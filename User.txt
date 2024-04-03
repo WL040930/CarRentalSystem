@@ -1,0 +1,15 @@
+admin
+admin@gmail.com
+admin
+admin
+
+username
+user@gmail.com
+password
+customer
+
+Nicholas
+nicholas@gmail.com
+NicholasYee
+customer
+
