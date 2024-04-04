@@ -36,8 +36,8 @@ public class dataIO {
         }
     }
 
-    // find data depending on the email (For login purpose)
-     
+    // find password depending on the email (For login purpose)
+    
 
     // write user data to User.txt
     public static void writeUser(String[] array) {
