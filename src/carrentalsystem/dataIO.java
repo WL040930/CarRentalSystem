@@ -12,20 +12,32 @@ public class dataIO {
     
     /* User.txt */
     // read user data from User.txt
-    public static void readUser() {
-        try {
-            File file = new File("User.txt");
-            Scanner scanner = new Scanner(file);
+    /*
+     * The number parameter is used to determine which line to read from the User.txt file.
+     * 1 - Username
+     * 2 - Email
+     * 3 - Password
+     * 4 - Role
+    */
+    public static String readUserDetails(int number) {
+        try (Scanner scanner = new Scanner(new File("User.txt"))) {
+            int lineNumber = 1;
             while (scanner.hasNextLine()) {
-                String data = scanner.nextLine();
-                System.out.println(data);
+                String line = scanner.nextLine();
+                if (lineNumber % 5 == number) {
+                    return line;
+                }
+                lineNumber++;
             }
-            scanner.close();
+            return null;
         } catch (Exception e) {
-            System.out.println("An error occurred.");
             e.printStackTrace();
+            return null;
         }
     }
+
+    // find data depending on the email (For login purpose)
+     
 
     // write user data to User.txt
     public static void writeUser(String[] array) {
