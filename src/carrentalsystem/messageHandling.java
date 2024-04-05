@@ -24,4 +24,8 @@ public class messageHandling {
         JOptionPane.showMessageDialog(null, "Email already exists", "Error", JOptionPane.ERROR_MESSAGE);
     }
 
+    public static void incorrectPassword() {
+        JOptionPane.showMessageDialog(null, "Incorrect Password", "Error", JOptionPane.ERROR_MESSAGE);
+    }
+
 }

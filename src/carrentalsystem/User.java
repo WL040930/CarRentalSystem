@@ -19,6 +19,14 @@ public class User {
 
 
     /* Start of Constructor */
+    public User() {}
+
+    public User(String name, String email, String password) {
+        this.name = name;
+        this.email = email;
+        this.password = password;
+    }
+
     public User(String name, String email, String password, String role) {
         this.name = name;
         this.email = email;
@@ -108,5 +116,36 @@ public class User {
     // public static void main(String[] args) {
     //     System.out.println(isEmailUnique("admin"));
     // }
+
+
+    /* Admin class inheritance */
+    public class admin extends User {
+        public admin(String name, String email, String password, String role) {
+            super(name, email, password, role);
+        }
+
+        public void setAdmin() {
+            this.setRole("admin");
+        }
+
+    }
+    /* End of admin class inheritance */
+
+
+    /* Customer class inheritance */
+    public class customer extends User {
+        public customer(String name, String email, String password) {
+            super(name, email, password);
+        }
+
+        public customer(String name, String email, String password, String role) {
+            super(name, email, password, role);
+        }
+
+        public void setCustomer() {
+            this.setRole("customer");
+        }
+
+    }
 
 }

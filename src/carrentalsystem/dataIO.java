@@ -37,7 +37,55 @@ public class dataIO {
     }
 
     // find password depending on the email (For login purpose)
-    
+    // public static String findPassword(String data) {
+    //     int rowNumber = rowNumber(data, 2);
+    //     if (rowNumber == -1) {
+    //         return null;
+    //     }
+
+    // }
+
+    // supporting function for the previous function
+    /*
+     * 1 - Username
+     * 2 - Email
+     * 3 - Password
+     * 4 - Role
+    */
+    public static int rowNumber (String data, int checkData) {
+        try (Scanner scanner = new Scanner(new File("User.txt"))) {
+            int lineNumber = 1;
+            while (scanner.hasNextLine()) {
+                String line = scanner.nextLine();
+                if (lineNumber % 5 == checkData && line.equals(data)) {
+                    return lineNumber;
+                }
+                lineNumber++;
+            }
+            return -1;
+        } catch (Exception e) {
+            e.printStackTrace();
+            return -1;
+        }
+    }
+
+    // Read data based on row number 
+    public static String readData(int rNumber) {
+        try (Scanner scanner = new Scanner(new File("User.txt"))) {
+            int lineNumber = 1;
+            while (scanner.hasNextLine()) {
+                String line = scanner.nextLine();
+                if (lineNumber == rNumber) {
+                    return line;
+                }
+                lineNumber++;
+            }
+            return null;
+        } catch (Exception e) {
+            e.printStackTrace();
+            return null;
+        }
+    }
 
     // write user data to User.txt
     public static void writeUser(String[] array) {
@@ -53,4 +101,8 @@ public class dataIO {
         }
     }
     /* End of User.txt */
+
+    // public static void main(String[] args) {
+    //     System.out.println(rowNumber("user@gmail.com", ));
+    // }
 }

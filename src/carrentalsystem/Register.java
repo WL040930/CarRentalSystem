@@ -4,8 +4,14 @@
 */
 package carrentalsystem;
 
+import java.io.FileOutputStream;
 import java.io.FileWriter;
+import java.io.IOException;
+import java.io.ObjectOutputStream;
+
 import javax.swing.JOptionPane;
+
+import carrentalsystem.User.customer;
 
 public class Register extends javax.swing.JFrame {
 
@@ -265,8 +271,26 @@ public class Register extends javax.swing.JFrame {
         passwordFieldActionPerformed(evt);
         confirmPasswordFieldActionPerformed(evt);
         
-        if (validateResult(data[0], data[1], data[2], data[3])) {
-            data[3] = "customer";
+    if (validateResult(data[0], data[1], data[2], data[3])) {
+        // Create a new User.customer object
+        // User.customer customer = new User().new customer(data[0], data[1], data[2]);
+
+        // try (FileOutputStream fileOut = new FileOutputStream("employees.txt");
+        //      ObjectOutputStream objectOut = new ObjectOutputStream(fileOut)) {
+
+        //     // Serialize and write the Customer object to file
+        //     objectOut.writeObject(customer);
+        //     System.out.println("User.customer object written to employees.txt");
+
+        //     JOptionPane.showMessageDialog(null, "Account created successfully", "Success", JOptionPane.INFORMATION_MESSAGE);
+        //     // Optionally switch to the login page or perform other actions here
+
+        // } catch (IOException e) {
+        //     System.err.println("Error writing User.customer object to file: " + e.getMessage());
+        //     e.printStackTrace();
+        // }
+
+
 
             try {
                 // dataIO.writeUser(data);
@@ -286,6 +310,7 @@ public class Register extends javax.swing.JFrame {
             }
         }
     }
+
     /* End of register button */
 
 

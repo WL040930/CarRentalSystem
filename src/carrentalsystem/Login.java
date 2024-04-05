@@ -17,6 +17,7 @@ public class Login extends javax.swing.JFrame {
      */
     public Login() {
         initComponents();
+        setResizable(false);
 
         linkToRegister.setCursor(Cursor.getPredefinedCursor(Cursor.HAND_CURSOR));
         linkToRegister.addMouseListener(new MouseAdapter() {
@@ -43,7 +44,7 @@ public class Login extends javax.swing.JFrame {
 
         jLabel1 = new javax.swing.JLabel();
         jLabel2 = new javax.swing.JLabel();
-        usernameField = new javax.swing.JTextField();
+        emailField = new javax.swing.JTextField();
         jLabel3 = new javax.swing.JLabel();
         passwordField = new javax.swing.JPasswordField();
         loginButton = new javax.swing.JButton();
@@ -56,11 +57,11 @@ public class Login extends javax.swing.JFrame {
         jLabel1.setText("Car Rental System");
 
         jLabel2.setFont(new java.awt.Font("Segoe UI", 1, 18)); // NOI18N
-        jLabel2.setText("Username:");
+        jLabel2.setText("Email Address:");
 
-        usernameField.addActionListener(new java.awt.event.ActionListener() {
+        emailField.addActionListener(new java.awt.event.ActionListener() {
             public void actionPerformed(java.awt.event.ActionEvent evt) {
-                usernameFieldActionPerformed(evt);
+                emailFieldActionPerformed(evt);
             }
         });
 
@@ -96,9 +97,9 @@ public class Login extends javax.swing.JFrame {
                     .addComponent(passwordField, javax.swing.GroupLayout.PREFERRED_SIZE, 321, javax.swing.GroupLayout.PREFERRED_SIZE)
                     .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING, false)
                         .addComponent(jLabel1, javax.swing.GroupLayout.DEFAULT_SIZE, 321, Short.MAX_VALUE)
-                        .addComponent(jLabel2, javax.swing.GroupLayout.PREFERRED_SIZE, 119, javax.swing.GroupLayout.PREFERRED_SIZE)
-                        .addComponent(usernameField)
-                        .addComponent(jLabel3, javax.swing.GroupLayout.PREFERRED_SIZE, 99, javax.swing.GroupLayout.PREFERRED_SIZE))
+                        .addComponent(emailField)
+                        .addComponent(jLabel3, javax.swing.GroupLayout.PREFERRED_SIZE, 99, javax.swing.GroupLayout.PREFERRED_SIZE)
+                        .addComponent(jLabel2, javax.swing.GroupLayout.PREFERRED_SIZE, 165, javax.swing.GroupLayout.PREFERRED_SIZE))
                     .addGroup(layout.createSequentialGroup()
                         .addGap(48, 48, 48)
                         .addComponent(jLabel4)
@@ -118,7 +119,7 @@ public class Login extends javax.swing.JFrame {
                 .addGap(36, 36, 36)
                 .addComponent(jLabel2)
                 .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
-                .addComponent(usernameField, javax.swing.GroupLayout.PREFERRED_SIZE, 53, javax.swing.GroupLayout.PREFERRED_SIZE)
+                .addComponent(emailField, javax.swing.GroupLayout.PREFERRED_SIZE, 53, javax.swing.GroupLayout.PREFERRED_SIZE)
                 .addGap(29, 29, 29)
                 .addComponent(jLabel3)
                 .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
@@ -143,11 +144,11 @@ public class Login extends javax.swing.JFrame {
     /* End of declaration of variables */
 
 
-    /* Start of username field */
-    private void usernameFieldActionPerformed(java.awt.event.ActionEvent evt) {                                              
-        loginDetails[0] =usernameField.getText();
+    /* Start of email field */
+    private void emailFieldActionPerformed(java.awt.event.ActionEvent evt) {                                              
+        loginDetails[0] =emailField.getText();
     }
-    /* End of username field */
+    /* End of email field */
 
 
     /* Start of password field */
@@ -165,11 +166,29 @@ public class Login extends javax.swing.JFrame {
 
     /* Start of login button */
     private void loginButtonActionPerformed(java.awt.event.ActionEvent evt) {
-        usernameFieldActionPerformed(evt);
+        emailFieldActionPerformed(evt);
         passwordFieldActionPerformed(evt);
 
+        int dataRow, passwordRow;
         // Check if the username and password are correct
-        
+        if (dataIO.rowNumber(loginDetails[0], 2) != -1) {
+            dataRow = dataIO.rowNumber(loginDetails[0], 2); // row number of emails
+            passwordRow = dataRow + 1; 
+            String correctPassword = dataIO.readData(passwordRow); 
+            if (correctPassword.equals(loginDetails[1])) {
+                if (dataIO.readData(passwordRow + 1).equals("customer")) {
+                    // User.customer customer = new User().new customer(dataIO.readData(dataRow - 1) , loginDetails[0] , loginDetails[1]);
+                    // customer.setCustomer();
+                    pageSwitch.switchPage(this, new CustomerDashboard());
+                } else if (dataIO.readData(passwordRow + 1).equals("admin")) {
+                    pageSwitch.switchPage(this, new AdminDashboard());
+                }   
+            } else {
+                messageHandling.incorrectPassword();
+                emailField.setText("");
+                passwordField.setText("");
+            }
+        }
     }
     /* End of login button */
     
@@ -212,6 +231,7 @@ public class Login extends javax.swing.JFrame {
     }
 
     // Variables declaration - do not modify//GEN-BEGIN:variables
+    private javax.swing.JTextField emailField;
     private javax.swing.JLabel jLabel1;
     private javax.swing.JLabel jLabel2;
     private javax.swing.JLabel jLabel3;
@@ -219,7 +239,6 @@ public class Login extends javax.swing.JFrame {
     private javax.swing.JLabel linkToRegister;
     private javax.swing.JButton loginButton;
     private javax.swing.JPasswordField passwordField;
-    private javax.swing.JTextField usernameField;
     // End of variables declaration//GEN-END:variables
 
  
