@@ -178,10 +178,8 @@ public class Login extends javax.swing.JFrame {
                 } else if (dataIO.readData(passwordRow + 1, "User.txt").equals("admin")) {
                     User.admin admin = new User().new admin(dataIO.readData(dataRow - 1, "User.txt"), loginDetails[0], loginDetails[1]);
                     admin.setAdmin();
-                    manageOwnAccount manageOwnAccount = new manageOwnAccount(admin);
-                    pageSwitch.switchPage(this, manageOwnAccount);
-                    // AdminDashboard adminDashboard = new AdminDashboard(admin);
-                    // pageSwitch.switchPage(this, adminDashboard);
+                    AdminDashboard adminDashboard = new AdminDashboard(admin);
+                    pageSwitch.switchPage(this, adminDashboard);
                 }   
             } else {
                 messageHandling.incorrectPassword();
