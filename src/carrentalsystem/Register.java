@@ -272,42 +272,31 @@ public class Register extends javax.swing.JFrame {
         confirmPasswordFieldActionPerformed(evt);
         
     if (validateResult(data[0], data[1], data[2], data[3])) {
-        // Create a new User.customer object
-        // User.customer customer = new User().new customer(data[0], data[1], data[2]);
+        try {
+            data[3] = "customer";
+            dataIO.writeData(data, "User.txt"); 
+            JOptionPane.showMessageDialog(null, "Account created successfully", "Success", JOptionPane.INFORMATION_MESSAGE);
+            pageSwitch.switchPage(this, new Login());
+        } catch (Exception e) {
+            e.printStackTrace();
+        }
 
-        // try (FileOutputStream fileOut = new FileOutputStream("employees.txt");
-        //      ObjectOutputStream objectOut = new ObjectOutputStream(fileOut)) {
+            // try {
+            //     // dataIO.writeUser(data);
+            //     FileWriter fileWriter = new FileWriter("User.txt", true);
+            //     for (String data : data) {
+            //         fileWriter.write(data + "\n");
+            //     }
+            //     fileWriter.write("\n");
 
-        //     // Serialize and write the Customer object to file
-        //     objectOut.writeObject(customer);
-        //     System.out.println("User.customer object written to employees.txt");
+            //     fileWriter.close();
 
-        //     JOptionPane.showMessageDialog(null, "Account created successfully", "Success", JOptionPane.INFORMATION_MESSAGE);
-        //     // Optionally switch to the login page or perform other actions here
-
-        // } catch (IOException e) {
-        //     System.err.println("Error writing User.customer object to file: " + e.getMessage());
-        //     e.printStackTrace();
-        // }
-
-
-
-            try {
-                // dataIO.writeUser(data);
-                FileWriter fileWriter = new FileWriter("User.txt", true);
-                for (String data : data) {
-                    fileWriter.write(data + "\n");
-                }
-                fileWriter.write("\n");
-
-                fileWriter.close();
-
-                JOptionPane.showMessageDialog(null, "Account created successfully", "Success", JOptionPane.INFORMATION_MESSAGE);
-                pageSwitch.switchPage(this, new Login());
-            } catch (Exception e) {
-                System.out.println("An error occurred.");
-                e.printStackTrace();
-            }
+            //     JOptionPane.showMessageDialog(null, "Account created successfully", "Success", JOptionPane.INFORMATION_MESSAGE);
+            //     pageSwitch.switchPage(this, new Login());
+            // } catch (Exception e) {
+            //     System.out.println("An error occurred.");
+            //     e.printStackTrace();
+            // }
         }
     }
 

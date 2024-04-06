@@ -4,10 +4,8 @@
  */
 package carrentalsystem;
 
-/**
- *
- * @author limwe
- */
+import javax.swing.JOptionPane;
+
 public class manageOwnAccount extends javax.swing.JFrame {
 
     /**
@@ -17,8 +15,8 @@ public class manageOwnAccount extends javax.swing.JFrame {
     static User user;
 
     public manageOwnAccount(User user) {
-        initComponents();
         manageOwnAccount.user = user;
+        initComponents();
     }
 
     /**
@@ -30,43 +28,284 @@ public class manageOwnAccount extends javax.swing.JFrame {
     // <editor-fold defaultstate="collapsed" desc="Generated Code">//GEN-BEGIN:initComponents
     private void initComponents() {
 
-        jButton1 = new javax.swing.JButton();
+        TitleJLabel = new javax.swing.JLabel();
+        jLabel1 = new javax.swing.JLabel();
+        usernameField = new javax.swing.JTextField();
+        jLabel2 = new javax.swing.JLabel();
+        EmailText = new javax.swing.JLabel();
+        jLabel4 = new javax.swing.JLabel();
+        jLabel5 = new javax.swing.JLabel();
+        passwordField = new javax.swing.JPasswordField();
+        confirmPasswordField = new javax.swing.JPasswordField();
+        updateButton = new javax.swing.JButton();
+        jSeparator1 = new javax.swing.JSeparator();
+        jLabel3 = new javax.swing.JLabel();
+        jMenuBar1 = new javax.swing.JMenuBar();
+        BackButton = new javax.swing.JMenu();
+        toDashboardButton = new javax.swing.JMenuItem();
+        SettingsButton = new javax.swing.JMenu();
+        LogoutMenuButton = new javax.swing.JMenuItem();
 
         setDefaultCloseOperation(javax.swing.WindowConstants.EXIT_ON_CLOSE);
+        setBackground(new java.awt.Color(255, 255, 255));
 
-        jButton1.setText("jButton1");
-        jButton1.addActionListener(new java.awt.event.ActionListener() {
+        TitleJLabel.setFont(new java.awt.Font("Segoe UI", 1, 36)); // NOI18N
+        TitleJLabel.setText("Manage Your Own Account - " + user.getName());
+
+        jLabel1.setFont(new java.awt.Font("Segoe UI", 1, 18)); // NOI18N
+        jLabel1.setText("Username: (" + user.getRole() + ")");
+
+        usernameField.setFont(new java.awt.Font("Segoe UI", 0, 18)); // NOI18N
+        usernameField.setText(user.getName());
+        usernameField.addActionListener(new java.awt.event.ActionListener() {
             public void actionPerformed(java.awt.event.ActionEvent evt) {
-                jButton1ActionPerformed(evt);
+                usernameFieldActionPerformed(evt);
             }
         });
+
+        jLabel2.setFont(new java.awt.Font("Segoe UI", 1, 18)); // NOI18N
+        jLabel2.setText("Email Address:");
+
+        EmailText.setBackground(new java.awt.Color(153, 153, 153));
+        EmailText.setFont(new java.awt.Font("Segoe UI", 0, 18)); // NOI18N
+        EmailText.setText(user.getEmail());
+        EmailText.setBorder(javax.swing.BorderFactory.createLineBorder(new java.awt.Color(0, 0, 0)));
+
+        jLabel4.setFont(new java.awt.Font("Segoe UI", 1, 18)); // NOI18N
+        jLabel4.setText("Password:");
+
+        jLabel5.setFont(new java.awt.Font("Segoe UI", 1, 18)); // NOI18N
+        jLabel5.setText("Confirm Password:");
+
+        passwordField.setFont(new java.awt.Font("Segoe UI", 0, 18)); // NOI18N
+        passwordField.addActionListener(new java.awt.event.ActionListener() {
+            public void actionPerformed(java.awt.event.ActionEvent evt) {
+                passwordFieldActionPerformed(evt);
+            }
+        });
+
+        confirmPasswordField.setFont(new java.awt.Font("Segoe UI", 0, 18)); // NOI18N
+        confirmPasswordField.addActionListener(new java.awt.event.ActionListener() {
+            public void actionPerformed(java.awt.event.ActionEvent evt) {
+                confirmPasswordFieldActionPerformed(evt);
+            }
+        });
+
+        updateButton.setFont(new java.awt.Font("Segoe UI", 1, 18)); // NOI18N
+        updateButton.setText("Update");
+        updateButton.addActionListener(new java.awt.event.ActionListener() {
+            public void actionPerformed(java.awt.event.ActionEvent evt) {
+                updateButtonActionPerformed(evt);
+            }
+        });
+
+        jSeparator1.setOrientation(javax.swing.SwingConstants.VERTICAL);
+
+        jLabel3.setText("Note* If you do not wish to update your password, kindly leave the password and confirm password field blank.");
+
+        BackButton.setText("Back");
+
+        toDashboardButton.setText("Back to Dashboard");
+        toDashboardButton.addActionListener(new java.awt.event.ActionListener() {
+            public void actionPerformed(java.awt.event.ActionEvent evt) {
+                toDashboardButtonActionPerformed(evt);
+            }
+        });
+        BackButton.add(toDashboardButton);
+
+        jMenuBar1.add(BackButton);
+
+        SettingsButton.setText("Settings");
+
+        LogoutMenuButton.setText("Logout");
+        LogoutMenuButton.addActionListener(new java.awt.event.ActionListener() {
+            public void actionPerformed(java.awt.event.ActionEvent evt) {
+                LogoutMenuButtonActionPerformed(evt);
+            }
+        });
+        SettingsButton.add(LogoutMenuButton);
+
+        jMenuBar1.add(SettingsButton);
+
+        setJMenuBar(jMenuBar1);
 
         javax.swing.GroupLayout layout = new javax.swing.GroupLayout(getContentPane());
         getContentPane().setLayout(layout);
         layout.setHorizontalGroup(
             layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
             .addGroup(layout.createSequentialGroup()
-                .addGap(455, 455, 455)
-                .addComponent(jButton1, javax.swing.GroupLayout.PREFERRED_SIZE, 83, javax.swing.GroupLayout.PREFERRED_SIZE)
-                .addContainerGap(462, Short.MAX_VALUE))
+                .addGap(435, 435, 435)
+                .addComponent(updateButton)
+                .addGap(0, 0, Short.MAX_VALUE))
+            .addGroup(layout.createSequentialGroup()
+                .addGap(46, 46, 46)
+                .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
+                    .addGroup(layout.createSequentialGroup()
+                        .addComponent(TitleJLabel, javax.swing.GroupLayout.PREFERRED_SIZE, 909, javax.swing.GroupLayout.PREFERRED_SIZE)
+                        .addContainerGap(18, Short.MAX_VALUE))
+                    .addGroup(javax.swing.GroupLayout.Alignment.TRAILING, layout.createSequentialGroup()
+                        .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.TRAILING)
+                            .addComponent(jLabel3, javax.swing.GroupLayout.Alignment.LEADING, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
+                            .addGroup(javax.swing.GroupLayout.Alignment.LEADING, layout.createSequentialGroup()
+                                .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING, false)
+                                    .addComponent(EmailText, javax.swing.GroupLayout.DEFAULT_SIZE, 365, Short.MAX_VALUE)
+                                    .addComponent(jLabel2, javax.swing.GroupLayout.PREFERRED_SIZE, 153, javax.swing.GroupLayout.PREFERRED_SIZE)
+                                    .addComponent(usernameField, javax.swing.GroupLayout.DEFAULT_SIZE, 365, Short.MAX_VALUE)
+                                    .addComponent(jLabel1, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE))
+                                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
+                                .addComponent(jSeparator1, javax.swing.GroupLayout.PREFERRED_SIZE, 15, javax.swing.GroupLayout.PREFERRED_SIZE)
+                                .addGap(35, 35, 35)
+                                .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
+                                    .addComponent(confirmPasswordField, javax.swing.GroupLayout.PREFERRED_SIZE, 365, javax.swing.GroupLayout.PREFERRED_SIZE)
+                                    .addComponent(passwordField, javax.swing.GroupLayout.PREFERRED_SIZE, 365, javax.swing.GroupLayout.PREFERRED_SIZE)
+                                    .addComponent(jLabel5, javax.swing.GroupLayout.PREFERRED_SIZE, 256, javax.swing.GroupLayout.PREFERRED_SIZE)
+                                    .addComponent(jLabel4, javax.swing.GroupLayout.PREFERRED_SIZE, 163, javax.swing.GroupLayout.PREFERRED_SIZE))))
+                        .addGap(78, 78, 78))))
         );
         layout.setVerticalGroup(
             layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
             .addGroup(layout.createSequentialGroup()
-                .addGap(167, 167, 167)
-                .addComponent(jButton1)
-                .addContainerGap(357, Short.MAX_VALUE))
+                .addGap(39, 39, 39)
+                .addComponent(TitleJLabel)
+                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
+                .addComponent(jLabel3, javax.swing.GroupLayout.PREFERRED_SIZE, 36, javax.swing.GroupLayout.PREFERRED_SIZE)
+                .addGap(26, 26, 26)
+                .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
+                    .addGroup(layout.createSequentialGroup()
+                        .addGap(4, 4, 4)
+                        .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.TRAILING, false)
+                            .addGroup(javax.swing.GroupLayout.Alignment.LEADING, layout.createSequentialGroup()
+                                .addComponent(jLabel4)
+                                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
+                                .addComponent(passwordField))
+                            .addGroup(javax.swing.GroupLayout.Alignment.LEADING, layout.createSequentialGroup()
+                                .addComponent(jLabel1)
+                                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
+                                .addComponent(usernameField, javax.swing.GroupLayout.PREFERRED_SIZE, 47, javax.swing.GroupLayout.PREFERRED_SIZE)))
+                        .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
+                            .addGroup(layout.createSequentialGroup()
+                                .addGap(31, 31, 31)
+                                .addComponent(jLabel2, javax.swing.GroupLayout.PREFERRED_SIZE, 26, javax.swing.GroupLayout.PREFERRED_SIZE))
+                            .addGroup(javax.swing.GroupLayout.Alignment.TRAILING, layout.createSequentialGroup()
+                                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
+                                .addComponent(jLabel5, javax.swing.GroupLayout.PREFERRED_SIZE, 25, javax.swing.GroupLayout.PREFERRED_SIZE)))
+                        .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
+                        .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
+                            .addComponent(EmailText, javax.swing.GroupLayout.PREFERRED_SIZE, 47, javax.swing.GroupLayout.PREFERRED_SIZE)
+                            .addComponent(confirmPasswordField, javax.swing.GroupLayout.PREFERRED_SIZE, 47, javax.swing.GroupLayout.PREFERRED_SIZE))
+                        .addGap(81, 81, 81))
+                    .addGroup(javax.swing.GroupLayout.Alignment.TRAILING, layout.createSequentialGroup()
+                        .addComponent(jSeparator1, javax.swing.GroupLayout.PREFERRED_SIZE, 214, javax.swing.GroupLayout.PREFERRED_SIZE)
+                        .addGap(18, 18, 18)
+                        .addComponent(updateButton, javax.swing.GroupLayout.PREFERRED_SIZE, 41, javax.swing.GroupLayout.PREFERRED_SIZE)))
+                .addContainerGap(86, Short.MAX_VALUE))
         );
 
         pack();
     }// </editor-fold>//GEN-END:initComponents
 
-    private void jButton1ActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jButton1ActionPerformed
-        System.out.println(user.getName());
-        System.out.println(user.getEmail());
-        System.out.println(user.getPassword());
-        System.out.println(user.getRole());
-    }//GEN-LAST:event_jButton1ActionPerformed
+    String newUsername;
+    String Pass, conPass, finalPassword;
+    
+
+    private void LogoutMenuButtonActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_LogoutMenuButtonActionPerformed
+        pageSwitch.switchPage(this, new Login()); 
+    }//GEN-LAST:event_LogoutMenuButtonActionPerformed
+
+    private void usernameFieldActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_usernameFieldActionPerformed
+        newUsername = usernameField.getText();
+    }//GEN-LAST:event_usernameFieldActionPerformed
+
+    private void confirmPasswordFieldActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_confirmPasswordFieldActionPerformed
+        char[] confirmPasswordChars = confirmPasswordField.getPassword();
+        conPass = new String(confirmPasswordChars);
+    }//GEN-LAST:event_confirmPasswordFieldActionPerformed
+
+    private void passwordFieldActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_passwordFieldActionPerformed
+        char[] PasswordChars = passwordField.getPassword();
+        Pass = new String(PasswordChars);
+    }//GEN-LAST:event_passwordFieldActionPerformed
+
+    private boolean isUsernameValidated(String username) {
+        if (User.validateUsername(username)) {
+            return true;
+        } else {
+            return false;
+        }
+    }
+
+    private boolean isPasswordValidated(String password) {
+        if (User.validatePassword(password)) {
+            return true;
+        } else {
+            return false;
+        }
+    }
+
+    private void updateButtonActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_updateButtonActionPerformed
+        usernameFieldActionPerformed(evt);
+        passwordFieldActionPerformed(evt);
+        confirmPasswordFieldActionPerformed(evt);
+    
+        boolean isPasswordUpdated = false;
+        String Pass = String.valueOf(passwordField.getPassword());
+        String conPass = String.valueOf(confirmPasswordField.getPassword());
+    
+        // Check if passwords are not empty
+        if (!Pass.isEmpty() || !conPass.isEmpty()) {
+            isPasswordUpdated = true;
+    
+            // Validate passwords
+            if (!isPasswordValidated(Pass)) {
+                passwordField.setText("");
+                confirmPasswordField.setText("");
+                messageHandling.errorPassword();
+                return;
+            } else if (!Pass.equals(conPass)) {
+                confirmPasswordField.setText("");
+                JOptionPane.showMessageDialog(null, "Passwords do not match", "Error", JOptionPane.ERROR_MESSAGE);
+                return;
+            }
+        }
+    
+        String newUsername = usernameField.getText();
+    
+        if (isUsernameValidated(newUsername)) {
+            int emailRow = dataIO.rowNumber(user.getEmail(), 2, "User.txt", 5);
+    
+            int usernameRow = emailRow - 1;
+            dataIO.overWriteData(newUsername, usernameRow, "User.txt");
+            user.setName(newUsername);
+    
+            if (isPasswordUpdated) {
+                int passwordRow = emailRow + 1;
+                dataIO.overWriteData(conPass, passwordRow, "User.txt");
+                user.setPassword(conPass);
+            }
+            
+            JOptionPane.showMessageDialog(null, "Account updated successfully", "Success", JOptionPane.INFORMATION_MESSAGE);
+            passwordField.setText("");
+            confirmPasswordField.setText("");
+        } else {
+            messageHandling.errorUsername();
+            usernameField.setText(user.getName());
+        }
+    }    
+
+
+    private void toDashboardButtonActionPerformed(java.awt.event.ActionEvent evt) {
+        String role = user.getRole();
+        if (role.equals("admin")) {
+            User.admin admin = new User().new admin(user.getName(), user.getEmail(), user.getPassword(), user.getRole());
+            AdminDashboard adminDashboard = new AdminDashboard(admin);
+            pageSwitch.switchPage(this, adminDashboard);
+        } else if (role.equals("customer")) {
+            User.customer customer = new User().new customer(user.getName(), user.getEmail(), user.getPassword(), user.getRole());
+            CustomerDashboard customerDashboard = new CustomerDashboard(customer);
+            pageSwitch.switchPage(this, customerDashboard); 
+        }
+    }   
+                                                     
 
     /**
      * @param args the command line arguments
@@ -104,6 +343,22 @@ public class manageOwnAccount extends javax.swing.JFrame {
     }
 
     // Variables declaration - do not modify//GEN-BEGIN:variables
-    private javax.swing.JButton jButton1;
+    private javax.swing.JMenu BackButton;
+    private javax.swing.JLabel EmailText;
+    private javax.swing.JMenuItem LogoutMenuButton;
+    private javax.swing.JMenu SettingsButton;
+    private javax.swing.JLabel TitleJLabel;
+    private javax.swing.JPasswordField confirmPasswordField;
+    private javax.swing.JLabel jLabel1;
+    private javax.swing.JLabel jLabel2;
+    private javax.swing.JLabel jLabel3;
+    private javax.swing.JLabel jLabel4;
+    private javax.swing.JLabel jLabel5;
+    private javax.swing.JMenuBar jMenuBar1;
+    private javax.swing.JSeparator jSeparator1;
+    private javax.swing.JPasswordField passwordField;
+    private javax.swing.JMenuItem toDashboardButton;
+    private javax.swing.JButton updateButton;
+    private javax.swing.JTextField usernameField;
     // End of variables declaration//GEN-END:variables
 }

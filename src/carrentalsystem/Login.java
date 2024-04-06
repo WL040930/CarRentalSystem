@@ -171,21 +171,23 @@ public class Login extends javax.swing.JFrame {
 
         int dataRow, passwordRow;
         // Check if the username and password are correct
-        if (dataIO.rowNumber(loginDetails[0], 2) != -1) {
-            dataRow = dataIO.rowNumber(loginDetails[0], 2); // row number of emails
+        if (dataIO.rowNumber(loginDetails[0], 2, "User.txt", 5) != -1) {
+            dataRow = dataIO.rowNumber(loginDetails[0], 2, "User.txt", 5); // row number of emails
             passwordRow = dataRow + 1; 
-            String correctPassword = dataIO.readData(passwordRow); 
+            String correctPassword = dataIO.readData(passwordRow, "User.txt"); 
             if (correctPassword.equals(loginDetails[1])) {
-                if (dataIO.readData(passwordRow + 1).equals("customer")) {
-                    User.customer customer = new User().new customer(dataIO.readData(dataRow - 1), loginDetails[0], loginDetails[1]);
+                if (dataIO.readData(passwordRow + 1, "User.txt").equals("customer")) {
+                    User.customer customer = new User().new customer(dataIO.readData(dataRow - 1, "User.txt"), loginDetails[0], loginDetails[1]);
                     customer.setCustomer();
                     CustomerDashboard customerDashboard = new CustomerDashboard(customer);
                     pageSwitch.switchPage(this, customerDashboard);
-                } else if (dataIO.readData(passwordRow + 1).equals("admin")) {
-                    User.admin admin = new User().new admin(dataIO.readData(dataRow - 1), loginDetails[0], loginDetails[1]);
+                } else if (dataIO.readData(passwordRow + 1, "User.txt").equals("admin")) {
+                    User.admin admin = new User().new admin(dataIO.readData(dataRow - 1, "User.txt"), loginDetails[0], loginDetails[1]);
                     admin.setAdmin();
-                    AdminDashboard adminDashboard = new AdminDashboard(admin);
-                    pageSwitch.switchPage(this, adminDashboard);
+                    manageOwnAccount manageOwnAccount = new manageOwnAccount(admin);
+                    pageSwitch.switchPage(this, manageOwnAccount);
+                    // AdminDashboard adminDashboard = new AdminDashboard(admin);
+                    // pageSwitch.switchPage(this, adminDashboard);
                 }   
             } else {
                 messageHandling.incorrectPassword();
