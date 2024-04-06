@@ -17,6 +17,7 @@ public class manageOwnAccount extends javax.swing.JFrame {
     public manageOwnAccount(User user) {
         manageOwnAccount.user = user;
         initComponents();
+        setResizable(false);
     }
 
     /**

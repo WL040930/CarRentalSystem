@@ -4,10 +4,6 @@
  */
 package carrentalsystem;
 
-/**
- *
- * @author limwe
- */
 public class CustomerDashboard extends javax.swing.JFrame {
 
     /**
@@ -18,6 +14,7 @@ public class CustomerDashboard extends javax.swing.JFrame {
 
     public CustomerDashboard(User.customer user) {
         initComponents();
+        setResizable(false);
         CustomerDashboard.user = user;
     }
 

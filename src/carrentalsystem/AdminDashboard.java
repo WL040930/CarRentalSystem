@@ -17,6 +17,7 @@ public class AdminDashboard extends javax.swing.JFrame {
 
     public AdminDashboard(User.admin user) {
         initComponents();
+        setResizable(false); 
         AdminDashboard.user = user;
     }
 

@@ -4,14 +4,7 @@
 */
 package carrentalsystem;
 
-import java.io.FileOutputStream;
-import java.io.FileWriter;
-import java.io.IOException;
-import java.io.ObjectOutputStream;
-
 import javax.swing.JOptionPane;
-
-import carrentalsystem.User.customer;
 
 public class Register extends javax.swing.JFrame {
 
