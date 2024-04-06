@@ -177,11 +177,15 @@ public class Login extends javax.swing.JFrame {
             String correctPassword = dataIO.readData(passwordRow); 
             if (correctPassword.equals(loginDetails[1])) {
                 if (dataIO.readData(passwordRow + 1).equals("customer")) {
-                    // User.customer customer = new User().new customer(dataIO.readData(dataRow - 1) , loginDetails[0] , loginDetails[1]);
-                    // customer.setCustomer();
-                    pageSwitch.switchPage(this, new CustomerDashboard());
+                    User.customer customer = new User().new customer(dataIO.readData(dataRow - 1), loginDetails[0], loginDetails[1]);
+                    customer.setCustomer();
+                    CustomerDashboard customerDashboard = new CustomerDashboard(customer);
+                    pageSwitch.switchPage(this, customerDashboard);
                 } else if (dataIO.readData(passwordRow + 1).equals("admin")) {
-                    pageSwitch.switchPage(this, new AdminDashboard());
+                    User.admin admin = new User().new admin(dataIO.readData(dataRow - 1), loginDetails[0], loginDetails[1]);
+                    admin.setAdmin();
+                    AdminDashboard adminDashboard = new AdminDashboard(admin);
+                    pageSwitch.switchPage(this, adminDashboard);
                 }   
             } else {
                 messageHandling.incorrectPassword();

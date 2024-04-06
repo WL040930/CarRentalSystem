@@ -120,6 +120,10 @@ public class User {
 
     /* Admin class inheritance */
     public class admin extends User {
+        public admin(String name, String email, String password) {
+            super(name, email, password);
+        }
+
         public admin(String name, String email, String password, String role) {
             super(name, email, password, role);
         }

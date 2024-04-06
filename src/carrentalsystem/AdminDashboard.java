@@ -13,8 +13,11 @@ public class AdminDashboard extends javax.swing.JFrame {
     /**
      * Creates new form AdminDashboard
      */
-    public AdminDashboard() {
+    static User.admin user;
+
+    public AdminDashboard(User.admin user) {
         initComponents();
+        AdminDashboard.user = user;
     }
 
     /**
@@ -72,7 +75,7 @@ public class AdminDashboard extends javax.swing.JFrame {
         /* Create and display the form */
         java.awt.EventQueue.invokeLater(new Runnable() {
             public void run() {
-                new AdminDashboard().setVisible(true);
+                new AdminDashboard(user).setVisible(true);
             }
         });
     }
