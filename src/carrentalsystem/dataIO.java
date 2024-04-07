@@ -8,6 +8,10 @@ import java.io.File;
 import java.io.FileWriter;
 import java.util.Scanner;
 import java.io.IOException;
+import java.util.UUID;
+import java.nio.file.Path;
+import java.nio.file.Files;
+import java.nio.file.StandardCopyOption;
 
 public class dataIO {
     
@@ -104,4 +108,25 @@ public class dataIO {
     // public static void main(String[] args) {
     //     System.out.println(readUserDetails(3, "User.txt", 4));
     // }
+
+    public static void moveFile(File sourceFile, String destinationDirectory) {
+        String fileName = sourceFile.getName();
+        String uniqueName = generateUniqueName(fileName);
+
+        try {
+            Path sourcePath = sourceFile.toPath();
+            Path destinationPath = Path.of(destinationDirectory, uniqueName);
+
+            Files.move(sourcePath, destinationPath, StandardCopyOption.REPLACE_EXISTING);
+            System.out.println("File moved successfully to: " + destinationPath);
+        } catch (IOException e) {
+            System.err.println("Error moving file: " + e.getMessage());
+        }
+    }
+
+    static String generateUniqueName(String originalFileName) {
+        String fileExtension = originalFileName.substring(originalFileName.lastIndexOf("."));
+        String uniqueID = UUID.randomUUID().toString();
+        return uniqueID + fileExtension;
+    }
 }

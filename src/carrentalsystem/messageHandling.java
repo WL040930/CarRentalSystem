@@ -28,4 +28,20 @@ public class messageHandling {
         JOptionPane.showMessageDialog(null, "Incorrect Password", "Error", JOptionPane.ERROR_MESSAGE);
     }
 
+    public static void incorrectPrice() {
+        JOptionPane.showMessageDialog(null, "Price must be a number", "Error", JOptionPane.ERROR_MESSAGE);
+    }
+
+    public static void incorrectSeats() {
+        JOptionPane.showMessageDialog(null, "Seats must be a number", "Error", JOptionPane.ERROR_MESSAGE);
+    }
+
+    public static void emptyCarName() {
+        JOptionPane.showMessageDialog(null, "Car name cannot be empty", "Error", JOptionPane.ERROR_MESSAGE);
+    }   
+
+    public static void incorrectImage() {
+        JOptionPane.showMessageDialog(null, "Image must be a .jpg file/.png file/.jpeg file", "Error", JOptionPane.ERROR_MESSAGE);
+    }
+
 }
