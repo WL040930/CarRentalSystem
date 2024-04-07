@@ -1,0 +1,10 @@
+adminn
+admin@gmail.com
+admin
+admin
+
+username
+user@gmail.com
+password
+customer
+

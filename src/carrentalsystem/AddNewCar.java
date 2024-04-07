@@ -6,6 +6,7 @@ package carrentalsystem;
 
 import javax.swing.JFileChooser;
 import javax.swing.filechooser.FileNameExtensionFilter;
+import java.awt.event.ActionListener;
 import java.io.File;
 import java.io.IOException;
 import java.util.logging.Level;
@@ -18,8 +19,9 @@ import javax.swing.JTextArea;
 import javax.swing.JTextField;
 import javax.swing.filechooser.FileFilter;
 import javax.swing.filechooser.FileNameExtensionFilter;
-
-
+import javax.swing.filechooser.FileSystemView;
+import java.awt.event.ActionEvent;
+import java.awt.event.ActionListener;
 
 public class AddNewCar extends javax.swing.JFrame {
 
@@ -27,12 +29,38 @@ public class AddNewCar extends javax.swing.JFrame {
      * Creates new form AddNewCar
      */
     static User.admin user;
+    File selectedFile;
 
     public AddNewCar(User.admin user) {
         initComponents();
         setResizable(false);
         AddNewCar.user = user;
+
+        SelectButton.addActionListener(new ActionListener() {
+            @Override
+            public void actionPerformed(ActionEvent e) {
+                // Create a file chooser
+                JFileChooser fileChooser = new JFileChooser(FileSystemView.getFileSystemView().getHomeDirectory());
+
+                // Show open dialog to select a file
+                int returnValue = fileChooser.showOpenDialog(null);
+
+                if (returnValue == JFileChooser.APPROVE_OPTION) {
+                    // Get the selected file
+                    selectedFile = fileChooser.getSelectedFile();
+
+                    // Display the file path in a text field or label (e.g., filePathField)
+                    filePathField.setText(selectedFile.getName());
+                } else {
+                    // User cancelled the operation
+                    filePathField.setText("No file selected");
+                }
+            }
+        });
+        
     }
+
+    
 
     /**
      * This method is called from within the constructor to initialize the form.
@@ -53,9 +81,10 @@ public class AddNewCar extends javax.swing.JFrame {
         PriceField = new javax.swing.JTextField();
         jLabel5 = new javax.swing.JLabel();
         CarTypeComboBox = new javax.swing.JComboBox<>();
-        ImageChooser = new javax.swing.JFileChooser();
         AddButton = new javax.swing.JButton();
         jLabel6 = new javax.swing.JLabel();
+        SelectButton = new javax.swing.JButton();
+        filePathField = new javax.swing.JLabel();
         jMenuBar1 = new javax.swing.JMenuBar();
         jMenu1 = new javax.swing.JMenu();
         jMenu4 = new javax.swing.JMenu();
@@ -110,12 +139,6 @@ public class AddNewCar extends javax.swing.JFrame {
             }
         });
 
-        ImageChooser.addActionListener(new java.awt.event.ActionListener() {
-            public void actionPerformed(java.awt.event.ActionEvent evt) {
-                ImageChooserActionPerformed(evt);
-            }
-        });
-
         AddButton.setText("Add");
         AddButton.addActionListener(new java.awt.event.ActionListener() {
             public void actionPerformed(java.awt.event.ActionEvent evt) {
@@ -125,6 +148,10 @@ public class AddNewCar extends javax.swing.JFrame {
 
         jLabel6.setFont(new java.awt.Font("Segoe UI", 1, 18)); // NOI18N
         jLabel6.setText("Picture:");
+
+        SelectButton.setText("Select");
+
+        filePathField.setText("jLabel7");
 
         jMenu1.setText("File");
         jMenuBar1.add(jMenu1);
@@ -198,11 +225,13 @@ public class AddNewCar extends javax.swing.JFrame {
                             .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.TRAILING, false)
                                 .addComponent(CarTypeComboBox, javax.swing.GroupLayout.Alignment.LEADING, 0, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
                                 .addComponent(jLabel3, javax.swing.GroupLayout.Alignment.LEADING, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)))
-                        .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED, 168, Short.MAX_VALUE)
+                        .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED, 166, Short.MAX_VALUE)
                         .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-                            .addComponent(jLabel6, javax.swing.GroupLayout.PREFERRED_SIZE, 81, javax.swing.GroupLayout.PREFERRED_SIZE)
-                            .addComponent(ImageChooser, javax.swing.GroupLayout.PREFERRED_SIZE, 548, javax.swing.GroupLayout.PREFERRED_SIZE))
-                        .addGap(25, 25, 25))))
+                            .addComponent(jLabel6, javax.swing.GroupLayout.Alignment.TRAILING, javax.swing.GroupLayout.PREFERRED_SIZE, 81, javax.swing.GroupLayout.PREFERRED_SIZE)
+                            .addComponent(SelectButton, javax.swing.GroupLayout.Alignment.TRAILING, javax.swing.GroupLayout.PREFERRED_SIZE, 83, javax.swing.GroupLayout.PREFERRED_SIZE))
+                        .addGap(30, 30, 30)
+                        .addComponent(filePathField, javax.swing.GroupLayout.PREFERRED_SIZE, 43, javax.swing.GroupLayout.PREFERRED_SIZE)
+                        .addGap(419, 419, 419))))
             .addGroup(layout.createSequentialGroup()
                 .addGap(433, 433, 433)
                 .addComponent(AddButton, javax.swing.GroupLayout.PREFERRED_SIZE, 83, javax.swing.GroupLayout.PREFERRED_SIZE)
@@ -214,7 +243,7 @@ public class AddNewCar extends javax.swing.JFrame {
                 .addGap(25, 25, 25)
                 .addComponent(jLabel1)
                 .addGap(24, 24, 24)
-                .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING, false)
+                .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
                     .addGroup(layout.createSequentialGroup()
                         .addComponent(jLabel2)
                         .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
@@ -233,8 +262,10 @@ public class AddNewCar extends javax.swing.JFrame {
                         .addComponent(CarTypeComboBox, javax.swing.GroupLayout.PREFERRED_SIZE, 39, javax.swing.GroupLayout.PREFERRED_SIZE))
                     .addGroup(layout.createSequentialGroup()
                         .addComponent(jLabel6)
-                        .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
-                        .addComponent(ImageChooser, javax.swing.GroupLayout.PREFERRED_SIZE, 303, javax.swing.GroupLayout.PREFERRED_SIZE)))
+                        .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
+                        .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
+                            .addComponent(SelectButton)
+                            .addComponent(filePathField))))
                 .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED, 35, Short.MAX_VALUE)
                 .addComponent(AddButton)
                 .addGap(31, 31, 31))
@@ -263,7 +294,7 @@ public class AddNewCar extends javax.swing.JFrame {
     String uniqueName;
     File image;
 
-    private void ImageChooserActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_ImageChooserActionPerformed
+    private void ImageChooserActionPerformed(java.awt.event.ActionEvent evt) {                                             
         JFileChooser fileChooser = (JFileChooser) evt.getSource();
         String fileName = fileChooser.getSelectedFile().getName();
 
@@ -281,30 +312,17 @@ public class AddNewCar extends javax.swing.JFrame {
         return Car.validatePrice(price) && Car.validateSeatsNumber(seatsNumber);
     }
 
-    private void AddButtonActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_AddButtonActionPerformed
-        // CarNameFieldActionPerformed(evt);
-        // NumberOfSeatsFieldActionPerformed(evt);
-        // PriceFieldActionPerformed(evt);
-        // CarTypeComboBoxActionPerformed(evt);
-        // ImageChooserActionPerformed(evt);
-
-        // boolean isImageExist = false;
-
-        // if (!carName.isEmpty()) {
-        //     if (validateCar(price, seatsNumber)) {
-
-        //     }
-        // } else {
-        //     messageHandling.emptyCarName();
-        // }
+    private void AddButtonActionPerformed(java.awt.event.ActionEvent evt) { 
+        
+        System.out.println(selectedFile.getName()); 
+        
     }
 
-    private void CarNameFieldActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_CarNameFieldActionPerformed
+    private void CarNameFieldActionPerformed(java.awt.event.ActionEvent evt) {
         carName = CarNameField.getText();
-    }//GEN-LAST:event_CarNameFieldActionPerformed
+    }
 
     private void PriceFieldActionPerformed(java.awt.event.ActionEvent evt) {
-        //GEN-FIRST:event_PriceFieldActionPerformed
         try {
             price = Integer.parseInt(PriceField.getText());
         } catch (NumberFormatException e) {
@@ -379,9 +397,10 @@ public class AddNewCar extends javax.swing.JFrame {
     private javax.swing.JButton AddButton;
     private javax.swing.JTextField CarNameField;
     private javax.swing.JComboBox<String> CarTypeComboBox;
-    private javax.swing.JFileChooser ImageChooser;
     private javax.swing.JTextField NumberOfSeatsField;
     private javax.swing.JTextField PriceField;
+    private javax.swing.JButton SelectButton;
+    private javax.swing.JLabel filePathField;
     private javax.swing.JFileChooser jFileChooser1;
     private javax.swing.JLabel jLabel1;
     private javax.swing.JLabel jLabel2;

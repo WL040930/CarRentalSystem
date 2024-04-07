@@ -8,7 +8,7 @@ package carrentalsystem;
 public class Car {
 
     /* Declaration of variables */
-    private String carID;
+    private int carID;
     private String carName;
     private int seatsNumber;
     private String carType; 
@@ -28,7 +28,7 @@ public class Car {
         this.price = price;
     }
 
-    public Car(String carID, String carName, int seatsNumber, String carType, int price) {
+    public Car(int carID, String carName, int seatsNumber, String carType, int price) {
         this.carID = carID;
         this.carName = carName;
         this.seatsNumber = seatsNumber;
@@ -39,7 +39,7 @@ public class Car {
 
 
     /* Getters */
-    public String getCarID() {
+    public int getCarID() {
         return carID;
     }
 
@@ -62,7 +62,7 @@ public class Car {
 
 
     /* Setters */
-    public void setCarID(String carID) {
+    public void setCarID(int carID) {
         this.carID = carID;
     }
 
@@ -102,7 +102,7 @@ public class Car {
             super(carName, seatsNumber, carType, price);
         }
 
-        public EconomyCar(String carID, String carName, int seatsNumber, String carType, int price) {
+        public EconomyCar(int carID, String carName, int seatsNumber, String carType, int price) {
             super(carID, carName, seatsNumber, carType, price);
         }
 
@@ -120,7 +120,7 @@ public class Car {
             super(carName, seatsNumber, carType, price);
         }
 
-        public CompactCar(String carID, String carName, int seatsNumber, String carType, int price) {
+        public CompactCar(int carID, String carName, int seatsNumber, String carType, int price) {
             super(carID, carName, seatsNumber, carType, price);
         }
 
@@ -139,7 +139,7 @@ public class Car {
             super(carName, seatsNumber, carType, price);
         }
 
-        public LuxuryCar(String carID, String carName, int seatsNumber, String carType, int price) {
+        public LuxuryCar(int carID, String carName, int seatsNumber, String carType, int price) {
             super(carID, carName, seatsNumber, carType, price);
         }
 
@@ -158,7 +158,7 @@ public class Car {
             super(carName, seatsNumber, carType, price);
         }
 
-        public Vans(String carID, String carName, int seatsNumber, String carType, int price) {
+        public Vans(int carID, String carName, int seatsNumber, String carType, int price) {
             super(carID, carName, seatsNumber, carType, price);
         }
 

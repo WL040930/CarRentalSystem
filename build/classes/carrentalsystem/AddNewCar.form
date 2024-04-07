@@ -119,12 +119,14 @@
                               <Component id="jLabel3" alignment="0" max="32767" attributes="0"/>
                           </Group>
                       </Group>
-                      <EmptySpace pref="168" max="32767" attributes="0"/>
+                      <EmptySpace pref="166" max="32767" attributes="0"/>
                       <Group type="103" groupAlignment="0" attributes="0">
-                          <Component id="jLabel6" min="-2" pref="81" max="-2" attributes="0"/>
-                          <Component id="ImageChooser" min="-2" pref="548" max="-2" attributes="0"/>
+                          <Component id="jLabel6" alignment="1" min="-2" pref="81" max="-2" attributes="0"/>
+                          <Component id="SelectButton" alignment="1" min="-2" pref="83" max="-2" attributes="0"/>
                       </Group>
-                      <EmptySpace min="-2" pref="25" max="-2" attributes="0"/>
+                      <EmptySpace min="-2" pref="30" max="-2" attributes="0"/>
+                      <Component id="filePathField" min="-2" pref="135" max="-2" attributes="0"/>
+                      <EmptySpace min="-2" pref="327" max="-2" attributes="0"/>
                   </Group>
               </Group>
           </Group>
@@ -141,7 +143,7 @@
               <EmptySpace min="-2" pref="25" max="-2" attributes="0"/>
               <Component id="jLabel1" min="-2" max="-2" attributes="0"/>
               <EmptySpace min="-2" pref="24" max="-2" attributes="0"/>
-              <Group type="103" groupAlignment="0" max="-2" attributes="0">
+              <Group type="103" groupAlignment="0" attributes="0">
                   <Group type="102" attributes="0">
                       <Component id="jLabel2" min="-2" max="-2" attributes="0"/>
                       <EmptySpace max="-2" attributes="0"/>
@@ -161,8 +163,11 @@
                   </Group>
                   <Group type="102" attributes="0">
                       <Component id="jLabel6" min="-2" max="-2" attributes="0"/>
-                      <EmptySpace max="32767" attributes="0"/>
-                      <Component id="ImageChooser" min="-2" pref="303" max="-2" attributes="0"/>
+                      <EmptySpace max="-2" attributes="0"/>
+                      <Group type="103" groupAlignment="3" attributes="0">
+                          <Component id="SelectButton" alignment="3" min="-2" max="-2" attributes="0"/>
+                          <Component id="filePathField" alignment="3" min="-2" max="-2" attributes="0"/>
+                      </Group>
                   </Group>
               </Group>
               <EmptySpace pref="35" max="32767" attributes="0"/>
@@ -241,11 +246,6 @@
         <AuxValue name="JavaCodeGenerator_TypeParameters" type="java.lang.String" value="&lt;String&gt;"/>
       </AuxValues>
     </Component>
-    <Component class="javax.swing.JFileChooser" name="ImageChooser">
-      <Events>
-        <EventHandler event="actionPerformed" listener="java.awt.event.ActionListener" parameters="java.awt.event.ActionEvent" handler="ImageChooserActionPerformed"/>
-      </Events>
-    </Component>
     <Component class="javax.swing.JButton" name="AddButton">
       <Properties>
         <Property name="text" type="java.lang.String" value="Add"/>
@@ -260,6 +260,16 @@
           <Font name="Segoe UI" size="18" style="1"/>
         </Property>
         <Property name="text" type="java.lang.String" value="Picture:"/>
+      </Properties>
+    </Component>
+    <Component class="javax.swing.JButton" name="SelectButton">
+      <Properties>
+        <Property name="text" type="java.lang.String" value="Select"/>
+      </Properties>
+    </Component>
+    <Component class="javax.swing.JLabel" name="filePathField">
+      <Properties>
+        <Property name="text" type="java.lang.String" value="No file is chosen."/>
       </Properties>
     </Component>
   </SubComponents>
