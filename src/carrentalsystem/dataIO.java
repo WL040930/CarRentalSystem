@@ -11,31 +11,6 @@ import java.io.IOException;
 
 public class dataIO {
     
-    // read user data from User.txt
-    /*
-     * The number parameter is used to determine which line to read from the User.txt file.
-     * 1 - Username
-     * 2 - Email
-     * 3 - Password
-     * 4 - Role
-    */
-    public static String readUserDetails(int number, String fileName, int numberOfLines) {
-        try (Scanner scanner = new Scanner(new File(fileName))) {
-            int lineNumber = 1;
-            while (scanner.hasNextLine()) {
-                String line = scanner.nextLine();
-                if (lineNumber % numberOfLines == number) {
-                    return line;
-                }
-                lineNumber++;
-            }
-            return null;
-        } catch (Exception e) {
-            e.printStackTrace();
-            return null;
-        }
-    }
-
     // calculate row number based on given data
     /*
      * 1 - Username
@@ -127,6 +102,6 @@ public class dataIO {
     }
 
     // public static void main(String[] args) {
-    //     overWriteData("adminusername", 1, "User.txt");
+    //     System.out.println(readUserDetails(3, "User.txt", 4));
     // }
 }
