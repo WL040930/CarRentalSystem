@@ -228,6 +228,7 @@ public class Register extends javax.swing.JFrame {
     /* declare data array to record data into text file */
     String[] data = new String[4];
     String password, conPass;
+    final String fileLocation = "src/carrentalsystem/data/User.txt";
     /* End of declaration */
 
     private boolean validateResult(String username, String email, String password, String confirmPassword) {
@@ -318,29 +319,13 @@ public class Register extends javax.swing.JFrame {
     if (validateResult(data[0], data[1], data[2], data[3])) {
         try {
             data[3] = "customer";
-            dataIO.writeData(data, "User.txt"); 
+            dataIO.writeData(data, fileLocation); 
             JOptionPane.showMessageDialog(null, "Account created successfully", "Success", JOptionPane.INFORMATION_MESSAGE);
             pageSwitch.switchPage(this, new Login());
         } catch (Exception e) {
             e.printStackTrace();
         }
 
-            // try {
-            //     // dataIO.writeUser(data);
-            //     FileWriter fileWriter = new FileWriter("User.txt", true);
-            //     for (String data : data) {
-            //         fileWriter.write(data + "\n");
-            //     }
-            //     fileWriter.write("\n");
-
-            //     fileWriter.close();
-
-            //     JOptionPane.showMessageDialog(null, "Account created successfully", "Success", JOptionPane.INFORMATION_MESSAGE);
-            //     pageSwitch.switchPage(this, new Login());
-            // } catch (Exception e) {
-            //     System.out.println("An error occurred.");
-            //     e.printStackTrace();
-            // }
         }
     }
 

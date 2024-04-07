@@ -13,6 +13,7 @@ public class manageOwnAccount extends javax.swing.JFrame {
      */
 
     static User user;
+    final String fileLocation = "src/carrentalsystem/data/User.txt";
 
     public manageOwnAccount(User user) {
         manageOwnAccount.user = user;
@@ -308,15 +309,15 @@ public class manageOwnAccount extends javax.swing.JFrame {
         String newUsername = usernameField.getText();
     
         if (isUsernameValidated(newUsername)) {
-            int emailRow = dataIO.rowNumber(user.getEmail(), 2, "User.txt", 5);
+            int emailRow = dataIO.rowNumber(user.getEmail(), 2, fileLocation, 5);
     
             int usernameRow = emailRow - 1;
-            dataIO.overWriteData(newUsername, usernameRow, "User.txt");
+            dataIO.overWriteData(newUsername, usernameRow, fileLocation);
             user.setName(newUsername);
     
             if (isPasswordUpdated) {
                 int passwordRow = emailRow + 1;
-                dataIO.overWriteData(conPass, passwordRow, "User.txt");
+                dataIO.overWriteData(conPass, passwordRow, fileLocation);
                 user.setPassword(conPass);
             }
             

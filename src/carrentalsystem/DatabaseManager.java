@@ -9,7 +9,7 @@ import java.util.List;
 
 public class DatabaseManager {
 
-    private static final String USER_FILE = "User.txt";
+    private static final String USER_FILE = "src/carrentalsystem/data/User.txt";
     private static final int NUMBER_OF_LINES_PER_USER = 5;
 
     public static List<User> getAllUsers() {

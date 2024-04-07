@@ -17,6 +17,7 @@ public class UserDatabase extends javax.swing.JFrame {
      */
     static User.admin user;
     DefaultTableModel model;
+    final String fileLocation = "src/carrentalsystem/data/User.txt";
 
     public UserDatabase(User.admin user) {
         UserDatabase.user = user;
@@ -322,19 +323,19 @@ public class UserDatabase extends javax.swing.JFrame {
         boolean updatePassword = false;
         String Pass = String.valueOf(passwordField.getPassword());
         String finalEmail = emailField.getText();
-        int emailRow = dataIO.rowNumber(finalEmail, 2, "User.txt", 5); 
+        int emailRow = dataIO.rowNumber(finalEmail, 2, fileLocation, 5); 
 
         if (!Pass.isEmpty()) {
             updatePassword = true;
         }
 
         if (validateUsernameInput(newName)) {
-            dataIO.overWriteData(newName, emailRow - 1, "User.txt");
-            if (!user.getEmail().equals(dataIO.readData(emailRow, "User.txt"))){
-                dataIO.overWriteData(newRole, emailRow + 2, "User.txt");
+            dataIO.overWriteData(newName, emailRow - 1, fileLocation);
+            if (!user.getEmail().equals(dataIO.readData(emailRow, fileLocation))){
+                dataIO.overWriteData(newRole, emailRow + 2, fileLocation);
                 if (updatePassword) {
                     if (User.validatePassword(newPassword)) {
-                        dataIO.overWriteData(newPassword, emailRow + 1, "User.txt");
+                        dataIO.overWriteData(newPassword, emailRow + 1, fileLocation);
                     } else {
                         messageHandling.errorPassword();
                         passwordField.setText("");
