@@ -307,7 +307,7 @@ public class AddNewCar extends javax.swing.JFrame {
 
         carID = carID();
 
-        if (!carName.isEmpty() && seatsNumber != 0 && price != 0 && carType != null) {
+        if (!carName.isEmpty() && seatsNumber > 0 && price > 0 && carType != null) {
             if (image == null) {
                 image = new File("src/carrentalsystem/img/defaultCar.png");
             }
@@ -337,7 +337,7 @@ public class AddNewCar extends javax.swing.JFrame {
         
     }
 
-    public void fileChooserActionPerformed(java.awt.event.ActionEvent evt) {
+    private void fileChooserActionPerformed(java.awt.event.ActionEvent evt) {
         if (selectedFile != null) {
             image = selectedFile;
         }

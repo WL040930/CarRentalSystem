@@ -14,12 +14,14 @@ import javax.swing.JFileChooser;
 import javax.swing.filechooser.FileSystemView;
 import java.awt.event.ActionEvent;
 import java.awt.event.ActionListener;
+import javax.swing.JTextField;
 
 public class CarDatabase extends javax.swing.JFrame {
 
     static User.admin user;
     File selectedFile;
     DefaultTableModel model;
+    String imageID;
     final String fileLocation = "src/carrentalsystem/data/Car.txt";
 
     public CarDatabase(User.admin user) {
@@ -58,12 +60,11 @@ public class CarDatabase extends javax.swing.JFrame {
                         CarTypeComboBox.setSelectedItem(CarType);
                         CarPriceField.setText(CarPrice);
 
-                        String imageID = CarIdText.getText();
+                        imageID = CarIdText.getText();
                         
                         int rowNumberOfCarID = dataIO.rowNumber(imageID, 1, fileLocation, 7);
                         
                         String imageFilePath = dataIO.readData(rowNumberOfCarID + 5, fileLocation);
-                        System.out.println(imageFilePath);
         
                         imageField.setIcon(new javax.swing.ImageIcon(getClass().getResource("/carrentalsystem/img/" + imageFilePath)));
                     }
@@ -149,9 +150,7 @@ public class CarDatabase extends javax.swing.JFrame {
         jLabel1.setText("Car Database");
 
         jLabel2.setText("Picture:");
-
-        imageField.setIcon(new javax.swing.ImageIcon(getClass().getResource("/carrentalsystem/img/email.png"))); // NOI18N
-        imageField.setText("imageField");
+        
 
         jLabel4.setText("Car Name:");
 
@@ -359,8 +358,10 @@ public class CarDatabase extends javax.swing.JFrame {
     }// </editor-fold>//GEN-END:initComponents
 
     File image;
-    String carType;
+    String carType, uniqueName;
     int price;
+    String carName;
+    int carSeats;
 
     private boolean validateFile (File file) {
         if (file.getName().endsWith(".jpg") || file.getName().endsWith(".png") || file.getName().endsWith(".jpeg")){
@@ -392,6 +393,27 @@ public class CarDatabase extends javax.swing.JFrame {
                 break;
         }
     }
+
+    private void CarSeatsFieldActionPerformed(java.awt.event.ActionEvent evt) {
+        try {
+            carSeats = Integer.parseInt(CarSeatsField.getText());
+        } catch (NumberFormatException e) {
+            // Handle invalid input (e.g., show error message)
+            JOptionPane.showMessageDialog(null, "Please enter a valid number for seats.");
+            CarSeatsField.setText(""); // Clear the field
+        }
+    }
+    
+    private void CarPriceFieldActionPerformed(java.awt.event.ActionEvent evt) {
+        try {
+            price = Integer.parseInt(CarPriceField.getText());
+        } catch (NumberFormatException e) {
+            // Handle invalid input (e.g., show error message)
+            JOptionPane.showMessageDialog(null, "Please enter a valid price.");
+            CarPriceField.setText(""); // Clear the field
+        }
+    }
+    
 
     private void populateCarTable(List<Car> Car) {
         model.setRowCount(0); // Clear existing table data
@@ -433,29 +455,59 @@ public class CarDatabase extends javax.swing.JFrame {
     }
 
     private void SaveButtonActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_SaveButtonActionPerformed
-        // TODO add your handling code here:
+        CarNameFieldActionPerformed(evt);
+        CarSeatsFieldActionPerformed(evt);
+        CarPriceFieldActionPerformed(evt);
+        CarTypeComboBoxActionPerformed(evt);
+
+        int rowCarID = dataIO.rowNumber(imageID, 1, fileLocation, 7);
+
+        if (price >= 0 && carSeats >= 0) {
+            if (selectedFile == null) {
+                dataIO.overWriteData(carName, rowCarID + 1, fileLocation);
+                dataIO.overWriteData(carSeats, rowCarID + 2, fileLocation);
+                dataIO.overWriteData(price, rowCarID + 3, fileLocation);
+                dataIO.overWriteData(carType, rowCarID + 4, fileLocation);
+            } else {
+                if (validateFile(image)) {
+                    dataIO.overWriteData(carName, rowCarID + 1, fileLocation);
+                    dataIO.overWriteData(carSeats, rowCarID + 2, fileLocation);
+                    dataIO.overWriteData(price, rowCarID + 3, fileLocation);
+                    dataIO.overWriteData(carType, rowCarID + 4, fileLocation);
+    
+                    if (image.exists()) {
+                        uniqueName = dataIO.moveFile(image, "src/carrentalsystem/img/");
+                    } else {
+                        uniqueName = "defaultCar.png";
+                    }
+                    dataIO.overWriteData(uniqueName, rowCarID + 5, fileLocation);
+                
+                } else {
+                    messageHandling.incorrectImage();
+                }
+            }
+
+            refreshCarTable();
+        } else {
+            JOptionPane.showMessageDialog(null, "Please enter a valid price and number of seats");
+            CarPriceField.setText("");
+            CarSeatsField.setText("");
+        }
+
+        
     }//GEN-LAST:event_SaveButtonActionPerformed
 
-    private void SelectButtonActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_SelectButtonActionPerformed
-        // TODO add your handling code here:
-    }//GEN-LAST:event_SelectButtonActionPerformed
+    private void SelectButtonActionPerformed(java.awt.event.ActionEvent evt) {}
+
+    private void refreshCarTable() {
+        List<Car> car = DatabaseManager.getAllCars();
+        populateCarTable(car);
+    }
 
     private void CarNameFieldActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_CarNameFieldActionPerformed
-        // TODO add your handling code here:
+        carName = CarNameField.getText();
     }//GEN-LAST:event_CarNameFieldActionPerformed
-
-    private void CarSeatsFieldActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_CarSeatsFieldActionPerformed
-        // TODO add your handling code here:
-    }//GEN-LAST:event_CarSeatsFieldActionPerformed
-
-    private void CarPriceFieldActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_CarPriceFieldActionPerformed
-        try {
-            price = Integer.parseInt(CarPriceField.getText());
-        } catch (NumberFormatException e) {
-            messageHandling.incorrectPrice();
-            CarPriceField.setText();
-        }
-    }//GEN-LAST:event_CarPriceFieldActionPerformed
+    
 
 
 

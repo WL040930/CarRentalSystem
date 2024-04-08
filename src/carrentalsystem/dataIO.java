@@ -162,6 +162,38 @@ public class dataIO {
         }
     }
 
+    public static void overWriteData(int data, int rowNumber, String fileName) {
+        try (Scanner scanner = new Scanner(new File(fileName))) {
+            int lineNumber = 1;
+            StringBuilder updatedContent = new StringBuilder(); // To hold updated file content
+    
+            // Read each line from the file
+            while (scanner.hasNextLine()) {
+                String line = scanner.nextLine();
+    
+                if (lineNumber == rowNumber) {
+                    // Replace the line with new data
+                    updatedContent.append(data).append("\n"); // Append new data with a newline
+                } else {
+                    // Keep the existing line
+                    updatedContent.append(line).append("\n"); // Append the existing line with a newline
+                }
+    
+                lineNumber++; // Increment line number
+            }
+    
+            // Write updated content back to the file
+            try (FileWriter fileWriter = new FileWriter(fileName)) {
+                fileWriter.write(updatedContent.toString());
+            } catch (IOException e) {
+                e.printStackTrace();
+            }
+    
+        } catch (IOException e) {
+            e.printStackTrace();
+        }
+    }
+
     public static String moveFile(File sourceFile, String destinationDirectory) {
         String fileName = sourceFile.getName();
         String uniqueName = generateUniqueName(fileName);
