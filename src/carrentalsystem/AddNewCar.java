@@ -141,7 +141,7 @@ public class AddNewCar extends javax.swing.JFrame {
 
         SelectButton.setText("Select");
 
-        filePathField.setText("jLabel7");
+        filePathField.setText("No file is chosen");
 
         jMenu1.setText("File");
         jMenuBar1.add(jMenu1);

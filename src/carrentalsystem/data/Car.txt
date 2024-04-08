@@ -12,3 +12,10 @@ d
 Compact
 defaultCar.png
 
+3
+da
+2
+3
+Vans
+defaultCar.png
+
