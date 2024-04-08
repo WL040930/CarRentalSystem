@@ -9,10 +9,16 @@ import javax.swing.table.DefaultTableModel;
 import javax.swing.JOptionPane;
 import javax.swing.event.ListSelectionEvent;
 import javax.swing.event.ListSelectionListener;
+import java.io.File;
+import javax.swing.JFileChooser;
+import javax.swing.filechooser.FileSystemView;
+import java.awt.event.ActionEvent;
+import java.awt.event.ActionListener;
 
 public class CarDatabase extends javax.swing.JFrame {
 
     static User.admin user;
+    File selectedFile;
     DefaultTableModel model;
     final String fileLocation = "src/carrentalsystem/data/Car.txt";
 
@@ -49,7 +55,7 @@ public class CarDatabase extends javax.swing.JFrame {
                         CarIdText.setText(carID);
                         CarNameField.setText(carName);
                         CarSeatsField.setText(numberofSeats);
-                        jComboBox1.setSelectedItem(CarType);
+                        CarTypeComboBox.setSelectedItem(CarType);
                         CarPriceField.setText(CarPrice);
 
                         String imageID = CarIdText.getText();
@@ -64,6 +70,24 @@ public class CarDatabase extends javax.swing.JFrame {
                 }
             }
         });
+
+        SelectButton.addActionListener(new ActionListener() {
+            @Override
+            public void actionPerformed(ActionEvent e) {
+                // Create a file chooser
+                JFileChooser fileChooser = new JFileChooser(FileSystemView.getFileSystemView().getHomeDirectory());
+        
+                // Show open dialog to select a file
+                int returnValue = fileChooser.showOpenDialog(null);
+        
+                if (returnValue == JFileChooser.APPROVE_OPTION) {
+                    // Get the selected file
+                    selectedFile = fileChooser.getSelectedFile(); 
+                } else {
+                    // User cancelled the operation
+                }
+            }
+        });        
     }
 
     /**
@@ -87,12 +111,12 @@ public class CarDatabase extends javax.swing.JFrame {
         jLabel6 = new javax.swing.JLabel();
         CarSeatsField = new javax.swing.JTextField();
         jLabel7 = new javax.swing.JLabel();
-        jComboBox1 = new javax.swing.JComboBox<>();
+        CarTypeComboBox = new javax.swing.JComboBox<>();
         jLabel8 = new javax.swing.JLabel();
         NumberOfBookings = new javax.swing.JLabel();
         SaveButton = new javax.swing.JButton();
         jSeparator1 = new javax.swing.JSeparator();
-        jButton1 = new javax.swing.JButton();
+        SelectButton = new javax.swing.JButton();
         jLabel10 = new javax.swing.JLabel();
         CarIdText = new javax.swing.JLabel();
         jMenuBar1 = new javax.swing.JMenuBar();
@@ -126,6 +150,9 @@ public class CarDatabase extends javax.swing.JFrame {
 
         jLabel2.setText("Picture:");
 
+        imageField.setIcon(new javax.swing.ImageIcon(getClass().getResource("/carrentalsystem/img/email.png"))); // NOI18N
+        imageField.setText("imageField");
+
         jLabel4.setText("Car Name:");
 
         CarNameField.addActionListener(new java.awt.event.ActionListener() {
@@ -154,10 +181,10 @@ public class CarDatabase extends javax.swing.JFrame {
 
         jLabel7.setText("Car type:");
 
-        jComboBox1.setModel(new javax.swing.DefaultComboBoxModel<>(new String[] { "Economy Car", "Compact Car", "Luxury Car", "Compact Car" }));
-        jComboBox1.addActionListener(new java.awt.event.ActionListener() {
+        CarTypeComboBox.setModel(new javax.swing.DefaultComboBoxModel<>(new String[] { "Economy Car", "Compact Car", "Luxury Car", "Compact Car" }));
+        CarTypeComboBox.addActionListener(new java.awt.event.ActionListener() {
             public void actionPerformed(java.awt.event.ActionEvent evt) {
-                jComboBox1ActionPerformed(evt);
+                CarTypeComboBoxActionPerformed(evt);
             }
         });
 
@@ -174,10 +201,10 @@ public class CarDatabase extends javax.swing.JFrame {
 
         jSeparator1.setOrientation(javax.swing.SwingConstants.VERTICAL);
 
-        jButton1.setText("Upload");
-        jButton1.addActionListener(new java.awt.event.ActionListener() {
+        SelectButton.setText("Upload");
+        SelectButton.addActionListener(new java.awt.event.ActionListener() {
             public void actionPerformed(java.awt.event.ActionEvent evt) {
-                jButton1ActionPerformed(evt);
+                SelectButtonActionPerformed(evt);
             }
         });
 
@@ -249,7 +276,7 @@ public class CarDatabase extends javax.swing.JFrame {
                             .addGroup(layout.createSequentialGroup()
                                 .addComponent(jLabel2, javax.swing.GroupLayout.PREFERRED_SIZE, 54, javax.swing.GroupLayout.PREFERRED_SIZE)
                                 .addGap(40, 40, 40)
-                                .addComponent(jButton1, javax.swing.GroupLayout.PREFERRED_SIZE, 83, javax.swing.GroupLayout.PREFERRED_SIZE))
+                                .addComponent(SelectButton, javax.swing.GroupLayout.PREFERRED_SIZE, 83, javax.swing.GroupLayout.PREFERRED_SIZE))
                             .addComponent(imageField, javax.swing.GroupLayout.PREFERRED_SIZE, 200, javax.swing.GroupLayout.PREFERRED_SIZE))
                         .addGap(46, 46, 46)
                         .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
@@ -266,7 +293,7 @@ public class CarDatabase extends javax.swing.JFrame {
                             .addComponent(NumberOfBookings, javax.swing.GroupLayout.PREFERRED_SIZE, 43, javax.swing.GroupLayout.PREFERRED_SIZE)
                             .addComponent(jLabel7, javax.swing.GroupLayout.PREFERRED_SIZE, 64, javax.swing.GroupLayout.PREFERRED_SIZE)
                             .addComponent(CarIdText, javax.swing.GroupLayout.PREFERRED_SIZE, 51, javax.swing.GroupLayout.PREFERRED_SIZE)
-                            .addComponent(jComboBox1, javax.swing.GroupLayout.PREFERRED_SIZE, 146, javax.swing.GroupLayout.PREFERRED_SIZE))
+                            .addComponent(CarTypeComboBox, javax.swing.GroupLayout.PREFERRED_SIZE, 146, javax.swing.GroupLayout.PREFERRED_SIZE))
                         .addGap(86, 86, 86)
                         .addComponent(jSeparator1, javax.swing.GroupLayout.PREFERRED_SIZE, 19, javax.swing.GroupLayout.PREFERRED_SIZE)
                         .addGap(28, 28, 28)
@@ -291,7 +318,7 @@ public class CarDatabase extends javax.swing.JFrame {
                                     .addGroup(layout.createSequentialGroup()
                                         .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
                                             .addComponent(jLabel2)
-                                            .addComponent(jButton1))
+                                            .addComponent(SelectButton))
                                         .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.UNRELATED))
                                     .addGroup(javax.swing.GroupLayout.Alignment.TRAILING, layout.createSequentialGroup()
                                         .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
@@ -302,7 +329,7 @@ public class CarDatabase extends javax.swing.JFrame {
                                     .addGroup(layout.createSequentialGroup()
                                         .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
                                             .addComponent(CarNameField, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
-                                            .addComponent(jComboBox1, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE))
+                                            .addComponent(CarTypeComboBox, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE))
                                         .addGap(26, 26, 26)
                                         .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
                                             .addComponent(jLabel6)
@@ -330,6 +357,41 @@ public class CarDatabase extends javax.swing.JFrame {
 
         pack();
     }// </editor-fold>//GEN-END:initComponents
+
+    File image;
+    String carType;
+    int price;
+
+    private boolean validateFile (File file) {
+        if (file.getName().endsWith(".jpg") || file.getName().endsWith(".png") || file.getName().endsWith(".jpeg")){
+            return true;
+        }
+        return false;
+    }
+
+    public void fileChooserActionPerformed(java.awt.event.ActionEvent evt) {
+        if (selectedFile != null) {
+            image = selectedFile;
+        }
+    }
+
+    private void CarTypeComboBoxActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_CarTypeComboBoxActionPerformed
+        carType = CarTypeComboBox.getSelectedItem().toString();
+        switch (carType) {
+            case "Economy Car":
+                carType = "Economy";
+                break;
+            case "Compact Car":
+                carType = "Compact";
+                break;
+            case "Luxury Car":
+                carType = "Luxury";
+                break;
+            case "Vans":
+                carType = "Vans";
+                break;
+        }
+    }
 
     private void populateCarTable(List<Car> Car) {
         model.setRowCount(0); // Clear existing table data
@@ -370,6 +432,36 @@ public class CarDatabase extends javax.swing.JFrame {
         CarTable.setColumnSelectionAllowed(false);
     }
 
+    private void SaveButtonActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_SaveButtonActionPerformed
+        // TODO add your handling code here:
+    }//GEN-LAST:event_SaveButtonActionPerformed
+
+    private void SelectButtonActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_SelectButtonActionPerformed
+        // TODO add your handling code here:
+    }//GEN-LAST:event_SelectButtonActionPerformed
+
+    private void CarNameFieldActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_CarNameFieldActionPerformed
+        // TODO add your handling code here:
+    }//GEN-LAST:event_CarNameFieldActionPerformed
+
+    private void CarSeatsFieldActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_CarSeatsFieldActionPerformed
+        // TODO add your handling code here:
+    }//GEN-LAST:event_CarSeatsFieldActionPerformed
+
+    private void CarPriceFieldActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_CarPriceFieldActionPerformed
+        try {
+            price = Integer.parseInt(CarPriceField.getText());
+        } catch (NumberFormatException e) {
+            messageHandling.incorrectPrice();
+            CarPriceField.setText();
+        }
+    }//GEN-LAST:event_CarPriceFieldActionPerformed
+
+
+
+
+
+
     private void jMenuItem5ActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jMenuItem5ActionPerformed
         pageSwitch.switchPage(this, new AddNewCar(user));
     }//GEN-LAST:event_jMenuItem5ActionPerformed
@@ -385,30 +477,6 @@ public class CarDatabase extends javax.swing.JFrame {
     private void jMenuItem2ActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jMenuItem2ActionPerformed
         // TODO add your handling code here:
     }//GEN-LAST:event_jMenuItem2ActionPerformed
-
-    private void SaveButtonActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_SaveButtonActionPerformed
-        // TODO add your handling code here:
-    }//GEN-LAST:event_SaveButtonActionPerformed
-
-    private void jButton1ActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jButton1ActionPerformed
-        // TODO add your handling code here:
-    }//GEN-LAST:event_jButton1ActionPerformed
-
-    private void CarNameFieldActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_CarNameFieldActionPerformed
-        // TODO add your handling code here:
-    }//GEN-LAST:event_CarNameFieldActionPerformed
-
-    private void CarSeatsFieldActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_CarSeatsFieldActionPerformed
-        // TODO add your handling code here:
-    }//GEN-LAST:event_CarSeatsFieldActionPerformed
-
-    private void CarPriceFieldActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_CarPriceFieldActionPerformed
-        // TODO add your handling code here:
-    }//GEN-LAST:event_CarPriceFieldActionPerformed
-
-    private void jComboBox1ActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jComboBox1ActionPerformed
-        // TODO add your handling code here:
-    }//GEN-LAST:event_jComboBox1ActionPerformed
 
     /**
      * @param args the command line arguments
@@ -451,11 +519,11 @@ public class CarDatabase extends javax.swing.JFrame {
     private javax.swing.JTextField CarPriceField;
     private javax.swing.JTextField CarSeatsField;
     private javax.swing.JTable CarTable;
+    private javax.swing.JComboBox<String> CarTypeComboBox;
     private javax.swing.JLabel NumberOfBookings;
     private javax.swing.JButton SaveButton;
+    private javax.swing.JButton SelectButton;
     private javax.swing.JLabel imageField;
-    private javax.swing.JButton jButton1;
-    private javax.swing.JComboBox<String> jComboBox1;
     private javax.swing.JLabel jLabel1;
     private javax.swing.JLabel jLabel10;
     private javax.swing.JLabel jLabel2;
