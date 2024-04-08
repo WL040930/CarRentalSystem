@@ -44,4 +44,12 @@ public class messageHandling {
         JOptionPane.showMessageDialog(null, "Image must be a .jpg file/.png file/.jpeg file", "Error", JOptionPane.ERROR_MESSAGE);
     }
 
+    public static void incorrectDataFormat() {
+        JOptionPane.showMessageDialog(null, "Incorrect data format for price/seats number (only digit number is allowed.)", "Error", JOptionPane.ERROR_MESSAGE);
+    
+    }
+
+    public static void incompletedData() {
+        JOptionPane.showMessageDialog(null, "Please fill all the fields", "Error", JOptionPane.ERROR_MESSAGE);
+    }
 }

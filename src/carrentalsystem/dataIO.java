@@ -17,11 +17,21 @@ public class dataIO {
     
     // calculate row number based on given data
     /*
+     * User.txt - number of Lines = 5
      * 1 - Username
      * 2 - Email
      * 3 - Password
      * 4 - Role
     */
+    /*
+     * Car.txt - number of Lines = 7 
+     * 1 - Car ID
+     * 2 - Car Name
+     * 3 - seats number
+     * 4 - price 
+     * 5 - Car type
+     * 6 - image path
+     */
     public static int rowNumber (String data, int checkData, String fileName, int numberOfLines) {
         try (Scanner scanner = new Scanner(new File(fileName))) {
             int lineNumber = 1;
@@ -36,6 +46,31 @@ public class dataIO {
         } catch (Exception e) {
             e.printStackTrace();
             return -1;
+        }
+    }
+
+    public static int[] carID (int checkData ,String fileName, int NumberOfLines) {
+        try (Scanner scanner = new Scanner(new File(fileName))) {
+            int lineNumber = 1;
+            int[] carID = new int[DatabaseManager.getTotalLines(fileName)/NumberOfLines];
+            while (scanner.hasNextLine()) {
+                String line = scanner.nextLine();
+                if (lineNumber % NumberOfLines == checkData) {
+                    carID[lineNumber/NumberOfLines] = Integer.parseInt(line);
+                }
+                lineNumber++;
+            }
+
+            if (carID.length == 0) {
+                carID = new int[1];
+                carID[0] = 0; 
+                return carID;
+            }
+
+            return carID;
+        } catch (Exception e) {
+            e.printStackTrace();
+            return null;
         }
     }
 
@@ -65,6 +100,28 @@ public class dataIO {
                 fileWriter.write(data + "\n");
             }
             fileWriter.write("\n");
+            fileWriter.close();
+        } catch (Exception e) {
+            System.out.println("An error occurred.");
+            e.printStackTrace();
+        }
+    }
+
+    public static void writeData(String data, String fileName) {
+        try {
+            FileWriter fileWriter = new FileWriter(fileName, true);
+            fileWriter.write(data + "\n");
+            fileWriter.close();
+        } catch (Exception e) {
+            System.out.println("An error occurred.");
+            e.printStackTrace();
+        }
+    }
+
+    public static void writeData (int data, String fileName) {
+        try {
+            FileWriter fileWriter = new FileWriter(fileName, true);
+            fileWriter.write(data + "\n");
             fileWriter.close();
         } catch (Exception e) {
             System.out.println("An error occurred.");
@@ -105,11 +162,7 @@ public class dataIO {
         }
     }
 
-    // public static void main(String[] args) {
-    //     System.out.println(readUserDetails(3, "User.txt", 4));
-    // }
-
-    public static void moveFile(File sourceFile, String destinationDirectory) {
+    public static String moveFile(File sourceFile, String destinationDirectory) {
         String fileName = sourceFile.getName();
         String uniqueName = generateUniqueName(fileName);
 
@@ -118,9 +171,10 @@ public class dataIO {
             Path destinationPath = Path.of(destinationDirectory, uniqueName);
 
             Files.move(sourcePath, destinationPath, StandardCopyOption.REPLACE_EXISTING);
-            System.out.println("File moved successfully to: " + destinationPath);
+            return uniqueName;
         } catch (IOException e) {
             System.err.println("Error moving file: " + e.getMessage());
+            return null;
         }
     }
 
@@ -129,4 +183,5 @@ public class dataIO {
         String uniqueID = UUID.randomUUID().toString();
         return uniqueID + fileExtension;
     }
+
 }

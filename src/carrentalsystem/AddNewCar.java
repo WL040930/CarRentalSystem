@@ -5,23 +5,13 @@
 package carrentalsystem;
 
 import javax.swing.JFileChooser;
-import javax.swing.filechooser.FileNameExtensionFilter;
+import javax.swing.JOptionPane;
+
 import java.awt.event.ActionListener;
 import java.io.File;
-import java.io.IOException;
-import java.util.logging.Level;
-import java.util.logging.Logger;
-import javax.swing.ImageIcon;
-import javax.swing.JLabel;
-import javax.swing.JPanel;
-import javax.swing.JScrollPane;
-import javax.swing.JTextArea;
-import javax.swing.JTextField;
-import javax.swing.filechooser.FileFilter;
-import javax.swing.filechooser.FileNameExtensionFilter;
 import javax.swing.filechooser.FileSystemView;
 import java.awt.event.ActionEvent;
-import java.awt.event.ActionListener;
+import java.util.Arrays;
 
 public class AddNewCar extends javax.swing.JFrame {
 
@@ -41,10 +31,10 @@ public class AddNewCar extends javax.swing.JFrame {
             public void actionPerformed(ActionEvent e) {
                 // Create a file chooser
                 JFileChooser fileChooser = new JFileChooser(FileSystemView.getFileSystemView().getHomeDirectory());
-
+        
                 // Show open dialog to select a file
                 int returnValue = fileChooser.showOpenDialog(null);
-
+        
                 if (returnValue == JFileChooser.APPROVE_OPTION) {
                     // Get the selected file
                     selectedFile = fileChooser.getSelectedFile();
@@ -56,7 +46,7 @@ public class AddNewCar extends javax.swing.JFrame {
                     filePathField.setText("No file selected");
                 }
             }
-        });
+        });        
         
     }
 
@@ -286,36 +276,71 @@ public class AddNewCar extends javax.swing.JFrame {
         // TODO add your handling code here:
     }//GEN-LAST:event_jMenuItem2ActionPerformed
 
-
+    int carID; 
     String carName;
     int seatsNumber;
     int price;
     String carType;
     String uniqueName;
     File image;
+    final String fileLocation = "src/carrentalsystem/data/Car.txt"; 
 
-    private void ImageChooserActionPerformed(java.awt.event.ActionEvent evt) {                                             
-        JFileChooser fileChooser = (JFileChooser) evt.getSource();
-        String fileName = fileChooser.getSelectedFile().getName();
-
-        if (fileName.endsWith(".jpg") || fileName.endsWith(".png") || fileName.endsWith(".jpeg")) {
-            image = fileChooser.getSelectedFile();
-            uniqueName = dataIO.generateUniqueName(fileName);
-            dataIO.moveFile(image, "src/carrentalsystem/CarImg/" + uniqueName);
-        } else {
-            messageHandling.incorrectImage();
-            fileChooser.setSelectedFile(null);
+    private boolean validateFile (File file) {
+        if (file.getName().endsWith(".jpg") || file.getName().endsWith(".png") || file.getName().endsWith(".jpeg")){
+            return true;
         }
+        return false;
     }
 
-    private boolean validateCar(int price, int seatsNumber) {
-        return Car.validatePrice(price) && Car.validateSeatsNumber(seatsNumber);
+    private int carID() {
+        int[] tempData = dataIO.carID(1, fileLocation, 7);
+        Arrays.sort(tempData);
+        return tempData[tempData.length - 1] + 1;
     }
 
     private void AddButtonActionPerformed(java.awt.event.ActionEvent evt) { 
+        CarNameFieldActionPerformed(evt);
+        NumberOfSeatsFieldActionPerformed(evt);
+        PriceFieldActionPerformed(evt);
+        CarTypeComboBoxActionPerformed(evt);
+        fileChooserActionPerformed(evt);
+
+        carID = carID();
+
+        if (!carName.isEmpty() && seatsNumber != 0 && price != 0 && carType != null) {
+            if (image == null) {
+                image = new File("src/carrentalsystem/img/defaultCar.png");
+            }
+            if (validateFile(image)) {
+                dataIO.writeData(carID, fileLocation);
+                dataIO.writeData(carName, fileLocation);
+                dataIO.writeData(seatsNumber, fileLocation);
+                dataIO.writeData(price, fileLocation);
+                dataIO.writeData(carType, fileLocation);
+
+                if (image.exists()) {
+                    uniqueName = dataIO.moveFile(image, "src/carrentalsystem/img/");
+                } else {
+                    uniqueName = "defaultCar.png";
+                }
+
+                dataIO.writeData(uniqueName, fileLocation);
+                
+                dataIO.writeData("", fileLocation);
+                JOptionPane.showMessageDialog(null, "Car added successfully");
+            } else {
+                messageHandling.incorrectImage();
+            }
+        } else {
+            messageHandling.incompletedData();
+        }
         
-        System.out.println(selectedFile.getName()); 
-        
+    }
+
+    public void fileChooserActionPerformed(java.awt.event.ActionEvent evt) {
+        if (selectedFile != null) {
+            image = selectedFile;
+        }
     }
 
     private void CarNameFieldActionPerformed(java.awt.event.ActionEvent evt) {

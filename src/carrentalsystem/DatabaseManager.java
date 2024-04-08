@@ -41,7 +41,7 @@ public class DatabaseManager {
         return users;
     }
 
-    private static int getTotalLines(String fileName) {
+    public static int getTotalLines(String fileName) {
         int totalLines = 0;
         try {
             java.io.FileReader fr = new java.io.FileReader(fileName);
