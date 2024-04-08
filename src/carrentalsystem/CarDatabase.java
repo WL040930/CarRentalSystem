@@ -14,7 +14,6 @@ import javax.swing.JFileChooser;
 import javax.swing.filechooser.FileSystemView;
 import java.awt.event.ActionEvent;
 import java.awt.event.ActionListener;
-import javax.swing.JTextField;
 
 public class CarDatabase extends javax.swing.JFrame {
 
@@ -177,7 +176,7 @@ public class CarDatabase extends javax.swing.JFrame {
 
         jLabel7.setText("Car type:");
 
-        CarTypeComboBox.setModel(new javax.swing.DefaultComboBoxModel<>(new String[] { "Economy Car", "Compact Car", "Luxury Car", "Compact Car" }));
+        CarTypeComboBox.setModel(new javax.swing.DefaultComboBoxModel<>(new String[] { "Economy Car", "Compact Car", "Luxury Car", "Vans" }));
         CarTypeComboBox.addActionListener(new java.awt.event.ActionListener() {
             public void actionPerformed(java.awt.event.ActionEvent evt) {
                 CarTypeComboBoxActionPerformed(evt);

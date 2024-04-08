@@ -30,6 +30,8 @@ public class CustomerDashboard extends javax.swing.JFrame {
         jButton1 = new javax.swing.JButton();
         jMenuBar1 = new javax.swing.JMenuBar();
         jMenu1 = new javax.swing.JMenu();
+        BookingMenu = new javax.swing.JMenu();
+        rentCarButton = new javax.swing.JMenuItem();
         jMenu2 = new javax.swing.JMenu();
         AccountSettingsMenu = new javax.swing.JMenuItem();
         LogoutMenu = new javax.swing.JMenuItem();
@@ -45,6 +47,18 @@ public class CustomerDashboard extends javax.swing.JFrame {
 
         jMenu1.setText("File");
         jMenuBar1.add(jMenu1);
+
+        BookingMenu.setText("Bookings");
+
+        rentCarButton.setText("Rent a Car");
+        rentCarButton.addActionListener(new java.awt.event.ActionListener() {
+            public void actionPerformed(java.awt.event.ActionEvent evt) {
+                rentCarButtonActionPerformed(evt);
+            }
+        });
+        BookingMenu.add(rentCarButton);
+
+        jMenuBar1.add(BookingMenu);
 
         jMenu2.setText("Settings");
 
@@ -103,6 +117,10 @@ public class CustomerDashboard extends javax.swing.JFrame {
         System.out.println(user.getRole());
     }//GEN-LAST:event_jButton1ActionPerformed
 
+    private void rentCarButtonActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_rentCarButtonActionPerformed
+        pageSwitch.switchPage(this, new ChooseCarType(user));
+    }//GEN-LAST:event_rentCarButtonActionPerformed
+
     /**
      * @param args the command line arguments
      */
@@ -140,10 +158,12 @@ public class CustomerDashboard extends javax.swing.JFrame {
 
     // Variables declaration - do not modify//GEN-BEGIN:variables
     private javax.swing.JMenuItem AccountSettingsMenu;
+    private javax.swing.JMenu BookingMenu;
     private javax.swing.JMenuItem LogoutMenu;
     private javax.swing.JButton jButton1;
     private javax.swing.JMenu jMenu1;
     private javax.swing.JMenu jMenu2;
     private javax.swing.JMenuBar jMenuBar1;
+    private javax.swing.JMenuItem rentCarButton;
     // End of variables declaration//GEN-END:variables
 }
