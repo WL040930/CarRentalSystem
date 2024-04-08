@@ -85,7 +85,7 @@ public class CarDatabase extends javax.swing.JFrame {
                     // Get the selected file
                     selectedFile = fileChooser.getSelectedFile(); 
                 } else {
-                    // User cancelled the operation
+                    
                 }
             }
         });        
@@ -150,7 +150,6 @@ public class CarDatabase extends javax.swing.JFrame {
         jLabel1.setText("Car Database");
 
         jLabel2.setText("Picture:");
-        
 
         jLabel4.setText("Car Name:");
 
@@ -162,7 +161,6 @@ public class CarDatabase extends javax.swing.JFrame {
 
         jLabel5.setText("Car Price:");
 
-        CarPriceField.setText("jTextField1");
         CarPriceField.addActionListener(new java.awt.event.ActionListener() {
             public void actionPerformed(java.awt.event.ActionEvent evt) {
                 CarPriceFieldActionPerformed(evt);
@@ -171,7 +169,6 @@ public class CarDatabase extends javax.swing.JFrame {
 
         jLabel6.setText("Number of Seats");
 
-        CarSeatsField.setText("jTextField2");
         CarSeatsField.addActionListener(new java.awt.event.ActionListener() {
             public void actionPerformed(java.awt.event.ActionEvent evt) {
                 CarSeatsFieldActionPerformed(evt);
@@ -370,13 +367,7 @@ public class CarDatabase extends javax.swing.JFrame {
         return false;
     }
 
-    public void fileChooserActionPerformed(java.awt.event.ActionEvent evt) {
-        if (selectedFile != null) {
-            image = selectedFile;
-        }
-    }
-
-    private void CarTypeComboBoxActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_CarTypeComboBoxActionPerformed
+    private void CarTypeComboBoxActionPerformed(java.awt.event.ActionEvent evt) {                                                
         carType = CarTypeComboBox.getSelectedItem().toString();
         switch (carType) {
             case "Economy Car":
@@ -459,40 +450,42 @@ public class CarDatabase extends javax.swing.JFrame {
         CarSeatsFieldActionPerformed(evt);
         CarPriceFieldActionPerformed(evt);
         CarTypeComboBoxActionPerformed(evt);
+        fileChooserActionPerformed(evt);
 
-        int rowCarID = dataIO.rowNumber(imageID, 1, fileLocation, 7);
-
-        if (price >= 0 && carSeats >= 0) {
-            if (selectedFile == null) {
-                dataIO.overWriteData(carName, rowCarID + 1, fileLocation);
-                dataIO.overWriteData(carSeats, rowCarID + 2, fileLocation);
-                dataIO.overWriteData(price, rowCarID + 3, fileLocation);
-                dataIO.overWriteData(carType, rowCarID + 4, fileLocation);
-            } else {
-                if (validateFile(image)) {
+        if (imageID != null ) {
+            int rowCarID = dataIO.rowNumber(imageID, 1, fileLocation, 7);
+            if (price >= 0 && carSeats >= 0) {
+                if (image == null) {
                     dataIO.overWriteData(carName, rowCarID + 1, fileLocation);
                     dataIO.overWriteData(carSeats, rowCarID + 2, fileLocation);
                     dataIO.overWriteData(price, rowCarID + 3, fileLocation);
                     dataIO.overWriteData(carType, rowCarID + 4, fileLocation);
-    
-                    if (image.exists()) {
-                        uniqueName = dataIO.moveFile(image, "src/carrentalsystem/img/");
-                    } else {
-                        uniqueName = "defaultCar.png";
-                    }
-                    dataIO.overWriteData(uniqueName, rowCarID + 5, fileLocation);
-                
                 } else {
-                    messageHandling.incorrectImage();
+                    if (validateFile(image)) {
+                        dataIO.overWriteData(carName, rowCarID + 1, fileLocation);
+                        dataIO.overWriteData(carSeats, rowCarID + 2, fileLocation);
+                        dataIO.overWriteData(price, rowCarID + 3, fileLocation);
+                        dataIO.overWriteData(carType, rowCarID + 4, fileLocation);
+        
+                        if (image.exists()) {
+                            uniqueName = dataIO.moveFile(image, "src/carrentalsystem/img/");
+                        }
+                        
+                        dataIO.overWriteData(uniqueName, rowCarID + 5, fileLocation);
+                    
+                    } else {
+                        messageHandling.incorrectImage();
+                    }
                 }
+    
+                refreshCarTable();
+            } else {
+                JOptionPane.showMessageDialog(null, "Please enter a valid price and number of seats");
+                CarPriceField.setText("");
+                CarSeatsField.setText("");
             }
-
-            refreshCarTable();
-        } else {
-            JOptionPane.showMessageDialog(null, "Please enter a valid price and number of seats");
-            CarPriceField.setText("");
-            CarSeatsField.setText("");
         }
+        
 
         
     }//GEN-LAST:event_SaveButtonActionPerformed
@@ -507,6 +500,12 @@ public class CarDatabase extends javax.swing.JFrame {
     private void CarNameFieldActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_CarNameFieldActionPerformed
         carName = CarNameField.getText();
     }//GEN-LAST:event_CarNameFieldActionPerformed
+
+    private void fileChooserActionPerformed(java.awt.event.ActionEvent evt) {
+        if (selectedFile != null) {
+            image = selectedFile;
+        }
+    }
     
 
 
