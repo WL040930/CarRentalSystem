@@ -43,20 +43,20 @@ public class ViewCar extends javax.swing.JFrame {
                     int selectedRow = CarTable.getSelectedRow();
                     if (selectedRow != -1) { 
                         // Get data from the selected row
-                        String carID = CarTable.getValueAt(selectedRow, 0).toString();
-                        String carName = CarTable.getValueAt(selectedRow, 1).toString();
-                        String CarPrice = CarTable.getValueAt(selectedRow, 4).toString();
+                        // String carID = CarTable.getValueAt(selectedRow, 0).toString();
+                        String carName = CarTable.getValueAt(selectedRow, 0).toString();
+                        String CarPrice = CarTable.getValueAt(selectedRow, 1).toString();
 
                         // Display data in the text fields
                         carNameField.setText(carName);
                         priceField.setText(CarPrice);
-                        pictureField.setIcon(new javax.swing.ImageIcon(getClass().getResource("/carrentalsystem/img/" + imageFilePath)));
+                        // pictureField.setIcon(new javax.swing.ImageIcon(getClass().getResource("/carrentalsystem/img/" + imageFilePath)));
 
-                        imageID = CarIdText.getText();
+                        // imageID = CarIdText.getText();
                         
-                        int rowNumberOfCarID = dataIO.rowNumber(imageID, 1, fileLocation, 7);
+                        // int rowNumberOfCarID = dataIO.rowNumber(imageID, 1, fileLocation, 7);
                         
-                        String imageFilePath = dataIO.readData(rowNumberOfCarID + 5, fileLocation);
+                        // String imageFilePath = dataIO.readData(rowNumberOfCarID + 5, fileLocation);
                     }
                 }
             }
@@ -220,11 +220,9 @@ public class ViewCar extends javax.swing.JFrame {
 
 
 
-    private int[] populateCarTable(List<Car> Car) {
+    private void populateCarTable(List<Car> Car) {
         model.setRowCount(0); // Clear existing table data
         model.setColumnCount(0); // Reset column count
-
-        int[] array = new int[Car.size()];
 
         DefaultTableModel model = new DefaultTableModel() {
             @Override
@@ -237,14 +235,13 @@ public class ViewCar extends javax.swing.JFrame {
         model.addColumn("Car Name");
         model.addColumn("Price");
     
-        int x = 1;
         for (Car Tcar : Car) {
-            int carId = Tcar.getCarID();
+            // int carId = Tcar.getCarID();
             String name = Tcar.getCarName();
             int price = Tcar.getPrice();
             
-            array[x] = carId;
-            x++;
+            // array[x] = carId;
+            // x++;
             // Add row to table model with correct role displayed
             model.addRow(new Object[]{name, price});
         }
@@ -258,7 +255,7 @@ public class ViewCar extends javax.swing.JFrame {
         CarTable.setCellSelectionEnabled(false);
         CarTable.setColumnSelectionAllowed(false);
         
-        return array;
+        
     }
 
     private void BackButtonActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_BackButtonActionPerformed
