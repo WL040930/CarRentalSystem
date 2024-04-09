@@ -8,6 +8,10 @@ import java.util.List;
 import javax.swing.event.ListSelectionEvent;
 import javax.swing.event.ListSelectionListener;
 import javax.swing.table.DefaultTableModel;
+import java.awt.Dimension;
+import javax.swing.ImageIcon;
+import java.awt.Image;
+import java.awt.print.Book;
 
 public class ViewCar extends javax.swing.JFrame {
 
@@ -17,12 +21,14 @@ public class ViewCar extends javax.swing.JFrame {
     static User.customer user; 
     static Car Car;
     DefaultTableModel model;
+    int selectedRow, carId;
     final String fileLocation = "src/carrentalsystem/data/Car.txt";
 
     public ViewCar(User.customer user, Car car) {
         ViewCar.user = user;
         ViewCar.Car = car;
         initComponents();
+        pictureField.setPreferredSize(new Dimension(200, 200));
         setResizable(false);
 
         model = new DefaultTableModel() {
@@ -40,7 +46,7 @@ public class ViewCar extends javax.swing.JFrame {
             @Override
             public void valueChanged(ListSelectionEvent e) {
                 if (!e.getValueIsAdjusting()) {
-                    int selectedRow = CarTable.getSelectedRow();
+                    selectedRow = CarTable.getSelectedRow();
                     if (selectedRow != -1) { 
                         // Get data from the selected row
                         // String carID = CarTable.getValueAt(selectedRow, 0).toString();
@@ -50,13 +56,15 @@ public class ViewCar extends javax.swing.JFrame {
                         // Display data in the text fields
                         carNameField.setText(carName);
                         priceField.setText(CarPrice);
-                        // pictureField.setIcon(new javax.swing.ImageIcon(getClass().getResource("/carrentalsystem/img/" + imageFilePath)));
 
-                        // imageID = CarIdText.getText();
-                        
-                        // int rowNumberOfCarID = dataIO.rowNumber(imageID, 1, fileLocation, 7);
-                        
-                        // String imageFilePath = dataIO.readData(rowNumberOfCarID + 5, fileLocation);
+                        int[] carArray = dataIO.returnCarId(Car.getCarType(), fileLocation); 
+                        carId = carArray[selectedRow];
+                        int rowNumberOfCarId = dataIO.rowNumber(carId, 1, fileLocation, 7);
+                        String imageFilePath = dataIO.readData(rowNumberOfCarId + 5, fileLocation);
+
+                        ImageIcon imageIcon = new ImageIcon(getClass().getResource("/carrentalsystem/img/" + imageFilePath));
+                        Image scaledImage = imageIcon.getImage().getScaledInstance(200, 200, Image.SCALE_SMOOTH);
+                        pictureField.setIcon(new ImageIcon(scaledImage));
                     }
                 }
             }
@@ -112,8 +120,6 @@ public class ViewCar extends javax.swing.JFrame {
         carNameField.setText("jLabel3");
 
         jLabel3.setText("Picture:");
-
-        pictureField.setText("jLabel4");
 
         jLabel5.setFont(new java.awt.Font("Segoe UI", 1, 18)); // NOI18N
         jLabel5.setText("Price (per day):");
@@ -217,9 +223,6 @@ public class ViewCar extends javax.swing.JFrame {
         pack();
     }// </editor-fold>//GEN-END:initComponents
 
-
-
-
     private void populateCarTable(List<Car> Car) {
         model.setRowCount(0); // Clear existing table data
         model.setColumnCount(0); // Reset column count
@@ -262,9 +265,10 @@ public class ViewCar extends javax.swing.JFrame {
         pageSwitch.switchPage(this, new ChooseCarType(user));
     }//GEN-LAST:event_BackButtonActionPerformed
 
-    private void continueButtonActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_continueButtonActionPerformed
-        // TODO add your handling code here:
-    }//GEN-LAST:event_continueButtonActionPerformed
+    private void continueButtonActionPerformed(java.awt.event.ActionEvent evt) {                                               
+        Car.setCarID(carId);
+        pageSwitch.switchPage(this, new BookCar(user, Car));
+    }
 
     /**
      * @param args the command line arguments

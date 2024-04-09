@@ -183,9 +183,6 @@
           </Properties>
         </Component>
         <Component class="javax.swing.JLabel" name="pictureField">
-          <Properties>
-            <Property name="text" type="java.lang.String" value="jLabel4"/>
-          </Properties>
         </Component>
         <Component class="javax.swing.JLabel" name="jLabel5">
           <Properties>

@@ -49,6 +49,23 @@ public class dataIO {
         }
     }
 
+    public static int rowNumber (int data, int checkData, String fileName, int numberOfLines) {
+        try (Scanner scanner = new Scanner(new File(fileName))) {
+            int lineNumber = 1;
+            while (scanner.hasNextLine()) {
+                String line = scanner.nextLine();
+                if (lineNumber % numberOfLines == checkData && Integer.parseInt(line) == data) {
+                    return lineNumber;
+                }
+                lineNumber++;
+            }
+            return -1;
+        } catch (Exception e) {
+            e.printStackTrace();
+            return -1;
+        }
+    }
+
     public static int[] carID (int checkData ,String fileName, int NumberOfLines) {
         try (Scanner scanner = new Scanner(new File(fileName))) {
             int lineNumber = 1;
@@ -214,6 +231,60 @@ public class dataIO {
         String fileExtension = originalFileName.substring(originalFileName.lastIndexOf("."));
         String uniqueID = UUID.randomUUID().toString();
         return uniqueID + fileExtension;
+    }
+
+    private static int returnNumberOfType(String type, String fileName) {
+        try (Scanner scanner = new Scanner(new File(fileName))) {
+            int lineNumber = 1;
+            int count = 0;
+            while (scanner.hasNextLine()) {
+                String line = scanner.nextLine();
+                if (lineNumber % 7 == 5 && line.equals(type)) {
+                    count++;
+                }
+                lineNumber++;
+            }
+            return count;
+        } catch (Exception e) {
+            e.printStackTrace();
+            return -1;
+        }
+    }
+
+    public static int[] returnCarId (String type, String fileName) {
+        int length = returnNumberOfType(type, fileName);
+        if (length == 0) {
+            return null;
+        }
+        int[] carID = new int[length];
+        try (Scanner scanner = new Scanner(new File(fileName))) {
+            int lineNumber = 1;
+            int index = 0;
+            while (scanner.hasNextLine()) {
+                String line = scanner.nextLine();
+                if (lineNumber % 7 == 5 && line.equals(type)) {
+                    carID[index] = Integer.parseInt(readData(lineNumber - 4, fileName));
+                    index++;
+                }
+                lineNumber++;
+            }
+            return carID;
+        } catch (Exception e) {
+            e.printStackTrace();
+            return null;
+        }
+    }
+
+    public static void main(String[] args) {
+        int[] i = returnCarId("Luxury", "src/carrentalsystem/data/Car.txt");
+        if (i == null) {
+            System.out.println("No car found");
+            return;
+        } else {
+            for (int j : i) {
+                System.out.println(j);
+            }
+        }
     }
 
 }
