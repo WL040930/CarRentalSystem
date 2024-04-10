@@ -12,10 +12,15 @@ public class BookCar extends javax.swing.JFrame {
      */
     static User.customer user; 
     static Car car;
+    int carId;
+    int rowOfCarId; 
+    final String readFileLocation = "src/carrentalsystem/data/Car.txt";
 
     public BookCar(User.customer user, Car car) {
         BookCar.user = user;
         BookCar.car = car;
+        carId = car.getCarID();
+        rowOfCarId = dataIO.rowNumber(carId, 1, readFileLocation, 7);
         initComponents();
     }
 
