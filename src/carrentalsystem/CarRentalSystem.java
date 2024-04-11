@@ -14,7 +14,7 @@ public class CarRentalSystem {
         login.setVisible(true);
 
     //     // Create a new text file called "Car.txt"
-    //     String filePath = "C:/APU/One Drive/OneDrive - Asia Pacific University/Sem 5/Java/CarRentalSystem/src/carrentalsystem/data/User.txt";
+    //     String filePath = "C:/APU/One Drive/OneDrive - Asia Pacific University/Sem 5/Java/CarRentalSystem/src/carrentalsystem/data/Booking.txt";
     //     File file = new File(filePath);
         
     //     try {

@@ -10,6 +10,8 @@ import javax.swing.event.ListSelectionListener;
 import javax.swing.table.DefaultTableModel;
 import java.awt.Dimension;
 import javax.swing.ImageIcon;
+import javax.swing.JOptionPane;
+
 import java.awt.Image;
 import java.awt.print.Book;
 
@@ -117,14 +119,10 @@ public class ViewCar extends javax.swing.JFrame {
         jLabel2.setFont(new java.awt.Font("Segoe UI", 1, 18)); // NOI18N
         jLabel2.setText("Car Name:");
 
-        carNameField.setText("jLabel3");
-
         jLabel3.setText("Picture:");
 
         jLabel5.setFont(new java.awt.Font("Segoe UI", 1, 18)); // NOI18N
         jLabel5.setText("Price (per day):");
-
-        priceField.setText("jLabel6");
 
         continueButton.setText("Continue");
         continueButton.addActionListener(new java.awt.event.ActionListener() {
@@ -157,14 +155,14 @@ public class ViewCar extends javax.swing.JFrame {
                             .addGroup(javax.swing.GroupLayout.Alignment.TRAILING, jPanel1Layout.createSequentialGroup()
                                 .addGroup(jPanel1Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
                                     .addComponent(jLabel2)
-                                    .addComponent(carNameField, javax.swing.GroupLayout.PREFERRED_SIZE, 43, javax.swing.GroupLayout.PREFERRED_SIZE))
+                                    .addComponent(carNameField))
                                 .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED, 129, Short.MAX_VALUE)
                                 .addGroup(jPanel1Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-                                    .addComponent(priceField, javax.swing.GroupLayout.PREFERRED_SIZE, 43, javax.swing.GroupLayout.PREFERRED_SIZE)
                                     .addComponent(jLabel5)
                                     .addGroup(jPanel1Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.TRAILING, false)
                                         .addComponent(BackButton, javax.swing.GroupLayout.Alignment.LEADING, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
-                                        .addComponent(continueButton, javax.swing.GroupLayout.Alignment.LEADING, javax.swing.GroupLayout.DEFAULT_SIZE, 102, Short.MAX_VALUE))))
+                                        .addComponent(continueButton, javax.swing.GroupLayout.Alignment.LEADING, javax.swing.GroupLayout.DEFAULT_SIZE, 102, Short.MAX_VALUE))
+                                    .addComponent(priceField)))
                             .addGroup(jPanel1Layout.createSequentialGroup()
                                 .addGroup(jPanel1Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.TRAILING, false)
                                     .addComponent(pictureField, javax.swing.GroupLayout.Alignment.LEADING, javax.swing.GroupLayout.DEFAULT_SIZE, 200, Short.MAX_VALUE)
@@ -266,9 +264,15 @@ public class ViewCar extends javax.swing.JFrame {
     }//GEN-LAST:event_BackButtonActionPerformed
 
     private void continueButtonActionPerformed(java.awt.event.ActionEvent evt) {                                               
-        Car.setCarID(carId);
-        pageSwitch.switchPage(this, new BookCar(user, Car));
+        if (carNameField.getText().isEmpty() || priceField.getText().isEmpty() || pictureField.getIcon() == null) {
+            JOptionPane.showMessageDialog(this, "Please select a car to continue.", "Error", JOptionPane.ERROR_MESSAGE);
+        } else {
+            // Proceed to the booking page
+            Car.setCarID(carId); // Assuming 'carId' is set appropriately based on user selection
+            pageSwitch.switchPage(this, new BookCar(user, Car));
+        }
     }
+    
 
     /**
      * @param args the command line arguments

@@ -4,6 +4,15 @@
  */
 package carrentalsystem;
 
+import java.awt.Image;
+import javax.swing.ImageIcon;
+import javax.swing.JOptionPane;
+import java.time.LocalDate;
+import java.time.temporal.ChronoUnit;
+import java.time.ZoneId;
+
+import java.util.Date;
+
 public class BookCar extends javax.swing.JFrame {
 
     /**
@@ -21,6 +30,32 @@ public class BookCar extends javax.swing.JFrame {
         carId = car.getCarID();
         rowOfCarId = dataIO.rowNumber(carId, 1, readFileLocation, 7);
         initComponents();
+
+        String imageFilePath = dataIO.readData(rowOfCarId + 5, readFileLocation);
+
+        ImageIcon imageIcon = new ImageIcon(getClass().getResource("/carrentalsystem/img/" + imageFilePath));
+        Image scaledImage = imageIcon.getImage().getScaledInstance(200, 200, Image.SCALE_SMOOTH);
+        pictureField.setIcon(new ImageIcon(scaledImage));
+        startDateField.setDateFormatString("dd/MM/yyyy");
+        startDateField.getDateEditor().setEnabled(false);
+        startDateField.getDateEditor().addPropertyChangeListener(new java.beans.PropertyChangeListener() {
+            public void propertyChange(java.beans.PropertyChangeEvent evt) {
+                if ("date".equals(evt.getPropertyName())) {
+                    Date selectedDate = (Date) evt.getNewValue();
+                    Date currentDate = new Date();
+                    
+                    if (selectedDate != null && selectedDate.before(currentDate)) {
+                        // Check if the selected date is before the current date
+                        JOptionPane.showMessageDialog(null, "You cannot select a date before today.");
+                        startDateField.setDate(null);  // Set the start date field to null
+                    }
+                }
+            }
+        });
+        
+
+        EndDateField.setDateFormatString("dd/MM/yyyy");
+        EndDateField.getDateEditor().setEnabled(false);
     }
 
     /**
@@ -32,9 +67,21 @@ public class BookCar extends javax.swing.JFrame {
     // <editor-fold defaultstate="collapsed" desc="Generated Code">//GEN-BEGIN:initComponents
     private void initComponents() {
 
-        JDateChooser = new com.toedter.calendar.JDateChooser();
+        startDateField = new com.toedter.calendar.JDateChooser();
         CarNameField = new javax.swing.JLabel();
         jLabel2 = new javax.swing.JLabel();
+        jLabel1 = new javax.swing.JLabel();
+        jLabel3 = new javax.swing.JLabel();
+        jLabel4 = new javax.swing.JLabel();
+        jLabel5 = new javax.swing.JLabel();
+        jLabel6 = new javax.swing.JLabel();
+        jLabel7 = new javax.swing.JLabel();
+        jLabel8 = new javax.swing.JLabel();
+        pictureField = new javax.swing.JLabel();
+        jLabel9 = new javax.swing.JLabel();
+        jLabel10 = new javax.swing.JLabel();
+        EndDateField = new com.toedter.calendar.JDateChooser();
+        bookButton = new javax.swing.JButton();
         jMenuBar1 = new javax.swing.JMenuBar();
         jMenu1 = new javax.swing.JMenu();
         jMenu2 = new javax.swing.JMenu();
@@ -44,6 +91,35 @@ public class BookCar extends javax.swing.JFrame {
         CarNameField.setText("Car Name:");
 
         jLabel2.setText(dataIO.readData(rowOfCarId + 1, readFileLocation));
+
+        jLabel1.setText("Number of Seats:");
+
+        jLabel3.setText(dataIO.readData(rowOfCarId + 2, readFileLocation));
+
+        jLabel4.setText("Price:  (Per Day)");
+
+        jLabel5.setText("RM " +dataIO.readData(rowOfCarId + 3, readFileLocation));
+
+        jLabel6.setText("Car Type:");
+
+        String carTypes = dataIO.readData(rowOfCarId + 4, readFileLocation);
+        if (carTypes != "Vans") {
+            carTypes = carTypes + "Car";
+        }
+        jLabel7.setText(carTypes);
+
+        jLabel8.setText("Picture:");
+
+        jLabel9.setText("Start Date:");
+
+        jLabel10.setText("End Date:");
+
+        bookButton.setText("Book");
+        bookButton.addActionListener(new java.awt.event.ActionListener() {
+            public void actionPerformed(java.awt.event.ActionEvent evt) {
+                bookButtonActionPerformed(evt);
+            }
+        });
 
         jMenu1.setText("File");
         jMenuBar1.add(jMenu1);
@@ -58,29 +134,109 @@ public class BookCar extends javax.swing.JFrame {
         layout.setHorizontalGroup(
             layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
             .addGroup(layout.createSequentialGroup()
-                .addGap(66, 66, 66)
                 .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-                    .addComponent(CarNameField)
                     .addGroup(layout.createSequentialGroup()
-                        .addComponent(jLabel2, javax.swing.GroupLayout.PREFERRED_SIZE, 43, javax.swing.GroupLayout.PREFERRED_SIZE)
-                        .addGap(176, 176, 176)
-                        .addComponent(JDateChooser, javax.swing.GroupLayout.PREFERRED_SIZE, 124, javax.swing.GroupLayout.PREFERRED_SIZE)))
-                .addContainerGap(591, Short.MAX_VALUE))
+                        .addGap(66, 66, 66)
+                        .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
+                            .addComponent(jLabel4)
+                            .addComponent(jLabel1)
+                            .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.TRAILING, false)
+                                .addComponent(jLabel7, javax.swing.GroupLayout.Alignment.LEADING, javax.swing.GroupLayout.DEFAULT_SIZE, 95, Short.MAX_VALUE)
+                                .addComponent(jLabel5, javax.swing.GroupLayout.Alignment.LEADING, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
+                                .addComponent(jLabel3, javax.swing.GroupLayout.Alignment.LEADING, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE))
+                            .addGroup(layout.createSequentialGroup()
+                                .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
+                                    .addComponent(CarNameField)
+                                    .addComponent(jLabel2, javax.swing.GroupLayout.PREFERRED_SIZE, 99, javax.swing.GroupLayout.PREFERRED_SIZE))
+                                .addGap(154, 154, 154)
+                                .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
+                                    .addComponent(jLabel8)
+                                    .addComponent(pictureField, javax.swing.GroupLayout.PREFERRED_SIZE, 200, javax.swing.GroupLayout.PREFERRED_SIZE)))
+                            .addGroup(layout.createSequentialGroup()
+                                .addComponent(jLabel6)
+                                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
+                                .addComponent(bookButton, javax.swing.GroupLayout.PREFERRED_SIZE, 83, javax.swing.GroupLayout.PREFERRED_SIZE))))
+                    .addGroup(layout.createSequentialGroup()
+                        .addGap(296, 296, 296)
+                        .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING, false)
+                            .addComponent(startDateField, javax.swing.GroupLayout.DEFAULT_SIZE, 124, Short.MAX_VALUE)
+                            .addComponent(jLabel9, javax.swing.GroupLayout.PREFERRED_SIZE, 77, javax.swing.GroupLayout.PREFERRED_SIZE)
+                            .addComponent(jLabel10, javax.swing.GroupLayout.PREFERRED_SIZE, 74, javax.swing.GroupLayout.PREFERRED_SIZE)
+                            .addComponent(EndDateField, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE))))
+                .addGap(228, 228, 228))
         );
         layout.setVerticalGroup(
             layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
             .addGroup(layout.createSequentialGroup()
                 .addGap(62, 62, 62)
-                .addComponent(CarNameField)
+                .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
+                    .addComponent(CarNameField)
+                    .addComponent(jLabel8))
                 .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
-                .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
+                .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
                     .addComponent(jLabel2)
-                    .addComponent(JDateChooser, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE))
-                .addContainerGap(409, Short.MAX_VALUE))
+                    .addComponent(pictureField, javax.swing.GroupLayout.PREFERRED_SIZE, 200, javax.swing.GroupLayout.PREFERRED_SIZE))
+                .addGap(58, 58, 58)
+                .addComponent(jLabel1)
+                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
+                .addComponent(jLabel3)
+                .addGap(4, 4, 4)
+                .addComponent(jLabel9)
+                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
+                .addComponent(startDateField, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
+                .addGap(8, 8, 8)
+                .addComponent(jLabel4)
+                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
+                .addComponent(jLabel5)
+                .addGap(2, 2, 2)
+                .addComponent(jLabel10)
+                .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
+                    .addGroup(layout.createSequentialGroup()
+                        .addGap(16, 16, 16)
+                        .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.TRAILING)
+                            .addGroup(layout.createSequentialGroup()
+                                .addComponent(jLabel6)
+                                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
+                                .addComponent(jLabel7))
+                            .addComponent(EndDateField, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE))
+                        .addContainerGap(javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE))
+                    .addGroup(javax.swing.GroupLayout.Alignment.TRAILING, layout.createSequentialGroup()
+                        .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
+                        .addComponent(bookButton)
+                        .addGap(151, 151, 151))))
         );
 
         pack();
     }// </editor-fold>//GEN-END:initComponents
+
+    private void bookButtonActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_bookButtonActionPerformed
+        Date startDate = startDateField.getDate();
+        Date endDate = EndDateField.getDate();
+    
+        if (startDate != null && endDate != null) {
+            if (endDate.before(startDate)) {
+                JOptionPane.showMessageDialog(this, "End date cannot be earlier than start date", "Invalid Date", JOptionPane.ERROR_MESSAGE);
+                EndDateField.setDate(null); // Reset EndDateField
+            } else {
+                // Confirm booking
+                int choice = JOptionPane.showConfirmDialog(this, "Confirm booking?", "Confirmation", JOptionPane.YES_NO_OPTION);
+                if (choice == JOptionPane.YES_OPTION) {
+                    // Calculate the number of days between start date and end date
+                    // LocalDate localStartDate = startDate.toInstant().atZone(ZoneId.systemDefault()).toLocalDate();
+                    // LocalDate localEndDate = endDate.toInstant().atZone(ZoneId.systemDefault()).toLocalDate();
+    
+                    // long daysBetween = ChronoUnit.DAYS.between(localStartDate, localEndDate);
+                    // JOptionPane.showMessageDialog(this, "Number of days between start and end date: " + daysBetween);
+    
+                    
+                }
+            }
+        } else {
+            JOptionPane.showMessageDialog(this, "Please select a start and end date", "Invalid Date", JOptionPane.ERROR_MESSAGE);
+        }
+    }//GEN-LAST:event_bookButtonActionPerformed
+    
+    
 
     /**
      * @param args the command line arguments
@@ -119,10 +275,22 @@ public class BookCar extends javax.swing.JFrame {
 
     // Variables declaration - do not modify//GEN-BEGIN:variables
     private javax.swing.JLabel CarNameField;
-    private com.toedter.calendar.JDateChooser JDateChooser;
+    private com.toedter.calendar.JDateChooser EndDateField;
+    private javax.swing.JButton bookButton;
+    private javax.swing.JLabel jLabel1;
+    private javax.swing.JLabel jLabel10;
     private javax.swing.JLabel jLabel2;
+    private javax.swing.JLabel jLabel3;
+    private javax.swing.JLabel jLabel4;
+    private javax.swing.JLabel jLabel5;
+    private javax.swing.JLabel jLabel6;
+    private javax.swing.JLabel jLabel7;
+    private javax.swing.JLabel jLabel8;
+    private javax.swing.JLabel jLabel9;
     private javax.swing.JMenu jMenu1;
     private javax.swing.JMenu jMenu2;
     private javax.swing.JMenuBar jMenuBar1;
+    private javax.swing.JLabel pictureField;
+    private com.toedter.calendar.JDateChooser startDateField;
     // End of variables declaration//GEN-END:variables
 }
