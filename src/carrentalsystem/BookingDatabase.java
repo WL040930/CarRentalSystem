@@ -5,6 +5,7 @@
 package carrentalsystem;
 
 import javax.swing.table.DefaultTableModel;
+import javax.swing.JOptionPane;
 import javax.swing.event.ListSelectionEvent;
 import javax.swing.event.ListSelectionListener;
 import java.util.List;
@@ -53,7 +54,6 @@ public class BookingDatabase extends javax.swing.JFrame {
                         int price = Integer.parseInt(dataIO.readData(rowNumberInCar + 3, CAR_FILE)); 
                         int days = (int) (endDate.toEpochDay() - startDate.toEpochDay());
                         int totalPayment = price * days;
-                        System.out.println(totalPayment);
 
                         bookingIdField.setText(String.valueOf(bookingId));
                         bookedCarField.setText(carName);
@@ -62,7 +62,7 @@ public class BookingDatabase extends javax.swing.JFrame {
                         PaymentStatusField.setSelectedItem(paymentStatus);
                         startDateField.setText(startDate.toString());
                         endDateField.setText(endDate.toString());
-                        paymentField.setText(String.valueOf(totalPayment));
+                        paymentField.setText("RM " +String.valueOf(totalPayment));
                     }
                 }
             }
@@ -123,27 +123,27 @@ public class BookingDatabase extends javax.swing.JFrame {
 
         jLabel2.setText("Booking ID:");
 
-        bookingIdField.setText("jLabel3");
+        bookingIdField.setText("");
 
         jLabel3.setText("Booked Car:");
 
-        bookedCarField.setText("jLabel4");
+        bookedCarField.setText("");
 
         jLabel4.setText("User Email:");
 
-        emailField.setText("jLabel5");
+        emailField.setText("");
 
         jLabel5.setText("Total Payment");
 
-        paymentField.setText("jLabel6");
+        paymentField.setText("");
 
         jLabel6.setText("Start Date");
 
-        startDateField.setText("jLabel7");
+        startDateField.setText("");
 
         jLabel7.setText("End Date:");
 
-        endDateField.setText("jLabel8");
+        endDateField.setText("");
 
         jLabel8.setText("Status:");
 
@@ -151,9 +151,14 @@ public class BookingDatabase extends javax.swing.JFrame {
 
         PaymentStatusField.setModel(new javax.swing.DefaultComboBoxModel<>(new String[] { "Paid", "Unpaid" }));
 
-        statusField.setText("jLabel10");
+        statusField.setText("");
 
         SaveButton.setText("Save");
+        SaveButton.addActionListener(new java.awt.event.ActionListener() {
+            public void actionPerformed(java.awt.event.ActionEvent evt) {
+                SaveButtonActionPerformed(evt);
+            }
+        });
 
         DeleteButton.setText("Delete");
 
@@ -186,9 +191,9 @@ public class BookingDatabase extends javax.swing.JFrame {
                         .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
                             .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING, false)
                                 .addComponent(jLabel4, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
-                                .addComponent(emailField, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
-                                .addComponent(paymentField, javax.swing.GroupLayout.PREFERRED_SIZE, 53, javax.swing.GroupLayout.PREFERRED_SIZE))
-                            .addComponent(jLabel5))
+                                .addComponent(emailField, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE))
+                            .addComponent(jLabel5)
+                            .addComponent(paymentField, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE))
                         .addGap(102, 102, 102)
                         .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
                             .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING, false)
@@ -250,6 +255,23 @@ public class BookingDatabase extends javax.swing.JFrame {
 
         pack();
     }// </editor-fold>//GEN-END:initComponents
+
+    private void SaveButtonActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_SaveButtonActionPerformed
+        if (!bookingIdField.getText().isEmpty()) {
+            int bookingId = Integer.parseInt(bookingIdField.getText());
+            int rowNumberInBooking = dataIO.rowNumber(bookingId, 1, BOOKING_FILE, 8);
+            String paymentStatus = (String) PaymentStatusField.getSelectedItem();
+            dataIO.overWriteData(paymentStatus, rowNumberInBooking + 6 , BOOKING_FILE);
+            refreshBookingTable();
+        } else {
+            JOptionPane.showMessageDialog(this, "Please select a booking to update", "Error", JOptionPane.ERROR_MESSAGE);
+        }
+    }//GEN-LAST:event_SaveButtonActionPerformed
+
+    private void refreshBookingTable() {
+        List<Booking> booking = DatabaseManager.getAllBookings();
+        populateBookingTable(booking);
+    }
 
     private void populateBookingTable(List<Booking> bookings) {
         model.setRowCount(0); // Clear existing table data
