@@ -75,25 +75,28 @@ public class DatabaseManager {
 
     public static List<Booking> getAllBookings() {
         List<Booking> bookings = new ArrayList<>();
-    
+        
         try {
             int totalLines = getTotalLines(BOOKING_FILE);
             int numberOfBookings = totalLines / NUMBER_OF_LINES_PER_BOOKING;
     
             for (int i = 0; i < numberOfBookings; i++) {
-                int lineNumber = i * NUMBER_OF_LINES_PER_BOOKING + 1; // Start line number for current car
-                
+                int lineNumber = i * NUMBER_OF_LINES_PER_BOOKING + 1; // Start line number for current booking
+    
                 int bookingID = Integer.parseInt(dataIO.readData(lineNumber, BOOKING_FILE));
                 int carID = Integer.parseInt(dataIO.readData(lineNumber + 1, BOOKING_FILE));
                 String customerEmail = dataIO.readData(lineNumber + 2, BOOKING_FILE);
-                LocalDate startDate = dataIO.readDate(lineNumber + 3, BOOKING_FILE);
-                LocalDate endDate = dataIO.readDate(lineNumber + 4, BOOKING_FILE);
+                String startDateStr = dataIO.readData(lineNumber + 3, BOOKING_FILE);
+                String endDateStr = dataIO.readData(lineNumber + 4, BOOKING_FILE);
                 String status = dataIO.readData(lineNumber + 5, BOOKING_FILE);
                 String paymentStatus = dataIO.readData(lineNumber + 6, BOOKING_FILE);
-
-                Booking book = new Booking(bookingID, carID, customerEmail, startDate, endDate, status, paymentStatus);
-
-                bookings.add(book);
+    
+                // Parse startDateStr and endDateStr into LocalDate objects
+                LocalDate startDate = LocalDate.parse(startDateStr);
+                LocalDate endDate = LocalDate.parse(endDateStr);
+    
+                Booking booking = new Booking(bookingID, carID, customerEmail, startDate, endDate, status, paymentStatus);
+                bookings.add(booking);
             }
         } catch (Exception e) {
             e.printStackTrace();

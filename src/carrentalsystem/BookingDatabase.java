@@ -4,14 +4,69 @@
  */
 package carrentalsystem;
 
+import javax.swing.table.DefaultTableModel;
+import javax.swing.event.ListSelectionEvent;
+import javax.swing.event.ListSelectionListener;
+import java.util.List;
+import java.time.LocalDate;
+
 public class BookingDatabase extends javax.swing.JFrame {
 
     static User.admin user;
+    DefaultTableModel model;
     final String BOOKING_FILE = "src/carrentalsystem/data/Booking.txt";
+    final String CAR_FILE = "src/carrentalsystem/data/Car.txt";
+    final String USER_FILE = "src/carrentalsystem/data/User.txt";
     
     public BookingDatabase(User.admin user) {
         BookingDatabase.user = user;
         initComponents();
+
+        model = new DefaultTableModel() {
+            @Override
+            public boolean isCellEditable(int row, int column) {
+                return false;
+            }
+        };
+
+        List<Booking> booking = DatabaseManager.getAllBookings();
+        populateBookingTable(booking);
+        BookingTable.getSelectionModel().addListSelectionListener(new ListSelectionListener() {
+            @Override
+            public void valueChanged(ListSelectionEvent e) {
+                if (!e.getValueIsAdjusting()) {
+                    int selectedRow = BookingTable.getSelectedRow();
+                    if (selectedRow != -1) { 
+                        int bookingId = (int) BookingTable.getValueAt(selectedRow, 0);
+                        String carName = (String) BookingTable.getValueAt(selectedRow, 1);
+                        String userEmail = (String) BookingTable.getValueAt(selectedRow, 2);
+                        String status = (String) BookingTable.getValueAt(selectedRow, 3);
+                        String paymentStatus = (String) BookingTable.getValueAt(selectedRow, 4);
+
+                        int rowNumberInBooking = dataIO.rowNumber(bookingId, 1, BOOKING_FILE, 8);
+
+                        LocalDate startDate = LocalDate.parse(dataIO.readData(rowNumberInBooking + 3, BOOKING_FILE));
+                        LocalDate endDate = LocalDate.parse(dataIO.readData(rowNumberInBooking + 4, BOOKING_FILE));
+
+                        int carId = Integer.parseInt(dataIO.readData(rowNumberInBooking + 1, BOOKING_FILE));
+                        int rowNumberInCar = (int) dataIO.rowNumber(String.valueOf(carId), 1, CAR_FILE, 7);
+                        int price = Integer.parseInt(dataIO.readData(rowNumberInCar + 3, CAR_FILE)); 
+                        int days = (int) (endDate.toEpochDay() - startDate.toEpochDay());
+                        int totalPayment = price * days;
+                        System.out.println(totalPayment);
+
+                        bookingIdField.setText(String.valueOf(bookingId));
+                        bookedCarField.setText(carName);
+                        emailField.setText(userEmail);
+                        statusField.setText(status);
+                        PaymentStatusField.setSelectedItem(paymentStatus);
+                        startDateField.setText(startDate.toString());
+                        endDateField.setText(endDate.toString());
+                        paymentField.setText(String.valueOf(totalPayment));
+                    }
+                }
+            }
+        });
     }
 
     /**
@@ -25,7 +80,25 @@ public class BookingDatabase extends javax.swing.JFrame {
 
         jLabel1 = new javax.swing.JLabel();
         jScrollPane1 = new javax.swing.JScrollPane();
-        jTable1 = new javax.swing.JTable();
+        BookingTable = new javax.swing.JTable();
+        jLabel2 = new javax.swing.JLabel();
+        bookingIdField = new javax.swing.JLabel();
+        jLabel3 = new javax.swing.JLabel();
+        bookedCarField = new javax.swing.JLabel();
+        jLabel4 = new javax.swing.JLabel();
+        emailField = new javax.swing.JLabel();
+        jLabel5 = new javax.swing.JLabel();
+        paymentField = new javax.swing.JLabel();
+        jLabel6 = new javax.swing.JLabel();
+        startDateField = new javax.swing.JLabel();
+        jLabel7 = new javax.swing.JLabel();
+        endDateField = new javax.swing.JLabel();
+        jLabel8 = new javax.swing.JLabel();
+        jLabel9 = new javax.swing.JLabel();
+        PaymentStatusField = new javax.swing.JComboBox<>();
+        statusField = new javax.swing.JLabel();
+        SaveButton = new javax.swing.JButton();
+        DeleteButton = new javax.swing.JButton();
         jMenuBar1 = new javax.swing.JMenuBar();
         jMenu1 = new javax.swing.JMenu();
         jMenu2 = new javax.swing.JMenu();
@@ -35,7 +108,7 @@ public class BookingDatabase extends javax.swing.JFrame {
         jLabel1.setFont(new java.awt.Font("Segoe UI", 1, 24)); // NOI18N
         jLabel1.setText("Booking Database");
 
-        jTable1.setModel(new javax.swing.table.DefaultTableModel(
+        BookingTable.setModel(new javax.swing.table.DefaultTableModel(
             new Object [][] {
                 {},
                 {},
@@ -46,7 +119,43 @@ public class BookingDatabase extends javax.swing.JFrame {
 
             }
         ));
-        jScrollPane1.setViewportView(jTable1);
+        jScrollPane1.setViewportView(BookingTable);
+
+        jLabel2.setText("Booking ID:");
+
+        bookingIdField.setText("jLabel3");
+
+        jLabel3.setText("Booked Car:");
+
+        bookedCarField.setText("jLabel4");
+
+        jLabel4.setText("User Email:");
+
+        emailField.setText("jLabel5");
+
+        jLabel5.setText("Total Payment");
+
+        paymentField.setText("jLabel6");
+
+        jLabel6.setText("Start Date");
+
+        startDateField.setText("jLabel7");
+
+        jLabel7.setText("End Date:");
+
+        endDateField.setText("jLabel8");
+
+        jLabel8.setText("Status:");
+
+        jLabel9.setText("Payment Status:");
+
+        PaymentStatusField.setModel(new javax.swing.DefaultComboBoxModel<>(new String[] { "Paid", "Unpaid" }));
+
+        statusField.setText("jLabel10");
+
+        SaveButton.setText("Save");
+
+        DeleteButton.setText("Delete");
 
         jMenu1.setText("File");
         jMenuBar1.add(jMenu1);
@@ -62,9 +171,45 @@ public class BookingDatabase extends javax.swing.JFrame {
             layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
             .addGroup(layout.createSequentialGroup()
                 .addGap(28, 28, 28)
-                .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
+                .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING, false)
                     .addComponent(jLabel1, javax.swing.GroupLayout.PREFERRED_SIZE, 221, javax.swing.GroupLayout.PREFERRED_SIZE)
-                    .addComponent(jScrollPane1, javax.swing.GroupLayout.PREFERRED_SIZE, 936, javax.swing.GroupLayout.PREFERRED_SIZE))
+                    .addComponent(jScrollPane1, javax.swing.GroupLayout.PREFERRED_SIZE, 936, javax.swing.GroupLayout.PREFERRED_SIZE)
+                    .addGroup(layout.createSequentialGroup()
+                        .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
+                            .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.TRAILING)
+                                .addComponent(jLabel2, javax.swing.GroupLayout.Alignment.LEADING, javax.swing.GroupLayout.PREFERRED_SIZE, 83, javax.swing.GroupLayout.PREFERRED_SIZE)
+                                .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
+                                    .addComponent(bookedCarField, javax.swing.GroupLayout.PREFERRED_SIZE, 43, javax.swing.GroupLayout.PREFERRED_SIZE)
+                                    .addComponent(jLabel3, javax.swing.GroupLayout.PREFERRED_SIZE, 82, javax.swing.GroupLayout.PREFERRED_SIZE)))
+                            .addComponent(bookingIdField))
+                        .addGap(111, 111, 111)
+                        .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
+                            .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING, false)
+                                .addComponent(jLabel4, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
+                                .addComponent(emailField, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
+                                .addComponent(paymentField, javax.swing.GroupLayout.PREFERRED_SIZE, 53, javax.swing.GroupLayout.PREFERRED_SIZE))
+                            .addComponent(jLabel5))
+                        .addGap(102, 102, 102)
+                        .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
+                            .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING, false)
+                                .addComponent(jLabel6, javax.swing.GroupLayout.DEFAULT_SIZE, 71, Short.MAX_VALUE)
+                                .addComponent(jLabel7, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE))
+                            .addComponent(startDateField, javax.swing.GroupLayout.PREFERRED_SIZE, 99, javax.swing.GroupLayout.PREFERRED_SIZE)
+                            .addComponent(endDateField, javax.swing.GroupLayout.PREFERRED_SIZE, 110, javax.swing.GroupLayout.PREFERRED_SIZE))
+                        .addGap(60, 60, 60)
+                        .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
+                            .addGroup(layout.createSequentialGroup()
+                                .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
+                                    .addComponent(jLabel8, javax.swing.GroupLayout.PREFERRED_SIZE, 43, javax.swing.GroupLayout.PREFERRED_SIZE)
+                                    .addComponent(jLabel9, javax.swing.GroupLayout.PREFERRED_SIZE, 117, javax.swing.GroupLayout.PREFERRED_SIZE)
+                                    .addComponent(PaymentStatusField, javax.swing.GroupLayout.PREFERRED_SIZE, 133, javax.swing.GroupLayout.PREFERRED_SIZE))
+                                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
+                                .addComponent(DeleteButton, javax.swing.GroupLayout.PREFERRED_SIZE, 83, javax.swing.GroupLayout.PREFERRED_SIZE))
+                            .addGroup(layout.createSequentialGroup()
+                                .addComponent(statusField, javax.swing.GroupLayout.PREFERRED_SIZE, 86, javax.swing.GroupLayout.PREFERRED_SIZE)
+                                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
+                                .addComponent(SaveButton, javax.swing.GroupLayout.PREFERRED_SIZE, 83, javax.swing.GroupLayout.PREFERRED_SIZE)))
+                        .addGap(42, 42, 42)))
                 .addContainerGap(36, Short.MAX_VALUE))
         );
         layout.setVerticalGroup(
@@ -74,11 +219,83 @@ public class BookingDatabase extends javax.swing.JFrame {
                 .addComponent(jLabel1)
                 .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
                 .addComponent(jScrollPane1, javax.swing.GroupLayout.PREFERRED_SIZE, 230, javax.swing.GroupLayout.PREFERRED_SIZE)
-                .addContainerGap(237, Short.MAX_VALUE))
+                .addGap(18, 18, 18)
+                .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
+                    .addComponent(jLabel2)
+                    .addComponent(jLabel4)
+                    .addComponent(jLabel6)
+                    .addComponent(jLabel8))
+                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
+                .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
+                    .addComponent(bookingIdField)
+                    .addComponent(emailField)
+                    .addComponent(startDateField)
+                    .addComponent(statusField)
+                    .addComponent(SaveButton))
+                .addGap(33, 33, 33)
+                .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
+                    .addComponent(jLabel3)
+                    .addComponent(jLabel5)
+                    .addComponent(jLabel7)
+                    .addComponent(jLabel9))
+                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
+                .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
+                    .addComponent(bookedCarField)
+                    .addComponent(paymentField)
+                    .addComponent(endDateField)
+                    .addComponent(PaymentStatusField, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
+                    .addComponent(DeleteButton))
+                .addContainerGap(82, Short.MAX_VALUE))
         );
 
         pack();
     }// </editor-fold>//GEN-END:initComponents
+
+    private void populateBookingTable(List<Booking> bookings) {
+        model.setRowCount(0); // Clear existing table data
+        model.setColumnCount(0); // Reset column count
+
+        DefaultTableModel model = new DefaultTableModel() {
+            @Override
+            public boolean isCellEditable(int row, int column) {
+                // This causes all cells to be non-editable
+                return false;
+            }
+        };
+        model.addColumn("Booking ID");
+        model.addColumn("Car Name");
+        model.addColumn("User Email");
+        model.addColumn("Status");
+        model.addColumn("Payment Status");
+    
+        for (Booking booking : bookings) {
+            int bookingId = booking.getBookingId();
+            String status = booking.getStatus();
+            String paymentStatus = booking.getPaymentStatus();
+
+            int rowNumberInBooking = dataIO.rowNumber(bookingId, 1, BOOKING_FILE, 8);
+
+            String carId = dataIO.readData(rowNumberInBooking + 1, BOOKING_FILE); 
+            int rowNumberInCar = dataIO.rowNumber(carId, 1, CAR_FILE, 7);
+
+            String carName = dataIO.readData(rowNumberInCar + 1, CAR_FILE);
+
+            String userEmail = dataIO.readData(rowNumberInBooking + 2, BOOKING_FILE); 
+    
+    
+            // Add row to table model with correct role displayed
+            model.addRow(new Object[]{bookingId, carName, userEmail, status, paymentStatus});
+        }
+    
+        BookingTable.setModel(model);
+    
+        // Allow row selection
+        BookingTable.setRowSelectionAllowed(true);
+    
+        // Ensure that cell selection is disabled
+        BookingTable.setCellSelectionEnabled(false);
+        BookingTable.setColumnSelectionAllowed(false);
+    }
 
     /**
      * @param args the command line arguments
@@ -116,11 +333,29 @@ public class BookingDatabase extends javax.swing.JFrame {
     }
 
     // Variables declaration - do not modify//GEN-BEGIN:variables
+    private javax.swing.JTable BookingTable;
+    private javax.swing.JButton DeleteButton;
+    private javax.swing.JComboBox<String> PaymentStatusField;
+    private javax.swing.JButton SaveButton;
+    private javax.swing.JLabel bookedCarField;
+    private javax.swing.JLabel bookingIdField;
+    private javax.swing.JLabel emailField;
+    private javax.swing.JLabel endDateField;
     private javax.swing.JLabel jLabel1;
+    private javax.swing.JLabel jLabel2;
+    private javax.swing.JLabel jLabel3;
+    private javax.swing.JLabel jLabel4;
+    private javax.swing.JLabel jLabel5;
+    private javax.swing.JLabel jLabel6;
+    private javax.swing.JLabel jLabel7;
+    private javax.swing.JLabel jLabel8;
+    private javax.swing.JLabel jLabel9;
     private javax.swing.JMenu jMenu1;
     private javax.swing.JMenu jMenu2;
     private javax.swing.JMenuBar jMenuBar1;
     private javax.swing.JScrollPane jScrollPane1;
-    private javax.swing.JTable jTable1;
+    private javax.swing.JLabel paymentField;
+    private javax.swing.JLabel startDateField;
+    private javax.swing.JLabel statusField;
     // End of variables declaration//GEN-END:variables
 }
