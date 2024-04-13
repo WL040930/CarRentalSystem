@@ -37,6 +37,7 @@ public class AdminDashboard extends javax.swing.JFrame {
         jMenu3 = new javax.swing.JMenu();
         jMenuItem3 = new javax.swing.JMenuItem();
         jMenuItem6 = new javax.swing.JMenuItem();
+        BookingMenu = new javax.swing.JMenuItem();
         jMenu2 = new javax.swing.JMenu();
         jMenuItem1 = new javax.swing.JMenuItem();
         jMenuItem2 = new javax.swing.JMenuItem();
@@ -70,6 +71,14 @@ public class AdminDashboard extends javax.swing.JFrame {
 
         jMenuItem6.setText("Car Database");
         jMenu3.add(jMenuItem6);
+
+        BookingMenu.setText("Booking Database");
+        BookingMenu.addActionListener(new java.awt.event.ActionListener() {
+            public void actionPerformed(java.awt.event.ActionEvent evt) {
+                BookingMenuActionPerformed(evt);
+            }
+        });
+        jMenu3.add(BookingMenu);
 
         jMenuBar1.add(jMenu3);
 
@@ -125,6 +134,10 @@ public class AdminDashboard extends javax.swing.JFrame {
         pageSwitch.switchPage(this, new AddNewCar(user));
     }//GEN-LAST:event_jMenuItem5ActionPerformed
 
+    private void BookingMenuActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_BookingMenuActionPerformed
+        pageSwitch.switchPage(this, new BookingDatabase(user));
+    }//GEN-LAST:event_BookingMenuActionPerformed
+
     /**
      * @param args the command line arguments
      */
@@ -161,6 +174,7 @@ public class AdminDashboard extends javax.swing.JFrame {
     }
 
     // Variables declaration - do not modify//GEN-BEGIN:variables
+    private javax.swing.JMenuItem BookingMenu;
     private javax.swing.JMenu jMenu1;
     private javax.swing.JMenu jMenu2;
     private javax.swing.JMenu jMenu3;

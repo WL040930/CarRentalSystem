@@ -12,6 +12,9 @@ import java.util.UUID;
 import java.nio.file.Path;
 import java.nio.file.Files;
 import java.nio.file.StandardCopyOption;
+import java.util.Date;
+import java.time.LocalDate;
+import java.time.format.DateTimeFormatter;
 
 public class dataIO {
     
@@ -31,7 +34,17 @@ public class dataIO {
      * 4 - price 
      * 5 - Car type
      * 6 - image path
-     */
+    */
+    /*
+     * Booking.txt - number of Lines = 8
+     * 1 - Booking ID
+     * 2 - Car ID
+     * 3 - Email 
+     * 4 - Start Date
+     * 5 - End Date
+     * 6 - Status
+     * 7 - Payment Status 
+    */
     public static int rowNumber (String data, int checkData, String fileName, int numberOfLines) {
         try (Scanner scanner = new Scanner(new File(fileName))) {
             int lineNumber = 1;
@@ -91,6 +104,31 @@ public class dataIO {
         }
     }
 
+    public static int[] bookingId (int checkData ,String fileName, int NumberOfLines) {
+        try (Scanner scanner = new Scanner(new File(fileName))) {
+            int lineNumber = 1;
+            int[] bookingID = new int[DatabaseManager.getTotalLines(fileName)/NumberOfLines];
+            while (scanner.hasNextLine()) {
+                String line = scanner.nextLine();
+                if (lineNumber % NumberOfLines == checkData) {
+                    bookingID[lineNumber/NumberOfLines] = Integer.parseInt(line);
+                }
+                lineNumber++;
+            }
+
+            if (bookingID.length == 0) {
+                bookingID = new int[1];
+                bookingID[0] = 0; 
+                return bookingID;
+            }
+
+            return bookingID;
+        } catch (Exception e) {
+            e.printStackTrace();
+            return null;
+        }
+    }
+
     // Read data based on row number 
     public static String readData(int rNumber, String fileName) {
         try (Scanner scanner = new Scanner(new File(fileName))) {
@@ -102,6 +140,27 @@ public class dataIO {
                 }
                 lineNumber++;
             }
+            return null;
+        } catch (Exception e) {
+            e.printStackTrace();
+            return null;
+        }
+    }
+
+    public static LocalDate readDate(int rNumber, String fileName) {
+        try (Scanner scanner = new Scanner(new File(fileName))) {
+            int lineNumber = 1;
+            while (scanner.hasNextLine()) {
+                String line = scanner.nextLine();
+                if (lineNumber == rNumber) {
+                    DateTimeFormatter dateFormatter = DateTimeFormatter.ofPattern("dd/MM/yyyy");
+                    return LocalDate.parse(line, dateFormatter);
+                }
+                lineNumber++;
+            }
+            return null;
+        } catch (IOException e) {
+            e.printStackTrace();
             return null;
         } catch (Exception e) {
             e.printStackTrace();
@@ -136,6 +195,28 @@ public class dataIO {
     }
 
     public static void writeData (int data, String fileName) {
+        try {
+            FileWriter fileWriter = new FileWriter(fileName, true);
+            fileWriter.write(data + "\n");
+            fileWriter.close();
+        } catch (Exception e) {
+            System.out.println("An error occurred.");
+            e.printStackTrace();
+        }
+    }
+
+    public static void writeData (LocalDate date, String fileName) {
+        try {
+            FileWriter fileWriter = new FileWriter(fileName, true);
+            fileWriter.write(date + "\n");
+            fileWriter.close();
+        } catch (Exception e) {
+            System.out.println("An error occurred.");
+            e.printStackTrace();
+        }
+    }
+
+    public static void writeData (Date data, String fileName) {
         try {
             FileWriter fileWriter = new FileWriter(fileName, true);
             fileWriter.write(data + "\n");
@@ -272,18 +353,6 @@ public class dataIO {
         } catch (Exception e) {
             e.printStackTrace();
             return null;
-        }
-    }
-
-    public static void main(String[] args) {
-        int[] i = returnCarId("Luxury", "src/carrentalsystem/data/Car.txt");
-        if (i == null) {
-            System.out.println("No car found");
-            return;
-        } else {
-            for (int j : i) {
-                System.out.println(j);
-            }
         }
     }
 

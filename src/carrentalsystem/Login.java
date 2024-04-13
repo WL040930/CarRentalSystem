@@ -4,6 +4,8 @@ import java.awt.Cursor;
 import java.awt.event.MouseAdapter;
 import java.awt.event.MouseEvent;
 
+import javax.swing.JOptionPane;
+
 public class Login extends javax.swing.JFrame {
 
     /**
@@ -262,6 +264,10 @@ public class Login extends javax.swing.JFrame {
                 emailField.setText("");
                 passwordField.setText("");
             }
+        } else {
+            JOptionPane.showMessageDialog(null, "Email not found", "Error", JOptionPane.ERROR_MESSAGE);
+            emailField.setText("");
+            passwordField.setText("");
         }
     }
     /* End of login button */

@@ -5,11 +5,14 @@
 package carrentalsystem;
 
 import java.awt.Image;
+import java.awt.print.Book;
+
 import javax.swing.ImageIcon;
 import javax.swing.JOptionPane;
 import java.time.LocalDate;
 import java.time.temporal.ChronoUnit;
 import java.time.ZoneId;
+import java.util.Arrays;
 
 import java.util.Date;
 
@@ -23,6 +26,7 @@ public class BookCar extends javax.swing.JFrame {
     int carId;
     int rowOfCarId; 
     final String readFileLocation = "src/carrentalsystem/data/Car.txt";
+    final String writeFileLocation = "src/carrentalsystem/data/Booking.txt";
 
     public BookCar(User.customer user, Car car) {
         BookCar.user = user;
@@ -218,17 +222,22 @@ public class BookCar extends javax.swing.JFrame {
                 JOptionPane.showMessageDialog(this, "End date cannot be earlier than start date", "Invalid Date", JOptionPane.ERROR_MESSAGE);
                 EndDateField.setDate(null); // Reset EndDateField
             } else {
-                // Confirm booking
-                int choice = JOptionPane.showConfirmDialog(this, "Confirm booking?", "Confirmation", JOptionPane.YES_NO_OPTION);
+                LocalDate localStartDate = startDate.toInstant().atZone(ZoneId.systemDefault()).toLocalDate();
+                LocalDate localEndDate = endDate.toInstant().atZone(ZoneId.systemDefault()).toLocalDate();
+                long daysBetween = ChronoUnit.DAYS.between(localStartDate, localEndDate);
+                int price = (int) (daysBetween * Integer.parseInt(dataIO.readData(rowOfCarId + 3, readFileLocation)));
+
+                int choice = JOptionPane.showConfirmDialog(this, "Total Price is RM " + price + ". Confirm Booking?", "Confirmation", JOptionPane.YES_NO_OPTION);
                 if (choice == JOptionPane.YES_OPTION) {
-                    // Calculate the number of days between start date and end date
-                    // LocalDate localStartDate = startDate.toInstant().atZone(ZoneId.systemDefault()).toLocalDate();
-                    // LocalDate localEndDate = endDate.toInstant().atZone(ZoneId.systemDefault()).toLocalDate();
-    
-                    // long daysBetween = ChronoUnit.DAYS.between(localStartDate, localEndDate);
-                    // JOptionPane.showMessageDialog(this, "Number of days between start and end date: " + daysBetween);
-    
-                    
+                    dataIO.writeData(BookingId(), writeFileLocation); 
+                    dataIO.writeData(car.getCarID(), writeFileLocation); 
+                    dataIO.writeData(user.getEmail(), writeFileLocation);
+                    dataIO.writeData(localStartDate, writeFileLocation);
+                    dataIO.writeData(localEndDate, writeFileLocation);
+                    dataIO.writeData("Pending", writeFileLocation);
+                    dataIO.writeData("Unpaid", writeFileLocation);
+                    dataIO.writeData("", writeFileLocation);
+                    JOptionPane.showMessageDialog(this, "Booking Successful", "Success", JOptionPane.INFORMATION_MESSAGE);
                 }
             }
         } else {
@@ -236,7 +245,11 @@ public class BookCar extends javax.swing.JFrame {
         }
     }//GEN-LAST:event_bookButtonActionPerformed
     
-    
+    private int BookingId() {
+        int[] tempData = dataIO.bookingId(1, writeFileLocation, 8);
+        Arrays.sort(tempData);
+        return tempData[tempData.length - 1] + 1;
+    }
 
     /**
      * @param args the command line arguments

@@ -6,6 +6,7 @@ package carrentalsystem;
 
 import java.util.ArrayList;
 import java.util.List;
+import java.time.LocalDate;
 
 public class DatabaseManager {
 
@@ -14,6 +15,9 @@ public class DatabaseManager {
 
     private static final String CAR_FILE = "src/carrentalsystem/data/Car.txt";
     private static final int NUMBER_OF_LINES_PER_CAR = 7;
+
+    private static final String BOOKING_FILE = "src/carrentalsystem/data/Booking.txt";
+    private static final int NUMBER_OF_LINES_PER_BOOKING = 8;
 
     public static List<User> getAllUsers() {
         List<User> users = new ArrayList<>();
@@ -67,6 +71,34 @@ public class DatabaseManager {
             e.printStackTrace();
         }
         return cars;
+    }
+
+    public static List<Booking> getAllBookings() {
+        List<Booking> bookings = new ArrayList<>();
+    
+        try {
+            int totalLines = getTotalLines(BOOKING_FILE);
+            int numberOfBookings = totalLines / NUMBER_OF_LINES_PER_BOOKING;
+    
+            for (int i = 0; i < numberOfBookings; i++) {
+                int lineNumber = i * NUMBER_OF_LINES_PER_BOOKING + 1; // Start line number for current car
+                
+                int bookingID = Integer.parseInt(dataIO.readData(lineNumber, BOOKING_FILE));
+                int carID = Integer.parseInt(dataIO.readData(lineNumber + 1, BOOKING_FILE));
+                String customerEmail = dataIO.readData(lineNumber + 2, BOOKING_FILE);
+                LocalDate startDate = dataIO.readDate(lineNumber + 3, BOOKING_FILE);
+                LocalDate endDate = dataIO.readDate(lineNumber + 4, BOOKING_FILE);
+                String status = dataIO.readData(lineNumber + 5, BOOKING_FILE);
+                String paymentStatus = dataIO.readData(lineNumber + 6, BOOKING_FILE);
+
+                Booking book = new Booking(bookingID, carID, customerEmail, startDate, endDate, status, paymentStatus);
+
+                bookings.add(book);
+            }
+        } catch (Exception e) {
+            e.printStackTrace();
+        }
+        return bookings;
     }
 
     public static List<Car> getSpecificCarsType(String Type) {
