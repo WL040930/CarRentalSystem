@@ -15,6 +15,9 @@ import java.nio.file.StandardCopyOption;
 import java.util.Date;
 import java.time.LocalDate;
 import java.time.format.DateTimeFormatter;
+import java.io.BufferedReader;
+import java.io.BufferedWriter;
+import java.io.FileReader;
 
 public class dataIO {
     
@@ -353,6 +356,34 @@ public class dataIO {
         } catch (Exception e) {
             e.printStackTrace();
             return null;
+        }
+    }
+
+    public static void deleteRow(int rowNumber, String fileName) {
+        try {
+            File inputFile = new File(fileName);
+            File tempFile = new File("temp.txt");
+
+            BufferedReader reader = new BufferedReader(new FileReader(inputFile));
+            BufferedWriter writer = new BufferedWriter(new FileWriter(tempFile));
+
+            String currentLine;
+            int lineNumber = 1;
+
+            while ((currentLine = reader.readLine()) != null) {
+                if (lineNumber != rowNumber) {
+                    writer.write(currentLine + System.getProperty("line.separator"));
+                }
+                lineNumber++;
+            }
+
+            writer.close();
+            reader.close();
+
+            inputFile.delete();
+            tempFile.renameTo(inputFile);
+        } catch (IOException e) {
+            e.printStackTrace();
         }
     }
 

@@ -161,6 +161,11 @@ public class BookingDatabase extends javax.swing.JFrame {
         });
 
         DeleteButton.setText("Delete");
+        DeleteButton.addActionListener(new java.awt.event.ActionListener() {
+            public void actionPerformed(java.awt.event.ActionEvent evt) {
+                DeleteButtonActionPerformed(evt);
+            }
+        });
 
         jMenu1.setText("File");
         jMenuBar1.add(jMenu1);
@@ -267,6 +272,25 @@ public class BookingDatabase extends javax.swing.JFrame {
             JOptionPane.showMessageDialog(this, "Please select a booking to update", "Error", JOptionPane.ERROR_MESSAGE);
         }
     }//GEN-LAST:event_SaveButtonActionPerformed
+
+    private void DeleteButtonActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_DeleteButtonActionPerformed
+        if (!bookingIdField.getText().isEmpty()) {
+            int confirmDelete = JOptionPane.showConfirmDialog(this, "Are you sure you want to delete this booking?", "Delete Booking", JOptionPane.YES_NO_OPTION);
+            if (confirmDelete == JOptionPane.YES_OPTION) {
+                int bookingId = Integer.parseInt(bookingIdField.getText());
+                int rowNumberInBooking = dataIO.rowNumber(bookingId, 1, BOOKING_FILE, 8);
+                
+                for (int i = 0; i < 8; i++) {
+                    dataIO.deleteRow(rowNumberInBooking, BOOKING_FILE);
+                }
+
+                refreshBookingTable();
+            }
+            refreshBookingTable();
+        } else {
+            JOptionPane.showMessageDialog(this, "Please select a booking to delete", "Error", JOptionPane.ERROR_MESSAGE);
+        }
+    }//GEN-LAST:event_DeleteButtonActionPerformed
 
     private void refreshBookingTable() {
         List<Booking> booking = DatabaseManager.getAllBookings();
