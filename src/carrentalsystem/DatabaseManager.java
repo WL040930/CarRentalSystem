@@ -182,13 +182,14 @@ public class DatabaseManager {
                 String endDateStr = dataIO.readData(lineNumber + 4, BOOKING_FILE);
                 String bookingStatus = dataIO.readData(lineNumber + 5, BOOKING_FILE);
                 String paymentStatus = dataIO.readData(lineNumber + 6, BOOKING_FILE);
+                String carPlate = dataIO.readData(lineNumber + 7, BOOKING_FILE);
 
                 // Parse startDateStr and endDateStr into LocalDate objects
                 LocalDate startDate = LocalDate.parse(startDateStr);
                 LocalDate endDate = LocalDate.parse(endDateStr);
 
-                if (customerEmail.equals(email)) {
-                    Booking booking = new Booking(bookingID, carID, customerEmail, startDate, endDate, bookingStatus, paymentStatus);
+                if (customerEmail.equals(email) && bookingStatus.equals("Waiting")) {
+                    Booking booking = new Booking(bookingID, carID, customerEmail, startDate, endDate, bookingStatus, paymentStatus, carPlate);
                     bookings.add(booking);
                 }
             }

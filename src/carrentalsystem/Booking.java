@@ -15,7 +15,8 @@ public class Booking {
     private LocalDate startDate;
     private LocalDate endDate;
     private String status; 
-    private String paymentStatus; 
+    private String paymentStatus;
+    private String carPlate; 
     /* End of Declaration of variables */
 
     /*
@@ -25,7 +26,7 @@ public class Booking {
         2. Waiting - meaning that the admin has sent the booking confirmation message to user
         3. Cancel - meaning that the admin has rejected the booking requests of user
         4. Accepted - meaning the user has accepted the booking confirmation message from admin 
-        5. Rejected - meaning thhe user has rejected the booking cofirmation message from admin
+        5. Rejected - meaning the user has rejected the booking cofirmation message from admin
     
     */
 
@@ -48,6 +49,17 @@ public class Booking {
         this.endDate = endDate;
         this.status = status;
         this.paymentStatus = paymentStatus;
+    }
+
+    public Booking (int bookingId, int carId, String email, LocalDate startDate, LocalDate endDate, String status, String paymentStatus, String carPlate) {
+        this.bookingId = bookingId;
+        this.carId = carId;
+        this.email = email;
+        this.startDate = startDate;
+        this.endDate = endDate;
+        this.status = status;
+        this.paymentStatus = paymentStatus;
+        this.carPlate = carPlate;
     }
     /* End of Constructor */
 
@@ -79,6 +91,10 @@ public class Booking {
     public String getPaymentStatus() {
         return paymentStatus;
     }
+
+    public String getCarPlate() {
+        return carPlate;
+    }
     /* End of Getters */
 
     /* Setters */
@@ -108,6 +124,10 @@ public class Booking {
 
     public void setPaymentStatus(String paymentStatus) {
         this.paymentStatus = paymentStatus;
+    }
+
+    public void setCarPlate(String carPlate) {
+        this.carPlate = carPlate;
     }
     /* End of Setters */
 
