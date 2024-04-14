@@ -32,6 +32,8 @@ public class CustomerDashboard extends javax.swing.JFrame {
         jMenu1 = new javax.swing.JMenu();
         BookingMenu = new javax.swing.JMenu();
         rentCarButton = new javax.swing.JMenuItem();
+        jMenu3 = new javax.swing.JMenu();
+        BookingConfirmationMenu = new javax.swing.JMenuItem();
         jMenu2 = new javax.swing.JMenu();
         AccountSettingsMenu = new javax.swing.JMenuItem();
         LogoutMenu = new javax.swing.JMenuItem();
@@ -48,7 +50,7 @@ public class CustomerDashboard extends javax.swing.JFrame {
         jMenu1.setText("File");
         jMenuBar1.add(jMenu1);
 
-        BookingMenu.setText("Bookings");
+        BookingMenu.setText("Services");
 
         rentCarButton.setText("Rent a Car");
         rentCarButton.addActionListener(new java.awt.event.ActionListener() {
@@ -59,6 +61,18 @@ public class CustomerDashboard extends javax.swing.JFrame {
         BookingMenu.add(rentCarButton);
 
         jMenuBar1.add(BookingMenu);
+
+        jMenu3.setText("Bookings");
+
+        BookingConfirmationMenu.setText("Booking Confirmation");
+        BookingConfirmationMenu.addActionListener(new java.awt.event.ActionListener() {
+            public void actionPerformed(java.awt.event.ActionEvent evt) {
+                BookingConfirmationMenuActionPerformed(evt);
+            }
+        });
+        jMenu3.add(BookingConfirmationMenu);
+
+        jMenuBar1.add(jMenu3);
 
         jMenu2.setText("Settings");
 
@@ -87,16 +101,16 @@ public class CustomerDashboard extends javax.swing.JFrame {
         layout.setHorizontalGroup(
             layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
             .addGroup(layout.createSequentialGroup()
-                .addGap(428, 428, 428)
+                .addGap(311, 311, 311)
                 .addComponent(jButton1, javax.swing.GroupLayout.PREFERRED_SIZE, 83, javax.swing.GroupLayout.PREFERRED_SIZE)
-                .addContainerGap(489, Short.MAX_VALUE))
+                .addContainerGap(606, Short.MAX_VALUE))
         );
         layout.setVerticalGroup(
             layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
             .addGroup(layout.createSequentialGroup()
-                .addGap(166, 166, 166)
+                .addGap(194, 194, 194)
                 .addComponent(jButton1)
-                .addContainerGap(331, Short.MAX_VALUE))
+                .addContainerGap(303, Short.MAX_VALUE))
         );
 
         pack();
@@ -120,6 +134,10 @@ public class CustomerDashboard extends javax.swing.JFrame {
     private void rentCarButtonActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_rentCarButtonActionPerformed
         pageSwitch.switchPage(this, new ChooseCarType(user));
     }//GEN-LAST:event_rentCarButtonActionPerformed
+
+    private void BookingConfirmationMenuActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_BookingConfirmationMenuActionPerformed
+        pageSwitch.switchPage(this, new BookingConfirmation(user));
+    }//GEN-LAST:event_BookingConfirmationMenuActionPerformed
 
     /**
      * @param args the command line arguments
@@ -158,11 +176,13 @@ public class CustomerDashboard extends javax.swing.JFrame {
 
     // Variables declaration - do not modify//GEN-BEGIN:variables
     private javax.swing.JMenuItem AccountSettingsMenu;
+    private javax.swing.JMenuItem BookingConfirmationMenu;
     private javax.swing.JMenu BookingMenu;
     private javax.swing.JMenuItem LogoutMenu;
     private javax.swing.JButton jButton1;
     private javax.swing.JMenu jMenu1;
     private javax.swing.JMenu jMenu2;
+    private javax.swing.JMenu jMenu3;
     private javax.swing.JMenuBar jMenuBar1;
     private javax.swing.JMenuItem rentCarButton;
     // End of variables declaration//GEN-END:variables

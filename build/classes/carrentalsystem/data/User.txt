@@ -5,6 +5,6 @@ admin
 
 username
 user@gmail.com
-password
+a
 customer
 
