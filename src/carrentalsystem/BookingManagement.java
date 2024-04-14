@@ -40,18 +40,13 @@ public class BookingManagement extends javax.swing.JFrame {
                         int bookingId = (int) BookingTable.getValueAt(selectedRow, 0);
                         String carName = (String) BookingTable.getValueAt(selectedRow, 1);
                         String userEmail = (String) BookingTable.getValueAt(selectedRow, 2);
-                        String status = (String) BookingTable.getValueAt(selectedRow, 3);
-                        String paymentStatus = (String) BookingTable.getValueAt(selectedRow, 4);
 
-                        int rowNumberInBooking = dataIO.rowNumber(bookingId, 1, BOOKING_FILE, 8);
+                        int rowNumberInBooking = dataIO.rowNumber(bookingId, 1, BOOKING_FILE, 9);
 
                         LocalDate startDate = LocalDate.parse(dataIO.readData(rowNumberInBooking + 3, BOOKING_FILE));
                         LocalDate endDate = LocalDate.parse(dataIO.readData(rowNumberInBooking + 4, BOOKING_FILE));
 
-                        int carId = Integer.parseInt(dataIO.readData(rowNumberInBooking + 1, BOOKING_FILE));
-                        int rowNumberInCar = (int) dataIO.rowNumber(String.valueOf(carId), 1, CAR_FILE, 7);
                         int days = (int) (endDate.toEpochDay() - startDate.toEpochDay());
-                        
 
                         BookingIdField.setText(String.valueOf(bookingId));
                         CarNameField.setText(carName);
@@ -59,6 +54,7 @@ public class BookingManagement extends javax.swing.JFrame {
                         StartDateField.setText(startDate.toString());
                         EndDateField.setText(endDate.toString());
                         DurationField.setText(String.valueOf(days) + " days");
+                        carPlateField.setText(dataIO.readData(rowNumberInBooking + 7, BOOKING_FILE));
 
                     }
                 }
@@ -92,6 +88,8 @@ public class BookingManagement extends javax.swing.JFrame {
         DurationField = new javax.swing.JLabel();
         ApproveButton = new javax.swing.JButton();
         RejectButton = new javax.swing.JButton();
+        jLabel8 = new javax.swing.JLabel();
+        carPlateField = new javax.swing.JTextField();
         jMenuBar1 = new javax.swing.JMenuBar();
         jMenu1 = new javax.swing.JMenu();
         jMenu2 = new javax.swing.JMenu();
@@ -152,6 +150,14 @@ public class BookingManagement extends javax.swing.JFrame {
             }
         });
 
+        jLabel8.setText("Car Plate: ");
+
+        carPlateField.addActionListener(new java.awt.event.ActionListener() {
+            public void actionPerformed(java.awt.event.ActionEvent evt) {
+                carPlateFieldActionPerformed(evt);
+            }
+        });
+
         jMenu1.setText("File");
         jMenuBar1.add(jMenu1);
 
@@ -167,32 +173,34 @@ public class BookingManagement extends javax.swing.JFrame {
             .addGroup(layout.createSequentialGroup()
                 .addGap(36, 36, 36)
                 .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-                    .addComponent(jLabel1, javax.swing.GroupLayout.PREFERRED_SIZE, 260, javax.swing.GroupLayout.PREFERRED_SIZE)
                     .addGroup(layout.createSequentialGroup()
                         .addComponent(jScrollPane1, javax.swing.GroupLayout.PREFERRED_SIZE, 466, javax.swing.GroupLayout.PREFERRED_SIZE)
                         .addGap(78, 78, 78)
                         .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
                             .addGroup(layout.createSequentialGroup()
-                                .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING, false)
-                                    .addComponent(jLabel2, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
-                                    .addComponent(BookingIdField, javax.swing.GroupLayout.PREFERRED_SIZE, 43, javax.swing.GroupLayout.PREFERRED_SIZE)
-                                    .addComponent(jLabel3, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
-                                    .addComponent(UserEmailField, javax.swing.GroupLayout.PREFERRED_SIZE, 43, javax.swing.GroupLayout.PREFERRED_SIZE)
-                                    .addComponent(jLabel4)
-                                    .addComponent(CarNameField, javax.swing.GroupLayout.PREFERRED_SIZE, 43, javax.swing.GroupLayout.PREFERRED_SIZE))
-                                .addGap(130, 130, 130)
-                                .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING, false)
-                                    .addComponent(jLabel5, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
-                                    .addComponent(StartDateField, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
-                                    .addComponent(jLabel6, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
-                                    .addComponent(EndDateField, javax.swing.GroupLayout.PREFERRED_SIZE, 43, javax.swing.GroupLayout.PREFERRED_SIZE)
-                                    .addComponent(jLabel7)
-                                    .addComponent(DurationField, javax.swing.GroupLayout.PREFERRED_SIZE, 43, javax.swing.GroupLayout.PREFERRED_SIZE)))
-                            .addGroup(layout.createSequentialGroup()
-                                .addComponent(RejectButton, javax.swing.GroupLayout.PREFERRED_SIZE, 83, javax.swing.GroupLayout.PREFERRED_SIZE)
-                                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED, 120, Short.MAX_VALUE)
-                                .addComponent(ApproveButton, javax.swing.GroupLayout.PREFERRED_SIZE, 95, javax.swing.GroupLayout.PREFERRED_SIZE)))))
-                .addContainerGap(122, Short.MAX_VALUE))
+                                .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
+                                    .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING, false)
+                                        .addComponent(jLabel2, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
+                                        .addComponent(BookingIdField, javax.swing.GroupLayout.PREFERRED_SIZE, 43, javax.swing.GroupLayout.PREFERRED_SIZE)
+                                        .addComponent(jLabel3, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
+                                        .addComponent(UserEmailField, javax.swing.GroupLayout.PREFERRED_SIZE, 43, javax.swing.GroupLayout.PREFERRED_SIZE)
+                                        .addComponent(jLabel4)
+                                        .addComponent(CarNameField, javax.swing.GroupLayout.PREFERRED_SIZE, 43, javax.swing.GroupLayout.PREFERRED_SIZE))
+                                    .addComponent(RejectButton, javax.swing.GroupLayout.PREFERRED_SIZE, 83, javax.swing.GroupLayout.PREFERRED_SIZE))
+                                .addGap(124, 124, 124)
+                                .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
+                                    .addComponent(ApproveButton, javax.swing.GroupLayout.PREFERRED_SIZE, 95, javax.swing.GroupLayout.PREFERRED_SIZE)
+                                    .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING, false)
+                                        .addComponent(jLabel5, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
+                                        .addComponent(StartDateField, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
+                                        .addComponent(jLabel6, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
+                                        .addComponent(EndDateField, javax.swing.GroupLayout.PREFERRED_SIZE, 43, javax.swing.GroupLayout.PREFERRED_SIZE)
+                                        .addComponent(jLabel7)
+                                        .addComponent(DurationField, javax.swing.GroupLayout.PREFERRED_SIZE, 43, javax.swing.GroupLayout.PREFERRED_SIZE))))
+                            .addComponent(jLabel8)
+                            .addComponent(carPlateField, javax.swing.GroupLayout.PREFERRED_SIZE, 122, javax.swing.GroupLayout.PREFERRED_SIZE)))
+                    .addComponent(jLabel1, javax.swing.GroupLayout.PREFERRED_SIZE, 260, javax.swing.GroupLayout.PREFERRED_SIZE))
+                .addContainerGap(118, Short.MAX_VALUE))
         );
         layout.setVerticalGroup(
             layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
@@ -201,7 +209,9 @@ public class BookingManagement extends javax.swing.JFrame {
                 .addComponent(jLabel1)
                 .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.UNRELATED)
                 .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-                    .addComponent(jScrollPane1, javax.swing.GroupLayout.PREFERRED_SIZE, 431, javax.swing.GroupLayout.PREFERRED_SIZE)
+                    .addGroup(layout.createSequentialGroup()
+                        .addComponent(jScrollPane1, javax.swing.GroupLayout.PREFERRED_SIZE, 431, javax.swing.GroupLayout.PREFERRED_SIZE)
+                        .addContainerGap(22, Short.MAX_VALUE))
                     .addGroup(layout.createSequentialGroup()
                         .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
                             .addComponent(jLabel2)
@@ -226,19 +236,25 @@ public class BookingManagement extends javax.swing.JFrame {
                         .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
                             .addComponent(CarNameField)
                             .addComponent(DurationField))
-                        .addGap(90, 90, 90)
+                        .addGap(41, 41, 41)
+                        .addComponent(jLabel8)
+                        .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
+                        .addComponent(carPlateField, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
+                        .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
                         .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
-                            .addComponent(ApproveButton)
-                            .addComponent(RejectButton))))
-                .addContainerGap(22, Short.MAX_VALUE))
+                            .addComponent(RejectButton)
+                            .addComponent(ApproveButton))
+                        .addGap(53, 53, 53))))
         );
 
         pack();
     }// </editor-fold>//GEN-END:initComponents
 
+    String carPlate; 
+
     private void RejectButtonActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_RejectButtonActionPerformed
         if (!BookingIdField.getText().isEmpty()) {
-            int rowNumberInBooking = dataIO.rowNumber(BookingIdField.getText(), 1, BOOKING_FILE, 8);
+            int rowNumberInBooking = dataIO.rowNumber(BookingIdField.getText(), 1, BOOKING_FILE, 9);
             int rowNumberOfStatus = rowNumberInBooking + 5;
             dataIO.overWriteData("Cancel", rowNumberOfStatus, BOOKING_FILE);
             refreshBookingTable();
@@ -248,15 +264,23 @@ public class BookingManagement extends javax.swing.JFrame {
     }//GEN-LAST:event_RejectButtonActionPerformed
 
     private void ApproveButtonActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_ApproveButtonActionPerformed
+        carPlateFieldActionPerformed(evt);   
         if (!BookingIdField.getText().isEmpty()) {
-            int rowNumberInBooking = dataIO.rowNumber(BookingIdField.getText(), 1, BOOKING_FILE, 8);
+            int rowNumberInBooking = dataIO.rowNumber(BookingIdField.getText(), 1, BOOKING_FILE, 9);
             int rowNumberOfStatus = rowNumberInBooking + 5;
             dataIO.overWriteData("Waiting", rowNumberOfStatus, BOOKING_FILE);
+
+            int rowNumberOfCarPlate = rowNumberInBooking + 7;
+            dataIO.overWriteData(carPlate, rowNumberOfCarPlate, BOOKING_FILE);
             refreshBookingTable();
         } else {
             JOptionPane.showMessageDialog(null, "Please select a booking to reject.");
         }
     }//GEN-LAST:event_ApproveButtonActionPerformed
+
+    private void carPlateFieldActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_carPlateFieldActionPerformed
+        carPlate = carPlateField.getText();
+    }//GEN-LAST:event_carPlateFieldActionPerformed
 
     private void refreshBookingTable() {
         List<Booking> booking = DatabaseManager.getSpecificBookings("Pending", "Cancel");
@@ -285,7 +309,7 @@ public class BookingManagement extends javax.swing.JFrame {
             String status = booking.getStatus();
             String paymentStatus = booking.getPaymentStatus();
 
-            int rowNumberInBooking = dataIO.rowNumber(bookingId, 1, BOOKING_FILE, 8);
+            int rowNumberInBooking = dataIO.rowNumber(bookingId, 1, BOOKING_FILE, 9);
 
             String carId = dataIO.readData(rowNumberInBooking + 1, BOOKING_FILE); 
             int rowNumberInCar = dataIO.rowNumber(carId, 1, CAR_FILE, 7);
@@ -354,6 +378,7 @@ public class BookingManagement extends javax.swing.JFrame {
     private javax.swing.JButton RejectButton;
     private javax.swing.JLabel StartDateField;
     private javax.swing.JLabel UserEmailField;
+    private javax.swing.JTextField carPlateField;
     private javax.swing.JLabel jLabel1;
     private javax.swing.JLabel jLabel2;
     private javax.swing.JLabel jLabel3;
@@ -361,6 +386,7 @@ public class BookingManagement extends javax.swing.JFrame {
     private javax.swing.JLabel jLabel5;
     private javax.swing.JLabel jLabel6;
     private javax.swing.JLabel jLabel7;
+    private javax.swing.JLabel jLabel8;
     private javax.swing.JMenu jMenu1;
     private javax.swing.JMenu jMenu2;
     private javax.swing.JMenuBar jMenuBar1;

@@ -237,6 +237,7 @@ public class BookCar extends javax.swing.JFrame {
                     dataIO.writeData("Pending", writeFileLocation);
                     dataIO.writeData("Unpaid", writeFileLocation);
                     dataIO.writeData("", writeFileLocation);
+                    dataIO.writeData("", writeFileLocation);
                     JOptionPane.showMessageDialog(this, "Booking Successful", "Success", JOptionPane.INFORMATION_MESSAGE);
                 }
             }
@@ -246,7 +247,7 @@ public class BookCar extends javax.swing.JFrame {
     }//GEN-LAST:event_bookButtonActionPerformed
     
     private int BookingId() {
-        int[] tempData = dataIO.bookingId(1, writeFileLocation, 8);
+        int[] tempData = dataIO.bookingId(1, writeFileLocation, 9);
         Arrays.sort(tempData);
         return tempData[tempData.length - 1] + 1;
     }

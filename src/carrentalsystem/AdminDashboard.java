@@ -59,6 +59,11 @@ public class AdminDashboard extends javax.swing.JFrame {
         jMenu4.add(jMenuItem5);
 
         ConfirmationMessageMenu.setText("Booking Management");
+        ConfirmationMessageMenu.addActionListener(new java.awt.event.ActionListener() {
+            public void actionPerformed(java.awt.event.ActionEvent evt) {
+                ConfirmationMessageMenuActionPerformed(evt);
+            }
+        });
         jMenu4.add(ConfirmationMessageMenu);
 
         jMenuBar1.add(jMenu4);
@@ -141,6 +146,10 @@ public class AdminDashboard extends javax.swing.JFrame {
     private void BookingMenuActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_BookingMenuActionPerformed
         pageSwitch.switchPage(this, new BookingDatabase(user));
     }//GEN-LAST:event_BookingMenuActionPerformed
+
+    private void ConfirmationMessageMenuActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_ConfirmationMessageMenuActionPerformed
+        pageSwitch.switchPage(this, new BookingManagement(user));
+    }//GEN-LAST:event_ConfirmationMessageMenuActionPerformed
 
     /**
      * @param args the command line arguments

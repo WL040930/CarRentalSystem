@@ -44,7 +44,7 @@ public class BookingDatabase extends javax.swing.JFrame {
                         String status = (String) BookingTable.getValueAt(selectedRow, 3);
                         String paymentStatus = (String) BookingTable.getValueAt(selectedRow, 4);
 
-                        int rowNumberInBooking = dataIO.rowNumber(bookingId, 1, BOOKING_FILE, 8);
+                        int rowNumberInBooking = dataIO.rowNumber(bookingId, 1, BOOKING_FILE, 9);
 
                         LocalDate startDate = LocalDate.parse(dataIO.readData(rowNumberInBooking + 3, BOOKING_FILE));
                         LocalDate endDate = LocalDate.parse(dataIO.readData(rowNumberInBooking + 4, BOOKING_FILE));
@@ -55,6 +55,8 @@ public class BookingDatabase extends javax.swing.JFrame {
                         int days = (int) (endDate.toEpochDay() - startDate.toEpochDay());
                         int totalPayment = price * days;
 
+                        String carPlate = dataIO.readData(rowNumberInBooking + 7, BOOKING_FILE); 
+
                         bookingIdField.setText(String.valueOf(bookingId));
                         bookedCarField.setText(carName);
                         emailField.setText(userEmail);
@@ -63,6 +65,7 @@ public class BookingDatabase extends javax.swing.JFrame {
                         startDateField.setText(startDate.toString());
                         endDateField.setText(endDate.toString());
                         paymentField.setText("RM " +String.valueOf(totalPayment));
+                        carPlateField.setText(carPlate);
                     }
                 }
             }
@@ -99,6 +102,8 @@ public class BookingDatabase extends javax.swing.JFrame {
         statusField = new javax.swing.JLabel();
         SaveButton = new javax.swing.JButton();
         DeleteButton = new javax.swing.JButton();
+        carPlateField = new javax.swing.JTextField();
+        jLabel10 = new javax.swing.JLabel();
         jMenuBar1 = new javax.swing.JMenuBar();
         jMenu1 = new javax.swing.JMenu();
         jMenu2 = new javax.swing.JMenu();
@@ -167,6 +172,8 @@ public class BookingDatabase extends javax.swing.JFrame {
             }
         });
 
+        jLabel10.setText("Car Plate:");
+
         jMenu1.setText("File");
         jMenuBar1.add(jMenu1);
 
@@ -208,17 +215,20 @@ public class BookingDatabase extends javax.swing.JFrame {
                             .addComponent(endDateField, javax.swing.GroupLayout.PREFERRED_SIZE, 110, javax.swing.GroupLayout.PREFERRED_SIZE))
                         .addGap(60, 60, 60)
                         .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-                            .addGroup(layout.createSequentialGroup()
+                            .addGroup(javax.swing.GroupLayout.Alignment.TRAILING, layout.createSequentialGroup()
+                                .addGap(0, 0, Short.MAX_VALUE)
+                                .addComponent(DeleteButton, javax.swing.GroupLayout.PREFERRED_SIZE, 83, javax.swing.GroupLayout.PREFERRED_SIZE))
+                            .addGroup(javax.swing.GroupLayout.Alignment.TRAILING, layout.createSequentialGroup()
                                 .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
+                                    .addComponent(PaymentStatusField, javax.swing.GroupLayout.PREFERRED_SIZE, 133, javax.swing.GroupLayout.PREFERRED_SIZE)
                                     .addComponent(jLabel8, javax.swing.GroupLayout.PREFERRED_SIZE, 43, javax.swing.GroupLayout.PREFERRED_SIZE)
                                     .addComponent(jLabel9, javax.swing.GroupLayout.PREFERRED_SIZE, 117, javax.swing.GroupLayout.PREFERRED_SIZE)
-                                    .addComponent(PaymentStatusField, javax.swing.GroupLayout.PREFERRED_SIZE, 133, javax.swing.GroupLayout.PREFERRED_SIZE))
+                                    .addComponent(statusField, javax.swing.GroupLayout.PREFERRED_SIZE, 86, javax.swing.GroupLayout.PREFERRED_SIZE))
                                 .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
-                                .addComponent(DeleteButton, javax.swing.GroupLayout.PREFERRED_SIZE, 83, javax.swing.GroupLayout.PREFERRED_SIZE))
-                            .addGroup(layout.createSequentialGroup()
-                                .addComponent(statusField, javax.swing.GroupLayout.PREFERRED_SIZE, 86, javax.swing.GroupLayout.PREFERRED_SIZE)
-                                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
-                                .addComponent(SaveButton, javax.swing.GroupLayout.PREFERRED_SIZE, 83, javax.swing.GroupLayout.PREFERRED_SIZE)))
+                                .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
+                                    .addComponent(carPlateField, javax.swing.GroupLayout.PREFERRED_SIZE, 79, javax.swing.GroupLayout.PREFERRED_SIZE)
+                                    .addComponent(SaveButton, javax.swing.GroupLayout.PREFERRED_SIZE, 83, javax.swing.GroupLayout.PREFERRED_SIZE)
+                                    .addComponent(jLabel10, javax.swing.GroupLayout.PREFERRED_SIZE, 70, javax.swing.GroupLayout.PREFERRED_SIZE))))
                         .addGap(42, 42, 42)))
                 .addContainerGap(36, Short.MAX_VALUE))
         );
@@ -234,14 +244,15 @@ public class BookingDatabase extends javax.swing.JFrame {
                     .addComponent(jLabel2)
                     .addComponent(jLabel4)
                     .addComponent(jLabel6)
-                    .addComponent(jLabel8))
+                    .addComponent(jLabel8)
+                    .addComponent(jLabel10))
                 .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
                 .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
                     .addComponent(bookingIdField)
                     .addComponent(emailField)
                     .addComponent(startDateField)
                     .addComponent(statusField)
-                    .addComponent(SaveButton))
+                    .addComponent(carPlateField, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE))
                 .addGap(33, 33, 33)
                 .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
                     .addComponent(jLabel3)
@@ -254,8 +265,10 @@ public class BookingDatabase extends javax.swing.JFrame {
                     .addComponent(paymentField)
                     .addComponent(endDateField)
                     .addComponent(PaymentStatusField, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
-                    .addComponent(DeleteButton))
-                .addContainerGap(82, Short.MAX_VALUE))
+                    .addComponent(SaveButton))
+                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.UNRELATED)
+                .addComponent(DeleteButton)
+                .addContainerGap(44, Short.MAX_VALUE))
         );
 
         pack();
@@ -264,9 +277,13 @@ public class BookingDatabase extends javax.swing.JFrame {
     private void SaveButtonActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_SaveButtonActionPerformed
         if (!bookingIdField.getText().isEmpty()) {
             int bookingId = Integer.parseInt(bookingIdField.getText());
-            int rowNumberInBooking = dataIO.rowNumber(bookingId, 1, BOOKING_FILE, 8);
+            int rowNumberInBooking = dataIO.rowNumber(bookingId, 1, BOOKING_FILE, 9);
+            
             String paymentStatus = (String) PaymentStatusField.getSelectedItem();
             dataIO.overWriteData(paymentStatus, rowNumberInBooking + 6 , BOOKING_FILE);
+
+            String carPlate = carPlateField.getText();
+            dataIO.overWriteData(carPlate, rowNumberInBooking + 7, BOOKING_FILE);
             refreshBookingTable();
         } else {
             JOptionPane.showMessageDialog(this, "Please select a booking to update", "Error", JOptionPane.ERROR_MESSAGE);
@@ -278,9 +295,9 @@ public class BookingDatabase extends javax.swing.JFrame {
             int confirmDelete = JOptionPane.showConfirmDialog(this, "Are you sure you want to delete this booking?", "Delete Booking", JOptionPane.YES_NO_OPTION);
             if (confirmDelete == JOptionPane.YES_OPTION) {
                 int bookingId = Integer.parseInt(bookingIdField.getText());
-                int rowNumberInBooking = dataIO.rowNumber(bookingId, 1, BOOKING_FILE, 8);
+                int rowNumberInBooking = dataIO.rowNumber(bookingId, 1, BOOKING_FILE, 9);
                 
-                for (int i = 0; i < 8; i++) {
+                for (int i = 0; i < 9; i++) {
                     dataIO.deleteRow(rowNumberInBooking, BOOKING_FILE);
                 }
 
@@ -319,7 +336,7 @@ public class BookingDatabase extends javax.swing.JFrame {
             String status = booking.getStatus();
             String paymentStatus = booking.getPaymentStatus();
 
-            int rowNumberInBooking = dataIO.rowNumber(bookingId, 1, BOOKING_FILE, 8);
+            int rowNumberInBooking = dataIO.rowNumber(bookingId, 1, BOOKING_FILE, 9);
 
             String carId = dataIO.readData(rowNumberInBooking + 1, BOOKING_FILE); 
             int rowNumberInCar = dataIO.rowNumber(carId, 1, CAR_FILE, 7);
@@ -385,9 +402,11 @@ public class BookingDatabase extends javax.swing.JFrame {
     private javax.swing.JButton SaveButton;
     private javax.swing.JLabel bookedCarField;
     private javax.swing.JLabel bookingIdField;
+    private javax.swing.JTextField carPlateField;
     private javax.swing.JLabel emailField;
     private javax.swing.JLabel endDateField;
     private javax.swing.JLabel jLabel1;
+    private javax.swing.JLabel jLabel10;
     private javax.swing.JLabel jLabel2;
     private javax.swing.JLabel jLabel3;
     private javax.swing.JLabel jLabel4;

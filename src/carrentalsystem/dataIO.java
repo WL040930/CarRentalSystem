@@ -55,7 +55,7 @@ public class dataIO {
      * 6 - image path
     */
     /*
-     * Booking.txt - number of Lines = 8
+     * Booking.txt - number of Lines = 9
      * 1 - Booking ID
      * 2 - Car ID
      * 3 - Email 
@@ -63,6 +63,7 @@ public class dataIO {
      * 5 - End Date
      * 6 - Status
      * 7 - Payment Status 
+     * 8 - car plate
     */
     public static int rowNumber (String data, int checkData, String fileName, int numberOfLines) {
         try (Scanner scanner = new Scanner(new File(fileName))) {

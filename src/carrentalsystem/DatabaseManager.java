@@ -17,7 +17,7 @@ public class DatabaseManager {
     private static final int NUMBER_OF_LINES_PER_CAR = 7;
 
     private static final String BOOKING_FILE = dataIO.GET_BOOKING_FILE(); 
-    private static final int NUMBER_OF_LINES_PER_BOOKING = 8;
+    private static final int NUMBER_OF_LINES_PER_BOOKING = 9;
 
     public static List<User> getAllUsers() {
         List<User> users = new ArrayList<>();
