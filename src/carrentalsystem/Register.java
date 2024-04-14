@@ -228,7 +228,7 @@ public class Register extends javax.swing.JFrame {
     /* declare data array to record data into text file */
     String[] data = new String[4];
     String password, conPass;
-    final String fileLocation = "src/carrentalsystem/data/User.txt";
+    final String fileLocation = dataIO.GET_USER_FILE();
     /* End of declaration */
 
     private boolean validateResult(String username, String email, String password, String confirmPassword) {

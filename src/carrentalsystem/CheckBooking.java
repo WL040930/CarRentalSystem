@@ -4,14 +4,37 @@
  */
 package carrentalsystem;
 
+import javax.swing.BoxLayout;
+import javax.swing.JPanel;
+import java.util.List;
+
 public class CheckBooking extends javax.swing.JFrame {
 
     static User.customer user; 
-    String selection; 
+    String selection = "All"; 
+    private final JPanel bookingContainer;
     
     public CheckBooking(User.customer user) {
         CheckBooking.user = user; 
         initComponents();
+        AllBookingsButton.setSelected(true);
+
+        List<Booking> bookings = DatabaseManager.getSpecificBooking(user.getEmail(), selection);
+
+        // Create a panel to hold the booking panels vertically
+        bookingContainer = new JPanel();
+        bookingContainer.setLayout(new BoxLayout(bookingContainer, BoxLayout.Y_AXIS));
+
+        // Create and add BookingPanel for each booking
+        for (Booking booking : bookings) {
+            BookingPanel bookingPanel = new BookingPanel(booking, this, selection);
+            bookingContainer.add(bookingPanel);
+        }
+
+        // Add the booking container panel to the scroll pane
+        ScrollPanel.setViewportView(bookingContainer);
+        ScrollPanel.setVerticalScrollBarPolicy(javax.swing.ScrollPaneConstants.VERTICAL_SCROLLBAR_ALWAYS);
+        ScrollPanel.setHorizontalScrollBarPolicy(javax.swing.ScrollPaneConstants.HORIZONTAL_SCROLLBAR_NEVER);
     }
 
     /**
@@ -95,23 +118,48 @@ public class CheckBooking extends javax.swing.JFrame {
         pack();
     }// </editor-fold>//GEN-END:initComponents
 
+    private void refreshBookings() {
+        List<Booking> bookings = DatabaseManager.getSpecificBooking(user.getEmail(), selection);
+    
+        // Clear existing booking panels from the container
+        bookingContainer.removeAll();
+    
+        // Create and add BookingPanel for each booking based on the new selection
+        for (Booking booking : bookings) {
+            BookingPanel bookingPanel = new BookingPanel(booking, this, selection);
+            bookingContainer.add(bookingPanel);
+        }
+    
+        // Revalidate and repaint the booking container to reflect changes
+        bookingContainer.revalidate();
+        bookingContainer.repaint();
+    }
+    
     private void PastBookingButtonActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_PastBookingButtonActionPerformed
         selection = "Past";
         UpcomingButton.setSelected(false);
         AllBookingsButton.setSelected(false);
+        refreshBookings(); // Refresh bookings display based on selection
     }//GEN-LAST:event_PastBookingButtonActionPerformed
-
+    
     private void UpcomingButtonActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_UpcomingButtonActionPerformed
         selection = "Upcoming";
         PastBookingButton.setSelected(false);
         AllBookingsButton.setSelected(false);
+        refreshBookings(); // Refresh bookings display based on selection
     }//GEN-LAST:event_UpcomingButtonActionPerformed
-
-    private void AllBookingsButtonActionPerformed(java.awt.event.ActionEvent evt) {                                                          
+    
+    private void AllBookingsButtonActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_AllBookingsButtonActionPerformed
         selection = "All";
         UpcomingButton.setSelected(false);
         PastBookingButton.setSelected(false);
-    }                                                 
+        refreshBookings(); // Refresh bookings display based on selection
+    }//GEN-LAST:event_AllBookingsButtonActionPerformed
+              
+    
+    public void displayBookingDetails(Booking booking) {
+        System.out.println("Booking ID: " + booking.getBookingId());
+    }
 
     /**
      * @param args the command line arguments

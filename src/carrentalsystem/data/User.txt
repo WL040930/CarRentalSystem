@@ -8,3 +8,8 @@ user@gmail.com
 a
 customer
 
+testUser
+test@gmail.com
+password
+customer
+

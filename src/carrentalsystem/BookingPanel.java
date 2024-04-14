@@ -10,13 +10,24 @@ public class BookingPanel extends JPanel {
 
     private final Booking booking;
     private final BookingConfirmation bookingConfirmation;
+    private final CheckBooking checkBooking;
 
     public BookingPanel(Booking booking, BookingConfirmation bookingConfirmation) {
         this.booking = booking;
         this.bookingConfirmation = bookingConfirmation; // Reference to the BookingConfirmation instance
+        this.checkBooking = null;
         initComponents();
         displayBookingInfo();
         addClickListener(); // Add click listener to handle mouse clicks
+    }
+
+    public BookingPanel(Booking booking, CheckBooking checkBooking, String status) {
+        this.booking = booking;
+        this.bookingConfirmation = null;
+        this.checkBooking = checkBooking;
+        initComponents();
+        displayBookingInfo();
+        addClickListeners();
     }
 
     private void initComponents() {
@@ -82,5 +93,20 @@ public class BookingPanel extends JPanel {
     private void handleBookingPanelClick() {
         // Pass the booking information to BookingConfirmation
         bookingConfirmation.displayBookingDetails(booking);
+    }
+
+    private void addClickListeners() {
+        // Add mouse listener to handle click events
+        this.addMouseListener(new MouseAdapter() {
+            @Override
+            public void mouseClicked(MouseEvent e) {
+                // Handle click event here
+                handleBookingPanelClicks();
+            }
+        });
+    }
+
+    private void handleBookingPanelClicks() {
+        checkBooking.displayBookingDetails(booking);
     }
 }

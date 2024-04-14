@@ -96,7 +96,7 @@ public class User {
 
     // function to check whether the email is unique
     public static boolean isEmailUnique(String email) {
-        try (Scanner scanner = new Scanner(new File("User.txt"))) {
+        try (Scanner scanner = new Scanner(new File(dataIO.USER_FILE))) {
             int lineNumber = 1;
             while (scanner.hasNextLine()) {
                 String line = scanner.nextLine();
