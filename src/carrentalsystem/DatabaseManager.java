@@ -199,6 +199,54 @@ public class DatabaseManager {
         }
         return bookings;
     }
+
+    public static List<Booking> getSpecificBooking(String email, String status) {
+        List<Booking> bookings = new ArrayList<>();
+
+        try {
+            int totalLines = getTotalLines(BOOKING_FILE);
+            int numberOfBookings = totalLines / NUMBER_OF_LINES_PER_BOOKING;
+
+            for (int i = 0; i < numberOfBookings; i++) {
+                int lineNumber = i * NUMBER_OF_LINES_PER_BOOKING + 1; // Start line number for current booking
+
+                int bookingID = Integer.parseInt(dataIO.readData(lineNumber, BOOKING_FILE));
+                int carID = Integer.parseInt(dataIO.readData(lineNumber + 1, BOOKING_FILE));
+                String customerEmail = dataIO.readData(lineNumber + 2, BOOKING_FILE);
+                String startDateStr = dataIO.readData(lineNumber + 3, BOOKING_FILE);
+                String endDateStr = dataIO.readData(lineNumber + 4, BOOKING_FILE);
+                String bookingStatus = dataIO.readData(lineNumber + 5, BOOKING_FILE);
+                String paymentStatus = dataIO.readData(lineNumber + 6, BOOKING_FILE);
+                String carPlate = dataIO.readData(lineNumber + 7, BOOKING_FILE);
+
+                // Parse startDateStr and endDateStr into LocalDate objects
+                LocalDate startDate = LocalDate.parse(startDateStr);
+                LocalDate endDate = LocalDate.parse(endDateStr);
+                LocalDate today = LocalDate.now();
+
+                if (customerEmail.equals(email)) {
+                    if (status.equals("All")) {
+                        Booking booking = new Booking(bookingID, carID, customerEmail, startDate, endDate, bookingStatus, paymentStatus, carPlate);
+                        bookings.add(booking);
+                    } else if (status.equals("Past")) {
+                        if (endDate.isBefore(today)) {
+                            Booking booking = new Booking(bookingID, carID, customerEmail, startDate, endDate, bookingStatus, paymentStatus, carPlate);
+                            bookings.add(booking);
+                        }
+                    } else if (status.equals("Upcoming")) {
+                        if (startDate.isAfter(today)) {
+                            Booking booking = new Booking(bookingID, carID, customerEmail, startDate, endDate, bookingStatus, paymentStatus, carPlate);
+                            bookings.add(booking);
+                        }
+                    }
+                }
+            }
+
+        } catch (Exception e) {
+            e.printStackTrace();
+        }
+        return bookings;
+    }
  
     public static int getTotalLines(String fileName) {
         int totalLines = 0;

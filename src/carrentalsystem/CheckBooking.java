@@ -4,13 +4,10 @@
  */
 package carrentalsystem;
 
-/**
- *
- * @author limwe
- */
 public class CheckBooking extends javax.swing.JFrame {
 
     static User.customer user; 
+    String selection; 
     
     public CheckBooking(User.customer user) {
         CheckBooking.user = user; 
@@ -29,6 +26,7 @@ public class CheckBooking extends javax.swing.JFrame {
         UpcomingButton = new javax.swing.JRadioButton();
         PastBookingButton = new javax.swing.JRadioButton();
         AllBookingsButton = new javax.swing.JRadioButton();
+        ScrollPanel = new javax.swing.JScrollPane();
         jMenuBar1 = new javax.swing.JMenuBar();
         jMenu1 = new javax.swing.JMenu();
         jMenu2 = new javax.swing.JMenu();
@@ -76,6 +74,10 @@ public class CheckBooking extends javax.swing.JFrame {
                 .addGap(18, 18, 18)
                 .addComponent(PastBookingButton)
                 .addGap(75, 75, 75))
+            .addGroup(layout.createSequentialGroup()
+                .addGap(42, 42, 42)
+                .addComponent(ScrollPanel, javax.swing.GroupLayout.PREFERRED_SIZE, 430, javax.swing.GroupLayout.PREFERRED_SIZE)
+                .addContainerGap(javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE))
         );
         layout.setVerticalGroup(
             layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
@@ -85,23 +87,31 @@ public class CheckBooking extends javax.swing.JFrame {
                     .addComponent(UpcomingButton)
                     .addComponent(PastBookingButton)
                     .addComponent(AllBookingsButton))
-                .addContainerGap(470, Short.MAX_VALUE))
+                .addGap(18, 18, 18)
+                .addComponent(ScrollPanel, javax.swing.GroupLayout.PREFERRED_SIZE, 420, javax.swing.GroupLayout.PREFERRED_SIZE)
+                .addContainerGap(32, Short.MAX_VALUE))
         );
 
         pack();
     }// </editor-fold>//GEN-END:initComponents
 
     private void PastBookingButtonActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_PastBookingButtonActionPerformed
-        // TODO add your handling code here:
+        selection = "Past";
+        UpcomingButton.setSelected(false);
+        AllBookingsButton.setSelected(false);
     }//GEN-LAST:event_PastBookingButtonActionPerformed
 
     private void UpcomingButtonActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_UpcomingButtonActionPerformed
-        // TODO add your handling code here:
+        selection = "Upcoming";
+        PastBookingButton.setSelected(false);
+        AllBookingsButton.setSelected(false);
     }//GEN-LAST:event_UpcomingButtonActionPerformed
 
-    private void AllBookingsButtonActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_AllBookingsButtonActionPerformed
-        // TODO add your handling code here:
-    }//GEN-LAST:event_AllBookingsButtonActionPerformed
+    private void AllBookingsButtonActionPerformed(java.awt.event.ActionEvent evt) {                                                          
+        selection = "All";
+        UpcomingButton.setSelected(false);
+        PastBookingButton.setSelected(false);
+    }                                                 
 
     /**
      * @param args the command line arguments
@@ -141,6 +151,7 @@ public class CheckBooking extends javax.swing.JFrame {
     // Variables declaration - do not modify//GEN-BEGIN:variables
     private javax.swing.JRadioButton AllBookingsButton;
     private javax.swing.JRadioButton PastBookingButton;
+    private javax.swing.JScrollPane ScrollPanel;
     private javax.swing.JRadioButton UpcomingButton;
     private javax.swing.JMenu jMenu1;
     private javax.swing.JMenu jMenu2;
