@@ -20,6 +20,22 @@ import java.io.BufferedWriter;
 import java.io.FileReader;
 
 public class dataIO {
+
+    final static String BOOKING_FILE = "src/carrentalsystem/data/Booking.txt";
+    final static String CAR_FILE = "src/carrentalsystem/data/Car.txt";
+    final static String USER_FILE = "src/carrentalsystem/data/User.txt";
+
+    public static String GET_USER_FILE() {
+        return USER_FILE;
+    }
+
+    public static String GET_CAR_FILE() {
+        return CAR_FILE;
+    }
+
+    public static String GET_BOOKING_FILE() {
+        return BOOKING_FILE;
+    }
     
     // calculate row number based on given data
     /*

@@ -21,7 +21,7 @@ public class CarDatabase extends javax.swing.JFrame {
     File selectedFile;
     DefaultTableModel model;
     String imageID;
-    final String fileLocation = "src/carrentalsystem/data/Car.txt";
+    final String fileLocation = dataIO.GET_CAR_FILE();
 
     public CarDatabase(User.admin user) {
         CarDatabase.user = user;

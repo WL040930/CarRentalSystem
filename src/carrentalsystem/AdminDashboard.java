@@ -34,6 +34,7 @@ public class AdminDashboard extends javax.swing.JFrame {
         jMenu1 = new javax.swing.JMenu();
         jMenu4 = new javax.swing.JMenu();
         jMenuItem5 = new javax.swing.JMenuItem();
+        ConfirmationMessageMenu = new javax.swing.JMenuItem();
         jMenu3 = new javax.swing.JMenu();
         jMenuItem3 = new javax.swing.JMenuItem();
         jMenuItem6 = new javax.swing.JMenuItem();
@@ -56,6 +57,9 @@ public class AdminDashboard extends javax.swing.JFrame {
             }
         });
         jMenu4.add(jMenuItem5);
+
+        ConfirmationMessageMenu.setText("Booking Management");
+        jMenu4.add(ConfirmationMessageMenu);
 
         jMenuBar1.add(jMenu4);
 
@@ -175,6 +179,7 @@ public class AdminDashboard extends javax.swing.JFrame {
 
     // Variables declaration - do not modify//GEN-BEGIN:variables
     private javax.swing.JMenuItem BookingMenu;
+    private javax.swing.JMenuItem ConfirmationMessageMenu;
     private javax.swing.JMenu jMenu1;
     private javax.swing.JMenu jMenu2;
     private javax.swing.JMenu jMenu3;

@@ -15,9 +15,9 @@ public class BookingDatabase extends javax.swing.JFrame {
 
     static User.admin user;
     DefaultTableModel model;
-    final String BOOKING_FILE = "src/carrentalsystem/data/Booking.txt";
-    final String CAR_FILE = "src/carrentalsystem/data/Car.txt";
-    final String USER_FILE = "src/carrentalsystem/data/User.txt";
+    final String BOOKING_FILE = dataIO.GET_BOOKING_FILE();
+    final String CAR_FILE = dataIO.GET_CAR_FILE();
+    final String USER_FILE = dataIO.GET_USER_FILE();
     
     public BookingDatabase(User.admin user) {
         BookingDatabase.user = user;
