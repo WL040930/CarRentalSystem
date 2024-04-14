@@ -34,6 +34,7 @@ public class CustomerDashboard extends javax.swing.JFrame {
         rentCarButton = new javax.swing.JMenuItem();
         jMenu3 = new javax.swing.JMenu();
         BookingConfirmationMenu = new javax.swing.JMenuItem();
+        ViewBookingsMenu = new javax.swing.JMenuItem();
         jMenu2 = new javax.swing.JMenu();
         AccountSettingsMenu = new javax.swing.JMenuItem();
         LogoutMenu = new javax.swing.JMenuItem();
@@ -71,6 +72,14 @@ public class CustomerDashboard extends javax.swing.JFrame {
             }
         });
         jMenu3.add(BookingConfirmationMenu);
+
+        ViewBookingsMenu.setText("View Bookings");
+        ViewBookingsMenu.addActionListener(new java.awt.event.ActionListener() {
+            public void actionPerformed(java.awt.event.ActionEvent evt) {
+                ViewBookingsMenuActionPerformed(evt);
+            }
+        });
+        jMenu3.add(ViewBookingsMenu);
 
         jMenuBar1.add(jMenu3);
 
@@ -139,6 +148,10 @@ public class CustomerDashboard extends javax.swing.JFrame {
         pageSwitch.switchPage(this, new BookingConfirmation(user));
     }//GEN-LAST:event_BookingConfirmationMenuActionPerformed
 
+    private void ViewBookingsMenuActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_ViewBookingsMenuActionPerformed
+        pageSwitch.switchPage(this, new CheckBooking(user));
+    }//GEN-LAST:event_ViewBookingsMenuActionPerformed
+
     /**
      * @param args the command line arguments
      */
@@ -179,6 +192,7 @@ public class CustomerDashboard extends javax.swing.JFrame {
     private javax.swing.JMenuItem BookingConfirmationMenu;
     private javax.swing.JMenu BookingMenu;
     private javax.swing.JMenuItem LogoutMenu;
+    private javax.swing.JMenuItem ViewBookingsMenu;
     private javax.swing.JButton jButton1;
     private javax.swing.JMenu jMenu1;
     private javax.swing.JMenu jMenu2;
