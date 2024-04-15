@@ -5,6 +5,12 @@
 package carrentalsystem;
 
 import java.time.LocalDate;
+import java.io.FileNotFoundException;
+import java.io.File;
+import java.util.Scanner;
+import java.util.Set;
+import java.util.HashSet;
+import java.time.format.DateTimeFormatter;
 
 public class Booking {
 
@@ -17,6 +23,8 @@ public class Booking {
     private String status; 
     private String paymentStatus;
     private String carPlate; 
+    private static final DateTimeFormatter INPUT_FORMATTER = DateTimeFormatter.ofPattern("yyyy-M-d");
+    private static final DateTimeFormatter OUTPUT_FORMATTER = DateTimeFormatter.ofPattern("MMMM, yyyy");
     /* End of Declaration of variables */
 
     /*
@@ -132,5 +140,80 @@ public class Booking {
     }
     /* End of Setters */
 
+    public static String[] returnDate() {
+        try (Scanner scanner = new Scanner(new File(dataIO.BOOKING_FILE))) {
+            int lineNumber = 1;
+            int linesPerRecord = 9;
+            int recordCount = DatabaseManager.getTotalLines(dataIO.BOOKING_FILE) / linesPerRecord;
+
+            String[] dates = new String[recordCount];
+            int currentIndex = 0;
+
+            while (scanner.hasNextLine()) {
+                String line = scanner.nextLine();
+                if (lineNumber % linesPerRecord == 4) {
+                    dates[currentIndex++] = line;
+                }
+                lineNumber++;
+            }
+
+            if (currentIndex == 0) {
+                return null; // No dates were read
+            }
+
+            // Trim the array to remove any null entries (if there are unused slots)
+            return trimArray(dates, currentIndex);
+        } catch (FileNotFoundException e) {
+            System.err.println("File not found: " + e.getMessage());
+            e.printStackTrace();
+            return null;
+        } catch (Exception e) {
+            System.err.println("Error reading file: " + e.getMessage());
+            e.printStackTrace();
+            return null;
+        }
+    }
+
+    // Helper method to trim the array to the correct size
+    private static String[] trimArray(String[] array, int size) {
+        String[] trimmedArray = new String[size];
+        System.arraycopy(array, 0, trimmedArray, 0, size);
+        return trimmedArray;
+    }
+
+    public static String[] convertDates(String[] dateStrings) {
+        if (dateStrings == null || dateStrings.length == 0) {
+            return new String[0]; // Return an empty array if input is null or empty
+        }
+
+        Set<String> uniqueDates = new HashSet<>(); // Set to store unique formatted dates
+
+        for (String dateString : dateStrings) {
+            LocalDate date = LocalDate.parse(dateString, INPUT_FORMATTER);
+            String formattedDate = date.format(OUTPUT_FORMATTER);
+            uniqueDates.add(formattedDate); // Add formatted date to the set (automatically handles duplicates)
+        }
+
+        // Convert the set of unique dates back to an array
+        String[] uniqueDatesArray = new String[uniqueDates.size()];
+        uniqueDates.toArray(uniqueDatesArray);
+
+        return uniqueDatesArray;
+    }
+
+    public static void main(String[] args) {
+        // Example input date strings (replace with your actual data)
+        String[] inputDates = returnDate();
+
+        // Convert the input dates to the desired format
+        String[] convertedDates = convertDates(inputDates);
+
+        // Print the converted dates
+        System.out.println("Converted Dates:");
+        for (String date : convertedDates) {
+            System.out.println(date);
+        }
+    }
 
 }
+
