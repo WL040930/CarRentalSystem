@@ -201,12 +201,26 @@ public class Booking {
         return uniqueDatesArray;
     }
 
+    public static String[] convertDateRepeated(String[] dateStrings) {
+        if (dateStrings == null || dateStrings.length == 0) {
+            return new String[0]; // Return an empty array if input is null or empty
+        }
+
+        String[] convertedDates = new String[dateStrings.length];
+        for (int i = 0; i < dateStrings.length; i++) {
+            LocalDate date = LocalDate.parse(dateStrings[i], INPUT_FORMATTER);
+            convertedDates[i] = date.format(OUTPUT_FORMATTER);
+        }
+
+        return convertedDates;
+    }
+
     public static void main(String[] args) {
         // Example input date strings (replace with your actual data)
         String[] inputDates = returnDate();
 
         // Convert the input dates to the desired format
-        String[] convertedDates = convertDates(inputDates);
+        String[] convertedDates = convertDateRepeated(inputDates);
 
         // Print the converted dates
         System.out.println("Converted Dates:");
