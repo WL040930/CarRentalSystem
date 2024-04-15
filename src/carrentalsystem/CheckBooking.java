@@ -5,12 +5,19 @@
 package carrentalsystem;
 
 import javax.swing.BoxLayout;
+import javax.swing.JOptionPane;
 import javax.swing.JPanel;
+import javax.swing.Timer;
+import java.awt.event.ActionEvent;
+import java.awt.event.ActionListener;
+import java.time.LocalDate;
 import java.util.List;
+import javax.swing.JDialog;
 
 public class CheckBooking extends javax.swing.JFrame {
 
     static User.customer user; 
+    int bookingId = -1; 
     String selection = "All"; 
     private final JPanel bookingContainer;
     
@@ -50,6 +57,23 @@ public class CheckBooking extends javax.swing.JFrame {
         PastBookingButton = new javax.swing.JRadioButton();
         AllBookingsButton = new javax.swing.JRadioButton();
         ScrollPanel = new javax.swing.JScrollPane();
+        jLabel1 = new javax.swing.JLabel();
+        CarNameField = new javax.swing.JLabel();
+        jLabel2 = new javax.swing.JLabel();
+        CarPlateField = new javax.swing.JLabel();
+        jLabel3 = new javax.swing.JLabel();
+        StartDateField = new javax.swing.JLabel();
+        jLabel4 = new javax.swing.JLabel();
+        EndDateField = new javax.swing.JLabel();
+        jLabel5 = new javax.swing.JLabel();
+        DurationField = new javax.swing.JLabel();
+        jLabel6 = new javax.swing.JLabel();
+        TotalPaymentField = new javax.swing.JLabel();
+        jLabel7 = new javax.swing.JLabel();
+        StatusField = new javax.swing.JLabel();
+        jLabel8 = new javax.swing.JLabel();
+        PaymentStatusField = new javax.swing.JLabel();
+        PayButton = new javax.swing.JButton();
         jMenuBar1 = new javax.swing.JMenuBar();
         jMenu1 = new javax.swing.JMenu();
         jMenu2 = new javax.swing.JMenu();
@@ -77,6 +101,45 @@ public class CheckBooking extends javax.swing.JFrame {
             }
         });
 
+        jLabel1.setText("Car Booked: ");
+
+        CarNameField.setText("");
+
+        jLabel2.setText("Car Plate: ");
+
+        CarPlateField.setText("");
+
+        jLabel3.setText("Start Date: ");
+
+        StartDateField.setText("");
+
+        jLabel4.setText("End Date: ");
+
+        EndDateField.setText("");
+
+        jLabel5.setText("Duration: ");
+
+        DurationField.setText("");
+
+        jLabel6.setText("Total Payment: ");
+
+        TotalPaymentField.setText("");
+
+        jLabel7.setText("Status: ");
+
+        StatusField.setText("");
+
+        jLabel8.setText("Payment Status: ");
+
+        PaymentStatusField.setText("");
+
+        PayButton.setText("Pay");
+        PayButton.addActionListener(new java.awt.event.ActionListener() {
+            public void actionPerformed(java.awt.event.ActionEvent evt) {
+                PayButtonActionPerformed(evt);
+            }
+        });
+
         jMenu1.setText("File");
         jMenuBar1.add(jMenu1);
 
@@ -100,6 +163,36 @@ public class CheckBooking extends javax.swing.JFrame {
             .addGroup(layout.createSequentialGroup()
                 .addGap(42, 42, 42)
                 .addComponent(ScrollPanel, javax.swing.GroupLayout.PREFERRED_SIZE, 430, javax.swing.GroupLayout.PREFERRED_SIZE)
+                .addGap(59, 59, 59)
+                .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
+                    .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING, false)
+                        .addGroup(layout.createSequentialGroup()
+                            .addComponent(EndDateField, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
+                            .addGap(104, 104, 104))
+                        .addGroup(layout.createSequentialGroup()
+                            .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING, false)
+                                .addComponent(jLabel1, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
+                                .addComponent(jLabel2)
+                                .addComponent(CarPlateField, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
+                                .addComponent(StartDateField, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
+                                .addComponent(jLabel3, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
+                                .addComponent(CarNameField, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE))
+                            .addGap(108, 108, 108)))
+                    .addGroup(layout.createSequentialGroup()
+                        .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.TRAILING, false)
+                            .addComponent(DurationField, javax.swing.GroupLayout.Alignment.LEADING, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
+                            .addComponent(jLabel5, javax.swing.GroupLayout.Alignment.LEADING, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
+                            .addComponent(jLabel4, javax.swing.GroupLayout.Alignment.LEADING, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE))
+                        .addGap(108, 108, 108)))
+                .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
+                    .addComponent(PayButton, javax.swing.GroupLayout.PREFERRED_SIZE, 93, javax.swing.GroupLayout.PREFERRED_SIZE)
+                    .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING, false)
+                        .addComponent(jLabel6, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
+                        .addComponent(jLabel7, javax.swing.GroupLayout.PREFERRED_SIZE, 56, javax.swing.GroupLayout.PREFERRED_SIZE)
+                        .addComponent(jLabel8, javax.swing.GroupLayout.DEFAULT_SIZE, 107, Short.MAX_VALUE)
+                        .addComponent(TotalPaymentField, javax.swing.GroupLayout.PREFERRED_SIZE, 93, javax.swing.GroupLayout.PREFERRED_SIZE)
+                        .addComponent(StatusField, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
+                        .addComponent(PaymentStatusField, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)))
                 .addContainerGap(javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE))
         );
         layout.setVerticalGroup(
@@ -111,7 +204,46 @@ public class CheckBooking extends javax.swing.JFrame {
                     .addComponent(PastBookingButton)
                     .addComponent(AllBookingsButton))
                 .addGap(18, 18, 18)
-                .addComponent(ScrollPanel, javax.swing.GroupLayout.PREFERRED_SIZE, 420, javax.swing.GroupLayout.PREFERRED_SIZE)
+                .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
+                    .addComponent(ScrollPanel, javax.swing.GroupLayout.PREFERRED_SIZE, 420, javax.swing.GroupLayout.PREFERRED_SIZE)
+                    .addGroup(layout.createSequentialGroup()
+                        .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
+                            .addComponent(jLabel1)
+                            .addComponent(jLabel6))
+                        .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
+                        .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
+                            .addComponent(CarNameField)
+                            .addComponent(TotalPaymentField))
+                        .addGap(38, 38, 38)
+                        .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
+                            .addComponent(jLabel2)
+                            .addComponent(jLabel7))
+                        .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
+                        .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
+                            .addComponent(CarPlateField)
+                            .addComponent(StatusField))
+                        .addGap(49, 49, 49)
+                        .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
+                            .addComponent(jLabel3)
+                            .addComponent(jLabel8))
+                        .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
+                        .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
+                            .addComponent(StartDateField)
+                            .addComponent(PaymentStatusField))
+                        .addGap(48, 48, 48)
+                        .addComponent(jLabel4)
+                        .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
+                        .addComponent(EndDateField)
+                        .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
+                            .addGroup(layout.createSequentialGroup()
+                                .addGap(33, 33, 33)
+                                .addComponent(jLabel5)
+                                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED))
+                            .addGroup(javax.swing.GroupLayout.Alignment.TRAILING, layout.createSequentialGroup()
+                                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
+                                .addComponent(PayButton)
+                                .addGap(24, 24, 24)))
+                        .addComponent(DurationField)))
                 .addContainerGap(32, Short.MAX_VALUE))
         );
 
@@ -155,10 +287,69 @@ public class CheckBooking extends javax.swing.JFrame {
         PastBookingButton.setSelected(false);
         refreshBookings(); // Refresh bookings display based on selection
     }//GEN-LAST:event_AllBookingsButtonActionPerformed
-              
+
+    private void PayButtonActionPerformed(java.awt.event.ActionEvent evt) {                                          
+        String message;
+    
+        if (bookingId == -1) {
+            message = "Please select a booking to pay.";
+        } else {
+            message = "Payment Status will be changed once the admin approves the payment.";
+        }
+    
+        JOptionPane pane = new JOptionPane(message, JOptionPane.INFORMATION_MESSAGE);
+    
+        // Create a JDialog to hold the JOptionPane
+        JDialog dialog = pane.createDialog("Payment Status");
+    
+        // Set up a Timer to close the dialog after 3 seconds
+        Timer timer = new Timer(3000, new ActionListener() {
+            @Override
+            public void actionPerformed(ActionEvent e) {
+                dialog.dispose(); // Close the dialog
+            }
+        });
+    
+        timer.setRepeats(false); // Only execute once
+        timer.start();
+    
+        // Show the dialog
+        dialog.setVisible(true);
+    }
+    
+           
     
     public void displayBookingDetails(Booking booking) {
-        System.out.println("Booking ID: " + booking.getBookingId());
+        bookingId = booking.getBookingId();
+        int carId = booking.getCarId();
+        int rowNumberOfCar = dataIO.rowNumber(carId, 1, dataIO.CAR_FILE, 7); 
+
+        String carName = dataIO.readData(rowNumberOfCar + 1, dataIO.CAR_FILE); 
+        LocalDate startDate = booking.getStartDate();
+        LocalDate endDate = booking.getEndDate();
+        int totalDuration = (int) (endDate.toEpochDay() - startDate.toEpochDay());
+        String carPlate = booking.getCarPlate();
+        String status = booking.getStatus();
+        String paymentStatus = booking.getPaymentStatus();
+        int totalPayment = totalDuration * Integer.parseInt(dataIO.readData(rowNumberOfCar + 3, dataIO.CAR_FILE));
+
+        CarNameField.setText(carName);
+        CarPlateField.setText(carPlate);
+        StartDateField.setText(startDate.toString());
+        EndDateField.setText(endDate.toString());
+        DurationField.setText(totalDuration + " days");
+        StatusField.setText(status);
+        PaymentStatusField.setText(paymentStatus);
+        TotalPaymentField.setText("RM " + totalPayment);
+
+        if (paymentStatus.equals("Paid")) {
+            PayButton.setText("Paid");
+            PayButton.setEnabled(false);
+        } else if (paymentStatus.equals("Unpaid")) {
+            PayButton.setText("Pay");
+            PayButton.setEnabled(true);
+        }
+
     }
 
     /**
@@ -198,9 +389,26 @@ public class CheckBooking extends javax.swing.JFrame {
 
     // Variables declaration - do not modify//GEN-BEGIN:variables
     private javax.swing.JRadioButton AllBookingsButton;
+    private javax.swing.JLabel CarNameField;
+    private javax.swing.JLabel CarPlateField;
+    private javax.swing.JLabel DurationField;
+    private javax.swing.JLabel EndDateField;
     private javax.swing.JRadioButton PastBookingButton;
+    private javax.swing.JButton PayButton;
+    private javax.swing.JLabel PaymentStatusField;
     private javax.swing.JScrollPane ScrollPanel;
+    private javax.swing.JLabel StartDateField;
+    private javax.swing.JLabel StatusField;
+    private javax.swing.JLabel TotalPaymentField;
     private javax.swing.JRadioButton UpcomingButton;
+    private javax.swing.JLabel jLabel1;
+    private javax.swing.JLabel jLabel2;
+    private javax.swing.JLabel jLabel3;
+    private javax.swing.JLabel jLabel4;
+    private javax.swing.JLabel jLabel5;
+    private javax.swing.JLabel jLabel6;
+    private javax.swing.JLabel jLabel7;
+    private javax.swing.JLabel jLabel8;
     private javax.swing.JMenu jMenu1;
     private javax.swing.JMenu jMenu2;
     private javax.swing.JMenuBar jMenuBar1;
