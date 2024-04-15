@@ -165,6 +165,41 @@ public class DatabaseManager {
         return bookings;
     }
 
+    public static List<Booking> getPayment (String status) {
+        List<Booking> bookings = new ArrayList<>();
+
+        try {
+            int totalLines = getTotalLines(BOOKING_FILE);
+            int numberOfBookings = totalLines / NUMBER_OF_LINES_PER_BOOKING;
+
+            for (int i = 0; i < numberOfBookings; i++) {
+                int lineNumber = i * NUMBER_OF_LINES_PER_BOOKING + 1; // Start line number for current booking
+
+                int bookingID = Integer.parseInt(dataIO.readData(lineNumber, BOOKING_FILE));
+                int carID = Integer.parseInt(dataIO.readData(lineNumber + 1, BOOKING_FILE));
+                String customerEmail = dataIO.readData(lineNumber + 2, BOOKING_FILE);
+                String startDateStr = dataIO.readData(lineNumber + 3, BOOKING_FILE);
+                String endDateStr = dataIO.readData(lineNumber + 4, BOOKING_FILE);
+                String bookingStatus = dataIO.readData(lineNumber + 5, BOOKING_FILE);
+                String paymentStatus = dataIO.readData(lineNumber + 6, BOOKING_FILE);
+
+                // Parse startDateStr and endDateStr into LocalDate objects
+                LocalDate startDate = LocalDate.parse(startDateStr);
+                LocalDate endDate = LocalDate.parse(endDateStr);
+
+                if (paymentStatus.equals(status)) {
+                    Booking booking = new Booking(bookingID, carID, customerEmail, startDate, endDate, bookingStatus, paymentStatus);
+                    bookings.add(booking);
+                }
+            }
+
+        } catch (Exception e) {
+            e.printStackTrace();
+        }
+        return bookings;
+    }
+
+
     public static List<Booking> getSpecificBookings(String email) {
         List<Booking> bookings = new ArrayList<>();
 

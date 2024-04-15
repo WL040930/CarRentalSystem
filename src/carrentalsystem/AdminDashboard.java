@@ -35,6 +35,8 @@ public class AdminDashboard extends javax.swing.JFrame {
         jMenu4 = new javax.swing.JMenu();
         jMenuItem5 = new javax.swing.JMenuItem();
         ConfirmationMessageMenu = new javax.swing.JMenuItem();
+        FinanceButton = new javax.swing.JMenu();
+        PaymentManagementMenu = new javax.swing.JMenuItem();
         jMenu3 = new javax.swing.JMenu();
         jMenuItem3 = new javax.swing.JMenuItem();
         jMenuItem6 = new javax.swing.JMenuItem();
@@ -67,6 +69,18 @@ public class AdminDashboard extends javax.swing.JFrame {
         jMenu4.add(ConfirmationMessageMenu);
 
         jMenuBar1.add(jMenu4);
+
+        FinanceButton.setText("Finance");
+
+        PaymentManagementMenu.setText("Payment Management");
+        PaymentManagementMenu.addActionListener(new java.awt.event.ActionListener() {
+            public void actionPerformed(java.awt.event.ActionEvent evt) {
+                PaymentManagementMenuActionPerformed(evt);
+            }
+        });
+        FinanceButton.add(PaymentManagementMenu);
+
+        jMenuBar1.add(FinanceButton);
 
         jMenu3.setText("Database");
 
@@ -151,6 +165,10 @@ public class AdminDashboard extends javax.swing.JFrame {
         pageSwitch.switchPage(this, new BookingManagement(user));
     }//GEN-LAST:event_ConfirmationMessageMenuActionPerformed
 
+    private void PaymentManagementMenuActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_PaymentManagementMenuActionPerformed
+        pageSwitch.switchPage(this, new ManagePayment(user)); 
+    }//GEN-LAST:event_PaymentManagementMenuActionPerformed
+
     /**
      * @param args the command line arguments
      */
@@ -189,6 +207,8 @@ public class AdminDashboard extends javax.swing.JFrame {
     // Variables declaration - do not modify//GEN-BEGIN:variables
     private javax.swing.JMenuItem BookingMenu;
     private javax.swing.JMenuItem ConfirmationMessageMenu;
+    private javax.swing.JMenu FinanceButton;
+    private javax.swing.JMenuItem PaymentManagementMenu;
     private javax.swing.JMenu jMenu1;
     private javax.swing.JMenu jMenu2;
     private javax.swing.JMenu jMenu3;
