@@ -18,6 +18,7 @@ public class CheckBooking extends javax.swing.JFrame {
 
     static User.customer user; 
     int bookingId = -1; 
+    int rowNumberOfBookingId; 
     String selection = "All"; 
     private final JPanel bookingContainer;
     
@@ -294,7 +295,10 @@ public class CheckBooking extends javax.swing.JFrame {
         if (bookingId == -1) {
             message = "Please select a booking to pay.";
         } else {
+            dataIO.overWriteData("Pending", rowNumberOfBookingId + 6 , dataIO.BOOKING_FILE);
             message = "Payment Status will be changed once the admin approves the payment.";
+            PaymentStatusField.setText("Pending");
+            refreshBookings();
         }
     
         JOptionPane pane = new JOptionPane(message, JOptionPane.INFORMATION_MESSAGE);
@@ -321,6 +325,7 @@ public class CheckBooking extends javax.swing.JFrame {
     
     public void displayBookingDetails(Booking booking) {
         bookingId = booking.getBookingId();
+        rowNumberOfBookingId = dataIO.rowNumber(bookingId, 1, dataIO.BOOKING_FILE, 9); 
         int carId = booking.getCarId();
         int rowNumberOfCar = dataIO.rowNumber(carId, 1, dataIO.CAR_FILE, 7); 
 

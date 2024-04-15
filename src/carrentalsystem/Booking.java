@@ -34,7 +34,8 @@ public class Booking {
     
         paymentStatus can be defined in: 
         1. Paid - meaning that the user has paid the booking amount
-        2. Unpaid - meaning that the user has not paid the booking amount
+        2. Pending - waiting for the admin to approve the payment
+        3. Unpaid - meaning that the user has not paid the booking amount
 
     */
 
