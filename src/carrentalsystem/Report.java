@@ -36,6 +36,11 @@ public class Report extends javax.swing.JPanel {
 
     public Report(String date) {
         Report.date = date;
+        
+        totalBookings = economyBookings + compactBookings + luxuryBookings + vansBookings;
+        totalUnpaid = economyUnpaid + compactUnpaid + luxuryUnpaid + vansUnpaid;
+        totalPaid = economyPaid + compactPaid + luxuryPaid + vansPaid;
+        totalTotal = economyTotal + compactTotal + luxuryTotal + vansTotal;
         initComponents();
     }
 
@@ -188,19 +193,19 @@ public class Report extends javax.swing.JPanel {
 
         TotalNumberOfBookings.setFont(new java.awt.Font("Bahnschrift", 0, 14)); // NOI18N
         TotalNumberOfBookings.setHorizontalAlignment(javax.swing.SwingConstants.CENTER);
-        TotalNumberOfBookings.setText("jLabel20");
+        TotalNumberOfBookings.setText(String.valueOf(totalBookings));
 
         TotalUnpaid.setFont(new java.awt.Font("Bahnschrift", 0, 14)); // NOI18N
         TotalUnpaid.setHorizontalAlignment(javax.swing.SwingConstants.CENTER);
-        TotalUnpaid.setText("jLabel24");
+        TotalUnpaid.setText(String.valueOf(totalUnpaid));
 
         TotalPaid.setFont(new java.awt.Font("Bahnschrift", 0, 14)); // NOI18N
         TotalPaid.setHorizontalAlignment(javax.swing.SwingConstants.CENTER);
-        TotalPaid.setText("jLabel24");
+        TotalPaid.setText(String.valueOf(totalPaid));
 
         TotalTotal.setFont(new java.awt.Font("Bahnschrift", 0, 14)); // NOI18N
         TotalTotal.setHorizontalAlignment(javax.swing.SwingConstants.CENTER);
-        TotalTotal.setText("jLabel24");
+        TotalTotal.setText(String.valueOf(totalTotal));
 
         javax.swing.GroupLayout jPanel2Layout = new javax.swing.GroupLayout(jPanel2);
         jPanel2.setLayout(jPanel2Layout);
@@ -237,73 +242,73 @@ public class Report extends javax.swing.JPanel {
 
         EconomyNumberOfBookings.setFont(new java.awt.Font("Bahnschrift", 0, 14)); // NOI18N
         EconomyNumberOfBookings.setHorizontalAlignment(javax.swing.SwingConstants.CENTER);
-        EconomyNumberOfBookings.setText("jLabel20");
+        EconomyNumberOfBookings.setText(String.valueOf(economyBookings));
 
         CompactNumberOfBookings.setFont(new java.awt.Font("Bahnschrift", 0, 14)); // NOI18N
         CompactNumberOfBookings.setHorizontalAlignment(javax.swing.SwingConstants.CENTER);
-        CompactNumberOfBookings.setText("jLabel21");
+        CompactNumberOfBookings.setText(String.valueOf(compactBookings));
 
         LuxuryNumberOfBookings.setFont(new java.awt.Font("Bahnschrift", 0, 14)); // NOI18N
         LuxuryNumberOfBookings.setHorizontalAlignment(javax.swing.SwingConstants.CENTER);
-        LuxuryNumberOfBookings.setText("jLabel22");
+        LuxuryNumberOfBookings.setText(String.valueOf(luxuryBookings));
 
         VansNumberOfBookings.setFont(new java.awt.Font("Bahnschrift", 0, 14)); // NOI18N
         VansNumberOfBookings.setHorizontalAlignment(javax.swing.SwingConstants.CENTER);
-        VansNumberOfBookings.setText("jLabel23");
+        VansNumberOfBookings.setText(String.valueOf(vansBookings));
 
         EconomyUnpaid.setFont(new java.awt.Font("Bahnschrift", 0, 14)); // NOI18N
         EconomyUnpaid.setHorizontalAlignment(javax.swing.SwingConstants.CENTER);
-        EconomyUnpaid.setText("jLabel20");
+        EconomyUnpaid.setText(String.valueOf(economyUnpaid));
 
         CompactUnpaid.setFont(new java.awt.Font("Bahnschrift", 0, 14)); // NOI18N
         CompactUnpaid.setHorizontalAlignment(javax.swing.SwingConstants.CENTER);
-        CompactUnpaid.setText("jLabel21");
+        CompactUnpaid.setText(String.valueOf(compactUnpaid));
 
         LuxuryUnpaid.setFont(new java.awt.Font("Bahnschrift", 0, 14)); // NOI18N
         LuxuryUnpaid.setHorizontalAlignment(javax.swing.SwingConstants.CENTER);
-        LuxuryUnpaid.setText("jLabel22");
+        LuxuryUnpaid.setText(String.valueOf(luxuryUnpaid));
 
         VansUnpaid.setFont(new java.awt.Font("Bahnschrift", 0, 14)); // NOI18N
         VansUnpaid.setHorizontalAlignment(javax.swing.SwingConstants.CENTER);
-        VansUnpaid.setText("jLabel23");
+        VansUnpaid.setText(String.valueOf(vansUnpaid));
 
         EconomyPaid.setFont(new java.awt.Font("Bahnschrift", 0, 14)); // NOI18N
         EconomyPaid.setHorizontalAlignment(javax.swing.SwingConstants.CENTER);
-        EconomyPaid.setText("jLabel20");
+        EconomyPaid.setText(String.valueOf(economyPaid));
 
         CompactPaid.setFont(new java.awt.Font("Bahnschrift", 0, 14)); // NOI18N
         CompactPaid.setHorizontalAlignment(javax.swing.SwingConstants.CENTER);
-        CompactPaid.setText("jLabel21");
+        CompactPaid.setText(String.valueOf(compactPaid));
 
         LuxuryPaid.setFont(new java.awt.Font("Bahnschrift", 0, 14)); // NOI18N
         LuxuryPaid.setHorizontalAlignment(javax.swing.SwingConstants.CENTER);
-        LuxuryPaid.setText("jLabel22");
+        LuxuryPaid.setText(String.valueOf(luxuryPaid));
 
         VansPaid.setFont(new java.awt.Font("Bahnschrift", 0, 14)); // NOI18N
         VansPaid.setHorizontalAlignment(javax.swing.SwingConstants.CENTER);
-        VansPaid.setText("jLabel23");
+        VansPaid.setText(String.valueOf(vansPaid));
 
         EconomyTotal.setFont(new java.awt.Font("Bahnschrift", 0, 14)); // NOI18N
         EconomyTotal.setHorizontalAlignment(javax.swing.SwingConstants.CENTER);
-        EconomyTotal.setText("jLabel20");
+        EconomyTotal.setText(String.valueOf(economyTotal));
 
         CompactTotal.setFont(new java.awt.Font("Bahnschrift", 0, 14)); // NOI18N
         CompactTotal.setHorizontalAlignment(javax.swing.SwingConstants.CENTER);
-        CompactTotal.setText("jLabel21");
+        CompactTotal.setText(String.valueOf(compactTotal));
 
         LuxuryTotal.setFont(new java.awt.Font("Bahnschrift", 0, 14)); // NOI18N
         LuxuryTotal.setHorizontalAlignment(javax.swing.SwingConstants.CENTER);
-        LuxuryTotal.setText("jLabel22");
+        LuxuryTotal.setText(String.valueOf(luxuryTotal));
 
         VansTotal.setFont(new java.awt.Font("Bahnschrift", 0, 14)); // NOI18N
         VansTotal.setHorizontalAlignment(javax.swing.SwingConstants.CENTER);
-        VansTotal.setText("jLabel23");
+        VansTotal.setText(String.valueOf(vansTotal));
 
         jLabel25.setFont(new java.awt.Font("Bahnschrift", 1, 14)); // NOI18N
         jLabel25.setText("Total Income: ");
 
         Totalncome.setFont(new java.awt.Font("Bahnschrift", 0, 14)); // NOI18N
-        Totalncome.setText("jLabel20");
+        Totalncome.setText(String.valueOf(totalTotal));
 
         jLabel21.setFont(new java.awt.Font("Bahnschrift", 1, 14)); // NOI18N
         jLabel21.setText("Best Selling Car Type: ");

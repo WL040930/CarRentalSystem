@@ -202,6 +202,7 @@ public class Booking {
         return uniqueDatesArray;
     }
 
+
     public static String[] convertDateRepeated(String[] dateStrings) {
         if (dateStrings == null || dateStrings.length == 0) {
             return new String[0]; // Return an empty array if input is null or empty
