@@ -11,6 +11,7 @@ import java.util.Scanner;
 import java.util.Set;
 import java.util.HashSet;
 import java.time.format.DateTimeFormatter;
+import java.time.YearMonth;
 
 public class Booking {
 
@@ -215,19 +216,33 @@ public class Booking {
         return convertedDates;
     }
 
-    public static void main(String[] args) {
-        // Example input date strings (replace with your actual data)
-        String[] inputDates = returnDate();
-
-        // Convert the input dates to the desired format
-        String[] convertedDates = convertDateRepeated(inputDates);
-
-        // Print the converted dates
-        System.out.println("Converted Dates:");
-        for (String date : convertedDates) {
-            System.out.println(date);
-        }
+    public static String returnFirstDay (String date) {
+        // the date is given in format August, 2024
+        String[] dateArray = date.split(", ");
+        String month = dateArray[0];
+        String year = dateArray[1];
+        String firstDay = "1";
+        String firstDate = firstDay + " " + month + " " + year;
+        return firstDate;
     }
+
+    public static String returnLastDay(String date) {
+        // The date is given in format August, 2024
+        String[] dateArray = date.split(", ");
+        String month = dateArray[0];
+        String year = dateArray[1];
+
+        // Parse the month and year
+        YearMonth yearMonth = YearMonth.parse(month + " " + year, DateTimeFormatter.ofPattern("MMMM yyyy"));
+
+        // Get the last day of the month
+        int lastDay = yearMonth.lengthOfMonth();
+
+        // Format the last day as a string
+        String lastDate = lastDay + " " + month + " " + year;
+        return lastDate;
+    }
+    
 
 }
 

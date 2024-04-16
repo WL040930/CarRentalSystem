@@ -4,18 +4,35 @@
  */
 package carrentalsystem;
 
-import javax.swing.text.View;
+import javax.swing.JPanel;
+import javax.swing.BoxLayout;
 
 public class ViewReport extends javax.swing.JFrame {
 
     static User.admin user;
     static String date; 
+    private final JPanel reportContainer;
 
     public ViewReport(User.admin user, String date) {
         ViewReport.user = user;
         ViewReport.date = date;
         initComponents();
 
+        reportContainer = new JPanel();
+        reportContainer.setLayout(new BoxLayout(reportContainer, BoxLayout.Y_AXIS));
+
+        ScrollPanel.setViewportView(reportContainer);
+        ScrollPanel.setVerticalScrollBarPolicy(javax.swing.ScrollPaneConstants.VERTICAL_SCROLLBAR_ALWAYS);
+        ScrollPanel.setHorizontalScrollBarPolicy(javax.swing.ScrollPaneConstants.HORIZONTAL_SCROLLBAR_NEVER);
+
+        // Create an instance of the Report panel
+        Report reportPanel = new Report(date);
+
+        // Add the reportPanel to the reportContainer
+        reportContainer.add(reportPanel);
+
+        // Pack the frame to adjust its size
+        pack();
     }
 
     /**
@@ -27,17 +44,25 @@ public class ViewReport extends javax.swing.JFrame {
     // <editor-fold defaultstate="collapsed" desc="Generated Code">//GEN-BEGIN:initComponents
     private void initComponents() {
 
+        ScrollPanel = new javax.swing.JScrollPane();
+
         setDefaultCloseOperation(javax.swing.WindowConstants.EXIT_ON_CLOSE);
 
         javax.swing.GroupLayout layout = new javax.swing.GroupLayout(getContentPane());
         getContentPane().setLayout(layout);
         layout.setHorizontalGroup(
             layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-            .addGap(0, 1000, Short.MAX_VALUE)
+            .addGroup(layout.createSequentialGroup()
+                .addGap(48, 48, 48)
+                .addComponent(ScrollPanel, javax.swing.GroupLayout.PREFERRED_SIZE, 900, javax.swing.GroupLayout.PREFERRED_SIZE)
+                .addContainerGap(52, Short.MAX_VALUE))
         );
         layout.setVerticalGroup(
             layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-            .addGap(0, 550, Short.MAX_VALUE)
+            .addGroup(javax.swing.GroupLayout.Alignment.TRAILING, layout.createSequentialGroup()
+                .addContainerGap(72, Short.MAX_VALUE)
+                .addComponent(ScrollPanel, javax.swing.GroupLayout.PREFERRED_SIZE, 460, javax.swing.GroupLayout.PREFERRED_SIZE)
+                .addGap(18, 18, 18))
         );
 
         pack();
@@ -79,5 +104,6 @@ public class ViewReport extends javax.swing.JFrame {
     }
 
     // Variables declaration - do not modify//GEN-BEGIN:variables
+    private javax.swing.JScrollPane ScrollPanel;
     // End of variables declaration//GEN-END:variables
 }
