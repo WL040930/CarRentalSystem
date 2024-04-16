@@ -42,11 +42,11 @@ public class Register extends javax.swing.JFrame {
 
         jPanel1.setBackground(new java.awt.Color(255, 255, 255));
 
-        header.setFont(new java.awt.Font("Segoe UI", 1, 36)); // NOI18N
+        header.setFont(new java.awt.Font("Bahnschrift", 1, 36)); // NOI18N
         header.setText("Register Your Account Here");
 
         backToLogin.setBackground(new java.awt.Color(6, 26, 35));
-        backToLogin.setFont(new java.awt.Font("Segoe UI", 1, 14)); // NOI18N
+        backToLogin.setFont(new java.awt.Font("Bahnschrift", 1, 14)); // NOI18N
         backToLogin.setForeground(new java.awt.Color(255, 255, 255));
         backToLogin.setText("Back to Login Page");
         backToLogin.addActionListener(new java.awt.event.ActionListener() {
@@ -55,24 +55,28 @@ public class Register extends javax.swing.JFrame {
             }
         });
 
+        usernameField.setFont(new java.awt.Font("Bahnschrift", 0, 18)); // NOI18N
         usernameField.addActionListener(new java.awt.event.ActionListener() {
             public void actionPerformed(java.awt.event.ActionEvent evt) {
                 usernameFieldActionPerformed(evt);
             }
         });
 
+        emailField.setFont(new java.awt.Font("Bahnschrift", 0, 18)); // NOI18N
         emailField.addActionListener(new java.awt.event.ActionListener() {
             public void actionPerformed(java.awt.event.ActionEvent evt) {
                 emailFieldActionPerformed(evt);
             }
         });
 
+        passwordField.setFont(new java.awt.Font("Bahnschrift", 0, 18)); // NOI18N
         passwordField.addActionListener(new java.awt.event.ActionListener() {
             public void actionPerformed(java.awt.event.ActionEvent evt) {
                 passwordFieldActionPerformed(evt);
             }
         });
 
+        confirmPasswordField.setFont(new java.awt.Font("Bahnschrift", 0, 18)); // NOI18N
         confirmPasswordField.setSelectionColor(new java.awt.Color(0, 0, 0));
         confirmPasswordField.addActionListener(new java.awt.event.ActionListener() {
             public void actionPerformed(java.awt.event.ActionEvent evt) {
@@ -80,19 +84,19 @@ public class Register extends javax.swing.JFrame {
             }
         });
 
-        jLabel1.setFont(new java.awt.Font("Segoe UI", 1, 18)); // NOI18N
+        jLabel1.setFont(new java.awt.Font("Bahnschrift", 1, 18)); // NOI18N
         jLabel1.setIcon(new javax.swing.ImageIcon(getClass().getResource("/carrentalsystem/img/user.png"))); // NOI18N
         jLabel1.setText("Username: ");
 
-        jLabel2.setFont(new java.awt.Font("Segoe UI", 1, 18)); // NOI18N
+        jLabel2.setFont(new java.awt.Font("Bahnschrift", 1, 18)); // NOI18N
         jLabel2.setIcon(new javax.swing.ImageIcon(getClass().getResource("/carrentalsystem/img/email.png"))); // NOI18N
         jLabel2.setText("Email Address:");
 
-        jLabel3.setFont(new java.awt.Font("Segoe UI", 1, 18)); // NOI18N
+        jLabel3.setFont(new java.awt.Font("Bahnschrift", 1, 18)); // NOI18N
         jLabel3.setIcon(new javax.swing.ImageIcon(getClass().getResource("/carrentalsystem/img/password.png"))); // NOI18N
         jLabel3.setText("Password:");
 
-        jLabel4.setFont(new java.awt.Font("Segoe UI", 1, 18)); // NOI18N
+        jLabel4.setFont(new java.awt.Font("Bahnschrift", 1, 18)); // NOI18N
         jLabel4.setIcon(new javax.swing.ImageIcon(getClass().getResource("/carrentalsystem/img/password.png"))); // NOI18N
         jLabel4.setText("Confirm Password:");
 
@@ -100,7 +104,7 @@ public class Register extends javax.swing.JFrame {
         jSeparator1.setOrientation(javax.swing.SwingConstants.VERTICAL);
 
         registerButton.setBackground(new java.awt.Color(6, 26, 35));
-        registerButton.setFont(new java.awt.Font("Segoe UI", 1, 18)); // NOI18N
+        registerButton.setFont(new java.awt.Font("Bahnschrift", 1, 18)); // NOI18N
         registerButton.setForeground(new java.awt.Color(255, 255, 255));
         registerButton.setText("Register");
         registerButton.addActionListener(new java.awt.event.ActionListener() {
@@ -111,7 +115,7 @@ public class Register extends javax.swing.JFrame {
 
         jPanel2.setBackground(new java.awt.Color(6, 26, 35));
 
-        jLabel6.setFont(new java.awt.Font("Segoe UI", 1, 18)); // NOI18N
+        jLabel6.setFont(new java.awt.Font("Bahnschrift", 1, 18)); // NOI18N
         jLabel6.setForeground(new java.awt.Color(255, 255, 255));
         jLabel6.setIcon(new javax.swing.ImageIcon(getClass().getResource("/carrentalsystem/img/iconLogo.jpeg"))); // NOI18N
         jLabel6.setText("Panda Car");
@@ -153,7 +157,7 @@ public class Register extends javax.swing.JFrame {
                         .addComponent(backToLogin))
                     .addGroup(jPanel1Layout.createSequentialGroup()
                         .addGap(34, 34, 34)
-                        .addComponent(jLabel1, javax.swing.GroupLayout.PREFERRED_SIZE, 125, javax.swing.GroupLayout.PREFERRED_SIZE)))
+                        .addComponent(jLabel1, javax.swing.GroupLayout.PREFERRED_SIZE, 138, javax.swing.GroupLayout.PREFERRED_SIZE)))
                 .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED, 83, Short.MAX_VALUE)
                 .addComponent(jSeparator1, javax.swing.GroupLayout.PREFERRED_SIZE, 28, javax.swing.GroupLayout.PREFERRED_SIZE)
                 .addGap(45, 45, 45)
