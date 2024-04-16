@@ -4,6 +4,8 @@
  */
 package carrentalsystem;
 
+import java.time.LocalDate;
+
 public class Report extends javax.swing.JPanel {
 
     static String date; 
@@ -32,11 +34,85 @@ public class Report extends javax.swing.JPanel {
         int luxuryTotal = 0;
         int vansTotal = 0;
         int totalTotal = 0;
+
+        String bestSelling; 
+        int totalQuantity;
         /* End of Declaration of variables */
 
     public Report(String date) {
         Report.date = date;
-        
+        int[] bookingids = Booking.returnRelevantBookingId(date); 
+        for (int i = 0; i < bookingids.length; i++) {
+            int bookingid = bookingids[i];
+
+            // row number of the booking id in the booking file
+            int rowNumber = dataIO.rowNumber(bookingid, 1, dataIO.BOOKING_FILE, 9);
+            
+            
+            String rowCarId = dataIO.readData(rowNumber + 1, dataIO.BOOKING_FILE);
+            int rowCarIdInt = Integer.parseInt(rowCarId); 
+            
+            // row number of the car id in the car file
+            int carIdRowInCarFile = dataIO.rowNumber(rowCarIdInt, 1, dataIO.CAR_FILE, 7); 
+            
+            String rowCarType = dataIO.readData(carIdRowInCarFile + 4, dataIO.CAR_FILE);
+
+            if (rowCarType.equals("Economy")) {
+                economyBookings = economyBookings + 1;
+            } else if (rowCarType.equals("Compact")) {
+                compactBookings = compactBookings + 1;
+            } else if (rowCarType.equals("Luxury")) {
+                luxuryBookings = luxuryBookings + 1;
+            } else if (rowCarType.equals("Vans")) {
+                vansBookings = vansBookings + 1;
+            }
+
+            String paymentStatus = dataIO.readData(rowNumber + 6, dataIO.BOOKING_FILE);
+            LocalDate startDate = LocalDate.parse(dataIO.readData(rowNumber + 3, dataIO.BOOKING_FILE));
+            LocalDate endDate = LocalDate.parse(dataIO.readData(rowNumber + 4, dataIO.BOOKING_FILE));
+            int days = (int) (endDate.toEpochDay() - startDate.toEpochDay());
+            int price = Integer.parseInt(dataIO.readData(carIdRowInCarFile + 3, dataIO.CAR_FILE));
+            int total = price * days;
+
+            if (paymentStatus.equals("Unpaid") || paymentStatus.equals("Pending")) {
+                if (rowCarType.equals("Economy")) {
+                    economyUnpaid = economyUnpaid + total;
+                } else if (rowCarType.equals("Compact")) {
+                    compactUnpaid = compactUnpaid + total;
+                } else if (rowCarType.equals("Luxury")) {
+                    luxuryUnpaid = luxuryUnpaid + total;
+                } else if (rowCarType.equals("Vans")) {
+                    vansUnpaid = vansUnpaid + total;
+                }
+            } else if (paymentStatus.equals("Paid")) {
+                if (rowCarType.equals("Economy")) {
+                    economyPaid = economyPaid + total;
+                } else if (rowCarType.equals("Compact")) {
+                    compactPaid = compactPaid + total;
+                } else if (rowCarType.equals("Luxury")) {
+                    luxuryPaid = luxuryPaid + total;
+                } else if (rowCarType.equals("Vans")) {
+                    vansPaid = vansPaid + total;
+                }
+            } 
+        }
+
+        if (economyBookings > compactBookings && economyBookings > luxuryBookings && economyBookings > vansBookings) {
+            bestSelling = "Economy Car";
+        } else if (compactBookings > economyBookings && compactBookings > luxuryBookings && compactBookings > vansBookings) {
+            bestSelling = "Compact Car";
+        } else if (luxuryBookings > economyBookings && luxuryBookings > compactBookings && luxuryBookings > vansBookings) {
+            bestSelling = "Luxury Car";
+        } else if (vansBookings > economyBookings && vansBookings > compactBookings && vansBookings > luxuryBookings) {
+            bestSelling = "Vans";
+        }
+
+        totalQuantity = economyBookings + compactBookings + luxuryBookings + vansBookings;
+
+        economyTotal = economyPaid + economyUnpaid;
+        compactTotal = compactPaid + compactUnpaid;
+        luxuryTotal = luxuryPaid + luxuryUnpaid;
+        vansTotal = vansPaid + vansUnpaid;
         totalBookings = economyBookings + compactBookings + luxuryBookings + vansBookings;
         totalUnpaid = economyUnpaid + compactUnpaid + luxuryUnpaid + vansUnpaid;
         totalPaid = economyPaid + compactPaid + luxuryPaid + vansPaid;
@@ -308,19 +384,19 @@ public class Report extends javax.swing.JPanel {
         jLabel25.setText("Total Income: ");
 
         Totalncome.setFont(new java.awt.Font("Bahnschrift", 0, 14)); // NOI18N
-        Totalncome.setText(String.valueOf(totalTotal));
+        Totalncome.setText("RM " +String.valueOf(totalTotal));
 
         jLabel21.setFont(new java.awt.Font("Bahnschrift", 1, 14)); // NOI18N
         jLabel21.setText("Best Selling Car Type: ");
 
         BestSellingCar.setFont(new java.awt.Font("Bahnschrift", 0, 14)); // NOI18N
-        BestSellingCar.setText("jLabel20");
+        BestSellingCar.setText(bestSelling);
 
         jLabel20.setFont(new java.awt.Font("Bahnschrift", 1, 14)); // NOI18N
         jLabel20.setText("Total Quantity Sold:");
 
         TotalQuantitySold.setFont(new java.awt.Font("Bahnschrift", 0, 14)); // NOI18N
-        TotalQuantitySold.setText("jLabel22");
+        TotalQuantitySold.setText(String.valueOf(totalQuantity));
 
         jLabel22.setFont(new java.awt.Font("Bahnschrift", 0, 14)); // NOI18N
         jLabel22.setText("Unauthorized users are not allowed to read the report.");

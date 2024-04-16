@@ -116,14 +116,18 @@
                       </Group>
                       <EmptySpace min="-2" pref="98" max="-2" attributes="0"/>
                       <Group type="103" groupAlignment="0" attributes="0">
-                          <Component id="jLabel10" min="-2" pref="51" max="-2" attributes="0"/>
-                          <Component id="jLabel8" alignment="0" min="-2" max="-2" attributes="0"/>
-                          <Component id="NumberOfBookings" alignment="0" min="-2" pref="43" max="-2" attributes="0"/>
+                          <Group type="102" alignment="0" attributes="0">
+                              <Group type="103" groupAlignment="0" attributes="0">
+                                  <Component id="jLabel10" min="-2" pref="51" max="-2" attributes="0"/>
+                                  <Component id="CarIdText" min="-2" pref="51" max="-2" attributes="0"/>
+                              </Group>
+                              <EmptySpace max="-2" attributes="0"/>
+                              <Component id="NumberOfBookings" min="-2" pref="43" max="-2" attributes="0"/>
+                          </Group>
                           <Component id="jLabel7" alignment="0" min="-2" pref="64" max="-2" attributes="0"/>
-                          <Component id="CarIdText" min="-2" pref="51" max="-2" attributes="0"/>
                           <Component id="CarTypeComboBox" alignment="0" min="-2" pref="146" max="-2" attributes="0"/>
                       </Group>
-                      <EmptySpace min="-2" pref="86" max="-2" attributes="0"/>
+                      <EmptySpace min="-2" pref="113" max="-2" attributes="0"/>
                       <Component id="jSeparator1" min="-2" pref="19" max="-2" attributes="0"/>
                       <EmptySpace min="-2" pref="28" max="-2" attributes="0"/>
                       <Component id="SaveButton" min="-2" pref="83" max="-2" attributes="0"/>
@@ -170,25 +174,25 @@
                                           <Component id="CarTypeComboBox" alignment="3" min="-2" max="-2" attributes="0"/>
                                       </Group>
                                       <EmptySpace min="-2" pref="26" max="-2" attributes="0"/>
-                                      <Group type="103" groupAlignment="3" attributes="0">
-                                          <Component id="jLabel6" alignment="3" min="-2" max="-2" attributes="0"/>
-                                          <Component id="jLabel8" alignment="3" min="-2" max="-2" attributes="0"/>
-                                      </Group>
-                                      <EmptySpace max="-2" attributes="0"/>
                                       <Group type="103" groupAlignment="0" attributes="0">
-                                          <Component id="CarSeatsField" min="-2" max="-2" attributes="0"/>
-                                          <Component id="NumberOfBookings" alignment="0" min="-2" max="-2" attributes="0"/>
+                                          <Group type="102" attributes="0">
+                                              <Component id="jLabel6" min="-2" max="-2" attributes="0"/>
+                                              <EmptySpace max="-2" attributes="0"/>
+                                              <Group type="103" groupAlignment="0" attributes="0">
+                                                  <Component id="CarSeatsField" min="-2" max="-2" attributes="0"/>
+                                                  <Component id="NumberOfBookings" alignment="0" min="-2" max="-2" attributes="0"/>
+                                              </Group>
+                                          </Group>
+                                          <Group type="102" attributes="0">
+                                              <Component id="jLabel10" min="-2" max="-2" attributes="0"/>
+                                              <EmptySpace max="-2" attributes="0"/>
+                                              <Component id="CarIdText" min="-2" max="-2" attributes="0"/>
+                                          </Group>
                                       </Group>
                                       <EmptySpace min="-2" pref="26" max="-2" attributes="0"/>
-                                      <Group type="103" groupAlignment="3" attributes="0">
-                                          <Component id="jLabel5" alignment="3" min="-2" max="-2" attributes="0"/>
-                                          <Component id="jLabel10" alignment="3" min="-2" max="-2" attributes="0"/>
-                                      </Group>
+                                      <Component id="jLabel5" min="-2" max="-2" attributes="0"/>
                                       <EmptySpace max="-2" attributes="0"/>
-                                      <Group type="103" groupAlignment="3" attributes="0">
-                                          <Component id="CarPriceField" alignment="3" min="-2" max="-2" attributes="0"/>
-                                          <Component id="CarIdText" alignment="3" min="-2" max="-2" attributes="0"/>
-                                      </Group>
+                                      <Component id="CarPriceField" min="-2" max="-2" attributes="0"/>
                                   </Group>
                                   <Component id="imageField" alignment="0" min="-2" pref="200" max="-2" attributes="0"/>
                               </Group>
@@ -300,11 +304,6 @@
       <AuxValues>
         <AuxValue name="JavaCodeGenerator_TypeParameters" type="java.lang.String" value="&lt;String&gt;"/>
       </AuxValues>
-    </Component>
-    <Component class="javax.swing.JLabel" name="jLabel8">
-      <Properties>
-        <Property name="text" type="java.lang.String" value="Number of People Booked:"/>
-      </Properties>
     </Component>
     <Component class="javax.swing.JLabel" name="NumberOfBookings">
       <Properties>

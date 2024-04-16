@@ -12,6 +12,12 @@ import java.util.Set;
 import java.util.HashSet;
 import java.time.format.DateTimeFormatter;
 import java.time.YearMonth;
+import java.text.SimpleDateFormat;
+import java.util.Date;
+import java.text.ParseException;
+import java.util.Locale;
+import java.util.ArrayList;
+import java.util.List;
 
 public class Booking {
 
@@ -141,6 +147,8 @@ public class Booking {
     }
     /* End of Setters */
 
+
+    
     public static String[] returnDate() {
         try (Scanner scanner = new Scanner(new File(dataIO.BOOKING_FILE))) {
             int lineNumber = 1;
@@ -243,7 +251,41 @@ public class Booking {
         String lastDate = lastDay + " " + month + " " + year;
         return lastDate;
     }
-    
+
+    private static String convertDate(String inputDate) {
+        SimpleDateFormat inputFormat = new SimpleDateFormat("yyyy-MM-dd");
+        SimpleDateFormat outputFormat = new SimpleDateFormat("MMMM, yyyy", Locale.ENGLISH);
+        String formattedDate = "";
+
+        try {
+            Date date = inputFormat.parse(inputDate);
+            formattedDate = outputFormat.format(date);
+        } catch (ParseException e) {
+            e.printStackTrace();
+        }
+
+        return formattedDate;
+    }
+
+    public static int[] returnRelevantBookingId(String date) {
+        List<Integer> bookingIdList = new ArrayList<>();
+
+        int totalLine = DatabaseManager.getTotalLines(dataIO.BOOKING_FILE);
+        int linesPerRecord = 9;
+        int recordCount = totalLine / linesPerRecord;
+
+        for (int i = 0; i < recordCount; i++) {
+            int lineNumber = i * linesPerRecord + 1;
+            String startDate = dataIO.readData(lineNumber + 3, dataIO.BOOKING_FILE);
+            String converted = convertDate(startDate);
+
+            if (converted.equals(date)) {
+                bookingIdList.add(Integer.parseInt(dataIO.readData(lineNumber, dataIO.BOOKING_FILE)));
+            }
+
+        }
+        return bookingIdList.stream().mapToInt(i -> i).toArray();
+    }
 
 }
 

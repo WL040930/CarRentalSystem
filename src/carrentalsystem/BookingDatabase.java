@@ -321,7 +321,6 @@ public class BookingDatabase extends javax.swing.JFrame {
         DefaultTableModel model = new DefaultTableModel() {
             @Override
             public boolean isCellEditable(int row, int column) {
-                // This causes all cells to be non-editable
                 return false;
             }
         };
