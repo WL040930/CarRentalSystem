@@ -14,6 +14,7 @@ public class DatabasePage extends javax.swing.JFrame {
     public DatabasePage(User.admin user) {
         DatabasePage.user = user;
         initComponents();
+        setResizable(false);
 
         ImageIcon imageIcon = new ImageIcon(getClass().getResource("/carrentalsystem/img/logo.jpeg"));
         Image scaledImage = imageIcon.getImage().getScaledInstance(100, 100, Image.SCALE_SMOOTH);
