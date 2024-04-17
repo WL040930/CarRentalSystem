@@ -4,16 +4,50 @@
  */
 package carrentalsystem;
 
-/**
- *
- * @author limwe
- */
+import javax.swing.ImageIcon;
+import java.awt.Image;
+
 public class ServicesPage extends javax.swing.JFrame {
 
     static User.admin user;
     public ServicesPage(User.admin user) {
         ServicesPage.user = user; 
         initComponents();
+        setResizable(false);
+
+        ImageIcon imageIcon = new ImageIcon(getClass().getResource("/carrentalsystem/img/logo.jpeg"));
+        Image scaledImage = imageIcon.getImage().getScaledInstance(100, 100, Image.SCALE_SMOOTH);
+        TitleImage.setIcon(new ImageIcon(scaledImage));
+
+        ImageIcon imageIcon2 = new ImageIcon(getClass().getResource("/carrentalsystem/img/backButton.png"));
+        Image scaledImage2 = imageIcon2.getImage().getScaledInstance(60, 60, Image.SCALE_SMOOTH);
+        backButton.setIcon(new ImageIcon(scaledImage2));
+
+        backButton.addMouseListener(new java.awt.event.MouseAdapter() {
+            public void mouseClicked(java.awt.event.MouseEvent evt) {
+                pageSwitch.switchPage(ServicesPage.this, new AdminDashboard(user));
+            }
+        });
+
+        ImageIcon imageIcon3 = new ImageIcon(getClass().getResource("/carrentalsystem/img/bookingManagement.png"));
+        Image scaledImage3 = imageIcon3.getImage().getScaledInstance(210, 210, Image.SCALE_SMOOTH);
+        BookingManagementButton.setIcon(new ImageIcon(scaledImage3));
+
+        BookingManagementButton.addMouseListener(new java.awt.event.MouseAdapter() {
+            public void mouseClicked(java.awt.event.MouseEvent evt) {
+                pageSwitch.switchPage(ServicesPage.this, new BookingManagement(user));
+            }
+        });
+
+        ImageIcon imageIcon4 = new ImageIcon(getClass().getResource("/carrentalsystem/img/addCar.png"));
+        Image scaledImage4 = imageIcon4.getImage().getScaledInstance(210, 210, Image.SCALE_SMOOTH);
+        AddCarButton.setIcon(new ImageIcon(scaledImage4));
+
+        AddCarButton.addMouseListener(new java.awt.event.MouseAdapter() {
+            public void mouseClicked(java.awt.event.MouseEvent evt) {
+                pageSwitch.switchPage(ServicesPage.this, new AddNewCar(user));
+            }
+        });
     }
 
     /**
@@ -25,6 +59,16 @@ public class ServicesPage extends javax.swing.JFrame {
     // <editor-fold defaultstate="collapsed" desc="Generated Code">//GEN-BEGIN:initComponents
     private void initComponents() {
 
+        jPanel1 = new javax.swing.JPanel();
+        TitleText = new javax.swing.JLabel();
+        TitleImage = new javax.swing.JLabel();
+        jLabel1 = new javax.swing.JLabel();
+        backButton = new javax.swing.JLabel();
+        jPanel2 = new javax.swing.JPanel();
+        BookingManagementButton = new javax.swing.JLabel();
+        jLabel3 = new javax.swing.JLabel();
+        AddCarButton = new javax.swing.JLabel();
+        jLabel2 = new javax.swing.JLabel();
         jMenuBar1 = new javax.swing.JMenuBar();
         jMenu4 = new javax.swing.JMenu();
         jMenuItem5 = new javax.swing.JMenuItem();
@@ -42,12 +86,114 @@ public class ServicesPage extends javax.swing.JFrame {
 
         setDefaultCloseOperation(javax.swing.WindowConstants.EXIT_ON_CLOSE);
 
+        jPanel1.setBackground(new java.awt.Color(255, 255, 255));
+
+        TitleText.setFont(new java.awt.Font("Bahnschrift", 1, 36)); // NOI18N
+        TitleText.setText("Panda Car System");
+
+        TitleImage.setText("");
+
+        jLabel1.setFont(new java.awt.Font("Bahnschrift", 2, 18)); // NOI18N
+        jLabel1.setText("Panda Car, World Trustable Car Rental App.");
+
+        backButton.setText("");
+        backButton.setCursor(new java.awt.Cursor(java.awt.Cursor.HAND_CURSOR));
+
+        jPanel2.setBackground(new java.awt.Color(6, 26, 35));
+
+        BookingManagementButton.setText("");
+        BookingManagementButton.setCursor(new java.awt.Cursor(java.awt.Cursor.HAND_CURSOR));
+
+        jLabel3.setFont(new java.awt.Font("Bahnschrift", 1, 18)); // NOI18N
+        jLabel3.setForeground(new java.awt.Color(255, 255, 255));
+        jLabel3.setText("Booking Management");
+
+        AddCarButton.setText("");
+        AddCarButton.setCursor(new java.awt.Cursor(java.awt.Cursor.HAND_CURSOR));
+
+        jLabel2.setFont(new java.awt.Font("Bahnschrift", 1, 18)); // NOI18N
+        jLabel2.setForeground(new java.awt.Color(255, 255, 255));
+        jLabel2.setText("Add New Car");
+
+        javax.swing.GroupLayout jPanel2Layout = new javax.swing.GroupLayout(jPanel2);
+        jPanel2.setLayout(jPanel2Layout);
+        jPanel2Layout.setHorizontalGroup(
+            jPanel2Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
+            .addGroup(jPanel2Layout.createSequentialGroup()
+                .addGap(224, 224, 224)
+                .addComponent(jLabel2)
+                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
+                .addComponent(jLabel3)
+                .addGap(232, 232, 232))
+            .addGroup(javax.swing.GroupLayout.Alignment.TRAILING, jPanel2Layout.createSequentialGroup()
+                .addGap(176, 176, 176)
+                .addComponent(AddCarButton, javax.swing.GroupLayout.PREFERRED_SIZE, 210, javax.swing.GroupLayout.PREFERRED_SIZE)
+                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
+                .addComponent(BookingManagementButton, javax.swing.GroupLayout.PREFERRED_SIZE, 210, javax.swing.GroupLayout.PREFERRED_SIZE)
+                .addGap(222, 222, 222))
+        );
+        jPanel2Layout.setVerticalGroup(
+            jPanel2Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
+            .addGroup(jPanel2Layout.createSequentialGroup()
+                .addGap(39, 39, 39)
+                .addGroup(jPanel2Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
+                    .addComponent(BookingManagementButton, javax.swing.GroupLayout.PREFERRED_SIZE, 210, javax.swing.GroupLayout.PREFERRED_SIZE)
+                    .addComponent(AddCarButton, javax.swing.GroupLayout.PREFERRED_SIZE, 210, javax.swing.GroupLayout.PREFERRED_SIZE))
+                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
+                .addGroup(jPanel2Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
+                    .addComponent(jLabel3)
+                    .addComponent(jLabel2))
+                .addContainerGap(48, Short.MAX_VALUE))
+        );
+
+        javax.swing.GroupLayout jPanel1Layout = new javax.swing.GroupLayout(jPanel1);
+        jPanel1.setLayout(jPanel1Layout);
+        jPanel1Layout.setHorizontalGroup(
+            jPanel1Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
+            .addGroup(jPanel1Layout.createSequentialGroup()
+                .addGap(40, 40, 40)
+                .addComponent(TitleImage, javax.swing.GroupLayout.PREFERRED_SIZE, 100, javax.swing.GroupLayout.PREFERRED_SIZE)
+                .addGap(18, 18, 18)
+                .addGroup(jPanel1Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
+                    .addGroup(jPanel1Layout.createSequentialGroup()
+                        .addComponent(jLabel1, javax.swing.GroupLayout.PREFERRED_SIZE, 369, javax.swing.GroupLayout.PREFERRED_SIZE)
+                        .addContainerGap(473, Short.MAX_VALUE))
+                    .addGroup(jPanel1Layout.createSequentialGroup()
+                        .addComponent(TitleText, javax.swing.GroupLayout.PREFERRED_SIZE, 323, javax.swing.GroupLayout.PREFERRED_SIZE)
+                        .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
+                        .addComponent(backButton, javax.swing.GroupLayout.PREFERRED_SIZE, 60, javax.swing.GroupLayout.PREFERRED_SIZE)
+                        .addGap(67, 67, 67))))
+            .addComponent(jPanel2, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
+        );
+        jPanel1Layout.setVerticalGroup(
+            jPanel1Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
+            .addGroup(jPanel1Layout.createSequentialGroup()
+                .addGroup(jPanel1Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
+                    .addGroup(jPanel1Layout.createSequentialGroup()
+                        .addGap(66, 66, 66)
+                        .addGroup(jPanel1Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
+                            .addComponent(TitleImage, javax.swing.GroupLayout.PREFERRED_SIZE, 100, javax.swing.GroupLayout.PREFERRED_SIZE)
+                            .addGroup(jPanel1Layout.createSequentialGroup()
+                                .addGap(15, 15, 15)
+                                .addComponent(TitleText)
+                                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
+                                .addComponent(jLabel1))))
+                    .addGroup(jPanel1Layout.createSequentialGroup()
+                        .addGap(41, 41, 41)
+                        .addComponent(backButton, javax.swing.GroupLayout.PREFERRED_SIZE, 60, javax.swing.GroupLayout.PREFERRED_SIZE)))
+                .addGap(52, 52, 52)
+                .addComponent(jPanel2, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE))
+        );
+
         jMenuBar1.setBackground(new java.awt.Color(6, 26, 35));
         jMenuBar1.setForeground(new java.awt.Color(255, 255, 255));
 
         jMenu4.setForeground(new java.awt.Color(255, 255, 255));
         jMenu4.setText("Services");
 
+        jMenuItem5.setBackground(new java.awt.Color(6, 26, 35));
+        jMenuItem5.setFont(new java.awt.Font("Bahnschrift", 0, 14)); // NOI18N
+        jMenuItem5.setForeground(new java.awt.Color(255, 255, 255));
         jMenuItem5.setText("Add New Car");
         jMenuItem5.addActionListener(new java.awt.event.ActionListener() {
             public void actionPerformed(java.awt.event.ActionEvent evt) {
@@ -56,6 +202,9 @@ public class ServicesPage extends javax.swing.JFrame {
         });
         jMenu4.add(jMenuItem5);
 
+        ConfirmationMessageMenu.setBackground(new java.awt.Color(6, 26, 35));
+        ConfirmationMessageMenu.setFont(new java.awt.Font("Bahnschrift", 0, 14)); // NOI18N
+        ConfirmationMessageMenu.setForeground(new java.awt.Color(255, 255, 255));
         ConfirmationMessageMenu.setText("Booking Management");
         ConfirmationMessageMenu.addActionListener(new java.awt.event.ActionListener() {
             public void actionPerformed(java.awt.event.ActionEvent evt) {
@@ -69,6 +218,9 @@ public class ServicesPage extends javax.swing.JFrame {
         FinanceButton.setForeground(new java.awt.Color(255, 255, 255));
         FinanceButton.setText("Finance");
 
+        PaymentManagementMenu.setBackground(new java.awt.Color(6, 26, 35));
+        PaymentManagementMenu.setFont(new java.awt.Font("Bahnschrift", 0, 14)); // NOI18N
+        PaymentManagementMenu.setForeground(new java.awt.Color(255, 255, 255));
         PaymentManagementMenu.setText("Payment Management");
         PaymentManagementMenu.addActionListener(new java.awt.event.ActionListener() {
             public void actionPerformed(java.awt.event.ActionEvent evt) {
@@ -77,6 +229,9 @@ public class ServicesPage extends javax.swing.JFrame {
         });
         FinanceButton.add(PaymentManagementMenu);
 
+        SalesReportMenu.setBackground(new java.awt.Color(6, 26, 35));
+        SalesReportMenu.setFont(new java.awt.Font("Bahnschrift", 0, 14)); // NOI18N
+        SalesReportMenu.setForeground(new java.awt.Color(255, 255, 255));
         SalesReportMenu.setText("Sales Reports");
         SalesReportMenu.addActionListener(new java.awt.event.ActionListener() {
             public void actionPerformed(java.awt.event.ActionEvent evt) {
@@ -90,6 +245,9 @@ public class ServicesPage extends javax.swing.JFrame {
         jMenu3.setForeground(new java.awt.Color(255, 255, 255));
         jMenu3.setText("Database");
 
+        jMenuItem3.setBackground(new java.awt.Color(6, 26, 35));
+        jMenuItem3.setFont(new java.awt.Font("Bahnschrift", 0, 14)); // NOI18N
+        jMenuItem3.setForeground(new java.awt.Color(255, 255, 255));
         jMenuItem3.setText("User Database");
         jMenuItem3.addActionListener(new java.awt.event.ActionListener() {
             public void actionPerformed(java.awt.event.ActionEvent evt) {
@@ -98,6 +256,9 @@ public class ServicesPage extends javax.swing.JFrame {
         });
         jMenu3.add(jMenuItem3);
 
+        jMenuItem6.setBackground(new java.awt.Color(6, 26, 35));
+        jMenuItem6.setFont(new java.awt.Font("Bahnschrift", 0, 14)); // NOI18N
+        jMenuItem6.setForeground(new java.awt.Color(255, 255, 255));
         jMenuItem6.setText("Car Database");
         jMenuItem6.addActionListener(new java.awt.event.ActionListener() {
             public void actionPerformed(java.awt.event.ActionEvent evt) {
@@ -106,6 +267,9 @@ public class ServicesPage extends javax.swing.JFrame {
         });
         jMenu3.add(jMenuItem6);
 
+        BookingMenu.setBackground(new java.awt.Color(6, 26, 35));
+        BookingMenu.setFont(new java.awt.Font("Bahnschrift", 0, 14)); // NOI18N
+        BookingMenu.setForeground(new java.awt.Color(255, 255, 255));
         BookingMenu.setText("Booking Database");
         BookingMenu.addActionListener(new java.awt.event.ActionListener() {
             public void actionPerformed(java.awt.event.ActionEvent evt) {
@@ -119,6 +283,9 @@ public class ServicesPage extends javax.swing.JFrame {
         jMenu2.setForeground(new java.awt.Color(255, 255, 255));
         jMenu2.setText("Settings");
 
+        jMenuItem1.setBackground(new java.awt.Color(6, 26, 35));
+        jMenuItem1.setFont(new java.awt.Font("Bahnschrift", 0, 14)); // NOI18N
+        jMenuItem1.setForeground(new java.awt.Color(255, 255, 255));
         jMenuItem1.setText("Account Settings");
         jMenuItem1.addActionListener(new java.awt.event.ActionListener() {
             public void actionPerformed(java.awt.event.ActionEvent evt) {
@@ -127,6 +294,9 @@ public class ServicesPage extends javax.swing.JFrame {
         });
         jMenu2.add(jMenuItem1);
 
+        LogoutMenu.setBackground(new java.awt.Color(6, 26, 35));
+        LogoutMenu.setFont(new java.awt.Font("Bahnschrift", 0, 14)); // NOI18N
+        LogoutMenu.setForeground(new java.awt.Color(255, 255, 255));
         LogoutMenu.setText("Logout");
         LogoutMenu.addActionListener(new java.awt.event.ActionListener() {
             public void actionPerformed(java.awt.event.ActionEvent evt) {
@@ -143,15 +313,49 @@ public class ServicesPage extends javax.swing.JFrame {
         getContentPane().setLayout(layout);
         layout.setHorizontalGroup(
             layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-            .addGap(0, 1000, Short.MAX_VALUE)
+            .addComponent(jPanel1, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
         );
         layout.setVerticalGroup(
             layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-            .addGap(0, 550, Short.MAX_VALUE)
+            .addGroup(layout.createSequentialGroup()
+                .addComponent(jPanel1, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
+                .addContainerGap())
         );
 
         pack();
     }// </editor-fold>//GEN-END:initComponents
+
+    private void jMenuItem5ActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jMenuItem5ActionPerformed
+        pageSwitch.switchPage(this, new AddNewCar(user));
+    }//GEN-LAST:event_jMenuItem5ActionPerformed
+
+    private void ConfirmationMessageMenuActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_ConfirmationMessageMenuActionPerformed
+        pageSwitch.switchPage(this, new BookingManagement(user));
+    }//GEN-LAST:event_ConfirmationMessageMenuActionPerformed
+
+    private void PaymentManagementMenuActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_PaymentManagementMenuActionPerformed
+        pageSwitch.switchPage(this, new ManagePayment(user));
+    }//GEN-LAST:event_PaymentManagementMenuActionPerformed
+
+    private void SalesReportMenuActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_SalesReportMenuActionPerformed
+        pageSwitch.switchPage(this, new ChooseTime(user));
+    }//GEN-LAST:event_SalesReportMenuActionPerformed
+
+    private void jMenuItem3ActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jMenuItem3ActionPerformed
+        pageSwitch.switchPage(this, new UserDatabase(user));
+    }//GEN-LAST:event_jMenuItem3ActionPerformed
+
+    private void jMenuItem6ActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jMenuItem6ActionPerformed
+        pageSwitch.switchPage(this, new CarDatabase(user));
+    }//GEN-LAST:event_jMenuItem6ActionPerformed
+
+    private void BookingMenuActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_BookingMenuActionPerformed
+        pageSwitch.switchPage(this, new BookingDatabase(user));
+    }//GEN-LAST:event_BookingMenuActionPerformed
+
+    private void jMenuItem1ActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jMenuItem1ActionPerformed
+        pageSwitch.switchPage(this, new manageOwnAccount(user));
+    }//GEN-LAST:event_jMenuItem1ActionPerformed
 
     private void LogoutMenuActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_LogoutMenuActionPerformed
         int dialogResult = javax.swing.JOptionPane.showConfirmDialog(null, "Are you sure you want to logout?", "Warning", javax.swing.JOptionPane.YES_NO_OPTION);
@@ -159,38 +363,6 @@ public class ServicesPage extends javax.swing.JFrame {
             pageSwitch.switchPage(this, new Login());
         }
     }//GEN-LAST:event_LogoutMenuActionPerformed
-
-    private void jMenuItem1ActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jMenuItem1ActionPerformed
-        pageSwitch.switchPage(this, new manageOwnAccount(user));
-    }//GEN-LAST:event_jMenuItem1ActionPerformed
-
-    private void BookingMenuActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_BookingMenuActionPerformed
-        pageSwitch.switchPage(this, new BookingDatabase(user));
-    }//GEN-LAST:event_BookingMenuActionPerformed
-
-    private void jMenuItem6ActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jMenuItem6ActionPerformed
-        pageSwitch.switchPage(this, new CarDatabase(user));
-    }//GEN-LAST:event_jMenuItem6ActionPerformed
-
-    private void jMenuItem3ActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jMenuItem3ActionPerformed
-        pageSwitch.switchPage(this, new UserDatabase(user));
-    }//GEN-LAST:event_jMenuItem3ActionPerformed
-
-    private void SalesReportMenuActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_SalesReportMenuActionPerformed
-        pageSwitch.switchPage(this, new ChooseTime(user));
-    }//GEN-LAST:event_SalesReportMenuActionPerformed
-
-    private void PaymentManagementMenuActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_PaymentManagementMenuActionPerformed
-        pageSwitch.switchPage(this, new ManagePayment(user));
-    }//GEN-LAST:event_PaymentManagementMenuActionPerformed
-
-    private void ConfirmationMessageMenuActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_ConfirmationMessageMenuActionPerformed
-        pageSwitch.switchPage(this, new BookingManagement(user));
-    }//GEN-LAST:event_ConfirmationMessageMenuActionPerformed
-
-    private void jMenuItem5ActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jMenuItem5ActionPerformed
-        pageSwitch.switchPage(this, new AddNewCar(user));
-    }//GEN-LAST:event_jMenuItem5ActionPerformed
 
     /**
      * @param args the command line arguments
@@ -228,12 +400,20 @@ public class ServicesPage extends javax.swing.JFrame {
     }
 
     // Variables declaration - do not modify//GEN-BEGIN:variables
+    private javax.swing.JLabel AddCarButton;
+    private javax.swing.JLabel BookingManagementButton;
     private javax.swing.JMenuItem BookingMenu;
     private javax.swing.JMenuItem ConfirmationMessageMenu;
     private javax.swing.JMenu FinanceButton;
     private javax.swing.JMenuItem LogoutMenu;
     private javax.swing.JMenuItem PaymentManagementMenu;
     private javax.swing.JMenuItem SalesReportMenu;
+    private javax.swing.JLabel TitleImage;
+    private javax.swing.JLabel TitleText;
+    private javax.swing.JLabel backButton;
+    private javax.swing.JLabel jLabel1;
+    private javax.swing.JLabel jLabel2;
+    private javax.swing.JLabel jLabel3;
     private javax.swing.JMenu jMenu2;
     private javax.swing.JMenu jMenu3;
     private javax.swing.JMenu jMenu4;
@@ -242,5 +422,7 @@ public class ServicesPage extends javax.swing.JFrame {
     private javax.swing.JMenuItem jMenuItem3;
     private javax.swing.JMenuItem jMenuItem5;
     private javax.swing.JMenuItem jMenuItem6;
+    private javax.swing.JPanel jPanel1;
+    private javax.swing.JPanel jPanel2;
     // End of variables declaration//GEN-END:variables
 }
