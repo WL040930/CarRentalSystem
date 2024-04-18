@@ -467,43 +467,62 @@ public class AddNewCar extends javax.swing.JFrame {
     private void AddButtonActionPerformed(java.awt.event.ActionEvent evt) { 
         CarNameFieldActionPerformed(evt);
         NumberOfSeatsFieldActionPerformed(evt);
-        PriceFieldActionPerformed(evt);
         CarTypeComboBoxActionPerformed(evt);
         fileChooserActionPerformed(evt);
 
+        try {
+            price = Integer.parseInt(PriceField.getText());
+        } catch (NumberFormatException e) {
+            messageHandling.incorrectPrice();
+            PriceField.setText("");
+            return;
+        }
+
+        try {
+            seatsNumber = Integer.parseInt(NumberOfSeatsField.getText());
+        } catch (NumberFormatException e) {
+            messageHandling.incorrectSeats();
+            NumberOfSeatsField.setText("");
+            return; 
+        }
+
         carID = carID();
 
-        if (!carName.isEmpty() && seatsNumber > 0 && price > 0 && carType != null) {
-            if (image == null) {
-                image = new File("src/carrentalsystem/img/defaultCar.png");
-            }
-            if (validateFile(image)) {
-                dataIO.writeData(carID, fileLocation);
-                dataIO.writeData(carName, fileLocation);
-                dataIO.writeData(seatsNumber, fileLocation);
-                dataIO.writeData(price, fileLocation);
-                dataIO.writeData(carType, fileLocation);
-
-                if (image.exists()) {
-                    uniqueName = dataIO.moveFile(image, "src/carrentalsystem/img/");
-                } else {
-                    uniqueName = "defaultCar.png";
+        if (!carName.isEmpty() && carType != null) {
+            if (seatsNumber > 0 && price > 0) {
+                if (image == null) {
+                    image = new File("src/carrentalsystem/img/defaultCar.png");
                 }
+                if (validateFile(image)) {
+                    dataIO.writeData(carID, fileLocation);
+                    dataIO.writeData(carName, fileLocation);
+                    dataIO.writeData(seatsNumber, fileLocation);
+                    dataIO.writeData(price, fileLocation);
+                    dataIO.writeData(carType, fileLocation);
 
-                dataIO.writeData(uniqueName, fileLocation);
-                
-                dataIO.writeData("", fileLocation);
-                JOptionPane.showMessageDialog(null, "Car added successfully");
-                
-                CarNameField.setText(null);
-                NumberOfSeatsField.setText(null);
-                PriceField.setText(null);
-                CarTypeComboBox.setSelectedIndex(0);
-                filePathField.setText("No file is chosen.");
-                displayImageField.setIcon(null);
-                
+                    if (image.exists()) {
+                        uniqueName = dataIO.moveFile(image, "src/carrentalsystem/img/");
+                    } else {
+                        uniqueName = "defaultCar.png";
+                    }
+
+                    dataIO.writeData(uniqueName, fileLocation);
+                    
+                    dataIO.writeData("", fileLocation);
+                    JOptionPane.showMessageDialog(null, "Car added successfully");
+                    
+                    CarNameField.setText(null);
+                    NumberOfSeatsField.setText(null);
+                    PriceField.setText(null);
+                    CarTypeComboBox.setSelectedIndex(0);
+                    filePathField.setText("No file is chosen.");
+                    displayImageField.setIcon(null);
+                    
+                } else {
+                    messageHandling.incorrectImage();
+                }
             } else {
-                messageHandling.incorrectImage();
+                JOptionPane.showMessageDialog(null, "Please make sure price and number of seats are positive numbers.");
             }
         } else {
             messageHandling.incompletedData();
@@ -522,21 +541,11 @@ public class AddNewCar extends javax.swing.JFrame {
     }
 
     private void PriceFieldActionPerformed(java.awt.event.ActionEvent evt) {
-        try {
-            price = Integer.parseInt(PriceField.getText());
-        } catch (NumberFormatException e) {
-            messageHandling.incorrectPrice();
-            PriceField.setText("");
-        }
+
     }                                          
 
     private void NumberOfSeatsFieldActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_NumberOfSeatsFieldActionPerformed
-        try {
-            seatsNumber = Integer.parseInt(NumberOfSeatsField.getText());
-        } catch (NumberFormatException e) {
-            messageHandling.incorrectSeats();
-            NumberOfSeatsField.setText("");
-        }
+
     }//GEN-LAST:event_NumberOfSeatsFieldActionPerformed
 
     private void CarTypeComboBoxActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_CarTypeComboBoxActionPerformed
