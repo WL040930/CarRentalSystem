@@ -3,9 +3,9 @@ admin@gmail.com
 admin
 admin
 
-username
+useruser
 user@gmail.com
-a
+password
 customer
 
 testUser
