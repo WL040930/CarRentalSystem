@@ -192,6 +192,7 @@ public class BookingManagement extends javax.swing.JFrame {
                 .addContainerGap(86, Short.MAX_VALUE))
         );
 
+        EndDateField.setFont(new java.awt.Font("Bahnschrift", 0, 14)); // NOI18N
         EndDateField.setText("");
 
         jLabel7.setFont(new java.awt.Font("Bahnschrift", 1, 18)); // NOI18N
@@ -200,10 +201,15 @@ public class BookingManagement extends javax.swing.JFrame {
         jLabel2.setFont(new java.awt.Font("Bahnschrift", 1, 18)); // NOI18N
         jLabel2.setText("Booking ID:");
 
+        DurationField.setFont(new java.awt.Font("Bahnschrift", 0, 14)); // NOI18N
         DurationField.setText("");
 
+        BookingIdField.setFont(new java.awt.Font("Bahnschrift", 0, 14)); // NOI18N
         BookingIdField.setText("");
 
+        ApproveButton.setBackground(new java.awt.Color(6, 26, 35));
+        ApproveButton.setFont(new java.awt.Font("Bahnschrift", 1, 18)); // NOI18N
+        ApproveButton.setForeground(new java.awt.Color(255, 255, 255));
         ApproveButton.setText("Approve");
         ApproveButton.addActionListener(new java.awt.event.ActionListener() {
             public void actionPerformed(java.awt.event.ActionEvent evt) {
@@ -214,6 +220,9 @@ public class BookingManagement extends javax.swing.JFrame {
         jLabel3.setFont(new java.awt.Font("Bahnschrift", 1, 18)); // NOI18N
         jLabel3.setText("User Email: ");
 
+        RejectButton.setBackground(new java.awt.Color(6, 26, 35));
+        RejectButton.setFont(new java.awt.Font("Bahnschrift", 1, 18)); // NOI18N
+        RejectButton.setForeground(new java.awt.Color(255, 255, 255));
         RejectButton.setText("Reject");
         RejectButton.addActionListener(new java.awt.event.ActionListener() {
             public void actionPerformed(java.awt.event.ActionEvent evt) {
@@ -221,6 +230,7 @@ public class BookingManagement extends javax.swing.JFrame {
             }
         });
 
+        UserEmailField.setFont(new java.awt.Font("Bahnschrift", 0, 14)); // NOI18N
         UserEmailField.setText("");
 
         jLabel8.setFont(new java.awt.Font("Bahnschrift", 1, 18)); // NOI18N
@@ -229,17 +239,20 @@ public class BookingManagement extends javax.swing.JFrame {
         jLabel4.setFont(new java.awt.Font("Bahnschrift", 1, 18)); // NOI18N
         jLabel4.setText("Car Booked:");
 
+        carPlateField.setFont(new java.awt.Font("Bahnschrift", 0, 14)); // NOI18N
         carPlateField.addActionListener(new java.awt.event.ActionListener() {
             public void actionPerformed(java.awt.event.ActionEvent evt) {
                 carPlateFieldActionPerformed(evt);
             }
         });
 
+        CarNameField.setFont(new java.awt.Font("Bahnschrift", 0, 14)); // NOI18N
         CarNameField.setText("");
 
         jLabel5.setFont(new java.awt.Font("Bahnschrift", 1, 18)); // NOI18N
         jLabel5.setText("Start Date: ");
 
+        StartDateField.setFont(new java.awt.Font("Bahnschrift", 0, 14)); // NOI18N
         StartDateField.setText("");
 
         jLabel6.setFont(new java.awt.Font("Bahnschrift", 1, 18)); // NOI18N
@@ -293,11 +306,11 @@ public class BookingManagement extends javax.swing.JFrame {
                         .addComponent(backButton, javax.swing.GroupLayout.PREFERRED_SIZE, 60, javax.swing.GroupLayout.PREFERRED_SIZE)
                         .addGap(42, 42, 42))
                     .addGroup(jPanel1Layout.createSequentialGroup()
-                        .addGap(98, 98, 98)
-                        .addComponent(RejectButton, javax.swing.GroupLayout.PREFERRED_SIZE, 83, javax.swing.GroupLayout.PREFERRED_SIZE)
+                        .addGap(82, 82, 82)
+                        .addComponent(RejectButton, javax.swing.GroupLayout.PREFERRED_SIZE, 94, javax.swing.GroupLayout.PREFERRED_SIZE)
                         .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
-                        .addComponent(ApproveButton, javax.swing.GroupLayout.PREFERRED_SIZE, 95, javax.swing.GroupLayout.PREFERRED_SIZE)
-                        .addGap(89, 89, 89))))
+                        .addComponent(ApproveButton)
+                        .addGap(83, 83, 83))))
         );
         jPanel1Layout.setVerticalGroup(
             jPanel1Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
@@ -335,12 +348,12 @@ public class BookingManagement extends javax.swing.JFrame {
                         .addComponent(jLabel8)
                         .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
                         .addComponent(carPlateField, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
-                        .addGap(30, 128, Short.MAX_VALUE))
+                        .addGap(30, 134, Short.MAX_VALUE))
                     .addGroup(javax.swing.GroupLayout.Alignment.TRAILING, jPanel1Layout.createSequentialGroup()
                         .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
                         .addGroup(jPanel1Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
-                            .addComponent(RejectButton)
-                            .addComponent(ApproveButton))
+                            .addComponent(RejectButton, javax.swing.GroupLayout.PREFERRED_SIZE, 38, javax.swing.GroupLayout.PREFERRED_SIZE)
+                            .addComponent(ApproveButton, javax.swing.GroupLayout.PREFERRED_SIZE, 38, javax.swing.GroupLayout.PREFERRED_SIZE))
                         .addGap(41, 41, 41))))
         );
 
@@ -497,6 +510,13 @@ public class BookingManagement extends javax.swing.JFrame {
 
     private void ApproveButtonActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_ApproveButtonActionPerformed
         carPlateFieldActionPerformed(evt);   
+        carPlate = carPlateField.getText().trim();
+        if (!carPlate.matches("^[A-Z]{3}[0-9]{3,4}$")) {
+            JOptionPane.showMessageDialog(null, "Please enter a valid car plate number in the format ABC123 or ABC1234.");
+            carPlateField.setText(""); // Clear the car plate field
+            return; // Exit the method or block to prevent further processing
+        }
+
         if (!BookingIdField.getText().isEmpty()) {
             int rowNumberInBooking = dataIO.rowNumber(BookingIdField.getText(), 1, BOOKING_FILE, 9);
             int rowNumberOfStatus = rowNumberInBooking + 5;
