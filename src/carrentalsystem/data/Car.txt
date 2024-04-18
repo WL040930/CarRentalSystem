@@ -19,3 +19,24 @@ Axia
 Compact
 defaultcar.png
 
+4
+Tesla
+5
+1000
+Luxury
+d8f9d214-0b6f-4ee2-b2ab-ae7b3648f290.png
+
+5
+BIG VANS
+20
+500
+Vans
+3d2e6d3a-f772-4cbd-a3bf-5b245a2977ff.png
+
+6
+small vanss
+10
+400
+Vans
+f82b2bba-07fd-4658-bdf0-28632595fdae.png
+
