@@ -10,6 +10,11 @@ import javax.swing.event.ListSelectionEvent;
 import javax.swing.event.ListSelectionListener;
 import java.util.List;
 import java.time.LocalDate;
+import javax.swing.ImageIcon;
+import java.awt.Image;
+import java.awt.Font;
+import java.awt.Color;
+import javax.swing.table.JTableHeader;
 
 public class ManagePayment extends javax.swing.JFrame {
 
@@ -64,6 +69,27 @@ public class ManagePayment extends javax.swing.JFrame {
                 }
             }
         });
+
+        ImageIcon imageIcon2 = new ImageIcon(getClass().getResource("/carrentalsystem/img/backButton.png"));
+        Image scaledImage2 = imageIcon2.getImage().getScaledInstance(60, 60, Image.SCALE_SMOOTH);
+        backButton.setIcon(new ImageIcon(scaledImage2));
+
+        backButton.addMouseListener(new java.awt.event.MouseAdapter() {
+            public void mouseClicked(java.awt.event.MouseEvent evt) {
+                pageSwitch.switchPage(ManagePayment.this, new FinancePage(user));
+            }
+        }); 
+
+        ImageIcon imageIcon = new ImageIcon(getClass().getResource("/carrentalsystem/img/logo.jpeg"));
+        Image scaledImage = imageIcon.getImage().getScaledInstance(73, 73, Image.SCALE_SMOOTH);
+        TitleImage.setIcon(new ImageIcon(scaledImage));
+
+        JTableHeader header = PaymentTable.getTableHeader();
+        header.setFont(new Font("Bahnschrift", Font.BOLD, 14));
+        header.setForeground(Color.WHITE);
+        header.setBackground(new Color(6, 26, 35)); // Dark background color
+        header.setReorderingAllowed(false); // Disable column reordering
+        
     }
 
     /**
@@ -75,29 +101,49 @@ public class ManagePayment extends javax.swing.JFrame {
     // <editor-fold defaultstate="collapsed" desc="Generated Code">//GEN-BEGIN:initComponents
     private void initComponents() {
 
+        jPanel1 = new javax.swing.JPanel();
+        jPanel2 = new javax.swing.JPanel();
         jScrollPane1 = new javax.swing.JScrollPane();
         PaymentTable = new javax.swing.JTable();
-        jLabel1 = new javax.swing.JLabel();
-        BookingIdField = new javax.swing.JLabel();
-        jLabel2 = new javax.swing.JLabel();
-        EmailField = new javax.swing.JLabel();
-        jLabel3 = new javax.swing.JLabel();
-        CarNameField = new javax.swing.JLabel();
-        jLabel4 = new javax.swing.JLabel();
+        TitleImage = new javax.swing.JLabel();
+        jLabel8 = new javax.swing.JLabel();
         StartDateField = new javax.swing.JLabel();
         jLabel5 = new javax.swing.JLabel();
         EndDateField = new javax.swing.JLabel();
         jLabel6 = new javax.swing.JLabel();
+        jLabel1 = new javax.swing.JLabel();
         DurationField = new javax.swing.JLabel();
+        BookingIdField = new javax.swing.JLabel();
         jLabel7 = new javax.swing.JLabel();
+        jLabel2 = new javax.swing.JLabel();
         TotalPaymentField = new javax.swing.JLabel();
+        EmailField = new javax.swing.JLabel();
         PaidButton = new javax.swing.JButton();
+        jLabel3 = new javax.swing.JLabel();
         UnpaidButton = new javax.swing.JButton();
+        CarNameField = new javax.swing.JLabel();
+        jLabel4 = new javax.swing.JLabel();
+        backButton = new javax.swing.JLabel();
         jMenuBar1 = new javax.swing.JMenuBar();
-        jMenu1 = new javax.swing.JMenu();
+        jMenu4 = new javax.swing.JMenu();
+        jMenuItem5 = new javax.swing.JMenuItem();
+        ConfirmationMessageMenu = new javax.swing.JMenuItem();
+        FinanceButton = new javax.swing.JMenu();
+        PaymentManagementMenu = new javax.swing.JMenuItem();
+        SalesReportMenu = new javax.swing.JMenuItem();
+        jMenu3 = new javax.swing.JMenu();
+        jMenuItem3 = new javax.swing.JMenuItem();
+        jMenuItem6 = new javax.swing.JMenuItem();
+        BookingMenu = new javax.swing.JMenuItem();
         jMenu2 = new javax.swing.JMenu();
+        jMenuItem1 = new javax.swing.JMenuItem();
+        LogoutMenu = new javax.swing.JMenuItem();
 
         setDefaultCloseOperation(javax.swing.WindowConstants.EXIT_ON_CLOSE);
+
+        jPanel1.setBackground(new java.awt.Color(255, 255, 255));
+
+        jPanel2.setBackground(new java.awt.Color(6, 26, 35));
 
         PaymentTable.setModel(new javax.swing.table.DefaultTableModel(
             new Object [][] {
@@ -112,34 +158,72 @@ public class ManagePayment extends javax.swing.JFrame {
         ));
         jScrollPane1.setViewportView(PaymentTable);
 
-        jLabel1.setText("Booking ID: ");
+        TitleImage.setText("");
 
-        BookingIdField.setText("");
+        jLabel8.setFont(new java.awt.Font("Bahnschrift", 1, 24)); // NOI18N
+        jLabel8.setForeground(new java.awt.Color(255, 255, 255));
+        jLabel8.setText("Payment Management");
 
-        jLabel2.setText("Email: ");
+        javax.swing.GroupLayout jPanel2Layout = new javax.swing.GroupLayout(jPanel2);
+        jPanel2.setLayout(jPanel2Layout);
+        jPanel2Layout.setHorizontalGroup(
+            jPanel2Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
+            .addGroup(jPanel2Layout.createSequentialGroup()
+                .addGap(28, 28, 28)
+                .addGroup(jPanel2Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
+                    .addGroup(jPanel2Layout.createSequentialGroup()
+                        .addComponent(TitleImage, javax.swing.GroupLayout.PREFERRED_SIZE, 60, javax.swing.GroupLayout.PREFERRED_SIZE)
+                        .addGap(18, 18, 18)
+                        .addComponent(jLabel8, javax.swing.GroupLayout.PREFERRED_SIZE, 261, javax.swing.GroupLayout.PREFERRED_SIZE))
+                    .addComponent(jScrollPane1, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE))
+                .addContainerGap(35, Short.MAX_VALUE))
+        );
+        jPanel2Layout.setVerticalGroup(
+            jPanel2Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
+            .addGroup(javax.swing.GroupLayout.Alignment.TRAILING, jPanel2Layout.createSequentialGroup()
+                .addGap(19, 19, 19)
+                .addGroup(jPanel2Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
+                    .addComponent(TitleImage, javax.swing.GroupLayout.DEFAULT_SIZE, 60, Short.MAX_VALUE)
+                    .addComponent(jLabel8, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE))
+                .addGap(18, 18, 18)
+                .addComponent(jScrollPane1, javax.swing.GroupLayout.PREFERRED_SIZE, 379, javax.swing.GroupLayout.PREFERRED_SIZE)
+                .addGap(49, 49, 49))
+        );
 
-        EmailField.setText("");
-
-        jLabel3.setText("Car Booked: ");
-
-        CarNameField.setText("");
-
-        jLabel4.setText("Start Date: ");
-
+        StartDateField.setFont(new java.awt.Font("Bahnschrift", 0, 14)); // NOI18N
         StartDateField.setText("");
 
+        jLabel5.setFont(new java.awt.Font("Bahnschrift", 1, 18)); // NOI18N
         jLabel5.setText("End Date: ");
 
+        EndDateField.setFont(new java.awt.Font("Bahnschrift", 0, 14)); // NOI18N
         EndDateField.setText("");
 
+        jLabel6.setFont(new java.awt.Font("Bahnschrift", 1, 18)); // NOI18N
         jLabel6.setText("Duration: ");
 
+        jLabel1.setFont(new java.awt.Font("Bahnschrift", 1, 18)); // NOI18N
+        jLabel1.setText("Booking ID: ");
+
+        DurationField.setFont(new java.awt.Font("Bahnschrift", 0, 14)); // NOI18N
         DurationField.setText("");
 
+        BookingIdField.setFont(new java.awt.Font("Bahnschrift", 0, 14)); // NOI18N
+        BookingIdField.setText("");
+
+        jLabel7.setFont(new java.awt.Font("Bahnschrift", 1, 18)); // NOI18N
         jLabel7.setText("Total Payment: ");
 
+        jLabel2.setFont(new java.awt.Font("Bahnschrift", 1, 18)); // NOI18N
+        jLabel2.setText("Email: ");
+
+        TotalPaymentField.setFont(new java.awt.Font("Bahnschrift", 0, 14)); // NOI18N
         TotalPaymentField.setText("");
 
+        EmailField.setFont(new java.awt.Font("Bahnschrift", 0, 14)); // NOI18N
+        EmailField.setText("");
+
+        PaidButton.setFont(new java.awt.Font("Bahnschrift", 1, 18)); // NOI18N
         PaidButton.setText("Paid");
         PaidButton.addActionListener(new java.awt.event.ActionListener() {
             public void actionPerformed(java.awt.event.ActionEvent evt) {
@@ -147,6 +231,10 @@ public class ManagePayment extends javax.swing.JFrame {
             }
         });
 
+        jLabel3.setFont(new java.awt.Font("Bahnschrift", 1, 18)); // NOI18N
+        jLabel3.setText("Car Booked: ");
+
+        UnpaidButton.setFont(new java.awt.Font("Bahnschrift", 1, 18)); // NOI18N
         UnpaidButton.setText("Unpaid");
         UnpaidButton.addActionListener(new java.awt.event.ActionListener() {
             public void actionPerformed(java.awt.event.ActionEvent evt) {
@@ -154,10 +242,220 @@ public class ManagePayment extends javax.swing.JFrame {
             }
         });
 
-        jMenu1.setText("File");
-        jMenuBar1.add(jMenu1);
+        CarNameField.setFont(new java.awt.Font("Bahnschrift", 0, 14)); // NOI18N
+        CarNameField.setText("");
 
-        jMenu2.setText("Edit");
+        jLabel4.setFont(new java.awt.Font("Bahnschrift", 1, 18)); // NOI18N
+        jLabel4.setText("Start Date: ");
+
+        backButton.setText("");
+        backButton.setCursor(new java.awt.Cursor(java.awt.Cursor.HAND_CURSOR));
+
+        javax.swing.GroupLayout jPanel1Layout = new javax.swing.GroupLayout(jPanel1);
+        jPanel1.setLayout(jPanel1Layout);
+        jPanel1Layout.setHorizontalGroup(
+            jPanel1Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
+            .addGroup(jPanel1Layout.createSequentialGroup()
+                .addComponent(jPanel2, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
+                .addGroup(jPanel1Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
+                    .addGroup(jPanel1Layout.createSequentialGroup()
+                        .addGap(67, 67, 67)
+                        .addGroup(jPanel1Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
+                            .addGroup(jPanel1Layout.createSequentialGroup()
+                                .addGroup(jPanel1Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
+                                    .addGroup(jPanel1Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING, false)
+                                        .addComponent(EndDateField, javax.swing.GroupLayout.DEFAULT_SIZE, 141, Short.MAX_VALUE)
+                                        .addComponent(jLabel5, javax.swing.GroupLayout.PREFERRED_SIZE, 85, javax.swing.GroupLayout.PREFERRED_SIZE)
+                                        .addComponent(jLabel1)
+                                        .addComponent(jLabel4)
+                                        .addComponent(BookingIdField, javax.swing.GroupLayout.PREFERRED_SIZE, 102, javax.swing.GroupLayout.PREFERRED_SIZE)
+                                        .addComponent(StartDateField, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE))
+                                    .addGroup(jPanel1Layout.createSequentialGroup()
+                                        .addGap(11, 11, 11)
+                                        .addComponent(UnpaidButton, javax.swing.GroupLayout.PREFERRED_SIZE, 97, javax.swing.GroupLayout.PREFERRED_SIZE)))
+                                .addGap(85, 85, 85)
+                                .addGroup(jPanel1Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
+                                    .addGroup(jPanel1Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.TRAILING, false)
+                                        .addGroup(jPanel1Layout.createSequentialGroup()
+                                            .addComponent(jLabel6, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
+                                            .addGap(2, 2, 2))
+                                        .addComponent(jLabel3, javax.swing.GroupLayout.Alignment.LEADING, javax.swing.GroupLayout.DEFAULT_SIZE, 110, Short.MAX_VALUE)
+                                        .addComponent(CarNameField, javax.swing.GroupLayout.Alignment.LEADING, javax.swing.GroupLayout.PREFERRED_SIZE, 94, javax.swing.GroupLayout.PREFERRED_SIZE)
+                                        .addComponent(PaidButton, javax.swing.GroupLayout.Alignment.LEADING, javax.swing.GroupLayout.PREFERRED_SIZE, 97, javax.swing.GroupLayout.PREFERRED_SIZE))
+                                    .addComponent(jLabel7)
+                                    .addComponent(DurationField, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
+                                    .addComponent(TotalPaymentField, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE))
+                                .addGap(61, 61, 61))
+                            .addGroup(jPanel1Layout.createSequentialGroup()
+                                .addComponent(jLabel2, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
+                                .addGap(116, 116, 116))
+                            .addComponent(EmailField, javax.swing.GroupLayout.PREFERRED_SIZE, 218, javax.swing.GroupLayout.PREFERRED_SIZE)))
+                    .addGroup(javax.swing.GroupLayout.Alignment.TRAILING, jPanel1Layout.createSequentialGroup()
+                        .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
+                        .addComponent(backButton, javax.swing.GroupLayout.PREFERRED_SIZE, 60, javax.swing.GroupLayout.PREFERRED_SIZE)
+                        .addGap(35, 35, 35))))
+        );
+        jPanel1Layout.setVerticalGroup(
+            jPanel1Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
+            .addComponent(jPanel2, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
+            .addGroup(javax.swing.GroupLayout.Alignment.TRAILING, jPanel1Layout.createSequentialGroup()
+                .addGap(25, 25, 25)
+                .addComponent(backButton, javax.swing.GroupLayout.PREFERRED_SIZE, 60, javax.swing.GroupLayout.PREFERRED_SIZE)
+                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
+                .addGroup(jPanel1Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
+                    .addComponent(jLabel3)
+                    .addComponent(jLabel1))
+                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
+                .addGroup(jPanel1Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
+                    .addComponent(BookingIdField)
+                    .addComponent(CarNameField))
+                .addGap(40, 40, 40)
+                .addComponent(jLabel2)
+                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
+                .addComponent(EmailField)
+                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
+                .addGroup(jPanel1Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
+                    .addComponent(jLabel6)
+                    .addComponent(jLabel4))
+                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
+                .addGroup(jPanel1Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
+                    .addComponent(DurationField)
+                    .addComponent(StartDateField))
+                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
+                .addGroup(jPanel1Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
+                    .addComponent(jLabel5)
+                    .addComponent(jLabel7))
+                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
+                .addGroup(jPanel1Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
+                    .addComponent(EndDateField)
+                    .addComponent(TotalPaymentField))
+                .addGap(51, 51, 51)
+                .addGroup(jPanel1Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
+                    .addComponent(PaidButton, javax.swing.GroupLayout.PREFERRED_SIZE, 37, javax.swing.GroupLayout.PREFERRED_SIZE)
+                    .addComponent(UnpaidButton, javax.swing.GroupLayout.PREFERRED_SIZE, 37, javax.swing.GroupLayout.PREFERRED_SIZE))
+                .addGap(41, 41, 41))
+        );
+
+        jMenuBar1.setBackground(new java.awt.Color(6, 26, 35));
+        jMenuBar1.setForeground(new java.awt.Color(255, 255, 255));
+
+        jMenu4.setForeground(new java.awt.Color(255, 255, 255));
+        jMenu4.setText("Services");
+
+        jMenuItem5.setBackground(new java.awt.Color(6, 26, 35));
+        jMenuItem5.setFont(new java.awt.Font("Bahnschrift", 0, 14)); // NOI18N
+        jMenuItem5.setForeground(new java.awt.Color(255, 255, 255));
+        jMenuItem5.setText("Add New Car");
+        jMenuItem5.addActionListener(new java.awt.event.ActionListener() {
+            public void actionPerformed(java.awt.event.ActionEvent evt) {
+                jMenuItem5ActionPerformed(evt);
+            }
+        });
+        jMenu4.add(jMenuItem5);
+
+        ConfirmationMessageMenu.setBackground(new java.awt.Color(6, 26, 35));
+        ConfirmationMessageMenu.setFont(new java.awt.Font("Bahnschrift", 0, 14)); // NOI18N
+        ConfirmationMessageMenu.setForeground(new java.awt.Color(255, 255, 255));
+        ConfirmationMessageMenu.setText("Booking Management");
+        ConfirmationMessageMenu.addActionListener(new java.awt.event.ActionListener() {
+            public void actionPerformed(java.awt.event.ActionEvent evt) {
+                ConfirmationMessageMenuActionPerformed(evt);
+            }
+        });
+        jMenu4.add(ConfirmationMessageMenu);
+
+        jMenuBar1.add(jMenu4);
+
+        FinanceButton.setForeground(new java.awt.Color(255, 255, 255));
+        FinanceButton.setText("Finance");
+
+        PaymentManagementMenu.setBackground(new java.awt.Color(6, 26, 35));
+        PaymentManagementMenu.setFont(new java.awt.Font("Bahnschrift", 0, 14)); // NOI18N
+        PaymentManagementMenu.setForeground(new java.awt.Color(255, 255, 255));
+        PaymentManagementMenu.setText("Payment Management");
+        PaymentManagementMenu.addActionListener(new java.awt.event.ActionListener() {
+            public void actionPerformed(java.awt.event.ActionEvent evt) {
+                PaymentManagementMenuActionPerformed(evt);
+            }
+        });
+        FinanceButton.add(PaymentManagementMenu);
+
+        SalesReportMenu.setBackground(new java.awt.Color(6, 26, 35));
+        SalesReportMenu.setFont(new java.awt.Font("Bahnschrift", 0, 14)); // NOI18N
+        SalesReportMenu.setForeground(new java.awt.Color(255, 255, 255));
+        SalesReportMenu.setText("Sales Reports");
+        SalesReportMenu.addActionListener(new java.awt.event.ActionListener() {
+            public void actionPerformed(java.awt.event.ActionEvent evt) {
+                SalesReportMenuActionPerformed(evt);
+            }
+        });
+        FinanceButton.add(SalesReportMenu);
+
+        jMenuBar1.add(FinanceButton);
+
+        jMenu3.setForeground(new java.awt.Color(255, 255, 255));
+        jMenu3.setText("Database");
+
+        jMenuItem3.setBackground(new java.awt.Color(6, 26, 35));
+        jMenuItem3.setFont(new java.awt.Font("Bahnschrift", 0, 14)); // NOI18N
+        jMenuItem3.setForeground(new java.awt.Color(255, 255, 255));
+        jMenuItem3.setText("User Database");
+        jMenuItem3.addActionListener(new java.awt.event.ActionListener() {
+            public void actionPerformed(java.awt.event.ActionEvent evt) {
+                jMenuItem3ActionPerformed(evt);
+            }
+        });
+        jMenu3.add(jMenuItem3);
+
+        jMenuItem6.setBackground(new java.awt.Color(6, 26, 35));
+        jMenuItem6.setFont(new java.awt.Font("Bahnschrift", 0, 14)); // NOI18N
+        jMenuItem6.setForeground(new java.awt.Color(255, 255, 255));
+        jMenuItem6.setText("Car Database");
+        jMenuItem6.addActionListener(new java.awt.event.ActionListener() {
+            public void actionPerformed(java.awt.event.ActionEvent evt) {
+                jMenuItem6ActionPerformed(evt);
+            }
+        });
+        jMenu3.add(jMenuItem6);
+
+        BookingMenu.setBackground(new java.awt.Color(6, 26, 35));
+        BookingMenu.setFont(new java.awt.Font("Bahnschrift", 0, 14)); // NOI18N
+        BookingMenu.setForeground(new java.awt.Color(255, 255, 255));
+        BookingMenu.setText("Booking Database");
+        BookingMenu.addActionListener(new java.awt.event.ActionListener() {
+            public void actionPerformed(java.awt.event.ActionEvent evt) {
+                BookingMenuActionPerformed(evt);
+            }
+        });
+        jMenu3.add(BookingMenu);
+
+        jMenuBar1.add(jMenu3);
+
+        jMenu2.setForeground(new java.awt.Color(255, 255, 255));
+        jMenu2.setText("Settings");
+
+        jMenuItem1.setBackground(new java.awt.Color(6, 26, 35));
+        jMenuItem1.setFont(new java.awt.Font("Bahnschrift", 0, 14)); // NOI18N
+        jMenuItem1.setForeground(new java.awt.Color(255, 255, 255));
+        jMenuItem1.setText("Account Settings");
+        jMenuItem1.addActionListener(new java.awt.event.ActionListener() {
+            public void actionPerformed(java.awt.event.ActionEvent evt) {
+                jMenuItem1ActionPerformed(evt);
+            }
+        });
+        jMenu2.add(jMenuItem1);
+
+        LogoutMenu.setBackground(new java.awt.Color(6, 26, 35));
+        LogoutMenu.setFont(new java.awt.Font("Bahnschrift", 0, 14)); // NOI18N
+        LogoutMenu.setForeground(new java.awt.Color(255, 255, 255));
+        LogoutMenu.setText("Logout");
+        LogoutMenu.addActionListener(new java.awt.event.ActionListener() {
+            public void actionPerformed(java.awt.event.ActionEvent evt) {
+                LogoutMenuActionPerformed(evt);
+            }
+        });
+        jMenu2.add(LogoutMenu);
+
         jMenuBar1.add(jMenu2);
 
         setJMenuBar(jMenuBar1);
@@ -166,78 +464,11 @@ public class ManagePayment extends javax.swing.JFrame {
         getContentPane().setLayout(layout);
         layout.setHorizontalGroup(
             layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-            .addGroup(layout.createSequentialGroup()
-                .addGap(38, 38, 38)
-                .addComponent(jScrollPane1, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
-                .addGap(76, 76, 76)
-                .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.TRAILING)
-                    .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-                        .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING, false)
-                            .addComponent(jLabel1, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
-                            .addComponent(BookingIdField, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
-                            .addComponent(jLabel2, javax.swing.GroupLayout.PREFERRED_SIZE, 43, javax.swing.GroupLayout.PREFERRED_SIZE)
-                            .addComponent(EmailField, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE))
-                        .addComponent(jLabel4)
-                        .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.TRAILING, false)
-                            .addComponent(StartDateField, javax.swing.GroupLayout.Alignment.LEADING, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
-                            .addComponent(EndDateField, javax.swing.GroupLayout.Alignment.LEADING, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
-                            .addComponent(jLabel5, javax.swing.GroupLayout.Alignment.LEADING, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)))
-                    .addGroup(layout.createSequentialGroup()
-                        .addComponent(UnpaidButton, javax.swing.GroupLayout.PREFERRED_SIZE, 83, javax.swing.GroupLayout.PREFERRED_SIZE)
-                        .addGap(8, 8, 8)))
-                .addGap(124, 124, 124)
-                .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-                    .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING, false)
-                        .addComponent(jLabel3, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
-                        .addComponent(DurationField, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
-                        .addComponent(jLabel6, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
-                        .addComponent(jLabel7, javax.swing.GroupLayout.PREFERRED_SIZE, 1, Short.MAX_VALUE))
-                    .addComponent(PaidButton, javax.swing.GroupLayout.PREFERRED_SIZE, 83, javax.swing.GroupLayout.PREFERRED_SIZE)
-                    .addComponent(TotalPaymentField, javax.swing.GroupLayout.PREFERRED_SIZE, 67, javax.swing.GroupLayout.PREFERRED_SIZE)
-                    .addComponent(CarNameField, javax.swing.GroupLayout.PREFERRED_SIZE, 94, javax.swing.GroupLayout.PREFERRED_SIZE))
-                .addContainerGap(125, Short.MAX_VALUE))
+            .addComponent(jPanel1, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
         );
         layout.setVerticalGroup(
             layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-            .addGroup(javax.swing.GroupLayout.Alignment.TRAILING, layout.createSequentialGroup()
-                .addContainerGap(96, Short.MAX_VALUE)
-                .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING, false)
-                    .addGroup(layout.createSequentialGroup()
-                        .addComponent(jScrollPane1, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
-                        .addGap(25, 25, 25))
-                    .addGroup(layout.createSequentialGroup()
-                        .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
-                            .addComponent(jLabel1)
-                            .addComponent(jLabel3))
-                        .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
-                        .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
-                            .addComponent(BookingIdField)
-                            .addComponent(CarNameField))
-                        .addGap(33, 33, 33)
-                        .addComponent(jLabel2)
-                        .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
-                        .addComponent(EmailField)
-                        .addGap(50, 50, 50)
-                        .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
-                            .addComponent(jLabel4)
-                            .addComponent(jLabel6))
-                        .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
-                        .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
-                            .addComponent(StartDateField)
-                            .addComponent(DurationField))
-                        .addGap(34, 34, 34)
-                        .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
-                            .addComponent(jLabel5)
-                            .addComponent(jLabel7))
-                        .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
-                        .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
-                            .addComponent(EndDateField)
-                            .addComponent(TotalPaymentField))
-                        .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
-                        .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
-                            .addComponent(PaidButton)
-                            .addComponent(UnpaidButton))
-                        .addGap(49, 49, 49))))
+            .addComponent(jPanel1, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
         );
 
         pack();
@@ -260,6 +491,45 @@ public class ManagePayment extends javax.swing.JFrame {
             JOptionPane.showMessageDialog(this, "Please select a booking to mark as paid.");
         }
     }//GEN-LAST:event_PaidButtonActionPerformed
+
+    private void jMenuItem5ActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jMenuItem5ActionPerformed
+        pageSwitch.switchPage(this, new AddNewCar(user));
+    }//GEN-LAST:event_jMenuItem5ActionPerformed
+
+    private void ConfirmationMessageMenuActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_ConfirmationMessageMenuActionPerformed
+        pageSwitch.switchPage(this, new BookingManagement(user));
+    }//GEN-LAST:event_ConfirmationMessageMenuActionPerformed
+
+    private void PaymentManagementMenuActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_PaymentManagementMenuActionPerformed
+        pageSwitch.switchPage(this, new ManagePayment(user));
+    }//GEN-LAST:event_PaymentManagementMenuActionPerformed
+
+    private void SalesReportMenuActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_SalesReportMenuActionPerformed
+        pageSwitch.switchPage(this, new ChooseTime(user));
+    }//GEN-LAST:event_SalesReportMenuActionPerformed
+
+    private void jMenuItem3ActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jMenuItem3ActionPerformed
+        pageSwitch.switchPage(this, new UserDatabase(user));
+    }//GEN-LAST:event_jMenuItem3ActionPerformed
+
+    private void jMenuItem6ActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jMenuItem6ActionPerformed
+        pageSwitch.switchPage(this, new CarDatabase(user));
+    }//GEN-LAST:event_jMenuItem6ActionPerformed
+
+    private void BookingMenuActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_BookingMenuActionPerformed
+        pageSwitch.switchPage(this, new BookingDatabase(user));
+    }//GEN-LAST:event_BookingMenuActionPerformed
+
+    private void jMenuItem1ActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jMenuItem1ActionPerformed
+        pageSwitch.switchPage(this, new manageOwnAccount(user));
+    }//GEN-LAST:event_jMenuItem1ActionPerformed
+
+    private void LogoutMenuActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_LogoutMenuActionPerformed
+        int dialogResult = javax.swing.JOptionPane.showConfirmDialog(null, "Are you sure you want to logout?", "Warning", javax.swing.JOptionPane.YES_NO_OPTION);
+        if (dialogResult == javax.swing.JOptionPane.YES_OPTION) {
+            pageSwitch.switchPage(this, new Login());
+        }
+    }//GEN-LAST:event_LogoutMenuActionPerformed
 
     private void populatePaymentTable(List<Booking> bookings) {
         model.setRowCount(0); // Clear existing table data
@@ -297,12 +567,6 @@ public class ManagePayment extends javax.swing.JFrame {
     
         PaymentTable.setModel(model);
     
-        // Allow row selection
-        PaymentTable.setRowSelectionAllowed(true);
-    
-        // Ensure that cell selection is disabled
-        PaymentTable.setCellSelectionEnabled(false);
-        PaymentTable.setColumnSelectionAllowed(false);
     }
 
     private void refreshPaymentTable() {
@@ -347,15 +611,23 @@ public class ManagePayment extends javax.swing.JFrame {
 
     // Variables declaration - do not modify//GEN-BEGIN:variables
     private javax.swing.JLabel BookingIdField;
+    private javax.swing.JMenuItem BookingMenu;
     private javax.swing.JLabel CarNameField;
+    private javax.swing.JMenuItem ConfirmationMessageMenu;
     private javax.swing.JLabel DurationField;
     private javax.swing.JLabel EmailField;
     private javax.swing.JLabel EndDateField;
+    private javax.swing.JMenu FinanceButton;
+    private javax.swing.JMenuItem LogoutMenu;
     private javax.swing.JButton PaidButton;
+    private javax.swing.JMenuItem PaymentManagementMenu;
     private javax.swing.JTable PaymentTable;
+    private javax.swing.JMenuItem SalesReportMenu;
     private javax.swing.JLabel StartDateField;
+    private javax.swing.JLabel TitleImage;
     private javax.swing.JLabel TotalPaymentField;
     private javax.swing.JButton UnpaidButton;
+    private javax.swing.JLabel backButton;
     private javax.swing.JLabel jLabel1;
     private javax.swing.JLabel jLabel2;
     private javax.swing.JLabel jLabel3;
@@ -363,9 +635,17 @@ public class ManagePayment extends javax.swing.JFrame {
     private javax.swing.JLabel jLabel5;
     private javax.swing.JLabel jLabel6;
     private javax.swing.JLabel jLabel7;
-    private javax.swing.JMenu jMenu1;
+    private javax.swing.JLabel jLabel8;
     private javax.swing.JMenu jMenu2;
+    private javax.swing.JMenu jMenu3;
+    private javax.swing.JMenu jMenu4;
     private javax.swing.JMenuBar jMenuBar1;
+    private javax.swing.JMenuItem jMenuItem1;
+    private javax.swing.JMenuItem jMenuItem3;
+    private javax.swing.JMenuItem jMenuItem5;
+    private javax.swing.JMenuItem jMenuItem6;
+    private javax.swing.JPanel jPanel1;
+    private javax.swing.JPanel jPanel2;
     private javax.swing.JScrollPane jScrollPane1;
     // End of variables declaration//GEN-END:variables
 }

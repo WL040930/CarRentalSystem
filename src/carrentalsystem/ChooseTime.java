@@ -33,17 +33,25 @@ public class ChooseTime extends javax.swing.JFrame {
     // <editor-fold defaultstate="collapsed" desc="Generated Code">//GEN-BEGIN:initComponents
     private void initComponents() {
 
-        ChooserComboBox = new javax.swing.JComboBox<>();
+        jPanel1 = new javax.swing.JPanel();
         ViewButton = new javax.swing.JButton();
+        ChooserComboBox = new javax.swing.JComboBox<>();
+        jMenuBar1 = new javax.swing.JMenuBar();
+        jMenu4 = new javax.swing.JMenu();
+        jMenuItem5 = new javax.swing.JMenuItem();
+        ConfirmationMessageMenu = new javax.swing.JMenuItem();
+        FinanceButton = new javax.swing.JMenu();
+        PaymentManagementMenu = new javax.swing.JMenuItem();
+        SalesReportMenu = new javax.swing.JMenuItem();
+        jMenu3 = new javax.swing.JMenu();
+        jMenuItem3 = new javax.swing.JMenuItem();
+        jMenuItem6 = new javax.swing.JMenuItem();
+        BookingMenu = new javax.swing.JMenuItem();
+        jMenu2 = new javax.swing.JMenu();
+        jMenuItem1 = new javax.swing.JMenuItem();
+        LogoutMenu = new javax.swing.JMenuItem();
 
         setDefaultCloseOperation(javax.swing.WindowConstants.EXIT_ON_CLOSE);
-
-        ChooserComboBox.setModel(new javax.swing.DefaultComboBoxModel<>(new String[] {}));
-        ChooserComboBox.addActionListener(new java.awt.event.ActionListener() {
-            public void actionPerformed(java.awt.event.ActionEvent evt) {
-                ChooserComboBoxActionPerformed(evt);
-            }
-        });
 
         ViewButton.setText("View");
         ViewButton.addActionListener(new java.awt.event.ActionListener() {
@@ -52,25 +60,167 @@ public class ChooseTime extends javax.swing.JFrame {
             }
         });
 
+        ChooserComboBox.setModel(new javax.swing.DefaultComboBoxModel<>(new String[] {}));
+        ChooserComboBox.addActionListener(new java.awt.event.ActionListener() {
+            public void actionPerformed(java.awt.event.ActionEvent evt) {
+                ChooserComboBoxActionPerformed(evt);
+            }
+        });
+
+        javax.swing.GroupLayout jPanel1Layout = new javax.swing.GroupLayout(jPanel1);
+        jPanel1.setLayout(jPanel1Layout);
+        jPanel1Layout.setHorizontalGroup(
+            jPanel1Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
+            .addGroup(jPanel1Layout.createSequentialGroup()
+                .addGap(318, 318, 318)
+                .addComponent(ChooserComboBox, javax.swing.GroupLayout.PREFERRED_SIZE, 131, javax.swing.GroupLayout.PREFERRED_SIZE)
+                .addGap(157, 157, 157)
+                .addComponent(ViewButton, javax.swing.GroupLayout.PREFERRED_SIZE, 83, javax.swing.GroupLayout.PREFERRED_SIZE)
+                .addContainerGap(311, Short.MAX_VALUE))
+        );
+        jPanel1Layout.setVerticalGroup(
+            jPanel1Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
+            .addGroup(jPanel1Layout.createSequentialGroup()
+                .addGap(212, 212, 212)
+                .addGroup(jPanel1Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
+                    .addComponent(ChooserComboBox, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
+                    .addComponent(ViewButton))
+                .addContainerGap(285, Short.MAX_VALUE))
+        );
+
+        jMenuBar1.setBackground(new java.awt.Color(6, 26, 35));
+        jMenuBar1.setForeground(new java.awt.Color(255, 255, 255));
+
+        jMenu4.setForeground(new java.awt.Color(255, 255, 255));
+        jMenu4.setText("Services");
+
+        jMenuItem5.setBackground(new java.awt.Color(6, 26, 35));
+        jMenuItem5.setFont(new java.awt.Font("Bahnschrift", 0, 14)); // NOI18N
+        jMenuItem5.setForeground(new java.awt.Color(255, 255, 255));
+        jMenuItem5.setText("Add New Car");
+        jMenuItem5.addActionListener(new java.awt.event.ActionListener() {
+            public void actionPerformed(java.awt.event.ActionEvent evt) {
+                jMenuItem5ActionPerformed(evt);
+            }
+        });
+        jMenu4.add(jMenuItem5);
+
+        ConfirmationMessageMenu.setBackground(new java.awt.Color(6, 26, 35));
+        ConfirmationMessageMenu.setFont(new java.awt.Font("Bahnschrift", 0, 14)); // NOI18N
+        ConfirmationMessageMenu.setForeground(new java.awt.Color(255, 255, 255));
+        ConfirmationMessageMenu.setText("Booking Management");
+        ConfirmationMessageMenu.addActionListener(new java.awt.event.ActionListener() {
+            public void actionPerformed(java.awt.event.ActionEvent evt) {
+                ConfirmationMessageMenuActionPerformed(evt);
+            }
+        });
+        jMenu4.add(ConfirmationMessageMenu);
+
+        jMenuBar1.add(jMenu4);
+
+        FinanceButton.setForeground(new java.awt.Color(255, 255, 255));
+        FinanceButton.setText("Finance");
+
+        PaymentManagementMenu.setBackground(new java.awt.Color(6, 26, 35));
+        PaymentManagementMenu.setFont(new java.awt.Font("Bahnschrift", 0, 14)); // NOI18N
+        PaymentManagementMenu.setForeground(new java.awt.Color(255, 255, 255));
+        PaymentManagementMenu.setText("Payment Management");
+        PaymentManagementMenu.addActionListener(new java.awt.event.ActionListener() {
+            public void actionPerformed(java.awt.event.ActionEvent evt) {
+                PaymentManagementMenuActionPerformed(evt);
+            }
+        });
+        FinanceButton.add(PaymentManagementMenu);
+
+        SalesReportMenu.setBackground(new java.awt.Color(6, 26, 35));
+        SalesReportMenu.setFont(new java.awt.Font("Bahnschrift", 0, 14)); // NOI18N
+        SalesReportMenu.setForeground(new java.awt.Color(255, 255, 255));
+        SalesReportMenu.setText("Sales Reports");
+        SalesReportMenu.addActionListener(new java.awt.event.ActionListener() {
+            public void actionPerformed(java.awt.event.ActionEvent evt) {
+                SalesReportMenuActionPerformed(evt);
+            }
+        });
+        FinanceButton.add(SalesReportMenu);
+
+        jMenuBar1.add(FinanceButton);
+
+        jMenu3.setForeground(new java.awt.Color(255, 255, 255));
+        jMenu3.setText("Database");
+
+        jMenuItem3.setBackground(new java.awt.Color(6, 26, 35));
+        jMenuItem3.setFont(new java.awt.Font("Bahnschrift", 0, 14)); // NOI18N
+        jMenuItem3.setForeground(new java.awt.Color(255, 255, 255));
+        jMenuItem3.setText("User Database");
+        jMenuItem3.addActionListener(new java.awt.event.ActionListener() {
+            public void actionPerformed(java.awt.event.ActionEvent evt) {
+                jMenuItem3ActionPerformed(evt);
+            }
+        });
+        jMenu3.add(jMenuItem3);
+
+        jMenuItem6.setBackground(new java.awt.Color(6, 26, 35));
+        jMenuItem6.setFont(new java.awt.Font("Bahnschrift", 0, 14)); // NOI18N
+        jMenuItem6.setForeground(new java.awt.Color(255, 255, 255));
+        jMenuItem6.setText("Car Database");
+        jMenuItem6.addActionListener(new java.awt.event.ActionListener() {
+            public void actionPerformed(java.awt.event.ActionEvent evt) {
+                jMenuItem6ActionPerformed(evt);
+            }
+        });
+        jMenu3.add(jMenuItem6);
+
+        BookingMenu.setBackground(new java.awt.Color(6, 26, 35));
+        BookingMenu.setFont(new java.awt.Font("Bahnschrift", 0, 14)); // NOI18N
+        BookingMenu.setForeground(new java.awt.Color(255, 255, 255));
+        BookingMenu.setText("Booking Database");
+        BookingMenu.addActionListener(new java.awt.event.ActionListener() {
+            public void actionPerformed(java.awt.event.ActionEvent evt) {
+                BookingMenuActionPerformed(evt);
+            }
+        });
+        jMenu3.add(BookingMenu);
+
+        jMenuBar1.add(jMenu3);
+
+        jMenu2.setForeground(new java.awt.Color(255, 255, 255));
+        jMenu2.setText("Settings");
+
+        jMenuItem1.setBackground(new java.awt.Color(6, 26, 35));
+        jMenuItem1.setFont(new java.awt.Font("Bahnschrift", 0, 14)); // NOI18N
+        jMenuItem1.setForeground(new java.awt.Color(255, 255, 255));
+        jMenuItem1.setText("Account Settings");
+        jMenuItem1.addActionListener(new java.awt.event.ActionListener() {
+            public void actionPerformed(java.awt.event.ActionEvent evt) {
+                jMenuItem1ActionPerformed(evt);
+            }
+        });
+        jMenu2.add(jMenuItem1);
+
+        LogoutMenu.setBackground(new java.awt.Color(6, 26, 35));
+        LogoutMenu.setFont(new java.awt.Font("Bahnschrift", 0, 14)); // NOI18N
+        LogoutMenu.setForeground(new java.awt.Color(255, 255, 255));
+        LogoutMenu.setText("Logout");
+        LogoutMenu.addActionListener(new java.awt.event.ActionListener() {
+            public void actionPerformed(java.awt.event.ActionEvent evt) {
+                LogoutMenuActionPerformed(evt);
+            }
+        });
+        jMenu2.add(LogoutMenu);
+
+        jMenuBar1.add(jMenu2);
+
+        setJMenuBar(jMenuBar1);
+
         javax.swing.GroupLayout layout = new javax.swing.GroupLayout(getContentPane());
         getContentPane().setLayout(layout);
         layout.setHorizontalGroup(
             layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-            .addGroup(layout.createSequentialGroup()
-                .addGap(242, 242, 242)
-                .addComponent(ChooserComboBox, javax.swing.GroupLayout.PREFERRED_SIZE, 131, javax.swing.GroupLayout.PREFERRED_SIZE)
-                .addGap(152, 152, 152)
-                .addComponent(ViewButton, javax.swing.GroupLayout.PREFERRED_SIZE, 83, javax.swing.GroupLayout.PREFERRED_SIZE)
-                .addContainerGap(392, Short.MAX_VALUE))
+            .addComponent(jPanel1, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
         );
         layout.setVerticalGroup(
             layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-            .addGroup(layout.createSequentialGroup()
-                .addGap(191, 191, 191)
-                .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
-                    .addComponent(ChooserComboBox, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
-                    .addComponent(ViewButton))
-                .addContainerGap(333, Short.MAX_VALUE))
+            .addComponent(jPanel1, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
         );
 
         pack();
@@ -84,6 +234,45 @@ public class ChooseTime extends javax.swing.JFrame {
         ChooserComboBoxActionPerformed(evt);
         pageSwitch.switchPage(this, new ViewReport(user, selected));
     }//GEN-LAST:event_ViewButtonActionPerformed
+
+    private void jMenuItem5ActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jMenuItem5ActionPerformed
+        pageSwitch.switchPage(this, new AddNewCar(user));
+    }//GEN-LAST:event_jMenuItem5ActionPerformed
+
+    private void ConfirmationMessageMenuActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_ConfirmationMessageMenuActionPerformed
+        pageSwitch.switchPage(this, new BookingManagement(user));
+    }//GEN-LAST:event_ConfirmationMessageMenuActionPerformed
+
+    private void PaymentManagementMenuActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_PaymentManagementMenuActionPerformed
+        pageSwitch.switchPage(this, new ManagePayment(user));
+    }//GEN-LAST:event_PaymentManagementMenuActionPerformed
+
+    private void SalesReportMenuActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_SalesReportMenuActionPerformed
+        pageSwitch.switchPage(this, new ChooseTime(user));
+    }//GEN-LAST:event_SalesReportMenuActionPerformed
+
+    private void jMenuItem3ActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jMenuItem3ActionPerformed
+        pageSwitch.switchPage(this, new UserDatabase(user));
+    }//GEN-LAST:event_jMenuItem3ActionPerformed
+
+    private void jMenuItem6ActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jMenuItem6ActionPerformed
+        pageSwitch.switchPage(this, new CarDatabase(user));
+    }//GEN-LAST:event_jMenuItem6ActionPerformed
+
+    private void BookingMenuActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_BookingMenuActionPerformed
+        pageSwitch.switchPage(this, new BookingDatabase(user));
+    }//GEN-LAST:event_BookingMenuActionPerformed
+
+    private void jMenuItem1ActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jMenuItem1ActionPerformed
+        pageSwitch.switchPage(this, new manageOwnAccount(user));
+    }//GEN-LAST:event_jMenuItem1ActionPerformed
+
+    private void LogoutMenuActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_LogoutMenuActionPerformed
+        int dialogResult = javax.swing.JOptionPane.showConfirmDialog(null, "Are you sure you want to logout?", "Warning", javax.swing.JOptionPane.YES_NO_OPTION);
+        if (dialogResult == javax.swing.JOptionPane.YES_OPTION) {
+            pageSwitch.switchPage(this, new Login());
+        }
+    }//GEN-LAST:event_LogoutMenuActionPerformed
 
     /**
      * @param args the command line arguments
@@ -121,7 +310,22 @@ public class ChooseTime extends javax.swing.JFrame {
     }
 
     // Variables declaration - do not modify//GEN-BEGIN:variables
+    private javax.swing.JMenuItem BookingMenu;
     private javax.swing.JComboBox<String> ChooserComboBox;
+    private javax.swing.JMenuItem ConfirmationMessageMenu;
+    private javax.swing.JMenu FinanceButton;
+    private javax.swing.JMenuItem LogoutMenu;
+    private javax.swing.JMenuItem PaymentManagementMenu;
+    private javax.swing.JMenuItem SalesReportMenu;
     private javax.swing.JButton ViewButton;
+    private javax.swing.JMenu jMenu2;
+    private javax.swing.JMenu jMenu3;
+    private javax.swing.JMenu jMenu4;
+    private javax.swing.JMenuBar jMenuBar1;
+    private javax.swing.JMenuItem jMenuItem1;
+    private javax.swing.JMenuItem jMenuItem3;
+    private javax.swing.JMenuItem jMenuItem5;
+    private javax.swing.JMenuItem jMenuItem6;
+    private javax.swing.JPanel jPanel1;
     // End of variables declaration//GEN-END:variables
 }
