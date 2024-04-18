@@ -56,55 +56,58 @@ public class Report extends javax.swing.JPanel {
             int carIdRowInCarFile = dataIO.rowNumber(rowCarIdInt, 1, dataIO.CAR_FILE, 7); 
             
             String rowCarType = dataIO.readData(carIdRowInCarFile + 4, dataIO.CAR_FILE);
+            String bookingStatus = dataIO.readData(rowNumber + 5, dataIO.BOOKING_FILE);
 
-            if (rowCarType.equals("Economy")) {
-                economyBookings = economyBookings + 1;
-            } else if (rowCarType.equals("Compact")) {
-                compactBookings = compactBookings + 1;
-            } else if (rowCarType.equals("Luxury")) {
-                luxuryBookings = luxuryBookings + 1;
-            } else if (rowCarType.equals("Vans")) {
-                vansBookings = vansBookings + 1;
+            if (bookingStatus.equals("Accepted")) {
+                if (rowCarType.equals("Economy")) {
+                    economyBookings = economyBookings + 1;
+                } else if (rowCarType.equals("Compact")) {
+                    compactBookings = compactBookings + 1;
+                } else if (rowCarType.equals("Luxury")) {
+                    luxuryBookings = luxuryBookings + 1;
+                } else if (rowCarType.equals("Vans")) {
+                    vansBookings = vansBookings + 1;
+                }
+
+                String paymentStatus = dataIO.readData(rowNumber + 6, dataIO.BOOKING_FILE);
+                LocalDate startDate = LocalDate.parse(dataIO.readData(rowNumber + 3, dataIO.BOOKING_FILE));
+                LocalDate endDate = LocalDate.parse(dataIO.readData(rowNumber + 4, dataIO.BOOKING_FILE));
+                int days = (int) (endDate.toEpochDay() - startDate.toEpochDay());
+                int price = Integer.parseInt(dataIO.readData(carIdRowInCarFile + 3, dataIO.CAR_FILE));
+                int total = price * days;
+
+                if (paymentStatus.equals("Unpaid") || paymentStatus.equals("Pending")) {
+                    if (rowCarType.equals("Economy")) {
+                        economyUnpaid = economyUnpaid + total;
+                    } else if (rowCarType.equals("Compact")) {
+                        compactUnpaid = compactUnpaid + total;
+                    } else if (rowCarType.equals("Luxury")) {
+                        luxuryUnpaid = luxuryUnpaid + total;
+                    } else if (rowCarType.equals("Vans")) {
+                        vansUnpaid = vansUnpaid + total;
+                    }
+                } else if (paymentStatus.equals("Paid")) {
+                    if (rowCarType.equals("Economy")) {
+                        economyPaid = economyPaid + total;
+                    } else if (rowCarType.equals("Compact")) {
+                        compactPaid = compactPaid + total;
+                    } else if (rowCarType.equals("Luxury")) {
+                        luxuryPaid = luxuryPaid + total;
+                    } else if (rowCarType.equals("Vans")) {
+                        vansPaid = vansPaid + total;
+                    }
+                } 
             }
 
-            String paymentStatus = dataIO.readData(rowNumber + 6, dataIO.BOOKING_FILE);
-            LocalDate startDate = LocalDate.parse(dataIO.readData(rowNumber + 3, dataIO.BOOKING_FILE));
-            LocalDate endDate = LocalDate.parse(dataIO.readData(rowNumber + 4, dataIO.BOOKING_FILE));
-            int days = (int) (endDate.toEpochDay() - startDate.toEpochDay());
-            int price = Integer.parseInt(dataIO.readData(carIdRowInCarFile + 3, dataIO.CAR_FILE));
-            int total = price * days;
-
-            if (paymentStatus.equals("Unpaid") || paymentStatus.equals("Pending")) {
-                if (rowCarType.equals("Economy")) {
-                    economyUnpaid = economyUnpaid + total;
-                } else if (rowCarType.equals("Compact")) {
-                    compactUnpaid = compactUnpaid + total;
-                } else if (rowCarType.equals("Luxury")) {
-                    luxuryUnpaid = luxuryUnpaid + total;
-                } else if (rowCarType.equals("Vans")) {
-                    vansUnpaid = vansUnpaid + total;
-                }
-            } else if (paymentStatus.equals("Paid")) {
-                if (rowCarType.equals("Economy")) {
-                    economyPaid = economyPaid + total;
-                } else if (rowCarType.equals("Compact")) {
-                    compactPaid = compactPaid + total;
-                } else if (rowCarType.equals("Luxury")) {
-                    luxuryPaid = luxuryPaid + total;
-                } else if (rowCarType.equals("Vans")) {
-                    vansPaid = vansPaid + total;
-                }
-            } 
-        }
-
-        if (economyBookings > compactBookings && economyBookings > luxuryBookings && economyBookings > vansBookings) {
-            bestSelling = "Economy Car";
-        } else if (compactBookings > economyBookings && compactBookings > luxuryBookings && compactBookings > vansBookings) {
-            bestSelling = "Compact Car";
-        } else if (luxuryBookings > economyBookings && luxuryBookings > compactBookings && luxuryBookings > vansBookings) {
-            bestSelling = "Luxury Car";
-        } else if (vansBookings > economyBookings && vansBookings > compactBookings && vansBookings > luxuryBookings) {
-            bestSelling = "Vans";
+            if (economyBookings > compactBookings && economyBookings > luxuryBookings && economyBookings > vansBookings) {
+                bestSelling = "Economy Car";
+            } else if (compactBookings > economyBookings && compactBookings > luxuryBookings && compactBookings > vansBookings) {
+                bestSelling = "Compact Car";
+            } else if (luxuryBookings > economyBookings && luxuryBookings > compactBookings && luxuryBookings > vansBookings) {
+                bestSelling = "Luxury Car";
+            } else if (vansBookings > economyBookings && vansBookings > compactBookings && vansBookings > luxuryBookings) {
+                bestSelling = "Vans";
+            }
         }
 
         totalQuantity = economyBookings + compactBookings + luxuryBookings + vansBookings;
