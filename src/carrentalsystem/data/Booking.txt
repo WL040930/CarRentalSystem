@@ -4,7 +4,7 @@ user@gmail.com
 2023-03-10
 2023-03-13
 Accepted
-Unpaid
+Paid
 NDS2131
 
 2
@@ -12,8 +12,8 @@ NDS2131
 user@gmail.com
 2024-03-13
 2024-03-14
-Waiting
-Unpaid
+Accepted
+Pending
 JND2132
 
 3
@@ -21,8 +21,8 @@ JND2132
 user@gmail.com
 2024-04-26
 2024-04-30
-Waiting
-Unpaid
+Accepted
+Pending
 HDA2131
 
 4
@@ -30,7 +30,7 @@ HDA2131
 user@gmail.com
 2024-04-23
 2024-04-27
-Waiting
+Accepted
 Paid
 RTS2132
 
