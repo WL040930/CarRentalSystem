@@ -17,6 +17,7 @@ public class ChooseTime extends javax.swing.JFrame {
     public ChooseTime(User.admin user) {
         ChooseTime.user = user;
         initComponents();
+        setResizable(false);
         for (String item : data) {
             ChooserComboBox.addItem(item);
         }

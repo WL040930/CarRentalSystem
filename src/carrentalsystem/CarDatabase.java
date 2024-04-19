@@ -61,7 +61,6 @@ public class CarDatabase extends javax.swing.JFrame {
 
                         int rowNumberOfId = dataIO.rowNumber(carID, 1, dataIO.CAR_FILE, 7);
                         String CarType = dataIO.readData(rowNumberOfId + 4, dataIO.CAR_FILE); 
-                        System.out.println(CarType);
 
                         if (!CarType.equals("Vans")) {
                             CarType = CarType + " Car";

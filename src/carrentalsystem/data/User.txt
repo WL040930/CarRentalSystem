@@ -3,7 +3,7 @@ admin@gmail.com
 admin
 admin
 
-useruser
+username
 user@gmail.com
 password
 customer

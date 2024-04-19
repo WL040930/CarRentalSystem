@@ -28,6 +28,7 @@ public class BookingDatabase extends javax.swing.JFrame {
     public BookingDatabase(User.admin user) {
         BookingDatabase.user = user;
         initComponents();
+        setResizable(false);
 
         model = new DefaultTableModel() {
             @Override
@@ -671,12 +672,6 @@ public class BookingDatabase extends javax.swing.JFrame {
     
         BookingTable.setModel(model);
     
-        // Allow row selection
-        BookingTable.setRowSelectionAllowed(true);
-    
-        // Ensure that cell selection is disabled
-        BookingTable.setCellSelectionEnabled(false);
-        BookingTable.setColumnSelectionAllowed(false);
     }
 
     /**

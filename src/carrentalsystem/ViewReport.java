@@ -20,6 +20,7 @@ public class ViewReport extends javax.swing.JFrame {
         ViewReport.user = user;
         ViewReport.date = date;
         initComponents();
+        setResizable(false);
 
         reportContainer = new JPanel();
         reportContainer.setLayout(new BoxLayout(reportContainer, BoxLayout.Y_AXIS));
