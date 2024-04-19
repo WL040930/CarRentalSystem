@@ -2,14 +2,14 @@
 CarName
 5
 20
-Luxury
+Economy
 defaultcar.png
 
 2
 Compact Testing Car
 7
 700
-Compact
+Economy
 8314f42e-a3a2-4b3d-bddd-029ab87e7dc2.png
 
 3
@@ -30,13 +30,13 @@ d8f9d214-0b6f-4ee2-b2ab-ae7b3648f290.png
 BIG VANS
 20
 500
-Vans
+Economy
 3d2e6d3a-f772-4cbd-a3bf-5b245a2977ff.png
 
 6
 small vanss
 10
 400
-Vans
+Economy
 f82b2bba-07fd-4658-bdf0-28632595fdae.png
 

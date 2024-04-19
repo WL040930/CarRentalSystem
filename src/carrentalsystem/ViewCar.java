@@ -5,15 +5,13 @@
 package carrentalsystem;
 
 import java.util.List;
-import javax.swing.event.ListSelectionEvent;
-import javax.swing.event.ListSelectionListener;
-import javax.swing.table.DefaultTableModel;
-import java.awt.Dimension;
+import javax.swing.JPanel;
+import javax.swing.BoxLayout;
+import javax.swing.JScrollPane;
+import java.awt.Image;
 import javax.swing.ImageIcon;
 import javax.swing.JOptionPane;
 
-import java.awt.Image;
-import java.awt.print.Book;
 
 public class ViewCar extends javax.swing.JFrame {
 
@@ -22,55 +20,53 @@ public class ViewCar extends javax.swing.JFrame {
      */
     static User.customer user; 
     static Car Car;
-    DefaultTableModel model;
     int selectedRow, carId;
-    final String fileLocation = "src/carrentalsystem/data/Car.txt";
+    private final JPanel Container;
 
     public ViewCar(User.customer user, Car car) {
         ViewCar.user = user;
-        ViewCar.Car = car;
+        ViewCar.Car = car; // ONLY CAR TYPE IS PASSED TO THIS PAGE
         initComponents();
-        pictureField.setPreferredSize(new Dimension(200, 200));
         setResizable(false);
 
-        model = new DefaultTableModel() {
-            @Override
-            public boolean isCellEditable(int row, int column) {
-                return false;
-            }
-        };
+        List<Car> cars = DatabaseManager.getSpecificCarsType(car.getCarType());
 
-        CarTable.setModel(model);
+         // Create a panel to hold the booking panels vertically
+        Container = new JPanel();
+        Container.setLayout(new BoxLayout(Container, BoxLayout.Y_AXIS));
 
-        List<Car> cars = DatabaseManager.getSpecificCarsType(Car.getCarType());
-        populateCarTable(cars);
-        CarTable.getSelectionModel().addListSelectionListener(new ListSelectionListener() {
-            @Override
-            public void valueChanged(ListSelectionEvent e) {
-                if (!e.getValueIsAdjusting()) {
-                    selectedRow = CarTable.getSelectedRow();
-                    if (selectedRow != -1) { 
-                        // Get data from the selected row
-                        // String carID = CarTable.getValueAt(selectedRow, 0).toString();
-                        String carName = CarTable.getValueAt(selectedRow, 0).toString();
-                        String CarPrice = CarTable.getValueAt(selectedRow, 1).toString();
+        for (Car car2 : cars) {
+            CarPanel carPanel = new CarPanel(car2, this);
+            Container.add(carPanel);
+        }
 
-                        // Display data in the text fields
-                        carNameField.setText(carName);
-                        priceField.setText(CarPrice);
+        ScrollPanel.setViewportView(Container);
+        ScrollPanel.setVerticalScrollBarPolicy(javax.swing.ScrollPaneConstants.VERTICAL_SCROLLBAR_ALWAYS);
+        ScrollPanel.setHorizontalScrollBarPolicy(javax.swing.ScrollPaneConstants.HORIZONTAL_SCROLLBAR_NEVER);
 
-                        int[] carArray = dataIO.returnCarId(Car.getCarType(), fileLocation); 
-                        carId = carArray[selectedRow];
-                        int rowNumberOfCarId = dataIO.rowNumber(carId, 1, fileLocation, 7);
-                        String imageFilePath = dataIO.readData(rowNumberOfCarId + 5, fileLocation);
+    }
 
-                        ImageIcon imageIcon = new ImageIcon(getClass().getResource("/carrentalsystem/img/" + imageFilePath));
-                        Image scaledImage = imageIcon.getImage().getScaledInstance(200, 200, Image.SCALE_SMOOTH);
-                        pictureField.setIcon(new ImageIcon(scaledImage));
-                    }
-                }
-            }
-        });
+    public void displayCarInfo(Car car) {
+        carId = car.getCarID();
+        int row = dataIO.rowNumber(carId, 1, dataIO.CAR_FILE, 7); 
+        String carName = dataIO.readData(row + 1, dataIO.CAR_FILE);
+        String seats = dataIO.readData(row + 2, dataIO.CAR_FILE);
+        String price = dataIO.readData(row + 3, dataIO.CAR_FILE);
+        String type = dataIO.readData(row + 4, dataIO.CAR_FILE);
+        String image = dataIO.readData(row + 5, dataIO.CAR_FILE);
+
+        if (!type.equals("Vans")) {
+            type = type + " Car"; 
+        }
+
+        CarNameField.setText(carName);
+        CarSeatsField.setText(seats);
+        CarPriceField.setText(price);
+        CarTypeField.setText(type);
+        
+        ImageIcon imageIcon = new ImageIcon(getClass().getResource("/carrentalsystem/img/" + image));
+        Image scaledImage = imageIcon.getImage().getScaledInstance(180,180, Image.SCALE_SMOOTH);
+        PictureField.setIcon(new ImageIcon(scaledImage));
     }
 
     /**
@@ -83,15 +79,16 @@ public class ViewCar extends javax.swing.JFrame {
     private void initComponents() {
 
         jPanel1 = new javax.swing.JPanel();
+        ScrollPanel = new javax.swing.JScrollPane();
         jLabel1 = new javax.swing.JLabel();
-        jScrollPane1 = new javax.swing.JScrollPane();
-        CarTable = new javax.swing.JTable();
+        CarNameField = new javax.swing.JLabel();
         jLabel2 = new javax.swing.JLabel();
-        carNameField = new javax.swing.JLabel();
+        CarSeatsField = new javax.swing.JLabel();
         jLabel3 = new javax.swing.JLabel();
-        pictureField = new javax.swing.JLabel();
-        jLabel5 = new javax.swing.JLabel();
-        priceField = new javax.swing.JLabel();
+        CarPriceField = new javax.swing.JLabel();
+        jLabel4 = new javax.swing.JLabel();
+        CarTypeField = new javax.swing.JLabel();
+        PictureField = new javax.swing.JLabel();
         continueButton = new javax.swing.JButton();
         BackButton = new javax.swing.JButton();
         jMenuBar1 = new javax.swing.JMenuBar();
@@ -100,29 +97,25 @@ public class ViewCar extends javax.swing.JFrame {
 
         setDefaultCloseOperation(javax.swing.WindowConstants.EXIT_ON_CLOSE);
 
-        jLabel1.setFont(new java.awt.Font("Segoe UI", 1, 24)); // NOI18N
-        jLabel1.setText(Car.getCarType() + " Car");
+        jPanel1.setBackground(new java.awt.Color(255, 255, 255));
 
-        CarTable.setModel(new javax.swing.table.DefaultTableModel(
-            new Object [][] {
-                {},
-                {},
-                {},
-                {}
-            },
-            new String [] {
+        jLabel1.setText("Car Name: ");
 
-            }
-        ));
-        jScrollPane1.setViewportView(CarTable);
+        CarNameField.setText("jLabel2");
 
-        jLabel2.setFont(new java.awt.Font("Segoe UI", 1, 18)); // NOI18N
-        jLabel2.setText("Car Name:");
+        jLabel2.setText("Car Seats: ");
 
-        jLabel3.setText("Picture:");
+        CarSeatsField.setText("jLabel3");
 
-        jLabel5.setFont(new java.awt.Font("Segoe UI", 1, 18)); // NOI18N
-        jLabel5.setText("Price (per day):");
+        jLabel3.setText("Car Price: (Per Day) ");
+
+        CarPriceField.setText("jLabel4");
+
+        jLabel4.setText("Car Type: ");
+
+        CarTypeField.setText("jLabel5");
+
+        PictureField.setText("");
 
         continueButton.setText("Continue");
         continueButton.addActionListener(new java.awt.event.ActionListener() {
@@ -143,60 +136,61 @@ public class ViewCar extends javax.swing.JFrame {
         jPanel1Layout.setHorizontalGroup(
             jPanel1Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
             .addGroup(jPanel1Layout.createSequentialGroup()
+                .addGap(36, 36, 36)
+                .addComponent(ScrollPanel, javax.swing.GroupLayout.PREFERRED_SIZE, 430, javax.swing.GroupLayout.PREFERRED_SIZE)
                 .addGroup(jPanel1Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
                     .addGroup(jPanel1Layout.createSequentialGroup()
-                        .addGap(50, 50, 50)
-                        .addComponent(jLabel1, javax.swing.GroupLayout.PREFERRED_SIZE, 246, javax.swing.GroupLayout.PREFERRED_SIZE))
-                    .addGroup(jPanel1Layout.createSequentialGroup()
-                        .addGap(38, 38, 38)
-                        .addComponent(jScrollPane1, javax.swing.GroupLayout.PREFERRED_SIZE, 498, javax.swing.GroupLayout.PREFERRED_SIZE)
-                        .addGap(43, 43, 43)
+                        .addGap(83, 83, 83)
                         .addGroup(jPanel1Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-                            .addGroup(javax.swing.GroupLayout.Alignment.TRAILING, jPanel1Layout.createSequentialGroup()
-                                .addGroup(jPanel1Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-                                    .addComponent(jLabel2)
-                                    .addComponent(carNameField))
-                                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED, 129, Short.MAX_VALUE)
-                                .addGroup(jPanel1Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-                                    .addComponent(jLabel5)
-                                    .addGroup(jPanel1Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.TRAILING, false)
-                                        .addComponent(BackButton, javax.swing.GroupLayout.Alignment.LEADING, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
-                                        .addComponent(continueButton, javax.swing.GroupLayout.Alignment.LEADING, javax.swing.GroupLayout.DEFAULT_SIZE, 102, Short.MAX_VALUE))
-                                    .addComponent(priceField)))
+                            .addComponent(PictureField, javax.swing.GroupLayout.PREFERRED_SIZE, 180, javax.swing.GroupLayout.PREFERRED_SIZE)
                             .addGroup(jPanel1Layout.createSequentialGroup()
-                                .addGroup(jPanel1Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.TRAILING, false)
-                                    .addComponent(pictureField, javax.swing.GroupLayout.Alignment.LEADING, javax.swing.GroupLayout.DEFAULT_SIZE, 200, Short.MAX_VALUE)
-                                    .addComponent(jLabel3, javax.swing.GroupLayout.Alignment.LEADING, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE))
-                                .addGap(0, 0, Short.MAX_VALUE)))))
-                .addGap(76, 76, 76))
+                                .addGroup(jPanel1Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
+                                    .addComponent(jLabel1)
+                                    .addComponent(CarNameField, javax.swing.GroupLayout.PREFERRED_SIZE, 99, javax.swing.GroupLayout.PREFERRED_SIZE)
+                                    .addComponent(jLabel2, javax.swing.GroupLayout.PREFERRED_SIZE, 81, javax.swing.GroupLayout.PREFERRED_SIZE)
+                                    .addComponent(CarSeatsField, javax.swing.GroupLayout.PREFERRED_SIZE, 130, javax.swing.GroupLayout.PREFERRED_SIZE))
+                                .addGap(102, 102, 102)
+                                .addGroup(jPanel1Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
+                                    .addComponent(CarPriceField, javax.swing.GroupLayout.PREFERRED_SIZE, 100, javax.swing.GroupLayout.PREFERRED_SIZE)
+                                    .addComponent(jLabel3)
+                                    .addComponent(jLabel4)
+                                    .addComponent(CarTypeField, javax.swing.GroupLayout.PREFERRED_SIZE, 104, javax.swing.GroupLayout.PREFERRED_SIZE)))))
+                    .addGroup(jPanel1Layout.createSequentialGroup()
+                        .addGap(200, 200, 200)
+                        .addGroup(jPanel1Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
+                            .addComponent(BackButton, javax.swing.GroupLayout.PREFERRED_SIZE, 83, javax.swing.GroupLayout.PREFERRED_SIZE)
+                            .addComponent(continueButton, javax.swing.GroupLayout.PREFERRED_SIZE, 83, javax.swing.GroupLayout.PREFERRED_SIZE))))
+                .addContainerGap(97, Short.MAX_VALUE))
         );
         jPanel1Layout.setVerticalGroup(
             jPanel1Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
             .addGroup(jPanel1Layout.createSequentialGroup()
-                .addGap(28, 28, 28)
-                .addComponent(jLabel1)
-                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.UNRELATED)
+                .addGap(49, 49, 49)
                 .addGroup(jPanel1Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
                     .addGroup(jPanel1Layout.createSequentialGroup()
-                        .addComponent(jScrollPane1, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
-                        .addContainerGap(49, Short.MAX_VALUE))
-                    .addGroup(jPanel1Layout.createSequentialGroup()
+                        .addComponent(PictureField, javax.swing.GroupLayout.PREFERRED_SIZE, 180, javax.swing.GroupLayout.PREFERRED_SIZE)
+                        .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
+                        .addGroup(jPanel1Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
+                            .addComponent(jLabel1)
+                            .addComponent(jLabel4))
+                        .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
+                        .addGroup(jPanel1Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
+                            .addComponent(CarNameField)
+                            .addComponent(CarTypeField))
+                        .addGap(52, 52, 52)
                         .addGroup(jPanel1Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
                             .addComponent(jLabel2)
-                            .addComponent(jLabel5))
+                            .addComponent(jLabel3))
                         .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
                         .addGroup(jPanel1Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
-                            .addComponent(carNameField)
-                            .addComponent(priceField))
-                        .addGap(40, 40, 40)
-                        .addComponent(jLabel3)
-                        .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
-                        .addComponent(pictureField, javax.swing.GroupLayout.PREFERRED_SIZE, 200, javax.swing.GroupLayout.PREFERRED_SIZE)
-                        .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
+                            .addComponent(CarSeatsField)
+                            .addComponent(CarPriceField))
+                        .addGap(31, 31, 31)
                         .addComponent(continueButton)
                         .addGap(18, 18, 18)
-                        .addComponent(BackButton)
-                        .addGap(30, 30, 30))))
+                        .addComponent(BackButton))
+                    .addComponent(ScrollPanel, javax.swing.GroupLayout.PREFERRED_SIZE, 420, javax.swing.GroupLayout.PREFERRED_SIZE))
+                .addContainerGap(43, Short.MAX_VALUE))
         );
 
         jMenu1.setText("File");
@@ -221,57 +215,19 @@ public class ViewCar extends javax.swing.JFrame {
         pack();
     }// </editor-fold>//GEN-END:initComponents
 
-    private void populateCarTable(List<Car> Car) {
-        model.setRowCount(0); // Clear existing table data
-        model.setColumnCount(0); // Reset column count
-
-        DefaultTableModel model = new DefaultTableModel() {
-            @Override
-            public boolean isCellEditable(int row, int column) {
-                // This causes all cells to be non-editable
-                return false;
-            }
-        };
-        //model.addColumn("Car ID");
-        model.addColumn("Car Name");
-        model.addColumn("Price");
-    
-        for (Car Tcar : Car) {
-            // int carId = Tcar.getCarID();
-            String name = Tcar.getCarName();
-            int price = Tcar.getPrice();
-            
-            // array[x] = carId;
-            // x++;
-            // Add row to table model with correct role displayed
-            model.addRow(new Object[]{name, price});
-        }
-    
-        CarTable.setModel(model);
-    
-        // Allow row selection
-        CarTable.setRowSelectionAllowed(true);
-    
-        // Ensure that cell selection is disabled
-        CarTable.setCellSelectionEnabled(false);
-        CarTable.setColumnSelectionAllowed(false);
-        
-        
-    }
-
-    private void BackButtonActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_BackButtonActionPerformed
-        pageSwitch.switchPage(this, new ChooseCarType(user));
-    }//GEN-LAST:event_BackButtonActionPerformed
-
-    private void continueButtonActionPerformed(java.awt.event.ActionEvent evt) {                                               
-        if (carNameField.getText().isEmpty() || priceField.getText().isEmpty() || pictureField.getIcon() == null) {
+    private void continueButtonActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_continueButtonActionPerformed
+        if (CarNameField.getText().isEmpty() || CarPriceField.getText().isEmpty() || PictureField.getIcon() == null || CarSeatsField.getText().isEmpty() || CarTypeField.getText().isEmpty()) {
             JOptionPane.showMessageDialog(this, "Please select a car to continue.", "Error", JOptionPane.ERROR_MESSAGE);
         } else {
             // Proceed to the booking page
             Car.setCarID(carId); // Assuming 'carId' is set appropriately based on user selection
             pageSwitch.switchPage(this, new BookCar(user, Car));
         }
-    }
+    }//GEN-LAST:event_continueButtonActionPerformed
+
+    private void BackButtonActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_BackButtonActionPerformed
+        pageSwitch.switchPage(this, new ChooseCarType(user)); 
+    }//GEN-LAST:event_BackButtonActionPerformed
     
 
     /**
@@ -311,19 +267,20 @@ public class ViewCar extends javax.swing.JFrame {
 
     // Variables declaration - do not modify//GEN-BEGIN:variables
     private javax.swing.JButton BackButton;
-    private javax.swing.JTable CarTable;
-    private javax.swing.JLabel carNameField;
+    private javax.swing.JLabel CarNameField;
+    private javax.swing.JLabel CarPriceField;
+    private javax.swing.JLabel CarSeatsField;
+    private javax.swing.JLabel CarTypeField;
+    private javax.swing.JLabel PictureField;
+    private javax.swing.JScrollPane ScrollPanel;
     private javax.swing.JButton continueButton;
     private javax.swing.JLabel jLabel1;
     private javax.swing.JLabel jLabel2;
     private javax.swing.JLabel jLabel3;
-    private javax.swing.JLabel jLabel5;
+    private javax.swing.JLabel jLabel4;
     private javax.swing.JMenu jMenu1;
     private javax.swing.JMenu jMenu2;
     private javax.swing.JMenuBar jMenuBar1;
     private javax.swing.JPanel jPanel1;
-    private javax.swing.JScrollPane jScrollPane1;
-    private javax.swing.JLabel pictureField;
-    private javax.swing.JLabel priceField;
     // End of variables declaration//GEN-END:variables
 }
