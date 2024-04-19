@@ -70,8 +70,8 @@ public class ChooseCarType extends javax.swing.JFrame {
         jLabel5 = new javax.swing.JLabel();
         jLabel4 = new javax.swing.JLabel();
         LuxuryButton = new javax.swing.JButton();
-        EconomyButton = new javax.swing.JButton();
         jLabel2 = new javax.swing.JLabel();
+        EconomyButton = new javax.swing.JButton();
         TitleImage = new javax.swing.JLabel();
         jMenuBar1 = new javax.swing.JMenuBar();
         BookingMenu = new javax.swing.JMenu();
@@ -133,17 +133,16 @@ public class ChooseCarType extends javax.swing.JFrame {
             }
         });
 
-        EconomyButton.setBorder(new javax.swing.border.SoftBevelBorder(javax.swing.border.BevelBorder.RAISED));
-        EconomyButton.setCursor(new java.awt.Cursor(java.awt.Cursor.HAND_CURSOR));
+        jLabel2.setFont(new java.awt.Font("Segoe UI", 1, 18)); // NOI18N
+        jLabel2.setForeground(new java.awt.Color(255, 255, 255));
+        jLabel2.setText("Economy Car");
+
+        EconomyButton.setText("");
         EconomyButton.addActionListener(new java.awt.event.ActionListener() {
             public void actionPerformed(java.awt.event.ActionEvent evt) {
                 EconomyButtonActionPerformed(evt);
             }
         });
-
-        jLabel2.setFont(new java.awt.Font("Segoe UI", 1, 18)); // NOI18N
-        jLabel2.setForeground(new java.awt.Color(255, 255, 255));
-        jLabel2.setText("Economy Car");
 
         javax.swing.GroupLayout jPanel2Layout = new javax.swing.GroupLayout(jPanel2);
         jPanel2.setLayout(jPanel2Layout);
@@ -349,11 +348,6 @@ public class ChooseCarType extends javax.swing.JFrame {
         pageSwitch.switchPage(this, new ViewCar(user, car));
     }//GEN-LAST:event_LuxuryButtonActionPerformed
 
-    private void EconomyButtonActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_EconomyButtonActionPerformed
-        car.setCarType("Economy");
-        pageSwitch.switchPage(this, new ViewCar(user, car));
-    }//GEN-LAST:event_EconomyButtonActionPerformed
-
     private void rentCarButtonActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_rentCarButtonActionPerformed
         pageSwitch.switchPage(this, new ChooseCarType(user));
     }//GEN-LAST:event_rentCarButtonActionPerformed
@@ -373,6 +367,11 @@ public class ChooseCarType extends javax.swing.JFrame {
     private void LogoutMenuActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_LogoutMenuActionPerformed
         pageSwitch.switchPage(this, new Login());
     }//GEN-LAST:event_LogoutMenuActionPerformed
+
+    private void EconomyButtonActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_EconomyButtonActionPerformed
+        car.setCarType("Economy");
+        pageSwitch.switchPage(this, new ViewCar(user, car));
+    }//GEN-LAST:event_EconomyButtonActionPerformed
 
     /**
      * @param args the command line arguments
