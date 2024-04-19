@@ -294,6 +294,8 @@ public class CheckBooking extends javax.swing.JFrame {
     
         if (bookingId == -1) {
             message = "Please select a booking to pay.";
+        } else if (!dataIO.readData(rowNumberOfBookingId + 5, dataIO.BOOKING_FILE).equals("Accepted")) {
+            message = "Payment cannot be made until the admin approves the booking.";
         } else {
             dataIO.overWriteData("Pending", rowNumberOfBookingId + 6 , dataIO.BOOKING_FILE);
             message = "Payment Status will be changed once the admin approves the payment.";
@@ -320,7 +322,6 @@ public class CheckBooking extends javax.swing.JFrame {
         // Show the dialog
         dialog.setVisible(true);
     }
-    
            
     
     public void displayBookingDetails(Booking booking) {
@@ -350,9 +351,12 @@ public class CheckBooking extends javax.swing.JFrame {
         if (paymentStatus.equals("Paid")) {
             PayButton.setText("Paid");
             PayButton.setEnabled(false);
-        } else if (paymentStatus.equals("Unpaid")) {
+        } else if (paymentStatus.equals("Unpaid") && status.equals("Accepted")) {
             PayButton.setText("Pay");
             PayButton.setEnabled(true);
+        } else {
+            PayButton.setText("Pending");
+            PayButton.setEnabled(false);
         }
 
     }
