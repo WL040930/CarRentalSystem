@@ -16,7 +16,7 @@ Economy
 Axia Car
 4
 140
-Economy
+Luxury
 defaultcar.png
 
 4

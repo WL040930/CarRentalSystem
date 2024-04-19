@@ -44,6 +44,9 @@ public class ViewCar extends javax.swing.JFrame {
         ScrollPanel.setVerticalScrollBarPolicy(javax.swing.ScrollPaneConstants.VERTICAL_SCROLLBAR_ALWAYS);
         ScrollPanel.setHorizontalScrollBarPolicy(javax.swing.ScrollPaneConstants.HORIZONTAL_SCROLLBAR_NEVER);
 
+        ImageIcon imageIcon = new ImageIcon(getClass().getResource("/carrentalsystem/img/logo.jpeg"));
+        Image scaledImage = imageIcon.getImage().getScaledInstance(60, 60, Image.SCALE_SMOOTH);
+        TitleImage.setIcon(new ImageIcon(scaledImage));
     }
 
     public void displayCarInfo(Car car) {
@@ -80,43 +83,83 @@ public class ViewCar extends javax.swing.JFrame {
 
         jPanel1 = new javax.swing.JPanel();
         ScrollPanel = new javax.swing.JScrollPane();
+        jLabel5 = new javax.swing.JLabel();
+        TitleImage = new javax.swing.JLabel();
+        jLabel7 = new javax.swing.JLabel();
+        jPanel2 = new javax.swing.JPanel();
         jLabel1 = new javax.swing.JLabel();
         CarNameField = new javax.swing.JLabel();
         jLabel2 = new javax.swing.JLabel();
         CarSeatsField = new javax.swing.JLabel();
-        jLabel3 = new javax.swing.JLabel();
-        CarPriceField = new javax.swing.JLabel();
         jLabel4 = new javax.swing.JLabel();
         CarTypeField = new javax.swing.JLabel();
+        jLabel3 = new javax.swing.JLabel();
+        CarPriceField = new javax.swing.JLabel();
         PictureField = new javax.swing.JLabel();
         continueButton = new javax.swing.JButton();
         BackButton = new javax.swing.JButton();
         jMenuBar1 = new javax.swing.JMenuBar();
+        BookingMenu = new javax.swing.JMenu();
+        rentCarButton = new javax.swing.JMenuItem();
         jMenu1 = new javax.swing.JMenu();
+        PaymentMenu = new javax.swing.JMenuItem();
+        jMenu3 = new javax.swing.JMenu();
+        BookingConfirmationMenu = new javax.swing.JMenuItem();
+        ViewBookingsMenu = new javax.swing.JMenuItem();
         jMenu2 = new javax.swing.JMenu();
+        AccountSettingsMenu = new javax.swing.JMenuItem();
+        LogoutMenu = new javax.swing.JMenuItem();
 
         setDefaultCloseOperation(javax.swing.WindowConstants.EXIT_ON_CLOSE);
 
         jPanel1.setBackground(new java.awt.Color(255, 255, 255));
 
+        jLabel5.setFont(new java.awt.Font("Bahnschrift", 1, 18)); // NOI18N
+        jLabel5.setText("Choose Your Car Here :) ");
+
+        TitleImage.setText("");
+
+        jLabel7.setFont(new java.awt.Font("Bahnschrift", 2, 14)); // NOI18N
+        jLabel7.setText("We offer a variety of car at the LOWEST price!");
+
+        jPanel2.setBackground(new java.awt.Color(6, 26, 35));
+
+        jLabel1.setFont(new java.awt.Font("Bahnschrift", 1, 18)); // NOI18N
+        jLabel1.setForeground(new java.awt.Color(255, 255, 255));
         jLabel1.setText("Car Name: ");
 
-        CarNameField.setText("jLabel2");
+        CarNameField.setFont(new java.awt.Font("Bahnschrift", 0, 14)); // NOI18N
+        CarNameField.setForeground(new java.awt.Color(255, 255, 255));
+        CarNameField.setText("");
 
+        jLabel2.setFont(new java.awt.Font("Bahnschrift", 1, 18)); // NOI18N
+        jLabel2.setForeground(new java.awt.Color(255, 255, 255));
         jLabel2.setText("Car Seats: ");
 
-        CarSeatsField.setText("jLabel3");
+        CarSeatsField.setFont(new java.awt.Font("Bahnschrift", 0, 14)); // NOI18N
+        CarSeatsField.setForeground(new java.awt.Color(255, 255, 255));
+        CarSeatsField.setText("");
 
-        jLabel3.setText("Car Price: (Per Day) ");
-
-        CarPriceField.setText("jLabel4");
-
+        jLabel4.setFont(new java.awt.Font("Bahnschrift", 1, 18)); // NOI18N
+        jLabel4.setForeground(new java.awt.Color(255, 255, 255));
         jLabel4.setText("Car Type: ");
 
-        CarTypeField.setText("jLabel5");
+        CarTypeField.setFont(new java.awt.Font("Bahnschrift", 0, 14)); // NOI18N
+        CarTypeField.setForeground(new java.awt.Color(255, 255, 255));
+        CarTypeField.setText("");
+
+        jLabel3.setFont(new java.awt.Font("Bahnschrift", 1, 18)); // NOI18N
+        jLabel3.setForeground(new java.awt.Color(255, 255, 255));
+        jLabel3.setText("Car Price: (Per Day) ");
+
+        CarPriceField.setFont(new java.awt.Font("Bahnschrift", 0, 14)); // NOI18N
+        CarPriceField.setForeground(new java.awt.Color(255, 255, 255));
+        CarPriceField.setText("");
 
         PictureField.setText("");
 
+        continueButton.setBackground(new java.awt.Color(255, 255, 254));
+        continueButton.setFont(new java.awt.Font("Bahnschrift", 1, 18)); // NOI18N
         continueButton.setText("Continue");
         continueButton.addActionListener(new java.awt.event.ActionListener() {
             public void actionPerformed(java.awt.event.ActionEvent evt) {
@@ -124,6 +167,8 @@ public class ViewCar extends javax.swing.JFrame {
             }
         });
 
+        BackButton.setBackground(new java.awt.Color(255, 255, 254));
+        BackButton.setFont(new java.awt.Font("Bahnschrift", 1, 18)); // NOI18N
         BackButton.setText("Back");
         BackButton.addActionListener(new java.awt.event.ActionListener() {
             public void actionPerformed(java.awt.event.ActionEvent evt) {
@@ -131,72 +176,180 @@ public class ViewCar extends javax.swing.JFrame {
             }
         });
 
+        javax.swing.GroupLayout jPanel2Layout = new javax.swing.GroupLayout(jPanel2);
+        jPanel2.setLayout(jPanel2Layout);
+        jPanel2Layout.setHorizontalGroup(
+            jPanel2Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
+            .addGroup(jPanel2Layout.createSequentialGroup()
+                .addGroup(jPanel2Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
+                    .addGroup(jPanel2Layout.createSequentialGroup()
+                        .addGap(160, 160, 160)
+                        .addComponent(PictureField, javax.swing.GroupLayout.PREFERRED_SIZE, 180, javax.swing.GroupLayout.PREFERRED_SIZE))
+                    .addGroup(jPanel2Layout.createSequentialGroup()
+                        .addGap(60, 60, 60)
+                        .addGroup(jPanel2Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
+                            .addGroup(jPanel2Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING, false)
+                                .addComponent(CarSeatsField, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
+                                .addComponent(CarNameField, javax.swing.GroupLayout.DEFAULT_SIZE, 182, Short.MAX_VALUE)
+                                .addComponent(jLabel2, javax.swing.GroupLayout.PREFERRED_SIZE, 127, javax.swing.GroupLayout.PREFERRED_SIZE))
+                            .addComponent(jLabel1)
+                            .addComponent(BackButton, javax.swing.GroupLayout.PREFERRED_SIZE, 114, javax.swing.GroupLayout.PREFERRED_SIZE))
+                        .addGap(56, 56, 56)
+                        .addGroup(jPanel2Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
+                            .addComponent(jLabel4)
+                            .addGroup(jPanel2Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING, false)
+                                .addComponent(jLabel3)
+                                .addComponent(CarPriceField, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
+                                .addComponent(CarTypeField, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE))
+                            .addComponent(continueButton, javax.swing.GroupLayout.PREFERRED_SIZE, 114, javax.swing.GroupLayout.PREFERRED_SIZE))))
+                .addContainerGap(29, Short.MAX_VALUE))
+        );
+        jPanel2Layout.setVerticalGroup(
+            jPanel2Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
+            .addGroup(jPanel2Layout.createSequentialGroup()
+                .addContainerGap(javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
+                .addComponent(PictureField, javax.swing.GroupLayout.PREFERRED_SIZE, 180, javax.swing.GroupLayout.PREFERRED_SIZE)
+                .addGap(33, 33, 33)
+                .addGroup(jPanel2Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
+                    .addComponent(jLabel1)
+                    .addComponent(jLabel4))
+                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
+                .addGroup(jPanel2Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
+                    .addComponent(CarNameField)
+                    .addComponent(CarTypeField))
+                .addGap(52, 52, 52)
+                .addGroup(jPanel2Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
+                    .addComponent(jLabel2)
+                    .addComponent(jLabel3))
+                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
+                .addGroup(jPanel2Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
+                    .addComponent(CarSeatsField)
+                    .addComponent(CarPriceField))
+                .addGap(64, 64, 64)
+                .addGroup(jPanel2Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
+                    .addComponent(BackButton)
+                    .addComponent(continueButton))
+                .addGap(40, 40, 40))
+        );
+
         javax.swing.GroupLayout jPanel1Layout = new javax.swing.GroupLayout(jPanel1);
         jPanel1.setLayout(jPanel1Layout);
         jPanel1Layout.setHorizontalGroup(
             jPanel1Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
             .addGroup(jPanel1Layout.createSequentialGroup()
-                .addGap(36, 36, 36)
-                .addComponent(ScrollPanel, javax.swing.GroupLayout.PREFERRED_SIZE, 430, javax.swing.GroupLayout.PREFERRED_SIZE)
                 .addGroup(jPanel1Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
                     .addGroup(jPanel1Layout.createSequentialGroup()
-                        .addGap(83, 83, 83)
-                        .addGroup(jPanel1Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-                            .addComponent(PictureField, javax.swing.GroupLayout.PREFERRED_SIZE, 180, javax.swing.GroupLayout.PREFERRED_SIZE)
-                            .addGroup(jPanel1Layout.createSequentialGroup()
-                                .addGroup(jPanel1Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-                                    .addComponent(jLabel1)
-                                    .addComponent(CarNameField, javax.swing.GroupLayout.PREFERRED_SIZE, 99, javax.swing.GroupLayout.PREFERRED_SIZE)
-                                    .addComponent(jLabel2, javax.swing.GroupLayout.PREFERRED_SIZE, 81, javax.swing.GroupLayout.PREFERRED_SIZE)
-                                    .addComponent(CarSeatsField, javax.swing.GroupLayout.PREFERRED_SIZE, 130, javax.swing.GroupLayout.PREFERRED_SIZE))
-                                .addGap(102, 102, 102)
-                                .addGroup(jPanel1Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-                                    .addComponent(CarPriceField, javax.swing.GroupLayout.PREFERRED_SIZE, 100, javax.swing.GroupLayout.PREFERRED_SIZE)
-                                    .addComponent(jLabel3)
-                                    .addComponent(jLabel4)
-                                    .addComponent(CarTypeField, javax.swing.GroupLayout.PREFERRED_SIZE, 104, javax.swing.GroupLayout.PREFERRED_SIZE)))))
+                        .addGap(31, 31, 31)
+                        .addComponent(ScrollPanel, javax.swing.GroupLayout.PREFERRED_SIZE, 430, javax.swing.GroupLayout.PREFERRED_SIZE))
                     .addGroup(jPanel1Layout.createSequentialGroup()
-                        .addGap(200, 200, 200)
+                        .addGap(29, 29, 29)
+                        .addComponent(TitleImage, javax.swing.GroupLayout.PREFERRED_SIZE, 60, javax.swing.GroupLayout.PREFERRED_SIZE)
+                        .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.UNRELATED)
                         .addGroup(jPanel1Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-                            .addComponent(BackButton, javax.swing.GroupLayout.PREFERRED_SIZE, 83, javax.swing.GroupLayout.PREFERRED_SIZE)
-                            .addComponent(continueButton, javax.swing.GroupLayout.PREFERRED_SIZE, 83, javax.swing.GroupLayout.PREFERRED_SIZE))))
-                .addContainerGap(97, Short.MAX_VALUE))
+                            .addComponent(jLabel5, javax.swing.GroupLayout.PREFERRED_SIZE, 220, javax.swing.GroupLayout.PREFERRED_SIZE)
+                            .addComponent(jLabel7, javax.swing.GroupLayout.PREFERRED_SIZE, 296, javax.swing.GroupLayout.PREFERRED_SIZE))))
+                .addGap(36, 36, 36)
+                .addComponent(jPanel2, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE))
         );
         jPanel1Layout.setVerticalGroup(
             jPanel1Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-            .addGroup(jPanel1Layout.createSequentialGroup()
-                .addGap(49, 49, 49)
-                .addGroup(jPanel1Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
+            .addGroup(javax.swing.GroupLayout.Alignment.TRAILING, jPanel1Layout.createSequentialGroup()
+                .addContainerGap()
+                .addGroup(jPanel1Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING, false)
+                    .addComponent(TitleImage, javax.swing.GroupLayout.PREFERRED_SIZE, 60, javax.swing.GroupLayout.PREFERRED_SIZE)
                     .addGroup(jPanel1Layout.createSequentialGroup()
-                        .addComponent(PictureField, javax.swing.GroupLayout.PREFERRED_SIZE, 180, javax.swing.GroupLayout.PREFERRED_SIZE)
+                        .addGap(10, 10, 10)
+                        .addComponent(jLabel5)
                         .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
-                        .addGroup(jPanel1Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
-                            .addComponent(jLabel1)
-                            .addComponent(jLabel4))
-                        .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
-                        .addGroup(jPanel1Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
-                            .addComponent(CarNameField)
-                            .addComponent(CarTypeField))
-                        .addGap(52, 52, 52)
-                        .addGroup(jPanel1Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
-                            .addComponent(jLabel2)
-                            .addComponent(jLabel3))
-                        .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
-                        .addGroup(jPanel1Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
-                            .addComponent(CarSeatsField)
-                            .addComponent(CarPriceField))
-                        .addGap(31, 31, 31)
-                        .addComponent(continueButton)
-                        .addGap(18, 18, 18)
-                        .addComponent(BackButton))
-                    .addComponent(ScrollPanel, javax.swing.GroupLayout.PREFERRED_SIZE, 420, javax.swing.GroupLayout.PREFERRED_SIZE))
-                .addContainerGap(43, Short.MAX_VALUE))
+                        .addComponent(jLabel7, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)))
+                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED, 10, Short.MAX_VALUE)
+                .addComponent(ScrollPanel, javax.swing.GroupLayout.PREFERRED_SIZE, 420, javax.swing.GroupLayout.PREFERRED_SIZE)
+                .addGap(27, 27, 27))
+            .addComponent(jPanel2, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
         );
 
-        jMenu1.setText("File");
+        jMenuBar1.setBackground(new java.awt.Color(6, 26, 35));
+        jMenuBar1.setForeground(new java.awt.Color(255, 255, 255));
+
+        BookingMenu.setForeground(new java.awt.Color(255, 255, 255));
+        BookingMenu.setText("Services");
+
+        rentCarButton.setBackground(new java.awt.Color(6, 26, 35));
+        rentCarButton.setFont(new java.awt.Font("Bahnschrift", 0, 14)); // NOI18N
+        rentCarButton.setForeground(new java.awt.Color(255, 255, 255));
+        rentCarButton.setText("Rent a Car");
+        rentCarButton.addActionListener(new java.awt.event.ActionListener() {
+            public void actionPerformed(java.awt.event.ActionEvent evt) {
+                rentCarButtonActionPerformed(evt);
+            }
+        });
+        BookingMenu.add(rentCarButton);
+
+        jMenuBar1.add(BookingMenu);
+
+        jMenu1.setForeground(new java.awt.Color(255, 255, 255));
+        jMenu1.setText("Finance");
+
+        PaymentMenu.setBackground(new java.awt.Color(6, 26, 35));
+        PaymentMenu.setFont(new java.awt.Font("Bahnschrift", 0, 14)); // NOI18N
+        PaymentMenu.setForeground(new java.awt.Color(255, 255, 255));
+        PaymentMenu.setText("Payment");
+        jMenu1.add(PaymentMenu);
+
         jMenuBar1.add(jMenu1);
 
-        jMenu2.setText("Edit");
+        jMenu3.setForeground(new java.awt.Color(255, 255, 255));
+        jMenu3.setText("Bookings");
+
+        BookingConfirmationMenu.setBackground(new java.awt.Color(6, 26, 35));
+        BookingConfirmationMenu.setFont(new java.awt.Font("Bahnschrift", 0, 14)); // NOI18N
+        BookingConfirmationMenu.setForeground(new java.awt.Color(255, 255, 255));
+        BookingConfirmationMenu.setText("Booking Confirmation");
+        BookingConfirmationMenu.addActionListener(new java.awt.event.ActionListener() {
+            public void actionPerformed(java.awt.event.ActionEvent evt) {
+                BookingConfirmationMenuActionPerformed(evt);
+            }
+        });
+        jMenu3.add(BookingConfirmationMenu);
+
+        ViewBookingsMenu.setBackground(new java.awt.Color(6, 26, 35));
+        ViewBookingsMenu.setFont(new java.awt.Font("Bahnschrift", 0, 14)); // NOI18N
+        ViewBookingsMenu.setForeground(new java.awt.Color(255, 255, 255));
+        ViewBookingsMenu.setText("View Bookings");
+        ViewBookingsMenu.addActionListener(new java.awt.event.ActionListener() {
+            public void actionPerformed(java.awt.event.ActionEvent evt) {
+                ViewBookingsMenuActionPerformed(evt);
+            }
+        });
+        jMenu3.add(ViewBookingsMenu);
+
+        jMenuBar1.add(jMenu3);
+
+        jMenu2.setForeground(new java.awt.Color(255, 255, 255));
+        jMenu2.setText("Settings");
+
+        AccountSettingsMenu.setBackground(new java.awt.Color(6, 26, 35));
+        AccountSettingsMenu.setFont(new java.awt.Font("Bahnschrift", 0, 14)); // NOI18N
+        AccountSettingsMenu.setForeground(new java.awt.Color(255, 255, 255));
+        AccountSettingsMenu.setText("Account Settings");
+        AccountSettingsMenu.addActionListener(new java.awt.event.ActionListener() {
+            public void actionPerformed(java.awt.event.ActionEvent evt) {
+                AccountSettingsMenuActionPerformed(evt);
+            }
+        });
+        jMenu2.add(AccountSettingsMenu);
+
+        LogoutMenu.setBackground(new java.awt.Color(6, 26, 35));
+        LogoutMenu.setFont(new java.awt.Font("Bahnschrift", 0, 14)); // NOI18N
+        LogoutMenu.setForeground(new java.awt.Color(255, 255, 255));
+        LogoutMenu.setText("Logout");
+        LogoutMenu.addActionListener(new java.awt.event.ActionListener() {
+            public void actionPerformed(java.awt.event.ActionEvent evt) {
+                LogoutMenuActionPerformed(evt);
+            }
+        });
+        jMenu2.add(LogoutMenu);
+
         jMenuBar1.add(jMenu2);
 
         setJMenuBar(jMenuBar1);
@@ -228,6 +381,26 @@ public class ViewCar extends javax.swing.JFrame {
     private void BackButtonActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_BackButtonActionPerformed
         pageSwitch.switchPage(this, new ChooseCarType(user)); 
     }//GEN-LAST:event_BackButtonActionPerformed
+
+    private void rentCarButtonActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_rentCarButtonActionPerformed
+        pageSwitch.switchPage(this, new ChooseCarType(user));
+    }//GEN-LAST:event_rentCarButtonActionPerformed
+
+    private void BookingConfirmationMenuActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_BookingConfirmationMenuActionPerformed
+        pageSwitch.switchPage(this, new BookingConfirmation(user));
+    }//GEN-LAST:event_BookingConfirmationMenuActionPerformed
+
+    private void ViewBookingsMenuActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_ViewBookingsMenuActionPerformed
+        pageSwitch.switchPage(this, new CheckBooking(user));
+    }//GEN-LAST:event_ViewBookingsMenuActionPerformed
+
+    private void AccountSettingsMenuActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_AccountSettingsMenuActionPerformed
+        pageSwitch.switchPage(this, new manageOwnAccount(user));
+    }//GEN-LAST:event_AccountSettingsMenuActionPerformed
+
+    private void LogoutMenuActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_LogoutMenuActionPerformed
+        pageSwitch.switchPage(this, new Login());
+    }//GEN-LAST:event_LogoutMenuActionPerformed
     
 
     /**
@@ -266,21 +439,33 @@ public class ViewCar extends javax.swing.JFrame {
     }
 
     // Variables declaration - do not modify//GEN-BEGIN:variables
+    private javax.swing.JMenuItem AccountSettingsMenu;
     private javax.swing.JButton BackButton;
+    private javax.swing.JMenuItem BookingConfirmationMenu;
+    private javax.swing.JMenu BookingMenu;
     private javax.swing.JLabel CarNameField;
     private javax.swing.JLabel CarPriceField;
     private javax.swing.JLabel CarSeatsField;
     private javax.swing.JLabel CarTypeField;
+    private javax.swing.JMenuItem LogoutMenu;
+    private javax.swing.JMenuItem PaymentMenu;
     private javax.swing.JLabel PictureField;
     private javax.swing.JScrollPane ScrollPanel;
+    private javax.swing.JLabel TitleImage;
+    private javax.swing.JMenuItem ViewBookingsMenu;
     private javax.swing.JButton continueButton;
     private javax.swing.JLabel jLabel1;
     private javax.swing.JLabel jLabel2;
     private javax.swing.JLabel jLabel3;
     private javax.swing.JLabel jLabel4;
+    private javax.swing.JLabel jLabel5;
+    private javax.swing.JLabel jLabel7;
     private javax.swing.JMenu jMenu1;
     private javax.swing.JMenu jMenu2;
+    private javax.swing.JMenu jMenu3;
     private javax.swing.JMenuBar jMenuBar1;
     private javax.swing.JPanel jPanel1;
+    private javax.swing.JPanel jPanel2;
+    private javax.swing.JMenuItem rentCarButton;
     // End of variables declaration//GEN-END:variables
 }
