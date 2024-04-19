@@ -29,7 +29,6 @@ public class CustomerDashboard extends javax.swing.JFrame {
 
         jButton1 = new javax.swing.JButton();
         jMenuBar1 = new javax.swing.JMenuBar();
-        jMenu1 = new javax.swing.JMenu();
         BookingMenu = new javax.swing.JMenu();
         rentCarButton = new javax.swing.JMenuItem();
         jMenu3 = new javax.swing.JMenu();
@@ -47,9 +46,6 @@ public class CustomerDashboard extends javax.swing.JFrame {
                 jButton1ActionPerformed(evt);
             }
         });
-
-        jMenu1.setText("File");
-        jMenuBar1.add(jMenu1);
 
         BookingMenu.setText("Services");
 
@@ -194,7 +190,6 @@ public class CustomerDashboard extends javax.swing.JFrame {
     private javax.swing.JMenuItem LogoutMenu;
     private javax.swing.JMenuItem ViewBookingsMenu;
     private javax.swing.JButton jButton1;
-    private javax.swing.JMenu jMenu1;
     private javax.swing.JMenu jMenu2;
     private javax.swing.JMenu jMenu3;
     private javax.swing.JMenuBar jMenuBar1;
