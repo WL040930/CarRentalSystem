@@ -121,7 +121,7 @@ public class BookCar extends javax.swing.JFrame {
 
         String carTypes = dataIO.readData(rowOfCarId + 4, readFileLocation);
         if (carTypes != "Vans") {
-            carTypes = carTypes + "Car";
+            carTypes = carTypes + " Car";
         }
         jLabel7.setFont(new java.awt.Font("Bahnschrift", 0, 14)); // NOI18N
         jLabel7.setForeground(new java.awt.Color(255, 255, 255));
