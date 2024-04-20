@@ -393,6 +393,9 @@ public class BookCar extends javax.swing.JFrame {
                     dataIO.writeData("", writeFileLocation);
                     dataIO.writeData("", writeFileLocation);
                     JOptionPane.showMessageDialog(this, "Booking Successful", "Success", JOptionPane.INFORMATION_MESSAGE);
+                    Car newCar = new Car();
+                    newCar.setCarType(car.getCarType());
+                    pageSwitch.switchPage(this, new ViewCar(user, newCar));
                 }
             }
         } else {
