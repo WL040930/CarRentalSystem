@@ -346,6 +346,11 @@ public class BookingConfirmation extends javax.swing.JFrame {
         PaymentMenu.setFont(new java.awt.Font("Bahnschrift", 0, 14)); // NOI18N
         PaymentMenu.setForeground(new java.awt.Color(255, 255, 255));
         PaymentMenu.setText("Payment");
+        PaymentMenu.addActionListener(new java.awt.event.ActionListener() {
+            public void actionPerformed(java.awt.event.ActionEvent evt) {
+                PaymentMenuActionPerformed(evt);
+            }
+        });
         jMenu1.add(PaymentMenu);
 
         jMenuBar1.add(jMenu1);
@@ -500,6 +505,10 @@ public class BookingConfirmation extends javax.swing.JFrame {
     private void LogoutMenuActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_LogoutMenuActionPerformed
         pageSwitch.switchPage(this, new Login());
     }//GEN-LAST:event_LogoutMenuActionPerformed
+
+    private void PaymentMenuActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_PaymentMenuActionPerformed
+        pageSwitch.switchPage(this, new UserPayment(user));
+    }//GEN-LAST:event_PaymentMenuActionPerformed
 
     public void displayBookingDetails(Booking booking) {
         bookingId = booking.getBookingId();

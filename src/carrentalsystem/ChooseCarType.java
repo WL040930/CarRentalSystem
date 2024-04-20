@@ -257,6 +257,11 @@ public class ChooseCarType extends javax.swing.JFrame {
         PaymentMenu.setFont(new java.awt.Font("Bahnschrift", 0, 14)); // NOI18N
         PaymentMenu.setForeground(new java.awt.Color(255, 255, 255));
         PaymentMenu.setText("Payment");
+        PaymentMenu.addActionListener(new java.awt.event.ActionListener() {
+            public void actionPerformed(java.awt.event.ActionEvent evt) {
+                PaymentMenuActionPerformed(evt);
+            }
+        });
         jMenu1.add(PaymentMenu);
 
         jMenuBar1.add(jMenu1);
@@ -372,6 +377,10 @@ public class ChooseCarType extends javax.swing.JFrame {
         car.setCarType("Economy");
         pageSwitch.switchPage(this, new ViewCar(user, car));
     }//GEN-LAST:event_EconomyButtonActionPerformed
+
+    private void PaymentMenuActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_PaymentMenuActionPerformed
+        pageSwitch.switchPage(this, new UserPayment(user));
+    }//GEN-LAST:event_PaymentMenuActionPerformed
 
     /**
      * @param args the command line arguments
