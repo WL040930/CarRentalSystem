@@ -138,6 +138,7 @@ public class ChooseCarType extends javax.swing.JFrame {
         jLabel2.setText("Economy Car");
 
         EconomyButton.setText("");
+        EconomyButton.setCursor(new java.awt.Cursor(java.awt.Cursor.HAND_CURSOR));
         EconomyButton.addActionListener(new java.awt.event.ActionListener() {
             public void actionPerformed(java.awt.event.ActionEvent evt) {
                 EconomyButtonActionPerformed(evt);
