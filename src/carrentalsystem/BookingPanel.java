@@ -16,12 +16,14 @@ public class BookingPanel extends javax.swing.JPanel {
 
     private final Booking booking;
     private final BookingConfirmation bookingConfirmation;
+    private final UserPayment userPayment;
     private final CheckBooking checkBooking;
     private static BookingPanel lastClickedPanel;
 
     public BookingPanel(Booking booking, BookingConfirmation bookingConfirmation) {
         this.booking = booking;
         this.bookingConfirmation = bookingConfirmation; // Reference to the BookingConfirmation instance
+        this.userPayment = null;
         this.checkBooking = null;
         initComponents();
         displayBookingInfo();
@@ -89,6 +91,7 @@ public class BookingPanel extends javax.swing.JPanel {
 
     public BookingPanel(Booking booking, CheckBooking checkBooking, String status) {
         this.booking = booking;
+        this.userPayment = null;
         this.bookingConfirmation = null;
         this.checkBooking = checkBooking;
         initComponents();
@@ -110,6 +113,42 @@ public class BookingPanel extends javax.swing.JPanel {
     private void handleBookingPanelClicks() {
         checkBooking.displayBookingDetails(booking);
         if (checkBooking.bookingId == booking.getBookingId()) {
+            setBackground(Color.LIGHT_GRAY);
+            jPanel1.setBackground(new Color(6, 26, 35));
+            setTextColor(Color.WHITE);
+            if (lastClickedPanel != null && lastClickedPanel != this) {
+                lastClickedPanel.setBackground(Color.WHITE); 
+                lastClickedPanel.jPanel1.setBackground(new Color(242,242,242));
+                lastClickedPanel.setTextColor(Color.BLACK);
+            }
+            lastClickedPanel = this;
+        }
+    }
+
+    public BookingPanel(Booking booking, UserPayment userPayment) {
+        this.booking = booking;
+        this.userPayment = userPayment;
+        this.bookingConfirmation = null;
+        this.checkBooking = null;
+        initComponents();
+        displayBookingInfo();
+        addClickListenersForPayment();
+    }
+
+    private void addClickListenersForPayment() {
+        // Add mouse listener to handle click events
+        this.addMouseListener(new MouseAdapter() {
+            @Override
+            public void mouseClicked(MouseEvent e) {
+                // Handle click event here
+                handlePaymentPanelClicks();
+            }
+        });
+    }
+
+    private void handlePaymentPanelClicks() {
+        userPayment.displayBookingDetails(booking);
+        if (userPayment.bookingid == booking.getBookingId()) {
             setBackground(Color.LIGHT_GRAY);
             jPanel1.setBackground(new Color(6, 26, 35));
             setTextColor(Color.WHITE);

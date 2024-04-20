@@ -17,7 +17,6 @@ import javax.swing.ImageIcon;
 import java.awt.Image;
 import java.awt.Color;
 
-
 public class CheckBooking extends javax.swing.JFrame {
 
     static User.customer user; 

@@ -50,7 +50,7 @@ public class CustomerDashboard extends javax.swing.JFrame {
 
         FinanceButton.addMouseListener(new java.awt.event.MouseAdapter() {
             public void mouseClicked(java.awt.event.MouseEvent evt) {
-                // TODO
+                pageSwitch.switchPage(CustomerDashboard.this, new UserPayment(user));
             }
         });
 
