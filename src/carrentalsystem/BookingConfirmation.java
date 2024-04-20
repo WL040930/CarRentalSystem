@@ -18,6 +18,7 @@ public class BookingConfirmation extends javax.swing.JFrame {
     public BookingConfirmation(User.customer user) {
         BookingConfirmation.user = user;
         initComponents();
+        setResizable(false);
 
         List<Booking> bookings = DatabaseManager.getSpecificBookings(user.getEmail());
 

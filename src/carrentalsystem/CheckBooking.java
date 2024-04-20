@@ -29,6 +29,7 @@ public class CheckBooking extends javax.swing.JFrame {
     public CheckBooking(User.customer user) {
         CheckBooking.user = user; 
         initComponents();
+        setResizable(false);
         AllBookingsButton.setSelected(true);
 
         List<Booking> bookings = DatabaseManager.getSpecificBooking(user.getEmail(), selection);

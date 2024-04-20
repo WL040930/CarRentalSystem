@@ -33,6 +33,7 @@ public class BookCar extends javax.swing.JFrame {
         carId = car.getCarID();
         rowOfCarId = dataIO.rowNumber(carId, 1, readFileLocation, 7);
         initComponents();
+        setResizable(false);
 
         String imageFilePath = dataIO.readData(rowOfCarId + 5, readFileLocation);
 
