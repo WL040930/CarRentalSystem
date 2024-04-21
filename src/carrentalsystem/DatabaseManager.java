@@ -262,7 +262,7 @@ public class DatabaseManager {
                     bookings.add(booking);
                 }
             }
-
+            
         } catch (Exception e) {
             e.printStackTrace();
         }

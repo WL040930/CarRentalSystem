@@ -6,7 +6,6 @@ package carrentalsystem;
 
 import java.awt.Image;
 import java.awt.print.Book;
-
 import javax.swing.ImageIcon;
 import javax.swing.JOptionPane;
 import java.time.LocalDate;
