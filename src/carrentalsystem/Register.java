@@ -237,43 +237,6 @@ public class Register extends javax.swing.JFrame {
     final String fileLocation = dataIO.GET_USER_FILE();
     /* End of declaration */
 
-    private boolean validateResult(String username, String email, String password, String confirmPassword) {
-        if (!User.validateUsername(username)) {
-            messageHandling.errorUsername();
-            usernameField.setText("");
-            return false;
-        } 
-
-        if (!User.validateEmail(email)) {
-            messageHandling.errorEmail();
-            emailField.setText("");
-            return false;
-        }
-
-        if (!User.isEmailUnique(email)) {
-            messageHandling.repeatedEmail();
-            emailField.setText("");
-            return false;
-        }
-
-        if (!User.validatePassword(password)) {
-            messageHandling.errorPassword();
-            passwordField.setText("");
-            confirmPasswordField.setText("");
-            return false;
-        }
-
-        if (!password.equals(confirmPassword)) {
-            JOptionPane.showMessageDialog(null, "Password does not match", "Error", JOptionPane.ERROR_MESSAGE);
-            confirmPasswordField.setText("");
-            return false;
-        }
-
-        return true;
-
-    }
-
-
     /* Start of username field */
     private void usernameFieldActionPerformed(java.awt.event.ActionEvent evt) {
         usernameField.getText();
@@ -314,6 +277,41 @@ public class Register extends javax.swing.JFrame {
     }
     /* End of confirm password field */
 
+    private boolean validateResult(String username, String email, String password, String confirmPassword) {
+        if (!User.validateUsername(username)) {
+            messageHandling.errorUsername();
+            usernameField.setText("");
+            return false;
+        } 
+
+        if (!User.validateEmail(email)) {
+            messageHandling.errorEmail();
+            emailField.setText("");
+            return false;
+        }
+
+        if (!User.isEmailUnique(email)) {
+            messageHandling.repeatedEmail();
+            emailField.setText("");
+            return false;
+        }
+
+        if (!User.validatePassword(password)) {
+            messageHandling.errorPassword();
+            passwordField.setText("");
+            confirmPasswordField.setText("");
+            return false;
+        }
+
+        if (!password.equals(confirmPassword)) {
+            JOptionPane.showMessageDialog(null, "Password does not match", "Error", JOptionPane.ERROR_MESSAGE);
+            confirmPasswordField.setText("");
+            return false;
+        }
+
+        return true;
+
+    }
 
     /* Register button */
     private void registerButtonActionPerformed(java.awt.event.ActionEvent evt) {
