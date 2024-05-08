@@ -211,6 +211,7 @@ public class BookingManagement extends javax.swing.JFrame {
         ApproveButton.setFont(new java.awt.Font("Bahnschrift", 1, 18)); // NOI18N
         ApproveButton.setForeground(new java.awt.Color(255, 255, 255));
         ApproveButton.setText("Approve");
+        ApproveButton.setCursor(new java.awt.Cursor(java.awt.Cursor.HAND_CURSOR));
         ApproveButton.addActionListener(new java.awt.event.ActionListener() {
             public void actionPerformed(java.awt.event.ActionEvent evt) {
                 ApproveButtonActionPerformed(evt);
@@ -224,6 +225,7 @@ public class BookingManagement extends javax.swing.JFrame {
         RejectButton.setFont(new java.awt.Font("Bahnschrift", 1, 18)); // NOI18N
         RejectButton.setForeground(new java.awt.Color(255, 255, 255));
         RejectButton.setText("Reject");
+        RejectButton.setCursor(new java.awt.Cursor(java.awt.Cursor.HAND_CURSOR));
         RejectButton.addActionListener(new java.awt.event.ActionListener() {
             public void actionPerformed(java.awt.event.ActionEvent evt) {
                 RejectButtonActionPerformed(evt);

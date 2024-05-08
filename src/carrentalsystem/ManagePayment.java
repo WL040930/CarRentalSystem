@@ -223,8 +223,10 @@ public class ManagePayment extends javax.swing.JFrame {
         EmailField.setFont(new java.awt.Font("Bahnschrift", 0, 14)); // NOI18N
         EmailField.setText("");
 
+        PaidButton.setBackground(new java.awt.Color(204, 204, 204));
         PaidButton.setFont(new java.awt.Font("Bahnschrift", 1, 18)); // NOI18N
         PaidButton.setText("Paid");
+        PaidButton.setCursor(new java.awt.Cursor(java.awt.Cursor.HAND_CURSOR));
         PaidButton.addActionListener(new java.awt.event.ActionListener() {
             public void actionPerformed(java.awt.event.ActionEvent evt) {
                 PaidButtonActionPerformed(evt);
@@ -234,8 +236,10 @@ public class ManagePayment extends javax.swing.JFrame {
         jLabel3.setFont(new java.awt.Font("Bahnschrift", 1, 18)); // NOI18N
         jLabel3.setText("Car Booked: ");
 
+        UnpaidButton.setBackground(new java.awt.Color(204, 204, 204));
         UnpaidButton.setFont(new java.awt.Font("Bahnschrift", 1, 18)); // NOI18N
         UnpaidButton.setText("Unpaid");
+        UnpaidButton.setCursor(new java.awt.Cursor(java.awt.Cursor.HAND_CURSOR));
         UnpaidButton.addActionListener(new java.awt.event.ActionListener() {
             public void actionPerformed(java.awt.event.ActionEvent evt) {
                 UnpaidButtonActionPerformed(evt);

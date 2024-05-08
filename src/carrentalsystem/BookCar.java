@@ -103,7 +103,7 @@ public class BookCar extends javax.swing.JFrame {
 
         jPanel1.setBackground(new java.awt.Color(255, 255, 255));
 
-        pictureField.setBorder(javax.swing.BorderFactory.createLineBorder(new java.awt.Color(0, 0, 0)));
+        pictureField.setBorder(javax.swing.BorderFactory.createLineBorder(null));
 
         jLabel2.setFont(new java.awt.Font("Bahnschrift", 1, 36)); // NOI18N
         jLabel2.setText(dataIO.readData(rowOfCarId + 1, readFileLocation));
@@ -120,7 +120,7 @@ public class BookCar extends javax.swing.JFrame {
 
         String carTypes = dataIO.readData(rowOfCarId + 4, readFileLocation);
         if (carTypes != "Vans") {
-            carTypes = carTypes + " Car";
+            carTypes = carTypes + "Car";
         }
         jLabel7.setFont(new java.awt.Font("Bahnschrift", 0, 14)); // NOI18N
         jLabel7.setForeground(new java.awt.Color(255, 255, 255));
@@ -155,6 +155,7 @@ public class BookCar extends javax.swing.JFrame {
         bookButton.setBackground(new java.awt.Color(255, 255, 254));
         bookButton.setFont(new java.awt.Font("Bahnschrift", 1, 18)); // NOI18N
         bookButton.setText("Book");
+        bookButton.setCursor(new java.awt.Cursor(java.awt.Cursor.HAND_CURSOR));
         bookButton.addActionListener(new java.awt.event.ActionListener() {
             public void actionPerformed(java.awt.event.ActionEvent evt) {
                 bookButtonActionPerformed(evt);
@@ -164,6 +165,7 @@ public class BookCar extends javax.swing.JFrame {
         Cancel.setBackground(new java.awt.Color(255, 255, 254));
         Cancel.setFont(new java.awt.Font("Bahnschrift", 1, 18)); // NOI18N
         Cancel.setText("Cancel");
+        Cancel.setCursor(new java.awt.Cursor(java.awt.Cursor.HAND_CURSOR));
         Cancel.addActionListener(new java.awt.event.ActionListener() {
             public void actionPerformed(java.awt.event.ActionEvent evt) {
                 CancelActionPerformed(evt);

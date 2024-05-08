@@ -173,6 +173,7 @@ public class AddNewCar extends javax.swing.JFrame {
         SelectButton.setBackground(new java.awt.Color(204, 204, 204));
         SelectButton.setFont(new java.awt.Font("Bahnschrift", 1, 18)); // NOI18N
         SelectButton.setText("Select");
+        SelectButton.setCursor(new java.awt.Cursor(java.awt.Cursor.HAND_CURSOR));
         SelectButton.addActionListener(new java.awt.event.ActionListener() {
             public void actionPerformed(java.awt.event.ActionEvent evt) {
                 SelectButtonActionPerformed(evt);
@@ -186,6 +187,7 @@ public class AddNewCar extends javax.swing.JFrame {
         AddButton.setBackground(new java.awt.Color(204, 204, 204));
         AddButton.setFont(new java.awt.Font("Bahnschrift", 1, 18)); // NOI18N
         AddButton.setText("Add");
+        AddButton.setCursor(new java.awt.Cursor(java.awt.Cursor.HAND_CURSOR));
         AddButton.addActionListener(new java.awt.event.ActionListener() {
             public void actionPerformed(java.awt.event.ActionEvent evt) {
                 AddButtonActionPerformed(evt);

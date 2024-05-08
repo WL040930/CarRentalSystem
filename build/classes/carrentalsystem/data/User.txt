@@ -1,15 +1,10 @@
-adminusername
+adminu
 admin@gmail.com
 admin
 admin
 
-username
-user@gmail.com
-password
-customer
-
-testUser
-test@gmail.com
+WeiLun
+limweilun3838@gmail.com
 password
 customer
 

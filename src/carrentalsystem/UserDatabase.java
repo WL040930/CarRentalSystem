@@ -164,6 +164,7 @@ public class UserDatabase extends javax.swing.JFrame {
         saveButton.setBackground(new java.awt.Color(255, 255, 254));
         saveButton.setFont(new java.awt.Font("Bahnschrift", 1, 18)); // NOI18N
         saveButton.setText("Save");
+        saveButton.setCursor(new java.awt.Cursor(java.awt.Cursor.HAND_CURSOR));
         saveButton.addActionListener(new java.awt.event.ActionListener() {
             public void actionPerformed(java.awt.event.ActionEvent evt) {
                 saveButtonActionPerformed(evt);
