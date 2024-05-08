@@ -49,6 +49,7 @@ public class Register extends javax.swing.JFrame {
         backToLogin.setFont(new java.awt.Font("Bahnschrift", 1, 14)); // NOI18N
         backToLogin.setForeground(new java.awt.Color(255, 255, 255));
         backToLogin.setText("Back to Login Page");
+        backToLogin.setCursor(new java.awt.Cursor(java.awt.Cursor.HAND_CURSOR));
         backToLogin.addActionListener(new java.awt.event.ActionListener() {
             public void actionPerformed(java.awt.event.ActionEvent evt) {
                 backToLoginActionPerformed(evt);
@@ -107,6 +108,7 @@ public class Register extends javax.swing.JFrame {
         registerButton.setFont(new java.awt.Font("Bahnschrift", 1, 18)); // NOI18N
         registerButton.setForeground(new java.awt.Color(255, 255, 255));
         registerButton.setText("Register");
+        registerButton.setCursor(new java.awt.Cursor(java.awt.Cursor.HAND_CURSOR));
         registerButton.addActionListener(new java.awt.event.ActionListener() {
             public void actionPerformed(java.awt.event.ActionEvent evt) {
                 registerButtonActionPerformed(evt);

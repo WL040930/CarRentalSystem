@@ -96,7 +96,7 @@ public class manageOwnAccount extends javax.swing.JFrame {
         EmailText.setFont(new java.awt.Font("Segoe UI", 0, 18)); // NOI18N
         EmailText.setForeground(new java.awt.Color(255, 255, 255));
         EmailText.setText(user.getEmail());
-        EmailText.setBorder(javax.swing.BorderFactory.createLineBorder(new java.awt.Color(0, 0, 0)));
+        EmailText.setBorder(javax.swing.BorderFactory.createLineBorder(null));
 
         jLabel1.setFont(new java.awt.Font("Segoe UI", 1, 18)); // NOI18N
         jLabel1.setForeground(new java.awt.Color(255, 255, 255));
@@ -140,10 +140,10 @@ public class manageOwnAccount extends javax.swing.JFrame {
             }
         });
 
-        updateButton.setBackground(new java.awt.Color(6, 26, 35));
+        updateButton.setBackground(new java.awt.Color(204, 204, 204));
         updateButton.setFont(new java.awt.Font("Segoe UI", 1, 18)); // NOI18N
-        updateButton.setForeground(new java.awt.Color(255, 255, 255));
         updateButton.setText("Update");
+        updateButton.setCursor(new java.awt.Cursor(java.awt.Cursor.HAND_CURSOR));
         updateButton.addActionListener(new java.awt.event.ActionListener() {
             public void actionPerformed(java.awt.event.ActionEvent evt) {
                 updateButtonActionPerformed(evt);

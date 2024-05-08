@@ -269,6 +269,7 @@ public class CarDatabase extends javax.swing.JFrame {
         SaveButton.setBackground(new java.awt.Color(255, 255, 254));
         SaveButton.setFont(new java.awt.Font("Bahnschrift", 1, 18)); // NOI18N
         SaveButton.setText("Save");
+        SaveButton.setCursor(new java.awt.Cursor(java.awt.Cursor.HAND_CURSOR));
         SaveButton.addActionListener(new java.awt.event.ActionListener() {
             public void actionPerformed(java.awt.event.ActionEvent evt) {
                 SaveButtonActionPerformed(evt);

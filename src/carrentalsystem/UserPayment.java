@@ -225,6 +225,7 @@ public class UserPayment extends javax.swing.JFrame {
         PayButton.setBackground(new java.awt.Color(255, 255, 254));
         PayButton.setFont(new java.awt.Font("Bahnschrift", 1, 18)); // NOI18N
         PayButton.setText("Pay");
+        PayButton.setCursor(new java.awt.Cursor(java.awt.Cursor.HAND_CURSOR));
         PayButton.addActionListener(new java.awt.event.ActionListener() {
             public void actionPerformed(java.awt.event.ActionEvent evt) {
                 PayButtonActionPerformed(evt);

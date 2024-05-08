@@ -93,6 +93,7 @@ public class ChooseTime extends javax.swing.JFrame {
         ViewButton.setBackground(new java.awt.Color(255, 255, 254));
         ViewButton.setFont(new java.awt.Font("Bahnschrift", 1, 18)); // NOI18N
         ViewButton.setText("Generate");
+        ViewButton.setCursor(new java.awt.Cursor(java.awt.Cursor.HAND_CURSOR));
         ViewButton.addActionListener(new java.awt.event.ActionListener() {
             public void actionPerformed(java.awt.event.ActionEvent evt) {
                 ViewButtonActionPerformed(evt);
@@ -326,13 +327,24 @@ public class ChooseTime extends javax.swing.JFrame {
     }// </editor-fold>//GEN-END:initComponents
 
     private void ChooserComboBoxActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_ChooserComboBoxActionPerformed
-        selected = ChooserComboBox.getSelectedItem().toString();
+        if (!ChooserComboBox.getSelectedItem().equals("")) {
+            selected = ChooserComboBox.getSelectedItem().toString();
+        } else {
+            return; 
+        }
     }//GEN-LAST:event_ChooserComboBoxActionPerformed
 
-    private void ViewButtonActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_ViewButtonActionPerformed
-        ChooserComboBoxActionPerformed(evt);
-        pageSwitch.switchPage(this, new ViewReport(user, selected));
-    }//GEN-LAST:event_ViewButtonActionPerformed
+    private void ViewButtonActionPerformed(java.awt.event.ActionEvent evt) {
+        Object selectedItem = ChooserComboBox.getSelectedItem();
+        
+        if (selectedItem != null && !selectedItem.toString().isEmpty()) {
+            selected = selectedItem.toString();
+            pageSwitch.switchPage(this, new ViewReport(user, selected));
+        } else {
+            System.out.println("Please select a valid item.");
+        }
+    }
+    
 
     private void jMenuItem5ActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jMenuItem5ActionPerformed
         pageSwitch.switchPage(this, new AddNewCar(user));
