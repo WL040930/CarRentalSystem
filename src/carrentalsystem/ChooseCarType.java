@@ -354,6 +354,11 @@ public class ChooseCarType extends javax.swing.JFrame {
         pageSwitch.switchPage(this, new ViewCar(user, car));
     }//GEN-LAST:event_LuxuryButtonActionPerformed
 
+    private void EconomyButtonActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_EconomyButtonActionPerformed
+        car.setCarType("Economy");
+        pageSwitch.switchPage(this, new ViewCar(user, car));
+    }//GEN-LAST:event_EconomyButtonActionPerformed
+
     private void rentCarButtonActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_rentCarButtonActionPerformed
         pageSwitch.switchPage(this, new ChooseCarType(user));
     }//GEN-LAST:event_rentCarButtonActionPerformed
@@ -373,11 +378,6 @@ public class ChooseCarType extends javax.swing.JFrame {
     private void LogoutMenuActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_LogoutMenuActionPerformed
         pageSwitch.switchPage(this, new Login());
     }//GEN-LAST:event_LogoutMenuActionPerformed
-
-    private void EconomyButtonActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_EconomyButtonActionPerformed
-        car.setCarType("Economy");
-        pageSwitch.switchPage(this, new ViewCar(user, car));
-    }//GEN-LAST:event_EconomyButtonActionPerformed
 
     private void PaymentMenuActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_PaymentMenuActionPerformed
         pageSwitch.switchPage(this, new UserPayment(user));
