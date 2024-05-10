@@ -42,7 +42,7 @@ public class Booking {
         3. Cancel - meaning that the admin has rejected the booking requests of user
         4. Accepted - meaning the user has accepted the booking confirmation message from admin 
         5. Rejected - meaning the user has rejected the booking cofirmation message from admin
-    
+    P
     */
 
     /*

@@ -1,14 +1,28 @@
 1
 Toyota Camry
 5
-300
+250
 Economy
 cbc7ca63-fb29-4f41-bbfa-3da17326991e.jpg
 
 2
-Toyota Camry
+Proton Myvi
 5
-300
+250
+Compact
+a5919c34-2e3f-430f-9d16-adc25adc56e6.jpg
+
+3
+Honda Civic
+5
+260
 Economy
-86ae2295-f0a7-4b3a-85fc-0400b066fdb7.jpg
+8ee128a3-fe0e-40b8-b97c-21986d11865b.jpg
+
+4
+Honda Accord
+5
+260
+Economy
+d4f32367-1694-4b19-9d6d-08953c0d8ef2.jpg
 
