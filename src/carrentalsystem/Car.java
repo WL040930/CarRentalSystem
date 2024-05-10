@@ -13,6 +13,7 @@ public class Car {
     private int seatsNumber;
     private String carType; 
     private int price; 
+    private String fileName; 
     /* End of declaration of variables */
     
 
@@ -58,6 +59,10 @@ public class Car {
     public int getPrice() {
         return price;
     }
+
+    public String getFileName() {
+        return fileName;
+    }
     /* End of Getters */
 
 
@@ -80,6 +85,10 @@ public class Car {
 
     public void setPrice(int price) {
         this.price = price;
+    }
+
+    public void setFileName(String fileName) {
+        this.fileName = fileName;
     }
     /* End of Setters */
 

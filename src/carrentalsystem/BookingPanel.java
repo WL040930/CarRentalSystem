@@ -22,7 +22,7 @@ public class BookingPanel extends javax.swing.JPanel {
 
     public BookingPanel(Booking booking, BookingConfirmation bookingConfirmation) {
         this.booking = booking;
-        this.bookingConfirmation = bookingConfirmation; // Reference to the BookingConfirmation instance
+        this.bookingConfirmation = bookingConfirmation; 
         this.userPayment = null;
         this.checkBooking = null;
         initComponents();

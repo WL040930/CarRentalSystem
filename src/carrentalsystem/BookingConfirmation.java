@@ -28,7 +28,7 @@ public class BookingConfirmation extends javax.swing.JFrame {
 
         // Create and add BookingPanel for each booking
         for (Booking booking : bookings) {
-            BookingPanel bookingPanel = new BookingPanel(booking, this); // Pass this instance of BookingConfirmation
+            BookingPanel bookingPanel = new BookingPanel(booking, this);
             bookingContainer.add(bookingPanel);
         }
 
