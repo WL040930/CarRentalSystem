@@ -1,7 +1,7 @@
 1
 Toyota Camry
 5
-250
+260
 Economy
 cbc7ca63-fb29-4f41-bbfa-3da17326991e.jpg
 
@@ -25,4 +25,32 @@ Honda Accord
 260
 Economy
 d4f32367-1694-4b19-9d6d-08953c0d8ef2.jpg
+
+5
+Mercedes-Benz S-Class
+5
+350
+Luxury
+159493cd-6b75-47ce-aa63-fc5cfd6525cf.jpg
+
+6
+Range Rover Velar
+5
+380
+Luxury
+98558f59-44fd-40ea-aabe-f4e7290c80b5.jpg
+
+7
+Ford Transit
+12
+120
+Vans
+9ab7c7a1-669c-4288-8dbf-60034b4205ff.jpeg
+
+8
+Chevrolet Express
+15
+150
+Vans
+323df095-1897-4308-8b17-19dc9710a426.jpg
 

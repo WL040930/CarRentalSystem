@@ -1,14 +1,15 @@
-adminu
+adminn
 admin@gmail.com
 admin
 admin
 
-WeiLun
-limweilun3838@gmail.com
+user01
+user@gmail.com
 password
 customer
 
-DenDen123
+DenDen
 denden@gmail.com
 12345678
 customer
+
