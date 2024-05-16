@@ -44,6 +44,9 @@ public class OverduePayment extends javax.swing.JFrame {
         ScrollPanel = new javax.swing.JScrollPane();
         jPanel2 = new javax.swing.JPanel();
         backButton = new javax.swing.JLabel();
+        UnpaidButton = new javax.swing.JRadioButton();
+        PendingButton = new javax.swing.JRadioButton();
+        PaidButton = new javax.swing.JRadioButton();
         TitleImage = new javax.swing.JLabel();
         jMenuBar1 = new javax.swing.JMenuBar();
         BookingMenu = new javax.swing.JMenu();
@@ -69,12 +72,33 @@ public class OverduePayment extends javax.swing.JFrame {
         backButton.setText("");
         backButton.setCursor(new java.awt.Cursor(java.awt.Cursor.HAND_CURSOR));
 
+        UnpaidButton.setBackground(new java.awt.Color(6, 26, 35));
+        UnpaidButton.setFont(new java.awt.Font("Bahnschrift", 1, 14)); // NOI18N
+        UnpaidButton.setForeground(new java.awt.Color(255, 255, 255));
+        UnpaidButton.setText("Unpaid");
+
+        PendingButton.setBackground(new java.awt.Color(6, 26, 35));
+        PendingButton.setFont(new java.awt.Font("Bahnschrift", 1, 14)); // NOI18N
+        PendingButton.setForeground(new java.awt.Color(255, 255, 255));
+        PendingButton.setText("Pending");
+
+        PaidButton.setBackground(new java.awt.Color(6, 26, 35));
+        PaidButton.setFont(new java.awt.Font("Bahnschrift", 1, 14)); // NOI18N
+        PaidButton.setForeground(new java.awt.Color(255, 255, 255));
+        PaidButton.setText("Paid");
+
         javax.swing.GroupLayout jPanel2Layout = new javax.swing.GroupLayout(jPanel2);
         jPanel2.setLayout(jPanel2Layout);
         jPanel2Layout.setHorizontalGroup(
             jPanel2Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-            .addGroup(javax.swing.GroupLayout.Alignment.TRAILING, jPanel2Layout.createSequentialGroup()
-                .addContainerGap(422, Short.MAX_VALUE)
+            .addGroup(jPanel2Layout.createSequentialGroup()
+                .addGap(31, 31, 31)
+                .addGroup(jPanel2Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING, false)
+                    .addComponent(PaidButton, javax.swing.GroupLayout.DEFAULT_SIZE, 155, Short.MAX_VALUE)
+                    .addGroup(jPanel2Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING, false)
+                        .addComponent(UnpaidButton, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
+                        .addComponent(PendingButton, javax.swing.GroupLayout.DEFAULT_SIZE, 155, Short.MAX_VALUE)))
+                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED, 236, Short.MAX_VALUE)
                 .addComponent(backButton, javax.swing.GroupLayout.PREFERRED_SIZE, 49, javax.swing.GroupLayout.PREFERRED_SIZE)
                 .addGap(40, 40, 40))
         );
@@ -82,8 +106,15 @@ public class OverduePayment extends javax.swing.JFrame {
             jPanel2Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
             .addGroup(jPanel2Layout.createSequentialGroup()
                 .addGap(19, 19, 19)
-                .addComponent(backButton, javax.swing.GroupLayout.PREFERRED_SIZE, 49, javax.swing.GroupLayout.PREFERRED_SIZE)
-                .addContainerGap(455, Short.MAX_VALUE))
+                .addGroup(jPanel2Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
+                    .addComponent(backButton, javax.swing.GroupLayout.PREFERRED_SIZE, 49, javax.swing.GroupLayout.PREFERRED_SIZE)
+                    .addGroup(jPanel2Layout.createSequentialGroup()
+                        .addComponent(UnpaidButton)
+                        .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
+                        .addComponent(PendingButton)))
+                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
+                .addComponent(PaidButton)
+                .addContainerGap(javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE))
         );
 
         TitleImage.setText("");
@@ -287,9 +318,12 @@ public class OverduePayment extends javax.swing.JFrame {
     private javax.swing.JMenuItem BookingConfirmationMenu;
     private javax.swing.JMenu BookingMenu;
     private javax.swing.JMenuItem LogoutMenu;
+    private javax.swing.JRadioButton PaidButton;
     private javax.swing.JMenuItem PaymentMenu;
+    private javax.swing.JRadioButton PendingButton;
     private javax.swing.JScrollPane ScrollPanel;
     private javax.swing.JLabel TitleImage;
+    private javax.swing.JRadioButton UnpaidButton;
     private javax.swing.JMenuItem ViewBookingsMenu;
     private javax.swing.JLabel backButton;
     private javax.swing.JLabel jLabel1;
