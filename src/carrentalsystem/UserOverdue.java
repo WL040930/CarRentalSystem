@@ -4,18 +4,17 @@
  */
 package carrentalsystem;
 
-import java.awt.Image;
 import javax.swing.ImageIcon;
+import java.awt.Image;
 
-public class UserCarService extends javax.swing.JFrame {
+public class UserOverdue extends javax.swing.JFrame {
 
-    static User.customer user; 
+    static User.customer user;
 
-    public UserCarService(User.customer user) {
-        UserCarService.user = user;
-        setResizable(false); 
+    public UserOverdue(User.customer user) {
+        UserOverdue.user = user;
         initComponents();
-
+    
         ImageIcon imageIcon = new ImageIcon(getClass().getResource("/carrentalsystem/img/logo.jpeg"));
         Image scaledImage = imageIcon.getImage().getScaledInstance(100, 100, Image.SCALE_SMOOTH);
         TitleImage.setIcon(new ImageIcon(scaledImage));
@@ -26,30 +25,30 @@ public class UserCarService extends javax.swing.JFrame {
 
         backButton.addMouseListener(new java.awt.event.MouseAdapter() {
             public void mouseClicked(java.awt.event.MouseEvent evt) {
-                pageSwitch.switchPage(UserCarService.this, new CustomerDashboard(user));
+                pageSwitch.switchPage(UserOverdue.this, new CustomerDashboard(user));
             }
         }); 
 
-        ImageIcon imageIcon3 = new ImageIcon(getClass().getResource("/carrentalsystem/img/rent_car_21.png"));
+        ImageIcon imageIcon3 = new ImageIcon(getClass().getResource("/carrentalsystem/img/financial_2.png"));
         Image scaledImage3 = imageIcon3.getImage().getScaledInstance(227, 227, Image.SCALE_SMOOTH);
-        RentCarButton.setIcon(new ImageIcon(scaledImage3));
+        FinancialButton.setIcon(new ImageIcon(scaledImage3));
 
-        RentCarButton.addMouseListener(new java.awt.event.MouseAdapter() {
+        FinancialButton.addMouseListener(new java.awt.event.MouseAdapter() {
             public void mouseClicked(java.awt.event.MouseEvent evt) {
-                pageSwitch.switchPage(UserCarService.this, new ChooseCarType(user));
+                pageSwitch.switchPage(UserOverdue.this, new UserPayment(user));
             }
         }); 
 
-        ImageIcon imageIcon4 = new ImageIcon(getClass().getResource("/carrentalsystem/img/return_car_icon.png"));
+        ImageIcon imageIcon4 = new ImageIcon(getClass().getResource("/carrentalsystem/img/overdue_icon.png"));
         Image scaledImage4 = imageIcon4.getImage().getScaledInstance(227, 227, Image.SCALE_SMOOTH);
-        ReturnCarButton.setIcon(new ImageIcon(scaledImage4));
+        OverdueButton.setIcon(new ImageIcon(scaledImage4));
 
-        ReturnCarButton.addMouseListener(new java.awt.event.MouseAdapter() {
+        OverdueButton.addMouseListener(new java.awt.event.MouseAdapter() {
             public void mouseClicked(java.awt.event.MouseEvent evt) {
-                pageSwitch.switchPage(UserCarService.this, new ReturnCar(user));
+                pageSwitch.switchPage(UserOverdue.this, new OverduePayment(user));
             }
         }); 
-
+    
     }
 
     /**
@@ -63,9 +62,9 @@ public class UserCarService extends javax.swing.JFrame {
 
         jPanel1 = new javax.swing.JPanel();
         jPanel2 = new javax.swing.JPanel();
-        RentCarButton = new javax.swing.JLabel();
+        FinancialButton = new javax.swing.JLabel();
         jLabel2 = new javax.swing.JLabel();
-        ReturnCarButton = new javax.swing.JLabel();
+        OverdueButton = new javax.swing.JLabel();
         jLabel3 = new javax.swing.JLabel();
         TitleText = new javax.swing.JLabel();
         jLabel1 = new javax.swing.JLabel();
@@ -89,19 +88,19 @@ public class UserCarService extends javax.swing.JFrame {
 
         jPanel2.setBackground(new java.awt.Color(6, 26, 35));
 
-        RentCarButton.setText("jLabel2");
-        RentCarButton.setCursor(new java.awt.Cursor(java.awt.Cursor.HAND_CURSOR));
+        FinancialButton.setText("jLabel2");
+        FinancialButton.setCursor(new java.awt.Cursor(java.awt.Cursor.HAND_CURSOR));
 
         jLabel2.setFont(new java.awt.Font("Bahnschrift", 1, 18)); // NOI18N
         jLabel2.setForeground(new java.awt.Color(255, 255, 255));
-        jLabel2.setText("Rent Car");
+        jLabel2.setText("Financial");
 
-        ReturnCarButton.setText("jLabel3");
-        ReturnCarButton.setCursor(new java.awt.Cursor(java.awt.Cursor.HAND_CURSOR));
+        OverdueButton.setText("jLabel3");
+        OverdueButton.setCursor(new java.awt.Cursor(java.awt.Cursor.HAND_CURSOR));
 
         jLabel3.setFont(new java.awt.Font("Bahnschrift", 1, 18)); // NOI18N
         jLabel3.setForeground(new java.awt.Color(255, 255, 255));
-        jLabel3.setText("Return Car");
+        jLabel3.setText("Overdue");
 
         javax.swing.GroupLayout jPanel2Layout = new javax.swing.GroupLayout(jPanel2);
         jPanel2.setLayout(jPanel2Layout);
@@ -109,24 +108,24 @@ public class UserCarService extends javax.swing.JFrame {
             jPanel2Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
             .addGroup(jPanel2Layout.createSequentialGroup()
                 .addGap(140, 140, 140)
-                .addComponent(RentCarButton, javax.swing.GroupLayout.PREFERRED_SIZE, 227, javax.swing.GroupLayout.PREFERRED_SIZE)
+                .addComponent(FinancialButton, javax.swing.GroupLayout.PREFERRED_SIZE, 227, javax.swing.GroupLayout.PREFERRED_SIZE)
                 .addGap(185, 185, 185)
-                .addComponent(ReturnCarButton, javax.swing.GroupLayout.PREFERRED_SIZE, 227, javax.swing.GroupLayout.PREFERRED_SIZE)
+                .addComponent(OverdueButton, javax.swing.GroupLayout.PREFERRED_SIZE, 227, javax.swing.GroupLayout.PREFERRED_SIZE)
                 .addContainerGap(221, Short.MAX_VALUE))
             .addGroup(jPanel2Layout.createSequentialGroup()
                 .addGap(211, 211, 211)
                 .addComponent(jLabel2, javax.swing.GroupLayout.PREFERRED_SIZE, 84, javax.swing.GroupLayout.PREFERRED_SIZE)
                 .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
-                .addComponent(jLabel3, javax.swing.GroupLayout.PREFERRED_SIZE, 104, javax.swing.GroupLayout.PREFERRED_SIZE)
-                .addGap(284, 284, 284))
+                .addComponent(jLabel3)
+                .addGap(295, 295, 295))
         );
         jPanel2Layout.setVerticalGroup(
             jPanel2Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
             .addGroup(jPanel2Layout.createSequentialGroup()
                 .addGap(38, 38, 38)
                 .addGroup(jPanel2Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING, false)
-                    .addComponent(ReturnCarButton, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
-                    .addComponent(RentCarButton, javax.swing.GroupLayout.DEFAULT_SIZE, 227, Short.MAX_VALUE))
+                    .addComponent(OverdueButton, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
+                    .addComponent(FinancialButton, javax.swing.GroupLayout.DEFAULT_SIZE, 227, Short.MAX_VALUE))
                 .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
                 .addGroup(jPanel2Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
                     .addComponent(jLabel2)
@@ -331,20 +330,20 @@ public class UserCarService extends javax.swing.JFrame {
 //                }
 //            }
 //        } catch (ClassNotFoundException ex) {
-//            java.util.logging.Logger.getLogger(UserCarService.class.getName()).log(java.util.logging.Level.SEVERE, null, ex);
+//            java.util.logging.Logger.getLogger(UserOverdue.class.getName()).log(java.util.logging.Level.SEVERE, null, ex);
 //        } catch (InstantiationException ex) {
-//            java.util.logging.Logger.getLogger(UserCarService.class.getName()).log(java.util.logging.Level.SEVERE, null, ex);
+//            java.util.logging.Logger.getLogger(UserOverdue.class.getName()).log(java.util.logging.Level.SEVERE, null, ex);
 //        } catch (IllegalAccessException ex) {
-//            java.util.logging.Logger.getLogger(UserCarService.class.getName()).log(java.util.logging.Level.SEVERE, null, ex);
+//            java.util.logging.Logger.getLogger(UserOverdue.class.getName()).log(java.util.logging.Level.SEVERE, null, ex);
 //        } catch (javax.swing.UnsupportedLookAndFeelException ex) {
-//            java.util.logging.Logger.getLogger(UserCarService.class.getName()).log(java.util.logging.Level.SEVERE, null, ex);
+//            java.util.logging.Logger.getLogger(UserOverdue.class.getName()).log(java.util.logging.Level.SEVERE, null, ex);
 //        }
 //        //</editor-fold>
 //
 //        /* Create and display the form */
 //        java.awt.EventQueue.invokeLater(new Runnable() {
 //            public void run() {
-//                new UserCarService(user).setVisible(true);
+//                new UserOverdue().setVisible(true);
 //            }
 //        });
 //    }
@@ -353,10 +352,10 @@ public class UserCarService extends javax.swing.JFrame {
     private javax.swing.JMenuItem AccountSettingsMenu;
     private javax.swing.JMenuItem BookingConfirmationMenu;
     private javax.swing.JMenu BookingMenu;
+    private javax.swing.JLabel FinancialButton;
     private javax.swing.JMenuItem LogoutMenu;
+    private javax.swing.JLabel OverdueButton;
     private javax.swing.JMenuItem PaymentMenu;
-    private javax.swing.JLabel RentCarButton;
-    private javax.swing.JLabel ReturnCarButton;
     private javax.swing.JLabel TitleImage;
     private javax.swing.JLabel TitleText;
     private javax.swing.JMenuItem ViewBookingsMenu;

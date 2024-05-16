@@ -48,7 +48,7 @@ public class UserPayment extends javax.swing.JFrame {
 
         backButton.addMouseListener(new java.awt.event.MouseAdapter() {
             public void mouseClicked(java.awt.event.MouseEvent evt) {
-                pageSwitch.switchPage(UserPayment.this, new CustomerDashboard(user));
+                pageSwitch.switchPage(UserPayment.this, new UserOverdue(user));
             }
         }); 
 
