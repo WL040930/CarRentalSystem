@@ -69,9 +69,12 @@ public class BookingPanel extends javax.swing.JPanel {
         String carName = dataIO.readData(rowOfCar + 1, dataIO.CAR_FILE);
         String image = dataIO.readData(rowOfCar + 5, dataIO.CAR_FILE);
 
+        String startDate = dataIO.readData(row + 3, dataIO.BOOKING_FILE);
+        String endDate = dataIO.readData(row + 4, dataIO.BOOKING_FILE);  
+
         BookingIdField.setText(String.valueOf(bookingId));
-        StartDateField.setText(booking.getStartDate().toString()); // Convert LocalDate to String
-        EndDateField.setText(booking.getEndDate().toString()); // Convert LocalDate to String
+        StartDateField.setText(startDate); 
+        EndDateField.setText(endDate); 
         BookedCarField.setText(carName);
 
         ImageIcon imageIcon = new ImageIcon(getClass().getResource("/carrentalsystem/img/" + image));
