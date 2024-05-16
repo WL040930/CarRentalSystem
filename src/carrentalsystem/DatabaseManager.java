@@ -19,6 +19,9 @@ public class DatabaseManager {
     private static final String BOOKING_FILE = dataIO.GET_BOOKING_FILE(); 
     private static final int NUMBER_OF_LINES_PER_BOOKING = 9;
 
+    private static final String RETURN_FILE = dataIO.GET_RETURN_FILE();
+    private static final int NUMBER_OF_LINES_PER_RETURN = 4;
+
     public static List<User> getAllUsers() {
         List<User> users = new ArrayList<>();
     
@@ -102,6 +105,31 @@ public class DatabaseManager {
             e.printStackTrace();
         }
         return bookings;
+    }
+
+    public static List<Return> getReturnDetails(String email) {
+        List<Return> returns = new ArrayList<>();
+    
+        try {
+            int totalLines = getTotalLines(RETURN_FILE);
+            int numberOfReturn = totalLines / NUMBER_OF_LINES_PER_RETURN;
+    
+            for (int i = 0; i < numberOfReturn; i++) {
+                int lineNumber = i * NUMBER_OF_LINES_PER_RETURN + 1;
+                
+                int bookingId = Integer.parseInt(dataIO.readData(lineNumber + 1, RETURN_FILE));
+                String returnStatus = dataIO.readData(lineNumber + 2, RETURN_FILE);
+                String returnDate = dataIO.readData(lineNumber + 3, RETURN_FILE);
+    
+                if (returnStatus.equals("")) {
+                    Return returnObj = new Return(bookingId, returnStatus, returnDate);
+                    returns.add(returnObj);
+                }
+            }
+        } catch (Exception e) {
+            e.printStackTrace();
+        }
+        return returns;
     }
 
     public static List<Car> getSpecificCarsType(String Type) {

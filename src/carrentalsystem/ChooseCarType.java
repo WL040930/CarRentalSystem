@@ -25,7 +25,7 @@ public class ChooseCarType extends javax.swing.JFrame {
 
         backButton.addMouseListener(new java.awt.event.MouseAdapter() {
             public void mouseClicked(java.awt.event.MouseEvent evt) {
-                pageSwitch.switchPage(ChooseCarType.this, new CustomerDashboard(user));
+                pageSwitch.switchPage(ChooseCarType.this, new UserCarService(user));
             }
         }); 
 

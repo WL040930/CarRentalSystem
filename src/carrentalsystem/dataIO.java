@@ -24,6 +24,7 @@ public class dataIO {
     final static String BOOKING_FILE = "src/carrentalsystem/data/Booking.txt";
     final static String CAR_FILE = "src/carrentalsystem/data/Car.txt";
     final static String USER_FILE = "src/carrentalsystem/data/User.txt";
+    final static String RETURN_FILE = "src/carrentalsystem/data/Return.txt";
 
     public static String GET_USER_FILE() {
         return USER_FILE;
@@ -35,6 +36,10 @@ public class dataIO {
 
     public static String GET_BOOKING_FILE() {
         return BOOKING_FILE;
+    }
+
+    public static String GET_RETURN_FILE() {
+        return RETURN_FILE;
     }
     
     // calculate row number based on given data

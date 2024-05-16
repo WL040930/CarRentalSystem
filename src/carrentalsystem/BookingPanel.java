@@ -15,16 +15,50 @@ import java.awt.event.MouseEvent;
 public class BookingPanel extends javax.swing.JPanel {
 
     private final Booking booking;
+    private Return returnInfo;
     private final BookingConfirmation bookingConfirmation;
     private final UserPayment userPayment;
     private final CheckBooking checkBooking;
+    private final ReturnCar returnCar;
     private static BookingPanel lastClickedPanel;
+
+    public BookingPanel(Return returnobj, ReturnCar returnCar) {
+        this.booking = null;
+        this.returnInfo = returnobj;
+        this.bookingConfirmation = null;
+        this.userPayment = null;
+        this.checkBooking = null;
+        this.returnCar = returnCar;
+        initComponents();
+        displayReturnInfo();
+        // addClickListenerForReturn();
+    }
+
+    private void displayReturnInfo() {
+        int bookingId = returnInfo.getBookingId();
+        int row = dataIO.rowNumber(bookingId, 1, dataIO.BOOKING_FILE, 9);
+        String carId = dataIO.readData(row + 1, dataIO.BOOKING_FILE);  
+        int rowOfCar = dataIO.rowNumber(carId, 1, dataIO.CAR_FILE, 7); 
+        String carName = dataIO.readData(rowOfCar + 1, dataIO.CAR_FILE);
+        String image = dataIO.readData(rowOfCar + 5, dataIO.CAR_FILE);
+
+        BookingIdField.setText(String.valueOf(bookingId));
+        StartDateField.setText(booking.getStartDate().toString()); // Convert LocalDate to String
+        EndDateField.setText(booking.getEndDate().toString()); // Convert LocalDate to String
+        BookedCarField.setText(carName);
+
+        ImageIcon imageIcon = new ImageIcon(getClass().getResource("/carrentalsystem/img/" + image));
+        Image scaledImage = imageIcon.getImage().getScaledInstance(87, 87, Image.SCALE_SMOOTH);
+        pictureField.setIcon(new ImageIcon(scaledImage));
+
+    }
 
     public BookingPanel(Booking booking, BookingConfirmation bookingConfirmation) {
         this.booking = booking;
         this.bookingConfirmation = bookingConfirmation; 
         this.userPayment = null;
         this.checkBooking = null;
+        this.returnCar = null;
         initComponents();
         displayBookingInfo();
         addClickListener(); 
@@ -94,6 +128,7 @@ public class BookingPanel extends javax.swing.JPanel {
         this.userPayment = null;
         this.bookingConfirmation = null;
         this.checkBooking = checkBooking;
+        this.returnCar = null;
         initComponents();
         displayBookingInfo();
         addClickListeners();
@@ -130,6 +165,7 @@ public class BookingPanel extends javax.swing.JPanel {
         this.userPayment = userPayment;
         this.bookingConfirmation = null;
         this.checkBooking = null;
+        this.returnCar = null;
         initComponents();
         displayBookingInfo();
         addClickListenersForPayment();

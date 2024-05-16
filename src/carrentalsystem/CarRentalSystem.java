@@ -13,6 +13,7 @@ public class CarRentalSystem {
         fileCreation.userFile();
         fileCreation.carFile();
         fileCreation.bookingFile();
+        fileCreation.returnFile();
 
         Login login = new Login();
         login.setVisible(true);

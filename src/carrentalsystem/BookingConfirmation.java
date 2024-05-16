@@ -473,6 +473,12 @@ public class BookingConfirmation extends javax.swing.JFrame {
                 int rowNumberOfBookingId = dataIO.rowNumber(bookingId, 1, dataIO.BOOKING_FILE, 9);
                 int rowChange = rowNumberOfBookingId + 5; 
                 dataIO.overWriteData("Accepted", rowChange, dataIO.BOOKING_FILE);
+
+                dataIO.writeData(bookingId, dataIO.RETURN_FILE);
+                dataIO.writeData("Pending", dataIO.RETURN_FILE);
+                dataIO.writeData("", dataIO.RETURN_FILE);
+                dataIO.writeData("", dataIO.RETURN_FILE);
+
                 carBookedField.setText("");
                 startDateField.setText("");
                 EndDateField.setText("");

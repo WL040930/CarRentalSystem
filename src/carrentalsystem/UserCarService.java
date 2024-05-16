@@ -7,72 +7,48 @@ package carrentalsystem;
 import java.awt.Image;
 import javax.swing.ImageIcon;
 
+public class UserCarService extends javax.swing.JFrame {
 
-public class CustomerDashboard extends javax.swing.JFrame {
+    static User.customer user; 
 
-    static User.customer user;
-
-    public CustomerDashboard(User.customer user) {
+    public UserCarService(User.customer user) {
+        UserCarService.user = user;
+        setResizable(false); 
         initComponents();
-        setResizable(false);
-        CustomerDashboard.user = user;
 
         ImageIcon imageIcon = new ImageIcon(getClass().getResource("/carrentalsystem/img/logo.jpeg"));
         Image scaledImage = imageIcon.getImage().getScaledInstance(100, 100, Image.SCALE_SMOOTH);
         TitleImage.setIcon(new ImageIcon(scaledImage));
 
-        ImageIcon imageIcon2 = new ImageIcon(getClass().getResource("/carrentalsystem/img/settings.png"));
+        ImageIcon imageIcon2 = new ImageIcon(getClass().getResource("/carrentalsystem/img/backButton.png"));
         Image scaledImage2 = imageIcon2.getImage().getScaledInstance(60, 60, Image.SCALE_SMOOTH);
-        settingsButton.setIcon(new ImageIcon(scaledImage2));
+        backButton.setIcon(new ImageIcon(scaledImage2));
 
-        settingsButton.addMouseListener(new java.awt.event.MouseAdapter() {
+        backButton.addMouseListener(new java.awt.event.MouseAdapter() {
             public void mouseClicked(java.awt.event.MouseEvent evt) {
-                pageSwitch.switchPage(CustomerDashboard.this, new manageOwnAccount(user));
+                pageSwitch.switchPage(UserCarService.this, new CustomerDashboard(user));
             }
-        });
+        }); 
 
-        ImageIcon imageIcon3 = new ImageIcon(getClass().getResource("/carrentalsystem/img/logout.png"));
-        Image scaledImage3 = imageIcon3.getImage().getScaledInstance(60, 60, Image.SCALE_SMOOTH);
-        logoutButton.setIcon(new ImageIcon(scaledImage3));
+        ImageIcon imageIcon3 = new ImageIcon(getClass().getResource("/carrentalsystem/img/rent_car_21.png"));
+        Image scaledImage3 = imageIcon3.getImage().getScaledInstance(227, 227, Image.SCALE_SMOOTH);
+        RentCarButton.setIcon(new ImageIcon(scaledImage3));
 
-        logoutButton.addMouseListener(new java.awt.event.MouseAdapter() {
+        RentCarButton.addMouseListener(new java.awt.event.MouseAdapter() {
             public void mouseClicked(java.awt.event.MouseEvent evt) {
-                int dialogResult = javax.swing.JOptionPane.showConfirmDialog(null, "Are you sure you want to logout?", "Warning", javax.swing.JOptionPane.YES_NO_OPTION);
-                if (dialogResult == javax.swing.JOptionPane.YES_OPTION) {
-                    pageSwitch.switchPage(CustomerDashboard.this, new Login());
-                }
+                pageSwitch.switchPage(UserCarService.this, new ChooseCarType(user));
             }
-        });
+        }); 
 
-        ImageIcon imageIcon4 = new ImageIcon(getClass().getResource("/carrentalsystem/img/finance.png"));
-        Image scaledImage4 = imageIcon4.getImage().getScaledInstance(235, 235, Image.SCALE_SMOOTH);
-        FinanceButton.setIcon(new ImageIcon(scaledImage4));
+        ImageIcon imageIcon4 = new ImageIcon(getClass().getResource("/carrentalsystem/img/return_car_icon.png"));
+        Image scaledImage4 = imageIcon4.getImage().getScaledInstance(227, 227, Image.SCALE_SMOOTH);
+        ReturnCarButton.setIcon(new ImageIcon(scaledImage4));
 
-        FinanceButton.addMouseListener(new java.awt.event.MouseAdapter() {
+        ReturnCarButton.addMouseListener(new java.awt.event.MouseAdapter() {
             public void mouseClicked(java.awt.event.MouseEvent evt) {
-                pageSwitch.switchPage(CustomerDashboard.this, new UserPayment(user));
+                pageSwitch.switchPage(UserCarService.this, new ReturnCar(user));
             }
-        });
-
-        ImageIcon imageIcon5 = new ImageIcon(getClass().getResource("/carrentalsystem/img/addCar.png"));
-        Image scaledImage5 = imageIcon5.getImage().getScaledInstance(235, 235, Image.SCALE_SMOOTH);
-        RentNewCarButton.setIcon(new ImageIcon(scaledImage5));
-
-        RentNewCarButton.addMouseListener(new java.awt.event.MouseAdapter() {
-            public void mouseClicked(java.awt.event.MouseEvent evt) {
-                pageSwitch.switchPage(CustomerDashboard.this, new UserCarService(user));
-            }
-        });
-
-        ImageIcon imageIcon6 = new ImageIcon(getClass().getResource("/carrentalsystem/img/bookingManagement.png"));
-        Image scaledImage6 = imageIcon6.getImage().getScaledInstance(235, 235, Image.SCALE_SMOOTH);
-        BookingsButtons.setIcon(new ImageIcon(scaledImage6));
-
-        BookingsButtons.addMouseListener(new java.awt.event.MouseAdapter() {
-            public void mouseClicked(java.awt.event.MouseEvent evt) {
-                pageSwitch.switchPage(CustomerDashboard.this, new UserBookingPage(user));
-            }
-        });
+        }); 
 
     }
 
@@ -86,18 +62,15 @@ public class CustomerDashboard extends javax.swing.JFrame {
     private void initComponents() {
 
         jPanel1 = new javax.swing.JPanel();
-        TitleImage = new javax.swing.JLabel();
+        jPanel2 = new javax.swing.JPanel();
+        RentCarButton = new javax.swing.JLabel();
+        jLabel2 = new javax.swing.JLabel();
+        ReturnCarButton = new javax.swing.JLabel();
+        jLabel3 = new javax.swing.JLabel();
         TitleText = new javax.swing.JLabel();
         jLabel1 = new javax.swing.JLabel();
-        settingsButton = new javax.swing.JLabel();
-        logoutButton = new javax.swing.JLabel();
-        jPanel2 = new javax.swing.JPanel();
-        RentNewCarButton = new javax.swing.JLabel();
-        FinanceButton = new javax.swing.JLabel();
-        BookingsButtons = new javax.swing.JLabel();
-        jLabel5 = new javax.swing.JLabel();
-        jLabel2 = new javax.swing.JLabel();
-        jLabel3 = new javax.swing.JLabel();
+        TitleImage = new javax.swing.JLabel();
+        backButton = new javax.swing.JLabel();
         jMenuBar1 = new javax.swing.JMenuBar();
         BookingMenu = new javax.swing.JMenu();
         rentCarButton = new javax.swing.JMenuItem();
@@ -114,7 +87,52 @@ public class CustomerDashboard extends javax.swing.JFrame {
 
         jPanel1.setBackground(new java.awt.Color(255, 255, 255));
 
-        TitleImage.setText("");
+        jPanel2.setBackground(new java.awt.Color(6, 26, 35));
+
+        RentCarButton.setText("jLabel2");
+        RentCarButton.setCursor(new java.awt.Cursor(java.awt.Cursor.HAND_CURSOR));
+
+        jLabel2.setFont(new java.awt.Font("Bahnschrift", 1, 18)); // NOI18N
+        jLabel2.setForeground(new java.awt.Color(255, 255, 255));
+        jLabel2.setText("Rent Car");
+
+        ReturnCarButton.setText("jLabel3");
+        ReturnCarButton.setCursor(new java.awt.Cursor(java.awt.Cursor.HAND_CURSOR));
+
+        jLabel3.setFont(new java.awt.Font("Bahnschrift", 1, 18)); // NOI18N
+        jLabel3.setForeground(new java.awt.Color(255, 255, 255));
+        jLabel3.setText("Return Car");
+
+        javax.swing.GroupLayout jPanel2Layout = new javax.swing.GroupLayout(jPanel2);
+        jPanel2.setLayout(jPanel2Layout);
+        jPanel2Layout.setHorizontalGroup(
+            jPanel2Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
+            .addGroup(jPanel2Layout.createSequentialGroup()
+                .addGap(140, 140, 140)
+                .addComponent(RentCarButton, javax.swing.GroupLayout.PREFERRED_SIZE, 227, javax.swing.GroupLayout.PREFERRED_SIZE)
+                .addGap(185, 185, 185)
+                .addComponent(ReturnCarButton, javax.swing.GroupLayout.PREFERRED_SIZE, 227, javax.swing.GroupLayout.PREFERRED_SIZE)
+                .addContainerGap(221, Short.MAX_VALUE))
+            .addGroup(jPanel2Layout.createSequentialGroup()
+                .addGap(211, 211, 211)
+                .addComponent(jLabel2, javax.swing.GroupLayout.PREFERRED_SIZE, 84, javax.swing.GroupLayout.PREFERRED_SIZE)
+                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
+                .addComponent(jLabel3, javax.swing.GroupLayout.PREFERRED_SIZE, 104, javax.swing.GroupLayout.PREFERRED_SIZE)
+                .addGap(284, 284, 284))
+        );
+        jPanel2Layout.setVerticalGroup(
+            jPanel2Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
+            .addGroup(jPanel2Layout.createSequentialGroup()
+                .addGap(38, 38, 38)
+                .addGroup(jPanel2Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING, false)
+                    .addComponent(ReturnCarButton, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
+                    .addComponent(RentCarButton, javax.swing.GroupLayout.DEFAULT_SIZE, 227, Short.MAX_VALUE))
+                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
+                .addGroup(jPanel2Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
+                    .addComponent(jLabel2)
+                    .addComponent(jLabel3))
+                .addContainerGap(36, Short.MAX_VALUE))
+        );
 
         TitleText.setFont(new java.awt.Font("Bahnschrift", 1, 36)); // NOI18N
         TitleText.setText("Panda Car System");
@@ -122,111 +140,48 @@ public class CustomerDashboard extends javax.swing.JFrame {
         jLabel1.setFont(new java.awt.Font("Bahnschrift", 2, 18)); // NOI18N
         jLabel1.setText("Panda Car, World Trustable Car Rental App.");
 
-        settingsButton.setText("");
-        settingsButton.setCursor(new java.awt.Cursor(java.awt.Cursor.HAND_CURSOR));
+        TitleImage.setText("");
 
-        logoutButton.setText("");
-        logoutButton.setCursor(new java.awt.Cursor(java.awt.Cursor.HAND_CURSOR));
-
-        jPanel2.setBackground(new java.awt.Color(6, 26, 35));
-
-        RentNewCarButton.setBackground(new java.awt.Color(255, 255, 255));
-        RentNewCarButton.setText("jLabel2");
-        RentNewCarButton.setCursor(new java.awt.Cursor(java.awt.Cursor.HAND_CURSOR));
-
-        FinanceButton.setText("");
-        FinanceButton.setCursor(new java.awt.Cursor(java.awt.Cursor.HAND_CURSOR));
-
-        BookingsButtons.setText("jLabel4");
-        BookingsButtons.setCursor(new java.awt.Cursor(java.awt.Cursor.HAND_CURSOR));
-
-        jLabel5.setFont(new java.awt.Font("Bahnschrift", 1, 18)); // NOI18N
-        jLabel5.setForeground(new java.awt.Color(255, 255, 255));
-        jLabel5.setText("Finance");
-
-        jLabel2.setFont(new java.awt.Font("Bahnschrift", 1, 18)); // NOI18N
-        jLabel2.setForeground(new java.awt.Color(255, 255, 255));
-        jLabel2.setText("Car Services");
-
-        jLabel3.setFont(new java.awt.Font("Bahnschrift", 1, 18)); // NOI18N
-        jLabel3.setForeground(new java.awt.Color(255, 255, 255));
-        jLabel3.setText("Bookings");
-
-        javax.swing.GroupLayout jPanel2Layout = new javax.swing.GroupLayout(jPanel2);
-        jPanel2.setLayout(jPanel2Layout);
-        jPanel2Layout.setHorizontalGroup(
-            jPanel2Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-            .addGroup(jPanel2Layout.createSequentialGroup()
-                .addGap(72, 72, 72)
-                .addComponent(RentNewCarButton, javax.swing.GroupLayout.PREFERRED_SIZE, 235, javax.swing.GroupLayout.PREFERRED_SIZE)
-                .addGap(70, 70, 70)
-                .addComponent(FinanceButton, javax.swing.GroupLayout.PREFERRED_SIZE, 235, javax.swing.GroupLayout.PREFERRED_SIZE)
-                .addGap(63, 63, 63)
-                .addComponent(BookingsButtons, javax.swing.GroupLayout.PREFERRED_SIZE, 235, javax.swing.GroupLayout.PREFERRED_SIZE)
-                .addContainerGap(javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE))
-            .addGroup(jPanel2Layout.createSequentialGroup()
-                .addGap(132, 132, 132)
-                .addComponent(jLabel2)
-                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
-                .addComponent(jLabel5)
-                .addGap(219, 219, 219)
-                .addComponent(jLabel3)
-                .addGap(170, 170, 170))
-        );
-        jPanel2Layout.setVerticalGroup(
-            jPanel2Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-            .addGroup(jPanel2Layout.createSequentialGroup()
-                .addGap(31, 31, 31)
-                .addGroup(jPanel2Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
-                    .addComponent(RentNewCarButton, javax.swing.GroupLayout.PREFERRED_SIZE, 235, javax.swing.GroupLayout.PREFERRED_SIZE)
-                    .addComponent(FinanceButton, javax.swing.GroupLayout.PREFERRED_SIZE, 235, javax.swing.GroupLayout.PREFERRED_SIZE)
-                    .addComponent(BookingsButtons, javax.swing.GroupLayout.PREFERRED_SIZE, 235, javax.swing.GroupLayout.PREFERRED_SIZE))
-                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.UNRELATED)
-                .addGroup(jPanel2Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
-                    .addComponent(jLabel2)
-                    .addComponent(jLabel5)
-                    .addComponent(jLabel3))
-                .addContainerGap(20, Short.MAX_VALUE))
-        );
+        backButton.setText("");
+        backButton.setCursor(new java.awt.Cursor(java.awt.Cursor.HAND_CURSOR));
 
         javax.swing.GroupLayout jPanel1Layout = new javax.swing.GroupLayout(jPanel1);
         jPanel1.setLayout(jPanel1Layout);
         jPanel1Layout.setHorizontalGroup(
             jPanel1Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
             .addGroup(jPanel1Layout.createSequentialGroup()
-                .addGap(36, 36, 36)
+                .addGap(52, 52, 52)
                 .addComponent(TitleImage, javax.swing.GroupLayout.PREFERRED_SIZE, 100, javax.swing.GroupLayout.PREFERRED_SIZE)
                 .addGap(18, 18, 18)
                 .addGroup(jPanel1Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
                     .addGroup(jPanel1Layout.createSequentialGroup()
                         .addComponent(jLabel1, javax.swing.GroupLayout.PREFERRED_SIZE, 369, javax.swing.GroupLayout.PREFERRED_SIZE)
-                        .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED, 406, javax.swing.GroupLayout.PREFERRED_SIZE))
+                        .addContainerGap(javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE))
                     .addGroup(jPanel1Layout.createSequentialGroup()
                         .addComponent(TitleText, javax.swing.GroupLayout.PREFERRED_SIZE, 323, javax.swing.GroupLayout.PREFERRED_SIZE)
-                        .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
-                        .addComponent(settingsButton, javax.swing.GroupLayout.PREFERRED_SIZE, 60, javax.swing.GroupLayout.PREFERRED_SIZE)
-                        .addGap(18, 18, 18)
-                        .addComponent(logoutButton, javax.swing.GroupLayout.PREFERRED_SIZE, 60, javax.swing.GroupLayout.PREFERRED_SIZE)))
-                .addGap(71, 71, 71))
-            .addComponent(jPanel2, javax.swing.GroupLayout.Alignment.TRAILING, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
+                        .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED, 397, Short.MAX_VALUE)
+                        .addComponent(backButton, javax.swing.GroupLayout.PREFERRED_SIZE, 60, javax.swing.GroupLayout.PREFERRED_SIZE)
+                        .addGap(50, 50, 50))))
+            .addComponent(jPanel2, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
         );
         jPanel1Layout.setVerticalGroup(
             jPanel1Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-            .addGroup(jPanel1Layout.createSequentialGroup()
-                .addGap(26, 26, 26)
+            .addGroup(javax.swing.GroupLayout.Alignment.TRAILING, jPanel1Layout.createSequentialGroup()
                 .addGroup(jPanel1Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
                     .addGroup(jPanel1Layout.createSequentialGroup()
-                        .addGap(25, 25, 25)
                         .addGroup(jPanel1Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-                            .addComponent(TitleImage, javax.swing.GroupLayout.PREFERRED_SIZE, 100, javax.swing.GroupLayout.PREFERRED_SIZE)
                             .addGroup(jPanel1Layout.createSequentialGroup()
-                                .addGap(15, 15, 15)
-                                .addComponent(TitleText)
-                                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
-                                .addComponent(jLabel1))))
-                    .addComponent(logoutButton, javax.swing.GroupLayout.PREFERRED_SIZE, 60, javax.swing.GroupLayout.PREFERRED_SIZE)
-                    .addComponent(settingsButton, javax.swing.GroupLayout.PREFERRED_SIZE, 60, javax.swing.GroupLayout.PREFERRED_SIZE))
-                .addGap(51, 51, 51)
+                                .addGap(57, 57, 57)
+                                .addComponent(TitleText))
+                            .addGroup(jPanel1Layout.createSequentialGroup()
+                                .addGap(31, 31, 31)
+                                .addComponent(backButton, javax.swing.GroupLayout.PREFERRED_SIZE, 60, javax.swing.GroupLayout.PREFERRED_SIZE)))
+                        .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
+                        .addComponent(jLabel1))
+                    .addGroup(jPanel1Layout.createSequentialGroup()
+                        .addGap(46, 46, 46)
+                        .addComponent(TitleImage, javax.swing.GroupLayout.PREFERRED_SIZE, 100, javax.swing.GroupLayout.PREFERRED_SIZE)))
+                .addGap(47, 47, 47)
                 .addComponent(jPanel2, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE))
         );
 
@@ -325,7 +280,7 @@ public class CustomerDashboard extends javax.swing.JFrame {
         getContentPane().setLayout(layout);
         layout.setHorizontalGroup(
             layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-            .addComponent(jPanel1, javax.swing.GroupLayout.Alignment.TRAILING, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
+            .addComponent(jPanel1, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
         );
         layout.setVerticalGroup(
             layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
@@ -335,17 +290,13 @@ public class CustomerDashboard extends javax.swing.JFrame {
         pack();
     }// </editor-fold>//GEN-END:initComponents
 
-    private void AccountSettingsMenuActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_AccountSettingsMenuActionPerformed
-        pageSwitch.switchPage(this, new manageOwnAccount(user));
-    }//GEN-LAST:event_AccountSettingsMenuActionPerformed
-
-    private void LogoutMenuActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_LogoutMenuActionPerformed
-        pageSwitch.switchPage(this, new Login());
-    }//GEN-LAST:event_LogoutMenuActionPerformed
-
     private void rentCarButtonActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_rentCarButtonActionPerformed
         pageSwitch.switchPage(this, new ChooseCarType(user));
     }//GEN-LAST:event_rentCarButtonActionPerformed
+
+    private void PaymentMenuActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_PaymentMenuActionPerformed
+        pageSwitch.switchPage(this, new UserPayment(user));
+    }//GEN-LAST:event_PaymentMenuActionPerformed
 
     private void BookingConfirmationMenuActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_BookingConfirmationMenuActionPerformed
         pageSwitch.switchPage(this, new BookingConfirmation(user));
@@ -355,69 +306,70 @@ public class CustomerDashboard extends javax.swing.JFrame {
         pageSwitch.switchPage(this, new CheckBooking(user));
     }//GEN-LAST:event_ViewBookingsMenuActionPerformed
 
-    private void PaymentMenuActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_PaymentMenuActionPerformed
-        pageSwitch.switchPage(this, new UserPayment(user));
-    }//GEN-LAST:event_PaymentMenuActionPerformed
+    private void AccountSettingsMenuActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_AccountSettingsMenuActionPerformed
+        pageSwitch.switchPage(this, new manageOwnAccount(user));
+    }//GEN-LAST:event_AccountSettingsMenuActionPerformed
+
+    private void LogoutMenuActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_LogoutMenuActionPerformed
+        pageSwitch.switchPage(this, new Login());
+    }//GEN-LAST:event_LogoutMenuActionPerformed
 
     /**
      * @param args the command line arguments
      */
-    // public static void main(String args[]) {
-    //     /* Set the Nimbus look and feel */
-    //     //<editor-fold defaultstate="collapsed" desc=" Look and feel setting code (optional) ">
-    //     /* If Nimbus (introduced in Java SE 6) is not available, stay with the default look and feel.
-    //      * For details see http://download.oracle.com/javase/tutorial/uiswing/lookandfeel/plaf.html 
-    //      */
-    //     try {
-    //         for (javax.swing.UIManager.LookAndFeelInfo info : javax.swing.UIManager.getInstalledLookAndFeels()) {
-    //             if ("Nimbus".equals(info.getName())) {
-    //                 javax.swing.UIManager.setLookAndFeel(info.getClassName());
-    //                 break;
-    //             }
-    //         }
-    //     } catch (ClassNotFoundException ex) {
-    //         java.util.logging.Logger.getLogger(CustomerDashboard.class.getName()).log(java.util.logging.Level.SEVERE, null, ex);
-    //     } catch (InstantiationException ex) {
-    //         java.util.logging.Logger.getLogger(CustomerDashboard.class.getName()).log(java.util.logging.Level.SEVERE, null, ex);
-    //     } catch (IllegalAccessException ex) {
-    //         java.util.logging.Logger.getLogger(CustomerDashboard.class.getName()).log(java.util.logging.Level.SEVERE, null, ex);
-    //     } catch (javax.swing.UnsupportedLookAndFeelException ex) {
-    //         java.util.logging.Logger.getLogger(CustomerDashboard.class.getName()).log(java.util.logging.Level.SEVERE, null, ex);
-    //     }
-    //     //</editor-fold>
+    public static void main(String args[]) {
+        /* Set the Nimbus look and feel */
+        //<editor-fold defaultstate="collapsed" desc=" Look and feel setting code (optional) ">
+        /* If Nimbus (introduced in Java SE 6) is not available, stay with the default look and feel.
+         * For details see http://download.oracle.com/javase/tutorial/uiswing/lookandfeel/plaf.html 
+         */
+        try {
+            for (javax.swing.UIManager.LookAndFeelInfo info : javax.swing.UIManager.getInstalledLookAndFeels()) {
+                if ("Nimbus".equals(info.getName())) {
+                    javax.swing.UIManager.setLookAndFeel(info.getClassName());
+                    break;
+                }
+            }
+        } catch (ClassNotFoundException ex) {
+            java.util.logging.Logger.getLogger(UserCarService.class.getName()).log(java.util.logging.Level.SEVERE, null, ex);
+        } catch (InstantiationException ex) {
+            java.util.logging.Logger.getLogger(UserCarService.class.getName()).log(java.util.logging.Level.SEVERE, null, ex);
+        } catch (IllegalAccessException ex) {
+            java.util.logging.Logger.getLogger(UserCarService.class.getName()).log(java.util.logging.Level.SEVERE, null, ex);
+        } catch (javax.swing.UnsupportedLookAndFeelException ex) {
+            java.util.logging.Logger.getLogger(UserCarService.class.getName()).log(java.util.logging.Level.SEVERE, null, ex);
+        }
+        //</editor-fold>
 
-    //     /* Create and display the form */
-    //     java.awt.EventQueue.invokeLater(new Runnable() {
-    //         public void run() {
-    //             new CustomerDashboard(user).setVisible(true);
-    //         }
-    //     });
-    // }
+        /* Create and display the form */
+        java.awt.EventQueue.invokeLater(new Runnable() {
+            public void run() {
+                new UserCarService(user).setVisible(true);
+            }
+        });
+    }
 
     // Variables declaration - do not modify//GEN-BEGIN:variables
     private javax.swing.JMenuItem AccountSettingsMenu;
     private javax.swing.JMenuItem BookingConfirmationMenu;
     private javax.swing.JMenu BookingMenu;
-    private javax.swing.JLabel BookingsButtons;
-    private javax.swing.JLabel FinanceButton;
     private javax.swing.JMenuItem LogoutMenu;
     private javax.swing.JMenuItem PaymentMenu;
-    private javax.swing.JLabel RentNewCarButton;
+    private javax.swing.JLabel RentCarButton;
+    private javax.swing.JLabel ReturnCarButton;
     private javax.swing.JLabel TitleImage;
     private javax.swing.JLabel TitleText;
     private javax.swing.JMenuItem ViewBookingsMenu;
+    private javax.swing.JLabel backButton;
     private javax.swing.JLabel jLabel1;
     private javax.swing.JLabel jLabel2;
     private javax.swing.JLabel jLabel3;
-    private javax.swing.JLabel jLabel5;
     private javax.swing.JMenu jMenu1;
     private javax.swing.JMenu jMenu2;
     private javax.swing.JMenu jMenu3;
     private javax.swing.JMenuBar jMenuBar1;
     private javax.swing.JPanel jPanel1;
     private javax.swing.JPanel jPanel2;
-    private javax.swing.JLabel logoutButton;
     private javax.swing.JMenuItem rentCarButton;
-    private javax.swing.JLabel settingsButton;
     // End of variables declaration//GEN-END:variables
 }

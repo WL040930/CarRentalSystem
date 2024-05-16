@@ -54,4 +54,19 @@ public class FileCreation {
         }
     }
 
+    public void returnFile() {
+        // Create a new text file called "Car.txt"
+        String filePath = "src/carrentalsystem/data/Return.txt";
+        File file = new File(filePath);
+
+        try {
+            if (file.createNewFile()) {
+                System.out.println("File created: " + file.getName());
+            }
+        } catch (IOException e) {
+            System.out.println("An error occurred while creating the file.");
+            e.printStackTrace();
+        }
+    }
+
 }
