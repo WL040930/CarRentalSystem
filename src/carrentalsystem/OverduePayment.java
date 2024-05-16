@@ -10,6 +10,7 @@ import java.awt.Image;
 public class OverduePayment extends javax.swing.JFrame {
 
     static User.customer user; 
+    String selection = "Overdue"; 
     
     public OverduePayment(User.customer user) {
         OverduePayment.user = user; 
@@ -76,16 +77,31 @@ public class OverduePayment extends javax.swing.JFrame {
         UnpaidButton.setFont(new java.awt.Font("Bahnschrift", 1, 14)); // NOI18N
         UnpaidButton.setForeground(new java.awt.Color(255, 255, 255));
         UnpaidButton.setText("Unpaid");
+        UnpaidButton.addActionListener(new java.awt.event.ActionListener() {
+            public void actionPerformed(java.awt.event.ActionEvent evt) {
+                UnpaidButtonActionPerformed(evt);
+            }
+        });
 
         PendingButton.setBackground(new java.awt.Color(6, 26, 35));
         PendingButton.setFont(new java.awt.Font("Bahnschrift", 1, 14)); // NOI18N
         PendingButton.setForeground(new java.awt.Color(255, 255, 255));
         PendingButton.setText("Pending");
+        PendingButton.addActionListener(new java.awt.event.ActionListener() {
+            public void actionPerformed(java.awt.event.ActionEvent evt) {
+                PendingButtonActionPerformed(evt);
+            }
+        });
 
         PaidButton.setBackground(new java.awt.Color(6, 26, 35));
         PaidButton.setFont(new java.awt.Font("Bahnschrift", 1, 14)); // NOI18N
         PaidButton.setForeground(new java.awt.Color(255, 255, 255));
         PaidButton.setText("Paid");
+        PaidButton.addActionListener(new java.awt.event.ActionListener() {
+            public void actionPerformed(java.awt.event.ActionEvent evt) {
+                PaidButtonActionPerformed(evt);
+            }
+        });
 
         javax.swing.GroupLayout jPanel2Layout = new javax.swing.GroupLayout(jPanel2);
         jPanel2.setLayout(jPanel2Layout);
@@ -95,9 +111,8 @@ public class OverduePayment extends javax.swing.JFrame {
                 .addGap(31, 31, 31)
                 .addGroup(jPanel2Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING, false)
                     .addComponent(PaidButton, javax.swing.GroupLayout.DEFAULT_SIZE, 155, Short.MAX_VALUE)
-                    .addGroup(jPanel2Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING, false)
-                        .addComponent(UnpaidButton, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
-                        .addComponent(PendingButton, javax.swing.GroupLayout.DEFAULT_SIZE, 155, Short.MAX_VALUE)))
+                    .addComponent(UnpaidButton, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
+                    .addComponent(PendingButton, javax.swing.GroupLayout.DEFAULT_SIZE, 155, Short.MAX_VALUE))
                 .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED, 236, Short.MAX_VALUE)
                 .addComponent(backButton, javax.swing.GroupLayout.PREFERRED_SIZE, 49, javax.swing.GroupLayout.PREFERRED_SIZE)
                 .addGap(40, 40, 40))
@@ -277,6 +292,27 @@ public class OverduePayment extends javax.swing.JFrame {
     private void LogoutMenuActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_LogoutMenuActionPerformed
         pageSwitch.switchPage(this, new Login());
     }//GEN-LAST:event_LogoutMenuActionPerformed
+
+    private void PaidButtonActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_PaidButtonActionPerformed
+        selection = "Paid";
+        PaidButton.setSelected(true);
+        PendingButton.setSelected(false);
+        UnpaidButton.setSelected(false);
+    }//GEN-LAST:event_PaidButtonActionPerformed
+
+    private void PendingButtonActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_PendingButtonActionPerformed
+        selection = "Pending";
+        PaidButton.setSelected(false);
+        PendingButton.setSelected(true);
+        UnpaidButton.setSelected(false);
+    }//GEN-LAST:event_PendingButtonActionPerformed
+
+    private void UnpaidButtonActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_UnpaidButtonActionPerformed
+        selection = "Overdue";
+        PaidButton.setSelected(false);
+        PendingButton.setSelected(false);
+        UnpaidButton.setSelected(true);
+    }//GEN-LAST:event_UnpaidButtonActionPerformed
 
     /**
      * @param args the command line arguments

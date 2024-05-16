@@ -261,10 +261,8 @@
                       <EmptySpace min="-2" pref="31" max="-2" attributes="0"/>
                       <Group type="103" groupAlignment="0" max="-2" attributes="0">
                           <Component id="PaidButton" pref="155" max="32767" attributes="0"/>
-                          <Group type="103" groupAlignment="0" max="-2" attributes="0">
-                              <Component id="UnpaidButton" max="32767" attributes="0"/>
-                              <Component id="PendingButton" pref="155" max="32767" attributes="0"/>
-                          </Group>
+                          <Component id="UnpaidButton" max="32767" attributes="0"/>
+                          <Component id="PendingButton" pref="155" max="32767" attributes="0"/>
                       </Group>
                       <EmptySpace pref="236" max="32767" attributes="0"/>
                       <Component id="backButton" min="-2" pref="49" max="-2" attributes="0"/>
@@ -315,6 +313,9 @@
                 </Property>
                 <Property name="text" type="java.lang.String" value="Unpaid"/>
               </Properties>
+              <Events>
+                <EventHandler event="actionPerformed" listener="java.awt.event.ActionListener" parameters="java.awt.event.ActionEvent" handler="UnpaidButtonActionPerformed"/>
+              </Events>
             </Component>
             <Component class="javax.swing.JRadioButton" name="PendingButton">
               <Properties>
@@ -329,6 +330,9 @@
                 </Property>
                 <Property name="text" type="java.lang.String" value="Pending"/>
               </Properties>
+              <Events>
+                <EventHandler event="actionPerformed" listener="java.awt.event.ActionListener" parameters="java.awt.event.ActionEvent" handler="PendingButtonActionPerformed"/>
+              </Events>
             </Component>
             <Component class="javax.swing.JRadioButton" name="PaidButton">
               <Properties>
@@ -343,6 +347,9 @@
                 </Property>
                 <Property name="text" type="java.lang.String" value="Paid"/>
               </Properties>
+              <Events>
+                <EventHandler event="actionPerformed" listener="java.awt.event.ActionListener" parameters="java.awt.event.ActionEvent" handler="PaidButtonActionPerformed"/>
+              </Events>
             </Component>
           </SubComponents>
         </Container>
