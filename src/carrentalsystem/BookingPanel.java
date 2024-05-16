@@ -31,7 +31,34 @@ public class BookingPanel extends javax.swing.JPanel {
         this.returnCar = returnCar;
         initComponents();
         displayReturnInfo();
-        // addClickListenerForReturn();
+        addClickListenerForReturn();
+    }
+
+    private void addClickListenerForReturn() {
+        // Add mouse listener to handle click events
+        this.addMouseListener(new MouseAdapter() {
+            @Override
+            public void mouseClicked(MouseEvent e) {
+                // Handle click event here
+                handleReturnPanelClick();
+            }
+        });
+    }
+
+    private void handleReturnPanelClick() {
+        returnCar.displayReturnDetails(returnInfo);
+        if (bookingConfirmation.bookingId == booking.getBookingId()) {
+            setBackground(Color.LIGHT_GRAY);
+            jPanel1.setBackground(new Color(6, 26, 35));
+            setTextColor(Color.WHITE);
+            if (lastClickedPanel != null && lastClickedPanel != this) {
+                lastClickedPanel.setBackground(Color.WHITE); 
+                lastClickedPanel.jPanel1.setBackground(new Color(242,242,242));
+                lastClickedPanel.setTextColor(Color.BLACK);
+            }
+
+            lastClickedPanel = this;
+        }
     }
 
     private void displayReturnInfo() {

@@ -5,11 +5,19 @@
 package carrentalsystem;
 
 import java.awt.Image;
+import java.time.LocalDate;
+
+import javax.swing.BoxLayout;
 import javax.swing.ImageIcon;
+import javax.swing.JPanel;
+
+import java.util.List;
 
 public class ReturnCar extends javax.swing.JFrame {
 
     static User.customer user;
+    private final JPanel bookingContainer;
+    int bookingId;
 
     public ReturnCar(User.customer user) {
         ReturnCar.user = user;
@@ -20,6 +28,26 @@ public class ReturnCar extends javax.swing.JFrame {
         Image scaledImage = imageIcon.getImage().getScaledInstance(55, 55, Image.SCALE_SMOOTH);
         TitleImage.setIcon(new ImageIcon(scaledImage));
 
+        List<Return> returnList = DatabaseManager.getReturnDetails(user.getEmail());
+
+        bookingContainer = new JPanel();
+        bookingContainer.setLayout(new BoxLayout(bookingContainer, BoxLayout.Y_AXIS));
+
+        // Create and add BookingPanel for each booking
+        for (Return r : returnList) {
+            BookingPanel bookingPanel = new BookingPanel(r, this);
+            bookingContainer.add(bookingPanel);
+        }
+
+        ScrollPanel.setViewportView(bookingContainer);
+        ScrollPanel.setVerticalScrollBarPolicy(javax.swing.ScrollPaneConstants.VERTICAL_SCROLLBAR_ALWAYS);
+        ScrollPanel.setHorizontalScrollBarPolicy(javax.swing.ScrollPaneConstants.HORIZONTAL_SCROLLBAR_NEVER);
+        
+    }
+
+    public void displayReturnDetails(Return returnobj) {
+        bookingId = returnobj.getBookingId();
+        System.out.println("Booking ID: " + bookingId);
     }
 
     /**
