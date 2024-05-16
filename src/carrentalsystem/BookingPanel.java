@@ -47,7 +47,7 @@ public class BookingPanel extends javax.swing.JPanel {
 
     private void handleReturnPanelClick() {
         returnCar.displayReturnDetails(returnInfo);
-        if (bookingConfirmation.bookingId == booking.getBookingId()) {
+        if (returnCar.bookingId == returnInfo.getBookingId()) {
             setBackground(Color.LIGHT_GRAY);
             jPanel1.setBackground(new Color(6, 26, 35));
             setTextColor(Color.WHITE);

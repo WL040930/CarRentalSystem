@@ -9,7 +9,9 @@ import java.time.LocalDate;
 
 import javax.swing.BoxLayout;
 import javax.swing.ImageIcon;
+import javax.swing.JOptionPane;
 import javax.swing.JPanel;
+import java.time.temporal.ChronoUnit;
 
 import java.util.List;
 
@@ -43,11 +45,44 @@ public class ReturnCar extends javax.swing.JFrame {
         ScrollPanel.setVerticalScrollBarPolicy(javax.swing.ScrollPaneConstants.VERTICAL_SCROLLBAR_ALWAYS);
         ScrollPanel.setHorizontalScrollBarPolicy(javax.swing.ScrollPaneConstants.HORIZONTAL_SCROLLBAR_NEVER);
         
+        ImageIcon imageIcon2 = new ImageIcon(getClass().getResource("/carrentalsystem/img/backButton.png"));
+        Image scaledImage2 = imageIcon2.getImage().getScaledInstance(49, 49, Image.SCALE_SMOOTH);
+        backButton.setIcon(new ImageIcon(scaledImage2));
+
+        backButton.addMouseListener(new java.awt.event.MouseAdapter() {
+            public void mouseClicked(java.awt.event.MouseEvent evt) {
+                pageSwitch.switchPage(ReturnCar.this, new UserCarService(user));
+            }
+        }); 
     }
 
     public void displayReturnDetails(Return returnobj) {
         bookingId = returnobj.getBookingId();
-        System.out.println("Booking ID: " + bookingId);
+        int rowOfBooking = dataIO.rowNumber(bookingId, 1, dataIO.BOOKING_FILE, 9);
+        int carId = Integer.parseInt(dataIO.readData(rowOfBooking + 1, dataIO.BOOKING_FILE));
+
+        int rowOfCar = dataIO.rowNumber(carId, 1, dataIO.CAR_FILE, 7);
+        String carName = dataIO.readData(rowOfCar + 1, dataIO.CAR_FILE);
+        BookedCarField.setText(carName);
+
+        String startDate = dataIO.readData(rowOfBooking + 3, dataIO.BOOKING_FILE);
+        StartDateField.setText(startDate);
+
+        String endDate = dataIO.readData(rowOfBooking + 4, dataIO.BOOKING_FILE);
+        endDateField.setText(endDate);
+
+        LocalDate currentDate = LocalDate.now();
+        LocalDate returnDate = LocalDate.parse(endDate);
+
+        if (currentDate.isAfter(returnDate)) {
+            long daysBetween = ChronoUnit.DAYS.between(returnDate, currentDate);
+            int price = Integer.parseInt(dataIO.readData(rowOfCar + 3, dataIO.CAR_FILE));
+            int overdue = price * (int) daysBetween;
+            overdueField.setText("RM " + overdue);
+        } else {
+            overdueField.setText("Not Available");
+        }
+
     }
 
     /**
@@ -63,6 +98,16 @@ public class ReturnCar extends javax.swing.JFrame {
         TitleImage = new javax.swing.JLabel();
         jLabel1 = new javax.swing.JLabel();
         jPanel2 = new javax.swing.JPanel();
+        backButton = new javax.swing.JLabel();
+        jLabel2 = new javax.swing.JLabel();
+        jLabel3 = new javax.swing.JLabel();
+        jLabel4 = new javax.swing.JLabel();
+        jLabel5 = new javax.swing.JLabel();
+        jButton1 = new javax.swing.JButton();
+        BookedCarField = new javax.swing.JLabel();
+        StartDateField = new javax.swing.JLabel();
+        endDateField = new javax.swing.JLabel();
+        overdueField = new javax.swing.JLabel();
         ScrollPanel = new javax.swing.JScrollPane();
         jMenuBar1 = new javax.swing.JMenuBar();
         BookingMenu = new javax.swing.JMenu();
@@ -85,15 +130,108 @@ public class ReturnCar extends javax.swing.JFrame {
         jLabel1.setFont(new java.awt.Font("Segoe UI", 1, 24)); // NOI18N
         jLabel1.setText("Return Car");
 
+        jPanel2.setBackground(new java.awt.Color(6, 26, 35));
+
+        backButton.setText("");
+        backButton.setCursor(new java.awt.Cursor(java.awt.Cursor.HAND_CURSOR));
+
+        jLabel2.setFont(new java.awt.Font("Bahnschrift", 1, 18)); // NOI18N
+        jLabel2.setForeground(new java.awt.Color(255, 255, 255));
+        jLabel2.setText("Booked Car: ");
+
+        jLabel3.setFont(new java.awt.Font("Bahnschrift", 1, 18)); // NOI18N
+        jLabel3.setForeground(new java.awt.Color(255, 255, 255));
+        jLabel3.setText("Start Date:");
+
+        jLabel4.setBackground(new java.awt.Color(255, 255, 255));
+        jLabel4.setFont(new java.awt.Font("Bahnschrift", 1, 18)); // NOI18N
+        jLabel4.setForeground(new java.awt.Color(255, 255, 255));
+        jLabel4.setText("End Date:");
+
+        jLabel5.setBackground(new java.awt.Color(255, 255, 255));
+        jLabel5.setFont(new java.awt.Font("Bahnschrift", 1, 18)); // NOI18N
+        jLabel5.setForeground(new java.awt.Color(255, 255, 255));
+        jLabel5.setText("Overdue: ");
+
+        jButton1.setBackground(new java.awt.Color(255, 255, 254));
+        jButton1.setFont(new java.awt.Font("Bahnschrift", 1, 18)); // NOI18N
+        jButton1.setForeground(new java.awt.Color(6, 26, 35));
+        jButton1.setText("Return");
+        jButton1.addActionListener(new java.awt.event.ActionListener() {
+            public void actionPerformed(java.awt.event.ActionEvent evt) {
+                jButton1ActionPerformed(evt);
+            }
+        });
+
+        BookedCarField.setFont(new java.awt.Font("Bahnschrift", 0, 14)); // NOI18N
+        BookedCarField.setForeground(new java.awt.Color(255, 255, 255));
+        BookedCarField.setText("");
+
+        StartDateField.setFont(new java.awt.Font("Bahnschrift", 0, 14)); // NOI18N
+        StartDateField.setForeground(new java.awt.Color(255, 255, 255));
+        StartDateField.setText("");
+
+        endDateField.setFont(new java.awt.Font("Bahnschrift", 0, 14)); // NOI18N
+        endDateField.setForeground(new java.awt.Color(255, 255, 254));
+        endDateField.setText("");
+
+        overdueField.setFont(new java.awt.Font("Bahnschrift", 0, 14)); // NOI18N
+        overdueField.setForeground(new java.awt.Color(255, 255, 255));
+        overdueField.setText("");
+
         javax.swing.GroupLayout jPanel2Layout = new javax.swing.GroupLayout(jPanel2);
         jPanel2.setLayout(jPanel2Layout);
         jPanel2Layout.setHorizontalGroup(
             jPanel2Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-            .addGap(0, 519, Short.MAX_VALUE)
+            .addGroup(javax.swing.GroupLayout.Alignment.TRAILING, jPanel2Layout.createSequentialGroup()
+                .addContainerGap(435, Short.MAX_VALUE)
+                .addComponent(backButton, javax.swing.GroupLayout.PREFERRED_SIZE, 49, javax.swing.GroupLayout.PREFERRED_SIZE)
+                .addGap(35, 35, 35))
+            .addGroup(jPanel2Layout.createSequentialGroup()
+                .addGap(216, 216, 216)
+                .addComponent(jButton1)
+                .addContainerGap(javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE))
+            .addGroup(jPanel2Layout.createSequentialGroup()
+                .addGap(51, 51, 51)
+                .addGroup(jPanel2Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
+                    .addGroup(jPanel2Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING, false)
+                        .addComponent(jLabel2, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
+                        .addComponent(jLabel3, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
+                        .addComponent(jLabel4, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE))
+                    .addGroup(jPanel2Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.TRAILING, false)
+                        .addComponent(StartDateField, javax.swing.GroupLayout.Alignment.LEADING, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
+                        .addComponent(BookedCarField, javax.swing.GroupLayout.Alignment.LEADING, javax.swing.GroupLayout.DEFAULT_SIZE, 160, Short.MAX_VALUE))
+                    .addComponent(endDateField, javax.swing.GroupLayout.PREFERRED_SIZE, 148, javax.swing.GroupLayout.PREFERRED_SIZE))
+                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
+                .addGroup(jPanel2Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
+                    .addComponent(jLabel5, javax.swing.GroupLayout.PREFERRED_SIZE, 101, javax.swing.GroupLayout.PREFERRED_SIZE)
+                    .addComponent(overdueField, javax.swing.GroupLayout.PREFERRED_SIZE, 141, javax.swing.GroupLayout.PREFERRED_SIZE))
+                .addGap(71, 71, 71))
         );
         jPanel2Layout.setVerticalGroup(
             jPanel2Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-            .addGap(0, 0, Short.MAX_VALUE)
+            .addGroup(jPanel2Layout.createSequentialGroup()
+                .addGap(28, 28, 28)
+                .addComponent(backButton, javax.swing.GroupLayout.PREFERRED_SIZE, 49, javax.swing.GroupLayout.PREFERRED_SIZE)
+                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.UNRELATED)
+                .addGroup(jPanel2Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
+                    .addComponent(jLabel2)
+                    .addComponent(jLabel5))
+                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
+                .addGroup(jPanel2Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
+                    .addComponent(BookedCarField)
+                    .addComponent(overdueField))
+                .addGap(46, 46, 46)
+                .addComponent(jLabel3)
+                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
+                .addComponent(StartDateField)
+                .addGap(56, 56, 56)
+                .addComponent(jLabel4)
+                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
+                .addComponent(endDateField)
+                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
+                .addComponent(jButton1)
+                .addGap(74, 74, 74))
         );
 
         javax.swing.GroupLayout jPanel1Layout = new javax.swing.GroupLayout(jPanel1);
@@ -253,6 +391,45 @@ public class ReturnCar extends javax.swing.JFrame {
         pageSwitch.switchPage(this, new Login());
     }//GEN-LAST:event_LogoutMenuActionPerformed
 
+    private void jButton1ActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jButton1ActionPerformed
+        
+        if (BookedCarField.getText().equals("") || StartDateField.getText().equals("") || endDateField.getText().equals("") || overdueField.getText().equals("")){
+            JOptionPane.showMessageDialog(null, "Please select a booking to return");
+            return;
+        }
+
+        int rowOfReturn = dataIO.rowNumber(bookingId, 1, dataIO.RETURN_FILE, 4);
+        String status; 
+        String statusForCar; 
+        if (overdueField.getText().equals("Not Available")) {
+            statusForCar = "Returned"; 
+            status = "Returned";
+        }  else {
+            statusForCar = "Overdue"; 
+            status = overdueField.getText();
+        }
+
+        dataIO.overWriteData(statusForCar, rowOfReturn + 1, dataIO.RETURN_FILE);
+        dataIO.overWriteData(status, rowOfReturn + 2, dataIO.RETURN_FILE);
+        JOptionPane.showMessageDialog(null, "Car Returned Successfully");
+        refreshScrollPanel();
+    }
+
+    private void refreshScrollPanel() {
+        bookingContainer.removeAll(); 
+
+        List<Return> returnList = DatabaseManager.getReturnDetails(user.getEmail());
+
+        // Create and add BookingPanel for each booking
+        for (Return r : returnList) {
+            BookingPanel bookingPanel = new BookingPanel(r, this);
+            bookingContainer.add(bookingPanel);
+        }
+        // Update the layout of bookingContainer
+        bookingContainer.revalidate();
+        bookingContainer.repaint();
+    }
+
     /**
      * @param args the command line arguments
      */
@@ -290,20 +467,30 @@ public class ReturnCar extends javax.swing.JFrame {
 
     // Variables declaration - do not modify//GEN-BEGIN:variables
     private javax.swing.JMenuItem AccountSettingsMenu;
+    private javax.swing.JLabel BookedCarField;
     private javax.swing.JMenuItem BookingConfirmationMenu;
     private javax.swing.JMenu BookingMenu;
     private javax.swing.JMenuItem LogoutMenu;
     private javax.swing.JMenuItem PaymentMenu;
     private javax.swing.JScrollPane ScrollPanel;
+    private javax.swing.JLabel StartDateField;
     private javax.swing.JLabel TitleImage;
     private javax.swing.JMenuItem ViewBookingsMenu;
+    private javax.swing.JLabel backButton;
+    private javax.swing.JLabel endDateField;
+    private javax.swing.JButton jButton1;
     private javax.swing.JLabel jLabel1;
+    private javax.swing.JLabel jLabel2;
+    private javax.swing.JLabel jLabel3;
+    private javax.swing.JLabel jLabel4;
+    private javax.swing.JLabel jLabel5;
     private javax.swing.JMenu jMenu1;
     private javax.swing.JMenu jMenu2;
     private javax.swing.JMenu jMenu3;
     private javax.swing.JMenuBar jMenuBar1;
     private javax.swing.JPanel jPanel1;
     private javax.swing.JPanel jPanel2;
+    private javax.swing.JLabel overdueField;
     private javax.swing.JMenuItem rentCarButton;
     // End of variables declaration//GEN-END:variables
 }

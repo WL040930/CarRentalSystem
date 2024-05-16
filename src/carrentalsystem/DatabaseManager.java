@@ -125,8 +125,10 @@ public class DatabaseManager {
                     String returnStatus = dataIO.readData(lineNumber + 1, RETURN_FILE);
                     String returnDate = dataIO.readData(lineNumber + 2, RETURN_FILE);
 
-                    Return returnObj = new Return(bookingId, returnStatus, returnDate);
-                    returns.add(returnObj);
+                    if (returnStatus.equals("Pending")) {
+                        Return returnObj = new Return(bookingId, returnStatus, returnDate);
+                        returns.add(returnObj);
+                    }
                 }
             }
         } catch (Exception e) {
