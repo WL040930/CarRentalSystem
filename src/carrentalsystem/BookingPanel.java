@@ -21,6 +21,49 @@ public class BookingPanel extends javax.swing.JPanel {
     private final CheckBooking checkBooking;
     private final ReturnCar returnCar;
     private static BookingPanel lastClickedPanel;
+    private final OverduePayment overduePayment;
+
+    public BookingPanel(Return returnobj, OverduePayment overduePayment) {
+        this.booking = null;
+        this.returnInfo = returnobj;
+        this.bookingConfirmation = null;
+        this.userPayment = null;
+        this.checkBooking = null;
+        this.returnCar = null;
+        this.overduePayment = overduePayment;
+        initComponents();
+        displayReturnInfo();
+        addClickListenerForReturns();
+    }
+
+    private void addClickListenerForReturns() {
+        // Add mouse listener to handle click events
+        this.addMouseListener(new MouseAdapter() {
+            @Override
+            public void mouseClicked(MouseEvent e) {
+                // Handle click event here
+                handleReturnPanelClicks();
+            }
+        });
+    }
+
+    private void handleReturnPanelClicks() {
+        overduePayment.displayReturnDetails(returnInfo);
+        if (overduePayment.bookingId == returnInfo.getBookingId()) {
+            setBackground(Color.LIGHT_GRAY);
+            jPanel1.setBackground(new Color(6, 26, 35));
+            setTextColor(Color.WHITE);
+            if (lastClickedPanel != null && lastClickedPanel != this) {
+                lastClickedPanel.setBackground(Color.WHITE); 
+                lastClickedPanel.jPanel1.setBackground(new Color(242,242,242));
+                lastClickedPanel.setTextColor(Color.BLACK);
+            }
+
+            lastClickedPanel = this;
+        }
+    }
+
+
 
     public BookingPanel(Return returnobj, ReturnCar returnCar) {
         this.booking = null;
@@ -29,6 +72,7 @@ public class BookingPanel extends javax.swing.JPanel {
         this.userPayment = null;
         this.checkBooking = null;
         this.returnCar = returnCar;
+        this.overduePayment = null;
         initComponents();
         displayReturnInfo();
         addClickListenerForReturn();
@@ -89,6 +133,7 @@ public class BookingPanel extends javax.swing.JPanel {
         this.userPayment = null;
         this.checkBooking = null;
         this.returnCar = null;
+        this.overduePayment = null;
         initComponents();
         displayBookingInfo();
         addClickListener(); 
@@ -159,6 +204,7 @@ public class BookingPanel extends javax.swing.JPanel {
         this.bookingConfirmation = null;
         this.checkBooking = checkBooking;
         this.returnCar = null;
+        this.overduePayment = null;
         initComponents();
         displayBookingInfo();
         addClickListeners();
@@ -196,6 +242,7 @@ public class BookingPanel extends javax.swing.JPanel {
         this.bookingConfirmation = null;
         this.checkBooking = null;
         this.returnCar = null;
+        this.overduePayment = null;
         initComponents();
         displayBookingInfo();
         addClickListenersForPayment();
