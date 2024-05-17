@@ -5,13 +5,24 @@
 package carrentalsystem;
 
 import javax.swing.ImageIcon;
+import javax.swing.JOptionPane;
+import javax.swing.event.ListSelectionEvent;
+import javax.swing.event.ListSelectionListener;
+import javax.swing.table.DefaultTableModel;
+import javax.swing.table.JTableHeader;
+
 import java.awt.Image;
 import java.util.List;
+import java.awt.Color;
+import java.awt.Font;
+
 
 
 public class AdminOverduePayment extends javax.swing.JFrame {
 
     static User.admin user;
+    DefaultTableModel model; 
+    int bookingId = -1; 
 
     public AdminOverduePayment(User.admin user) {
         AdminOverduePayment.user = user;
@@ -32,8 +43,77 @@ public class AdminOverduePayment extends javax.swing.JFrame {
             }
         }); 
 
-        List<Return> overduePayment = DatabaseManager.getReturnDetail("Pending"); 
+        model = new DefaultTableModel() {
+            @Override
+            public boolean isCellEditable(int row, int column) {
+                return false;
+            }
+        };
 
+
+        List<Return> overduePayment = DatabaseManager.getReturnDetail("Pending"); 
+        populatePaymentTable(overduePayment);
+        PaymentTable.getSelectionModel().addListSelectionListener(new ListSelectionListener() {
+            @Override
+            public void valueChanged(ListSelectionEvent e) {
+                if (!e.getValueIsAdjusting()) {
+                    int selectedRow = PaymentTable.getSelectedRow();
+                    if (selectedRow != -1) { 
+                        bookingId = (int) PaymentTable.getValueAt(selectedRow, 0);
+                        String bookedCar = (String) PaymentTable.getValueAt(selectedRow, 1);
+                        String email = (String) PaymentTable.getValueAt(selectedRow, 2);
+                        String overduePrice = (String) PaymentTable.getValueAt(selectedRow, 3);
+
+                        BookedCarField.setText(bookedCar);
+                        emailField.setText(email);
+                        overduePaymentField.setText(overduePrice);
+                        
+                    }
+                }
+            }
+        });
+
+        JTableHeader header = PaymentTable.getTableHeader();
+        header.setFont(new Font("Bahnschrift", Font.BOLD, 14));
+        header.setForeground(Color.WHITE);
+        header.setBackground(new Color(6, 26, 35)); // Dark background color
+        header.setReorderingAllowed(false); // Disable column reordering
+
+    }
+
+    private void populatePaymentTable(List<Return> returns) {
+        model.setRowCount(0); 
+        model.setColumnCount(0); 
+
+        DefaultTableModel model = new DefaultTableModel() {
+            @Override
+            public boolean isCellEditable(int row, int column) {
+                // This causes all cells to be non-editable
+                return false;
+            }
+        };
+        model.addColumn("Booking ID");
+        model.addColumn("Car Name");
+        model.addColumn("User Email");
+        model.addColumn("Overdue Payment");
+    
+        for (Return returnonj : returns) {
+            int bookingId = returnonj.getBookingId();
+            int rowNumberInReturn = dataIO.rowNumber(bookingId, 1, dataIO.RETURN_FILE, 4); 
+            String overdue = dataIO.readData(rowNumberInReturn + 2, dataIO.RETURN_FILE);
+            
+            int rowInBooking = dataIO.rowNumber(bookingId, 1, dataIO.BOOKING_FILE, 9); 
+            String email = dataIO.readData(rowInBooking + 2, dataIO.BOOKING_FILE);
+            int carId = Integer.parseInt(dataIO.readData(rowInBooking + 1, dataIO.BOOKING_FILE));
+
+            int rowInCar = dataIO.rowNumber(Integer.toString(carId), 1, dataIO.CAR_FILE, 7);
+            String carName = dataIO.readData(rowInCar + 1, dataIO.CAR_FILE);
+
+            model.addRow(new Object[]{bookingId, carName, email, overdue});
+        }
+    
+        PaymentTable.setModel(model);
+    
     }
 
     /**
@@ -49,11 +129,17 @@ public class AdminOverduePayment extends javax.swing.JFrame {
         jPanel2 = new javax.swing.JPanel();
         jLabel1 = new javax.swing.JLabel();
         jScrollPane1 = new javax.swing.JScrollPane();
-        BookingTable = new javax.swing.JTable();
+        PaymentTable = new javax.swing.JTable();
         TitleImage = new javax.swing.JLabel();
         ApproveButton = new javax.swing.JButton();
         RejectButton = new javax.swing.JButton();
         backButton = new javax.swing.JLabel();
+        jLabel2 = new javax.swing.JLabel();
+        BookedCarField = new javax.swing.JLabel();
+        jLabel3 = new javax.swing.JLabel();
+        emailField = new javax.swing.JLabel();
+        jLabel4 = new javax.swing.JLabel();
+        overduePaymentField = new javax.swing.JLabel();
         jMenuBar1 = new javax.swing.JMenuBar();
         jMenu4 = new javax.swing.JMenu();
         jMenuItem5 = new javax.swing.JMenuItem();
@@ -79,7 +165,7 @@ public class AdminOverduePayment extends javax.swing.JFrame {
         jLabel1.setForeground(new java.awt.Color(255, 255, 255));
         jLabel1.setText("Overdue Payment");
 
-        BookingTable.setModel(new javax.swing.table.DefaultTableModel(
+        PaymentTable.setModel(new javax.swing.table.DefaultTableModel(
             new Object [][] {
                 {},
                 {},
@@ -90,7 +176,7 @@ public class AdminOverduePayment extends javax.swing.JFrame {
 
             }
         ));
-        jScrollPane1.setViewportView(BookingTable);
+        jScrollPane1.setViewportView(PaymentTable);
 
         TitleImage.setText("");
 
@@ -148,6 +234,24 @@ public class AdminOverduePayment extends javax.swing.JFrame {
         backButton.setText("");
         backButton.setCursor(new java.awt.Cursor(java.awt.Cursor.HAND_CURSOR));
 
+        jLabel2.setFont(new java.awt.Font("Bahnschrift", 1, 18)); // NOI18N
+        jLabel2.setText("Booked Car:");
+
+        BookedCarField.setFont(new java.awt.Font("Bahnschrift", 0, 14)); // NOI18N
+        BookedCarField.setText("");
+
+        jLabel3.setFont(new java.awt.Font("Bahnschrift", 1, 18)); // NOI18N
+        jLabel3.setText("Email Address:");
+
+        emailField.setFont(new java.awt.Font("Bahnschrift", 0, 14)); // NOI18N
+        emailField.setText("");
+
+        jLabel4.setFont(new java.awt.Font("Bahnschrift", 1, 18)); // NOI18N
+        jLabel4.setText("Overdue: ");
+
+        overduePaymentField.setFont(new java.awt.Font("Bahnschrift", 0, 14)); // NOI18N
+        overduePaymentField.setText("");
+
         javax.swing.GroupLayout jPanel1Layout = new javax.swing.GroupLayout(jPanel1);
         jPanel1.setLayout(jPanel1Layout);
         jPanel1Layout.setHorizontalGroup(
@@ -155,16 +259,30 @@ public class AdminOverduePayment extends javax.swing.JFrame {
             .addGroup(jPanel1Layout.createSequentialGroup()
                 .addComponent(jPanel2, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
                 .addGroup(jPanel1Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-                    .addGroup(javax.swing.GroupLayout.Alignment.TRAILING, jPanel1Layout.createSequentialGroup()
-                        .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
-                        .addComponent(backButton, javax.swing.GroupLayout.PREFERRED_SIZE, 60, javax.swing.GroupLayout.PREFERRED_SIZE)
-                        .addGap(42, 42, 42))
                     .addGroup(jPanel1Layout.createSequentialGroup()
                         .addGap(82, 82, 82)
                         .addComponent(RejectButton, javax.swing.GroupLayout.PREFERRED_SIZE, 94, javax.swing.GroupLayout.PREFERRED_SIZE)
                         .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED, 105, Short.MAX_VALUE)
                         .addComponent(ApproveButton)
-                        .addGap(83, 83, 83))))
+                        .addGap(83, 83, 83))
+                    .addGroup(javax.swing.GroupLayout.Alignment.TRAILING, jPanel1Layout.createSequentialGroup()
+                        .addGroup(jPanel1Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.TRAILING)
+                            .addGroup(javax.swing.GroupLayout.Alignment.LEADING, jPanel1Layout.createSequentialGroup()
+                                .addGap(57, 57, 57)
+                                .addGroup(jPanel1Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
+                                    .addGroup(jPanel1Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING, false)
+                                        .addComponent(jLabel2)
+                                        .addComponent(BookedCarField, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
+                                        .addComponent(jLabel3, javax.swing.GroupLayout.DEFAULT_SIZE, 138, Short.MAX_VALUE))
+                                    .addComponent(emailField, javax.swing.GroupLayout.PREFERRED_SIZE, 149, javax.swing.GroupLayout.PREFERRED_SIZE))
+                                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
+                                .addGroup(jPanel1Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING, false)
+                                    .addComponent(jLabel4, javax.swing.GroupLayout.DEFAULT_SIZE, 142, Short.MAX_VALUE)
+                                    .addComponent(overduePaymentField, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)))
+                            .addGroup(jPanel1Layout.createSequentialGroup()
+                                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
+                                .addComponent(backButton, javax.swing.GroupLayout.PREFERRED_SIZE, 60, javax.swing.GroupLayout.PREFERRED_SIZE)))
+                        .addGap(42, 42, 42))))
         );
         jPanel1Layout.setVerticalGroup(
             jPanel1Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
@@ -172,6 +290,18 @@ public class AdminOverduePayment extends javax.swing.JFrame {
             .addGroup(javax.swing.GroupLayout.Alignment.TRAILING, jPanel1Layout.createSequentialGroup()
                 .addGap(23, 23, 23)
                 .addComponent(backButton, javax.swing.GroupLayout.PREFERRED_SIZE, 60, javax.swing.GroupLayout.PREFERRED_SIZE)
+                .addGap(9, 9, 9)
+                .addGroup(jPanel1Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
+                    .addComponent(jLabel2)
+                    .addComponent(jLabel4))
+                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
+                .addGroup(jPanel1Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
+                    .addComponent(BookedCarField)
+                    .addComponent(overduePaymentField))
+                .addGap(69, 69, 69)
+                .addComponent(jLabel3)
+                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
+                .addComponent(emailField)
                 .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
                 .addGroup(jPanel1Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
                     .addComponent(RejectButton, javax.swing.GroupLayout.PREFERRED_SIZE, 38, javax.swing.GroupLayout.PREFERRED_SIZE)
@@ -357,12 +487,38 @@ public class AdminOverduePayment extends javax.swing.JFrame {
     }//GEN-LAST:event_LogoutMenuActionPerformed
 
     private void RejectButtonActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_RejectButtonActionPerformed
-       // TODO
+        if (bookingId == -1 ) {
+            JOptionPane.showMessageDialog(this, "Please select a booking to reject");
+            return;
+        }
+
+        int rowNumberInReturn = dataIO.rowNumber(bookingId, 1, dataIO.RETURN_FILE, 4);
+        dataIO.overWriteData("Overdue", rowNumberInReturn + 1, dataIO.RETURN_FILE);
+
+        JOptionPane.showMessageDialog(this, "Payment rejected");
+        refreshPaymentTable();
+
     }//GEN-LAST:event_RejectButtonActionPerformed
 
     private void ApproveButtonActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_ApproveButtonActionPerformed
-        // TODO
-    }//GEN-LAST:event_ApproveButtonActionPerformed
+        if (bookingId == -1 ) {
+            JOptionPane.showMessageDialog(this, "Please select a booking to reject");
+            return;
+        }
+
+        int rowNumberInReturn = dataIO.rowNumber(bookingId, 1, dataIO.RETURN_FILE, 4);
+        dataIO.overWriteData("Returned", rowNumberInReturn + 1, dataIO.RETURN_FILE);
+        dataIO.overWriteData("Returned", rowNumberInReturn + 2, dataIO.RETURN_FILE);
+
+        JOptionPane.showMessageDialog(this, "Payment approved");
+        
+        refreshPaymentTable();
+    }
+
+    private void refreshPaymentTable() {
+        List<Return> overduePayment = DatabaseManager.getReturnDetail("Pending"); 
+        populatePaymentTable(overduePayment);
+    }
 
     /**
      * @param args the command line arguments
@@ -401,17 +557,22 @@ public class AdminOverduePayment extends javax.swing.JFrame {
 
     // Variables declaration - do not modify//GEN-BEGIN:variables
     private javax.swing.JButton ApproveButton;
+    private javax.swing.JLabel BookedCarField;
     private javax.swing.JMenuItem BookingMenu;
-    private javax.swing.JTable BookingTable;
     private javax.swing.JMenuItem ConfirmationMessageMenu;
     private javax.swing.JMenu FinanceButton;
     private javax.swing.JMenuItem LogoutMenu;
     private javax.swing.JMenuItem PaymentManagementMenu;
+    private javax.swing.JTable PaymentTable;
     private javax.swing.JButton RejectButton;
     private javax.swing.JMenuItem SalesReportMenu;
     private javax.swing.JLabel TitleImage;
     private javax.swing.JLabel backButton;
+    private javax.swing.JLabel emailField;
     private javax.swing.JLabel jLabel1;
+    private javax.swing.JLabel jLabel2;
+    private javax.swing.JLabel jLabel3;
+    private javax.swing.JLabel jLabel4;
     private javax.swing.JMenu jMenu2;
     private javax.swing.JMenu jMenu3;
     private javax.swing.JMenu jMenu4;
@@ -423,5 +584,6 @@ public class AdminOverduePayment extends javax.swing.JFrame {
     private javax.swing.JPanel jPanel1;
     private javax.swing.JPanel jPanel2;
     private javax.swing.JScrollPane jScrollPane1;
+    private javax.swing.JLabel overduePaymentField;
     // End of variables declaration//GEN-END:variables
 }
