@@ -4,17 +4,23 @@
  */
 package carrentalsystem;
 
-import java.awt.Image;
 import javax.swing.ImageIcon;
+import java.awt.Image;
+import java.util.List;
 
-public class FinancePage extends javax.swing.JFrame {
+
+public class AdminOverduePayment extends javax.swing.JFrame {
 
     static User.admin user;
 
-    public FinancePage(User.admin user) {
-        FinancePage.user = user;
+    public AdminOverduePayment(User.admin user) {
+        AdminOverduePayment.user = user;
         initComponents();
         setResizable(false);
+
+        ImageIcon imageIcon = new ImageIcon(getClass().getResource("/carrentalsystem/img/logo.jpeg"));
+        Image scaledImage = imageIcon.getImage().getScaledInstance(73, 73, Image.SCALE_SMOOTH);
+        TitleImage.setIcon(new ImageIcon(scaledImage));
 
         ImageIcon imageIcon2 = new ImageIcon(getClass().getResource("/carrentalsystem/img/backButton.png"));
         Image scaledImage2 = imageIcon2.getImage().getScaledInstance(60, 60, Image.SCALE_SMOOTH);
@@ -22,43 +28,11 @@ public class FinancePage extends javax.swing.JFrame {
 
         backButton.addMouseListener(new java.awt.event.MouseAdapter() {
             public void mouseClicked(java.awt.event.MouseEvent evt) {
-                pageSwitch.switchPage(FinancePage.this, new AdminDashboard(user));
+                pageSwitch.switchPage(AdminOverduePayment.this, new FinancePage(user));
             }
         }); 
 
-        ImageIcon imageIcon = new ImageIcon(getClass().getResource("/carrentalsystem/img/logo.jpeg"));
-        Image scaledImage = imageIcon.getImage().getScaledInstance(100, 100, Image.SCALE_SMOOTH);
-        TitleImage.setIcon(new ImageIcon(scaledImage));
-
-        ImageIcon imageIcon3 = new ImageIcon(getClass().getResource("/carrentalsystem/img/salesReport.png"));
-        Image scaledImage3 = imageIcon3.getImage().getScaledInstance(210, 210, Image.SCALE_SMOOTH);
-        salesReportsButton.setIcon(new ImageIcon(scaledImage3));
-
-        salesReportsButton.addMouseListener(new java.awt.event.MouseAdapter() {
-            public void mouseClicked(java.awt.event.MouseEvent evt) {
-                pageSwitch.switchPage(FinancePage.this, new ChooseTime(user));
-            }
-        });
-
-        ImageIcon imageIcon4 = new ImageIcon(getClass().getResource("/carrentalsystem/img/paymentManagement.png"));
-        Image scaledImage4 = imageIcon4.getImage().getScaledInstance(210, 210, Image.SCALE_SMOOTH);
-        paymentManagementButton.setIcon(new ImageIcon(scaledImage4));
-
-        paymentManagementButton.addMouseListener(new java.awt.event.MouseAdapter() {
-            public void mouseClicked(java.awt.event.MouseEvent evt) {
-                pageSwitch.switchPage(FinancePage.this, new ManagePayment(user));
-            }
-        });
-
-        ImageIcon imageIcon5 = new ImageIcon(getClass().getResource("/carrentalsystem/img/overdue_payment_admin.png"));
-        Image scaledImage5 = imageIcon5.getImage().getScaledInstance(210, 210, Image.SCALE_SMOOTH);
-        OverduePaymentButton.setIcon(new ImageIcon(scaledImage5));
-
-        OverduePaymentButton.addMouseListener(new java.awt.event.MouseAdapter() {
-            public void mouseClicked(java.awt.event.MouseEvent evt) {
-                pageSwitch.switchPage(FinancePage.this, new AdminOverduePayment(user));
-            }
-        });
+        List<Return> overduePayment = DatabaseManager.getReturnDetail("Pending"); 
 
     }
 
@@ -72,17 +46,14 @@ public class FinancePage extends javax.swing.JFrame {
     private void initComponents() {
 
         jPanel1 = new javax.swing.JPanel();
-        TitleText = new javax.swing.JLabel();
-        TitleImage = new javax.swing.JLabel();
-        jLabel1 = new javax.swing.JLabel();
-        backButton = new javax.swing.JLabel();
         jPanel2 = new javax.swing.JPanel();
-        salesReportsButton = new javax.swing.JLabel();
-        jLabel3 = new javax.swing.JLabel();
-        paymentManagementButton = new javax.swing.JLabel();
-        jLabel2 = new javax.swing.JLabel();
-        OverduePaymentButton = new javax.swing.JLabel();
-        jLabel4 = new javax.swing.JLabel();
+        jLabel1 = new javax.swing.JLabel();
+        jScrollPane1 = new javax.swing.JScrollPane();
+        BookingTable = new javax.swing.JTable();
+        TitleImage = new javax.swing.JLabel();
+        ApproveButton = new javax.swing.JButton();
+        RejectButton = new javax.swing.JButton();
+        backButton = new javax.swing.JLabel();
         jMenuBar1 = new javax.swing.JMenuBar();
         jMenu4 = new javax.swing.JMenu();
         jMenuItem5 = new javax.swing.JMenuItem();
@@ -102,116 +73,110 @@ public class FinancePage extends javax.swing.JFrame {
 
         jPanel1.setBackground(new java.awt.Color(255, 255, 255));
 
-        TitleText.setFont(new java.awt.Font("Bahnschrift", 1, 36)); // NOI18N
-        TitleText.setText("Panda Car System");
-
-        TitleImage.setText("");
-
-        jLabel1.setFont(new java.awt.Font("Bahnschrift", 2, 18)); // NOI18N
-        jLabel1.setText("Panda Car, World Trustable Car Rental App.");
-
-        backButton.setText("");
-        backButton.setCursor(new java.awt.Cursor(java.awt.Cursor.HAND_CURSOR));
-
         jPanel2.setBackground(new java.awt.Color(6, 26, 35));
 
-        salesReportsButton.setText("");
-        salesReportsButton.setCursor(new java.awt.Cursor(java.awt.Cursor.HAND_CURSOR));
+        jLabel1.setFont(new java.awt.Font("Segoe UI", 1, 24)); // NOI18N
+        jLabel1.setForeground(new java.awt.Color(255, 255, 255));
+        jLabel1.setText("Overdue Payment");
 
-        jLabel3.setFont(new java.awt.Font("Bahnschrift", 1, 18)); // NOI18N
-        jLabel3.setForeground(new java.awt.Color(255, 255, 255));
-        jLabel3.setText("Sales Reports");
+        BookingTable.setModel(new javax.swing.table.DefaultTableModel(
+            new Object [][] {
+                {},
+                {},
+                {},
+                {}
+            },
+            new String [] {
 
-        paymentManagementButton.setText("");
-        paymentManagementButton.setCursor(new java.awt.Cursor(java.awt.Cursor.HAND_CURSOR));
+            }
+        ));
+        jScrollPane1.setViewportView(BookingTable);
 
-        jLabel2.setFont(new java.awt.Font("Bahnschrift", 1, 18)); // NOI18N
-        jLabel2.setForeground(new java.awt.Color(255, 255, 255));
-        jLabel2.setText("Payment Management");
-
-        OverduePaymentButton.setText("jLabel4");
-        OverduePaymentButton.setCursor(new java.awt.Cursor(java.awt.Cursor.HAND_CURSOR));
-
-        jLabel4.setFont(new java.awt.Font("Bahnschrift", 1, 18)); // NOI18N
-        jLabel4.setForeground(new java.awt.Color(255, 255, 255));
-        jLabel4.setText("Overdue Payment");
+        TitleImage.setText("");
 
         javax.swing.GroupLayout jPanel2Layout = new javax.swing.GroupLayout(jPanel2);
         jPanel2.setLayout(jPanel2Layout);
         jPanel2Layout.setHorizontalGroup(
             jPanel2Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
             .addGroup(jPanel2Layout.createSequentialGroup()
-                .addGap(92, 92, 92)
+                .addContainerGap(33, Short.MAX_VALUE)
                 .addGroup(jPanel2Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
+                    .addComponent(jScrollPane1, javax.swing.GroupLayout.PREFERRED_SIZE, 469, javax.swing.GroupLayout.PREFERRED_SIZE)
                     .addGroup(jPanel2Layout.createSequentialGroup()
-                        .addComponent(paymentManagementButton, javax.swing.GroupLayout.PREFERRED_SIZE, 210, javax.swing.GroupLayout.PREFERRED_SIZE)
-                        .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
-                        .addComponent(OverduePaymentButton, javax.swing.GroupLayout.PREFERRED_SIZE, 210, javax.swing.GroupLayout.PREFERRED_SIZE)
-                        .addGap(86, 86, 86)
-                        .addComponent(salesReportsButton, javax.swing.GroupLayout.PREFERRED_SIZE, 210, javax.swing.GroupLayout.PREFERRED_SIZE)
-                        .addGap(103, 103, 103))
-                    .addGroup(jPanel2Layout.createSequentialGroup()
-                        .addGap(6, 6, 6)
-                        .addComponent(jLabel2)
-                        .addGap(132, 132, 132)
-                        .addComponent(jLabel4)
-                        .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
-                        .addComponent(jLabel3)
-                        .addGap(146, 146, 146))))
+                        .addComponent(TitleImage, javax.swing.GroupLayout.PREFERRED_SIZE, 73, javax.swing.GroupLayout.PREFERRED_SIZE)
+                        .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
+                        .addComponent(jLabel1, javax.swing.GroupLayout.PREFERRED_SIZE, 260, javax.swing.GroupLayout.PREFERRED_SIZE)))
+                .addContainerGap(33, Short.MAX_VALUE))
         );
         jPanel2Layout.setVerticalGroup(
             jPanel2Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
             .addGroup(jPanel2Layout.createSequentialGroup()
-                .addGap(39, 39, 39)
-                .addGroup(jPanel2Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
-                    .addComponent(salesReportsButton, javax.swing.GroupLayout.PREFERRED_SIZE, 210, javax.swing.GroupLayout.PREFERRED_SIZE)
-                    .addComponent(paymentManagementButton, javax.swing.GroupLayout.PREFERRED_SIZE, 210, javax.swing.GroupLayout.PREFERRED_SIZE)
-                    .addComponent(OverduePaymentButton, javax.swing.GroupLayout.PREFERRED_SIZE, 210, javax.swing.GroupLayout.PREFERRED_SIZE))
-                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.UNRELATED)
-                .addGroup(jPanel2Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
-                    .addComponent(jLabel3)
-                    .addComponent(jLabel2)
-                    .addComponent(jLabel4))
-                .addContainerGap(33, Short.MAX_VALUE))
+                .addGroup(jPanel2Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
+                    .addGroup(jPanel2Layout.createSequentialGroup()
+                        .addGap(12, 12, 12)
+                        .addComponent(TitleImage, javax.swing.GroupLayout.PREFERRED_SIZE, 70, javax.swing.GroupLayout.PREFERRED_SIZE))
+                    .addGroup(javax.swing.GroupLayout.Alignment.TRAILING, jPanel2Layout.createSequentialGroup()
+                        .addContainerGap()
+                        .addComponent(jLabel1)
+                        .addGap(13, 13, 13)))
+                .addComponent(jScrollPane1, javax.swing.GroupLayout.PREFERRED_SIZE, 355, javax.swing.GroupLayout.PREFERRED_SIZE)
+                .addContainerGap(86, Short.MAX_VALUE))
         );
+
+        ApproveButton.setBackground(new java.awt.Color(6, 26, 35));
+        ApproveButton.setFont(new java.awt.Font("Bahnschrift", 1, 18)); // NOI18N
+        ApproveButton.setForeground(new java.awt.Color(255, 255, 255));
+        ApproveButton.setText("Approve");
+        ApproveButton.setCursor(new java.awt.Cursor(java.awt.Cursor.HAND_CURSOR));
+        ApproveButton.addActionListener(new java.awt.event.ActionListener() {
+            public void actionPerformed(java.awt.event.ActionEvent evt) {
+                ApproveButtonActionPerformed(evt);
+            }
+        });
+
+        RejectButton.setBackground(new java.awt.Color(6, 26, 35));
+        RejectButton.setFont(new java.awt.Font("Bahnschrift", 1, 18)); // NOI18N
+        RejectButton.setForeground(new java.awt.Color(255, 255, 255));
+        RejectButton.setText("Reject");
+        RejectButton.setCursor(new java.awt.Cursor(java.awt.Cursor.HAND_CURSOR));
+        RejectButton.addActionListener(new java.awt.event.ActionListener() {
+            public void actionPerformed(java.awt.event.ActionEvent evt) {
+                RejectButtonActionPerformed(evt);
+            }
+        });
+
+        backButton.setText("");
+        backButton.setCursor(new java.awt.Cursor(java.awt.Cursor.HAND_CURSOR));
 
         javax.swing.GroupLayout jPanel1Layout = new javax.swing.GroupLayout(jPanel1);
         jPanel1.setLayout(jPanel1Layout);
         jPanel1Layout.setHorizontalGroup(
             jPanel1Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
             .addGroup(jPanel1Layout.createSequentialGroup()
-                .addGap(40, 40, 40)
-                .addComponent(TitleImage, javax.swing.GroupLayout.PREFERRED_SIZE, 100, javax.swing.GroupLayout.PREFERRED_SIZE)
-                .addGap(18, 18, 18)
+                .addComponent(jPanel2, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
                 .addGroup(jPanel1Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-                    .addGroup(jPanel1Layout.createSequentialGroup()
-                        .addComponent(jLabel1, javax.swing.GroupLayout.PREFERRED_SIZE, 369, javax.swing.GroupLayout.PREFERRED_SIZE)
-                        .addContainerGap(473, Short.MAX_VALUE))
-                    .addGroup(jPanel1Layout.createSequentialGroup()
-                        .addComponent(TitleText, javax.swing.GroupLayout.PREFERRED_SIZE, 323, javax.swing.GroupLayout.PREFERRED_SIZE)
+                    .addGroup(javax.swing.GroupLayout.Alignment.TRAILING, jPanel1Layout.createSequentialGroup()
                         .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
                         .addComponent(backButton, javax.swing.GroupLayout.PREFERRED_SIZE, 60, javax.swing.GroupLayout.PREFERRED_SIZE)
-                        .addGap(67, 67, 67))))
-            .addComponent(jPanel2, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
+                        .addGap(42, 42, 42))
+                    .addGroup(jPanel1Layout.createSequentialGroup()
+                        .addGap(82, 82, 82)
+                        .addComponent(RejectButton, javax.swing.GroupLayout.PREFERRED_SIZE, 94, javax.swing.GroupLayout.PREFERRED_SIZE)
+                        .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED, 105, Short.MAX_VALUE)
+                        .addComponent(ApproveButton)
+                        .addGap(83, 83, 83))))
         );
         jPanel1Layout.setVerticalGroup(
             jPanel1Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-            .addGroup(jPanel1Layout.createSequentialGroup()
-                .addGroup(jPanel1Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-                    .addGroup(jPanel1Layout.createSequentialGroup()
-                        .addGap(66, 66, 66)
-                        .addGroup(jPanel1Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-                            .addComponent(TitleImage, javax.swing.GroupLayout.PREFERRED_SIZE, 100, javax.swing.GroupLayout.PREFERRED_SIZE)
-                            .addGroup(jPanel1Layout.createSequentialGroup()
-                                .addGap(15, 15, 15)
-                                .addComponent(TitleText)
-                                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
-                                .addComponent(jLabel1))))
-                    .addGroup(jPanel1Layout.createSequentialGroup()
-                        .addGap(41, 41, 41)
-                        .addComponent(backButton, javax.swing.GroupLayout.PREFERRED_SIZE, 60, javax.swing.GroupLayout.PREFERRED_SIZE)))
-                .addGap(52, 52, 52)
-                .addComponent(jPanel2, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE))
+            .addComponent(jPanel2, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
+            .addGroup(javax.swing.GroupLayout.Alignment.TRAILING, jPanel1Layout.createSequentialGroup()
+                .addGap(23, 23, 23)
+                .addComponent(backButton, javax.swing.GroupLayout.PREFERRED_SIZE, 60, javax.swing.GroupLayout.PREFERRED_SIZE)
+                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
+                .addGroup(jPanel1Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
+                    .addComponent(RejectButton, javax.swing.GroupLayout.PREFERRED_SIZE, 38, javax.swing.GroupLayout.PREFERRED_SIZE)
+                    .addComponent(ApproveButton, javax.swing.GroupLayout.PREFERRED_SIZE, 38, javax.swing.GroupLayout.PREFERRED_SIZE))
+                .addGap(41, 41, 41))
         );
 
         jMenuBar1.setBackground(new java.awt.Color(6, 26, 35));
@@ -346,9 +311,7 @@ public class FinancePage extends javax.swing.JFrame {
         );
         layout.setVerticalGroup(
             layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-            .addGroup(layout.createSequentialGroup()
-                .addComponent(jPanel1, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
-                .addGap(0, 0, Short.MAX_VALUE))
+            .addComponent(jPanel1, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
         );
 
         pack();
@@ -393,6 +356,14 @@ public class FinancePage extends javax.swing.JFrame {
         }
     }//GEN-LAST:event_LogoutMenuActionPerformed
 
+    private void RejectButtonActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_RejectButtonActionPerformed
+       // TODO
+    }//GEN-LAST:event_RejectButtonActionPerformed
+
+    private void ApproveButtonActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_ApproveButtonActionPerformed
+        // TODO
+    }//GEN-LAST:event_ApproveButtonActionPerformed
+
     /**
      * @param args the command line arguments
      */
@@ -410,39 +381,37 @@ public class FinancePage extends javax.swing.JFrame {
     //             }
     //         }
     //     } catch (ClassNotFoundException ex) {
-    //         java.util.logging.Logger.getLogger(FinancePage.class.getName()).log(java.util.logging.Level.SEVERE, null, ex);
+    //         java.util.logging.Logger.getLogger(AdminOverduePayment.class.getName()).log(java.util.logging.Level.SEVERE, null, ex);
     //     } catch (InstantiationException ex) {
-    //         java.util.logging.Logger.getLogger(FinancePage.class.getName()).log(java.util.logging.Level.SEVERE, null, ex);
+    //         java.util.logging.Logger.getLogger(AdminOverduePayment.class.getName()).log(java.util.logging.Level.SEVERE, null, ex);
     //     } catch (IllegalAccessException ex) {
-    //         java.util.logging.Logger.getLogger(FinancePage.class.getName()).log(java.util.logging.Level.SEVERE, null, ex);
+    //         java.util.logging.Logger.getLogger(AdminOverduePayment.class.getName()).log(java.util.logging.Level.SEVERE, null, ex);
     //     } catch (javax.swing.UnsupportedLookAndFeelException ex) {
-    //         java.util.logging.Logger.getLogger(FinancePage.class.getName()).log(java.util.logging.Level.SEVERE, null, ex);
+    //         java.util.logging.Logger.getLogger(AdminOverduePayment.class.getName()).log(java.util.logging.Level.SEVERE, null, ex);
     //     }
     //     //</editor-fold>
 
     //     /* Create and display the form */
     //     java.awt.EventQueue.invokeLater(new Runnable() {
     //         public void run() {
-    //             new FinancePage(user).setVisible(true);
+    //             new AdminOverduePayment().setVisible(true);
     //         }
     //     });
     // }
 
     // Variables declaration - do not modify//GEN-BEGIN:variables
+    private javax.swing.JButton ApproveButton;
     private javax.swing.JMenuItem BookingMenu;
+    private javax.swing.JTable BookingTable;
     private javax.swing.JMenuItem ConfirmationMessageMenu;
     private javax.swing.JMenu FinanceButton;
     private javax.swing.JMenuItem LogoutMenu;
-    private javax.swing.JLabel OverduePaymentButton;
     private javax.swing.JMenuItem PaymentManagementMenu;
+    private javax.swing.JButton RejectButton;
     private javax.swing.JMenuItem SalesReportMenu;
     private javax.swing.JLabel TitleImage;
-    private javax.swing.JLabel TitleText;
     private javax.swing.JLabel backButton;
     private javax.swing.JLabel jLabel1;
-    private javax.swing.JLabel jLabel2;
-    private javax.swing.JLabel jLabel3;
-    private javax.swing.JLabel jLabel4;
     private javax.swing.JMenu jMenu2;
     private javax.swing.JMenu jMenu3;
     private javax.swing.JMenu jMenu4;
@@ -453,7 +422,6 @@ public class FinancePage extends javax.swing.JFrame {
     private javax.swing.JMenuItem jMenuItem6;
     private javax.swing.JPanel jPanel1;
     private javax.swing.JPanel jPanel2;
-    private javax.swing.JLabel paymentManagementButton;
-    private javax.swing.JLabel salesReportsButton;
+    private javax.swing.JScrollPane jScrollPane1;
     // End of variables declaration//GEN-END:variables
 }

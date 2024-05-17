@@ -167,6 +167,31 @@ public class DatabaseManager {
         return returns;
     }
 
+    public static List<Return> getReturnDetail(String status) {
+        List<Return> returns = new ArrayList<>();
+
+        try {
+            int totalLines = getTotalLines(RETURN_FILE);
+            int numberOfReturns = totalLines / NUMBER_OF_LINES_PER_RETURN;
+
+            for (int i = 0; i < numberOfReturns; i++) {
+                int lineNumber = i * NUMBER_OF_LINES_PER_RETURN + 1;
+                int bookingId = Integer.parseInt(dataIO.readData(lineNumber, RETURN_FILE));
+                String returnStatus = dataIO.readData(lineNumber + 1, RETURN_FILE);
+                String returnDate = dataIO.readData(lineNumber + 2, RETURN_FILE);
+
+                if (returnStatus.equals(status)) {
+                    Return returnObj = new Return(bookingId, returnStatus, returnDate);
+                    returns.add(returnObj);
+                }
+                
+            }
+        } catch (Exception e) {
+            e.printStackTrace();
+        }
+        return returns;
+    }
+
     public static List<Car> getSpecificCarsType(String Type) {
         List<Car> cars = new ArrayList<>();
     
