@@ -90,8 +90,10 @@ public class BookCar extends javax.swing.JFrame {
         jMenuBar1 = new javax.swing.JMenuBar();
         BookingMenu = new javax.swing.JMenu();
         rentCarButton = new javax.swing.JMenuItem();
+        ReturnCarButton = new javax.swing.JMenuItem();
         jMenu1 = new javax.swing.JMenu();
         PaymentMenu = new javax.swing.JMenuItem();
+        OverdueButton = new javax.swing.JMenuItem();
         jMenu3 = new javax.swing.JMenu();
         BookingConfirmationMenu = new javax.swing.JMenuItem();
         ViewBookingsMenu = new javax.swing.JMenuItem();
@@ -103,7 +105,7 @@ public class BookCar extends javax.swing.JFrame {
 
         jPanel1.setBackground(new java.awt.Color(255, 255, 255));
 
-        pictureField.setBorder(javax.swing.BorderFactory.createLineBorder(null));
+        pictureField.setBorder(javax.swing.BorderFactory.createLineBorder(new java.awt.Color(0, 0, 0)));
 
         jLabel2.setFont(new java.awt.Font("Bahnschrift", 1, 36)); // NOI18N
         jLabel2.setText(dataIO.readData(rowOfCarId + 1, readFileLocation));
@@ -280,6 +282,16 @@ public class BookCar extends javax.swing.JFrame {
         });
         BookingMenu.add(rentCarButton);
 
+        ReturnCarButton.setBackground(new java.awt.Color(6, 26, 35));
+        ReturnCarButton.setForeground(new java.awt.Color(255, 255, 255));
+        ReturnCarButton.setText("Return Car");
+        ReturnCarButton.addActionListener(new java.awt.event.ActionListener() {
+            public void actionPerformed(java.awt.event.ActionEvent evt) {
+                ReturnCarButtonActionPerformed(evt);
+            }
+        });
+        BookingMenu.add(ReturnCarButton);
+
         jMenuBar1.add(BookingMenu);
 
         jMenu1.setForeground(new java.awt.Color(255, 255, 255));
@@ -295,6 +307,16 @@ public class BookCar extends javax.swing.JFrame {
             }
         });
         jMenu1.add(PaymentMenu);
+
+        OverdueButton.setBackground(new java.awt.Color(6, 26, 35));
+        OverdueButton.setForeground(new java.awt.Color(255, 255, 255));
+        OverdueButton.setText("Overdue Payment");
+        OverdueButton.addActionListener(new java.awt.event.ActionListener() {
+            public void actionPerformed(java.awt.event.ActionEvent evt) {
+                OverdueButtonActionPerformed(evt);
+            }
+        });
+        jMenu1.add(OverdueButton);
 
         jMenuBar1.add(jMenu1);
 
@@ -404,9 +426,30 @@ public class BookCar extends javax.swing.JFrame {
         }
     }//GEN-LAST:event_bookButtonActionPerformed
 
+    private void CancelActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_CancelActionPerformed
+        int choice = JOptionPane.showConfirmDialog(this, "Are you sure you want to cancel the booking?", "Cancel Booking", JOptionPane.YES_NO_OPTION);
+        if (choice == JOptionPane.YES_OPTION) {
+            Car cars = new Car(); 
+            cars.setCarType(car.getCarType());
+            pageSwitch.switchPage(this, new ViewCar(user, cars));
+        }
+    }//GEN-LAST:event_CancelActionPerformed
+
     private void rentCarButtonActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_rentCarButtonActionPerformed
         pageSwitch.switchPage(this, new ChooseCarType(user));
     }//GEN-LAST:event_rentCarButtonActionPerformed
+
+    private void ReturnCarButtonActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_ReturnCarButtonActionPerformed
+        pageSwitch.switchPage(this, new ReturnCar(user));
+    }//GEN-LAST:event_ReturnCarButtonActionPerformed
+
+    private void PaymentMenuActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_PaymentMenuActionPerformed
+        pageSwitch.switchPage(this, new UserPayment(user));
+    }//GEN-LAST:event_PaymentMenuActionPerformed
+
+    private void OverdueButtonActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_OverdueButtonActionPerformed
+        pageSwitch.switchPage(this, new OverduePayment(user));
+    }//GEN-LAST:event_OverdueButtonActionPerformed
 
     private void BookingConfirmationMenuActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_BookingConfirmationMenuActionPerformed
         pageSwitch.switchPage(this, new BookingConfirmation(user));
@@ -423,19 +466,6 @@ public class BookCar extends javax.swing.JFrame {
     private void LogoutMenuActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_LogoutMenuActionPerformed
         pageSwitch.switchPage(this, new Login());
     }//GEN-LAST:event_LogoutMenuActionPerformed
-
-    private void CancelActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_CancelActionPerformed
-        int choice = JOptionPane.showConfirmDialog(this, "Are you sure you want to cancel the booking?", "Cancel Booking", JOptionPane.YES_NO_OPTION);
-        if (choice == JOptionPane.YES_OPTION) {
-            Car cars = new Car(); 
-            cars.setCarType(car.getCarType());
-            pageSwitch.switchPage(this, new ViewCar(user, cars));
-        }
-    }//GEN-LAST:event_CancelActionPerformed
-
-    private void PaymentMenuActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_PaymentMenuActionPerformed
-        pageSwitch.switchPage(this, new UserPayment(user));
-    }//GEN-LAST:event_PaymentMenuActionPerformed
     
     private int BookingId() {
         int[] tempData = dataIO.bookingId(1, writeFileLocation, 9);
@@ -485,7 +515,9 @@ public class BookCar extends javax.swing.JFrame {
     private javax.swing.JButton Cancel;
     private com.toedter.calendar.JDateChooser EndDateField;
     private javax.swing.JMenuItem LogoutMenu;
+    private javax.swing.JMenuItem OverdueButton;
     private javax.swing.JMenuItem PaymentMenu;
+    private javax.swing.JMenuItem ReturnCarButton;
     private javax.swing.JMenuItem ViewBookingsMenu;
     private javax.swing.JButton bookButton;
     private javax.swing.JLabel jLabel1;

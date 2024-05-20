@@ -15,16 +15,125 @@ import java.awt.event.MouseEvent;
 public class BookingPanel extends javax.swing.JPanel {
 
     private final Booking booking;
+    private Return returnInfo;
     private final BookingConfirmation bookingConfirmation;
     private final UserPayment userPayment;
     private final CheckBooking checkBooking;
+    private final ReturnCar returnCar;
     private static BookingPanel lastClickedPanel;
+    private final OverduePayment overduePayment;
+
+    public BookingPanel(Return returnobj, OverduePayment overduePayment) {
+        this.booking = null;
+        this.returnInfo = returnobj;
+        this.bookingConfirmation = null;
+        this.userPayment = null;
+        this.checkBooking = null;
+        this.returnCar = null;
+        this.overduePayment = overduePayment;
+        initComponents();
+        displayReturnInfo();
+        addClickListenerForReturns();
+    }
+
+    private void addClickListenerForReturns() {
+        // Add mouse listener to handle click events
+        this.addMouseListener(new MouseAdapter() {
+            @Override
+            public void mouseClicked(MouseEvent e) {
+                // Handle click event here
+                handleReturnPanelClicks();
+            }
+        });
+    }
+
+    private void handleReturnPanelClicks() {
+        overduePayment.displayReturnDetails(returnInfo);
+        if (overduePayment.bookingId == returnInfo.getBookingId()) {
+            setBackground(Color.LIGHT_GRAY);
+            jPanel1.setBackground(new Color(6, 26, 35));
+            setTextColor(Color.WHITE);
+            if (lastClickedPanel != null && lastClickedPanel != this) {
+                lastClickedPanel.setBackground(Color.WHITE); 
+                lastClickedPanel.jPanel1.setBackground(new Color(242,242,242));
+                lastClickedPanel.setTextColor(Color.BLACK);
+            }
+
+            lastClickedPanel = this;
+        }
+    }
+
+
+
+    public BookingPanel(Return returnobj, ReturnCar returnCar) {
+        this.booking = null;
+        this.returnInfo = returnobj;
+        this.bookingConfirmation = null;
+        this.userPayment = null;
+        this.checkBooking = null;
+        this.returnCar = returnCar;
+        this.overduePayment = null;
+        initComponents();
+        displayReturnInfo();
+        addClickListenerForReturn();
+    }
+
+    private void addClickListenerForReturn() {
+        // Add mouse listener to handle click events
+        this.addMouseListener(new MouseAdapter() {
+            @Override
+            public void mouseClicked(MouseEvent e) {
+                // Handle click event here
+                handleReturnPanelClick();
+            }
+        });
+    }
+
+    private void handleReturnPanelClick() {
+        returnCar.displayReturnDetails(returnInfo);
+        if (returnCar.bookingId == returnInfo.getBookingId()) {
+            setBackground(Color.LIGHT_GRAY);
+            jPanel1.setBackground(new Color(6, 26, 35));
+            setTextColor(Color.WHITE);
+            if (lastClickedPanel != null && lastClickedPanel != this) {
+                lastClickedPanel.setBackground(Color.WHITE); 
+                lastClickedPanel.jPanel1.setBackground(new Color(242,242,242));
+                lastClickedPanel.setTextColor(Color.BLACK);
+            }
+
+            lastClickedPanel = this;
+        }
+    }
+
+    private void displayReturnInfo() {
+        int bookingId = returnInfo.getBookingId();
+        int row = dataIO.rowNumber(bookingId, 1, dataIO.BOOKING_FILE, 9);
+        String carId = dataIO.readData(row + 1, dataIO.BOOKING_FILE);  
+        int rowOfCar = dataIO.rowNumber(carId, 1, dataIO.CAR_FILE, 7); 
+        String carName = dataIO.readData(rowOfCar + 1, dataIO.CAR_FILE);
+        String image = dataIO.readData(rowOfCar + 5, dataIO.CAR_FILE);
+
+        String startDate = dataIO.readData(row + 3, dataIO.BOOKING_FILE);
+        String endDate = dataIO.readData(row + 4, dataIO.BOOKING_FILE);  
+
+        BookingIdField.setText(String.valueOf(bookingId));
+        StartDateField.setText(startDate); 
+        EndDateField.setText(endDate); 
+        BookedCarField.setText(carName);
+
+        ImageIcon imageIcon = new ImageIcon(getClass().getResource("/carrentalsystem/img/" + image));
+        Image scaledImage = imageIcon.getImage().getScaledInstance(87, 87, Image.SCALE_SMOOTH);
+        pictureField.setIcon(new ImageIcon(scaledImage));
+
+    }
 
     public BookingPanel(Booking booking, BookingConfirmation bookingConfirmation) {
         this.booking = booking;
         this.bookingConfirmation = bookingConfirmation; 
         this.userPayment = null;
         this.checkBooking = null;
+        this.returnCar = null;
+        this.overduePayment = null;
         initComponents();
         displayBookingInfo();
         addClickListener(); 
@@ -94,6 +203,8 @@ public class BookingPanel extends javax.swing.JPanel {
         this.userPayment = null;
         this.bookingConfirmation = null;
         this.checkBooking = checkBooking;
+        this.returnCar = null;
+        this.overduePayment = null;
         initComponents();
         displayBookingInfo();
         addClickListeners();
@@ -130,6 +241,8 @@ public class BookingPanel extends javax.swing.JPanel {
         this.userPayment = userPayment;
         this.bookingConfirmation = null;
         this.checkBooking = null;
+        this.returnCar = null;
+        this.overduePayment = null;
         initComponents();
         displayBookingInfo();
         addClickListenersForPayment();

@@ -50,7 +50,7 @@ public class CustomerDashboard extends javax.swing.JFrame {
 
         FinanceButton.addMouseListener(new java.awt.event.MouseAdapter() {
             public void mouseClicked(java.awt.event.MouseEvent evt) {
-                pageSwitch.switchPage(CustomerDashboard.this, new UserPayment(user));
+                pageSwitch.switchPage(CustomerDashboard.this, new UserOverdue(user));
             }
         });
 
@@ -60,7 +60,7 @@ public class CustomerDashboard extends javax.swing.JFrame {
 
         RentNewCarButton.addMouseListener(new java.awt.event.MouseAdapter() {
             public void mouseClicked(java.awt.event.MouseEvent evt) {
-                pageSwitch.switchPage(CustomerDashboard.this, new ChooseCarType(user));
+                pageSwitch.switchPage(CustomerDashboard.this, new UserCarService(user));
             }
         });
 
@@ -101,8 +101,10 @@ public class CustomerDashboard extends javax.swing.JFrame {
         jMenuBar1 = new javax.swing.JMenuBar();
         BookingMenu = new javax.swing.JMenu();
         rentCarButton = new javax.swing.JMenuItem();
+        ReturnCarButton = new javax.swing.JMenuItem();
         jMenu1 = new javax.swing.JMenu();
         PaymentMenu = new javax.swing.JMenuItem();
+        OverdueButton = new javax.swing.JMenuItem();
         jMenu3 = new javax.swing.JMenu();
         BookingConfirmationMenu = new javax.swing.JMenuItem();
         ViewBookingsMenu = new javax.swing.JMenuItem();
@@ -146,7 +148,7 @@ public class CustomerDashboard extends javax.swing.JFrame {
 
         jLabel2.setFont(new java.awt.Font("Bahnschrift", 1, 18)); // NOI18N
         jLabel2.setForeground(new java.awt.Color(255, 255, 255));
-        jLabel2.setText("Rent Car");
+        jLabel2.setText("Car Services");
 
         jLabel3.setFont(new java.awt.Font("Bahnschrift", 1, 18)); // NOI18N
         jLabel3.setForeground(new java.awt.Color(255, 255, 255));
@@ -165,7 +167,7 @@ public class CustomerDashboard extends javax.swing.JFrame {
                 .addComponent(BookingsButtons, javax.swing.GroupLayout.PREFERRED_SIZE, 235, javax.swing.GroupLayout.PREFERRED_SIZE)
                 .addContainerGap(javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE))
             .addGroup(jPanel2Layout.createSequentialGroup()
-                .addGap(150, 150, 150)
+                .addGap(132, 132, 132)
                 .addComponent(jLabel2)
                 .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
                 .addComponent(jLabel5)
@@ -247,6 +249,16 @@ public class CustomerDashboard extends javax.swing.JFrame {
         });
         BookingMenu.add(rentCarButton);
 
+        ReturnCarButton.setBackground(new java.awt.Color(6, 26, 35));
+        ReturnCarButton.setForeground(new java.awt.Color(255, 255, 255));
+        ReturnCarButton.setText("Return Car");
+        ReturnCarButton.addActionListener(new java.awt.event.ActionListener() {
+            public void actionPerformed(java.awt.event.ActionEvent evt) {
+                ReturnCarButtonActionPerformed(evt);
+            }
+        });
+        BookingMenu.add(ReturnCarButton);
+
         jMenuBar1.add(BookingMenu);
 
         jMenu1.setForeground(new java.awt.Color(255, 255, 255));
@@ -262,6 +274,16 @@ public class CustomerDashboard extends javax.swing.JFrame {
             }
         });
         jMenu1.add(PaymentMenu);
+
+        OverdueButton.setBackground(new java.awt.Color(6, 26, 35));
+        OverdueButton.setForeground(new java.awt.Color(255, 255, 255));
+        OverdueButton.setText("Overdue Payment");
+        OverdueButton.addActionListener(new java.awt.event.ActionListener() {
+            public void actionPerformed(java.awt.event.ActionEvent evt) {
+                OverdueButtonActionPerformed(evt);
+            }
+        });
+        jMenu1.add(OverdueButton);
 
         jMenuBar1.add(jMenu1);
 
@@ -359,6 +381,14 @@ public class CustomerDashboard extends javax.swing.JFrame {
         pageSwitch.switchPage(this, new UserPayment(user));
     }//GEN-LAST:event_PaymentMenuActionPerformed
 
+    private void ReturnCarButtonActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_ReturnCarButtonActionPerformed
+        pageSwitch.switchPage(this, new ReturnCar(user)); 
+    }//GEN-LAST:event_ReturnCarButtonActionPerformed
+
+    private void OverdueButtonActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_OverdueButtonActionPerformed
+        pageSwitch.switchPage(this, new OverduePayment(user)); 
+    }//GEN-LAST:event_OverdueButtonActionPerformed
+
     /**
      * @param args the command line arguments
      */
@@ -401,8 +431,10 @@ public class CustomerDashboard extends javax.swing.JFrame {
     private javax.swing.JLabel BookingsButtons;
     private javax.swing.JLabel FinanceButton;
     private javax.swing.JMenuItem LogoutMenu;
+    private javax.swing.JMenuItem OverdueButton;
     private javax.swing.JMenuItem PaymentMenu;
     private javax.swing.JLabel RentNewCarButton;
+    private javax.swing.JMenuItem ReturnCarButton;
     private javax.swing.JLabel TitleImage;
     private javax.swing.JLabel TitleText;
     private javax.swing.JMenuItem ViewBookingsMenu;
