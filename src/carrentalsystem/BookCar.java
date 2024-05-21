@@ -397,11 +397,14 @@ public class BookCar extends javax.swing.JFrame {
         if (startDate != null && endDate != null) {
             if (endDate.before(startDate)) {
                 JOptionPane.showMessageDialog(this, "End date cannot be earlier than start date", "Invalid Date", JOptionPane.ERROR_MESSAGE);
-                EndDateField.setDate(null); // Reset EndDateField
+                EndDateField.setDate(null); 
             } else {
                 LocalDate localStartDate = startDate.toInstant().atZone(ZoneId.systemDefault()).toLocalDate();
                 LocalDate localEndDate = endDate.toInstant().atZone(ZoneId.systemDefault()).toLocalDate();
                 long daysBetween = ChronoUnit.DAYS.between(localStartDate, localEndDate);
+                if (daysBetween == 0) {
+                    daysBetween = 1;
+                }
                 int price = (int) (daysBetween * Integer.parseInt(dataIO.readData(rowOfCarId + 3, readFileLocation)));
 
                 int choice = JOptionPane.showConfirmDialog(this, "Total Price is RM " + price + ". Confirm Booking?", "Confirmation", JOptionPane.YES_NO_OPTION);
