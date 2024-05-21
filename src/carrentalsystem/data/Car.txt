@@ -8,7 +8,7 @@ cbc7ca63-fb29-4f41-bbfa-3da17326991e.jpg
 2
 Proton Myvi
 5
-250
+350
 Compact
 a5919c34-2e3f-430f-9d16-adc25adc56e6.jpg
 
@@ -55,9 +55,23 @@ Vans
 323df095-1897-4308-8b17-19dc9710a426.jpg
 
 9
-Myvi
+Myvi Auto
+4
+200
+Economy
+37863c92-91af-490a-baa6-fbff7f10fecd.jpg
+
+10
+Myvi Manual
 4
 120
 Economy
-37863c92-91af-490a-baa6-fbff7f10fecd.jpg
+14f05883-227e-4220-b370-339635efd424.jpg
+
+11
+Myvi Deluxe Edition
+4
+120
+Compact
+6a508dfc-3300-402f-adba-889db1e7b6d4.jpg
 
