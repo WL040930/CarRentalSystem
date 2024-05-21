@@ -125,7 +125,7 @@ public class DatabaseManager {
                     String returnStatus = dataIO.readData(lineNumber + 1, RETURN_FILE);
                     String returnDate = dataIO.readData(lineNumber + 2, RETURN_FILE);
 
-                    if (returnStatus.equals("Pending")) {
+                    if (returnStatus.equals("PendingR")) {
                         Return returnObj = new Return(bookingId, returnStatus, returnDate);
                         returns.add(returnObj);
                     }

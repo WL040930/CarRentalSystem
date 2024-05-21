@@ -497,7 +497,7 @@ public class BookingConfirmation extends javax.swing.JFrame {
                 dataIO.overWriteData("Accepted", rowChange, dataIO.BOOKING_FILE);
 
                 dataIO.writeData(bookingId, dataIO.RETURN_FILE);
-                dataIO.writeData("Pending", dataIO.RETURN_FILE);
+                dataIO.writeData("PendingR", dataIO.RETURN_FILE);
                 dataIO.writeData("", dataIO.RETURN_FILE);
                 dataIO.writeData("", dataIO.RETURN_FILE);
 

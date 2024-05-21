@@ -3,8 +3,8 @@ Returned
 Returned
 
 9
-Pending
-RM 122
+Returned
+Returned
 
 10
 Overdue
@@ -17,15 +17,4 @@ Returned
 1
 Returned
 Returned
-
-14
-Returned
-Returned
-12
-Pending
-
-
-16
-Pending
-
 
