@@ -6,3 +6,26 @@ Returned
 Pending
 RM 122
 
+10
+Overdue
+RM 1040
+
+13
+Returned
+Returned
+
+1
+Returned
+Returned
+
+14
+Returned
+Returned
+12
+Pending
+
+
+16
+Pending
+
+

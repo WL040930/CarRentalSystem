@@ -3,12 +3,12 @@ admin@gmail.com
 admin
 admin
 
-user01
+user012
 user@gmail.com
 password
 customer
 
-DenDen
+denden
 denden@gmail.com
 12345678
 customer
