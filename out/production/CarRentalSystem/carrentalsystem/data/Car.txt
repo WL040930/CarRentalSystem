@@ -1,0 +1,77 @@
+1
+Toyota Camry
+5
+260
+Economy
+cbc7ca63-fb29-4f41-bbfa-3da17326991e.jpg
+
+2
+Proton Myvi
+5
+350
+Compact
+a5919c34-2e3f-430f-9d16-adc25adc56e6.jpg
+
+3
+Honda Civic
+5
+260
+Economy
+8ee128a3-fe0e-40b8-b97c-21986d11865b.jpg
+
+4
+Honda Accord
+5
+260
+Economy
+d4f32367-1694-4b19-9d6d-08953c0d8ef2.jpg
+
+5
+Mercedes-Benz S-Class
+5
+350
+Luxury
+159493cd-6b75-47ce-aa63-fc5cfd6525cf.jpg
+
+6
+Range Rover Velar
+5
+380
+Luxury
+98558f59-44fd-40ea-aabe-f4e7290c80b5.jpg
+
+7
+Ford Transit
+12
+120
+Vans
+9ab7c7a1-669c-4288-8dbf-60034b4205ff.jpeg
+
+8
+Chevrolet Express
+15
+150
+Vans
+323df095-1897-4308-8b17-19dc9710a426.jpg
+
+9
+Myvi Auto
+4
+200
+Economy
+37863c92-91af-490a-baa6-fbff7f10fecd.jpg
+
+10
+Myvi Manual
+4
+120
+Economy
+14f05883-227e-4220-b370-339635efd424.jpg
+
+11
+Myvi Deluxe Edition
+4
+120
+Compact
+6a508dfc-3300-402f-adba-889db1e7b6d4.jpg
+
