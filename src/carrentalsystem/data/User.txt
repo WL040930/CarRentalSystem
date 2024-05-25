@@ -1,15 +1,15 @@
-adminn
+admin
 admin@gmail.com
 admin
 admin
 
-user012
-user@gmail.com
+Denden
+denden@gmail.com
 password
 customer
 
-denden
-denden@gmail.com
-12345678
+littles@gmail.com
+littles@gmail.com
+password
 customer
 

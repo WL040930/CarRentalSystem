@@ -1,36 +1,20 @@
-17
-Returned
-Returned
-
-11
-Returned
-Returned
-
-9
-Returned
-Returned
-
-10
-Overdue
-RM 1040
-
-13
-Returned
-Returned
-
 1
 Returned
 Returned
 
-15
-Returned
-Returned
+3
+Overdue
+RM 2400
 
-18
-Returned
-Returned
+6
+PendingR
 
-19
-Returned
-Returned
+
+2
+Pending
+RM 2500
+
+4
+PendingR
+
 
